@@ -1,0 +1,26 @@
+{
+  "name": "projekt3-chess",
+  "version": "1.0.0",
+  "description": "**UWAGA! Zaczynając pracę nad projektem — nie róbcie forka.\r Jedna osoba z zespołu (np. Mentor) powinna użyć przycisku `Use this template` i dodać innych członków zespołu jako Collaborators do tego repozytorium.\r Mentorzy mogą dowolnie zmieniać zakres projektu lub zdecydować się na zupełnie inny temat.**",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotr-bocian/Projekt3-chess.git"
+  },
+  "keywords": [
+    "CodersCamp2020",
+    "CodersCHESS"
+  ],
+  "author": "Piotr Bocian, Jan Eliasz, Adam Połynka, Szymon Suchodolski, Daria Torz, Klaudia Wojciechowska, Łukasz Żurawski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piotr-bocian/Projekt3-chess/issues"
+  },
+  "homepage": "https://github.com/piotr-bocian/Projekt3-chess#readme"
+}
