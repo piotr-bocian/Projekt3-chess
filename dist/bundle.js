@@ -1,0 +1,1 @@
+(()=>{"use strict";var e=document.querySelector("#secret-button"),t=document.querySelector("#secret-paragraph");console.log("hello there...");var c=!1;function o(){t.style.display=c?"block":"none"}e.addEventListener("click",(function(){c=!c,o(),e.textContent=c?"Hide the Secret":"Show the Secret"})),o()})();
