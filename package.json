@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "start": "webpack --watch",
     "build": "webpack"
   },
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/piotr-bocian/Projekt3-chess#readme",
   "devDependencies": {
+    "jest": "^26.6.3",
     "webpack": "^5.16.0",
     "webpack-cli": "^4.4.0"
   }
