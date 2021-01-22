@@ -16,27 +16,37 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index1 */ \"./src/index1.js\");\n/* harmony import */ var _js_components_hello__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js-components/hello */ \"./src/js-components/hello.js\");\n/* harmony import */ var _js_components_hello__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_js_components_hello__WEBPACK_IMPORTED_MODULE_1__);\n\r\n\r\n\r\nvar showSecret = false;\r\n\r\n_index1__WEBPACK_IMPORTED_MODULE_0__.secretButton.addEventListener('click', toggleSecretState);\r\nupdateSecretParagraph();\r\n\r\nfunction toggleSecretState() {\r\n    showSecret = !showSecret;\r\n    updateSecretParagraph();\r\n    updateSecretButton()\r\n}\r\n\r\nfunction updateSecretButton() {\r\n    if (showSecret) {\r\n        _index1__WEBPACK_IMPORTED_MODULE_0__.secretButton.textContent = 'Hide the Secret';\r\n    } else {\r\n        _index1__WEBPACK_IMPORTED_MODULE_0__.secretButton.textContent = 'Show the Secret';\r\n    }\r\n}\r\n\r\nfunction updateSecretParagraph() {\r\n    if (showSecret) {\r\n        _index1__WEBPACK_IMPORTED_MODULE_0__.secretParagraph.style.display = 'block';\r\n    } else {\r\n        _index1__WEBPACK_IMPORTED_MODULE_0__.secretParagraph.style.display = 'none';\r\n    }\r\n}\n\n//# sourceURL=webpack://projekt3-chess/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_components_board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js-components/board */ \"./src/js-components/board.js\");\n/* harmony import */ var _js_components_pieces_king__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js-components/pieces/king */ \"./src/js-components/pieces/king.js\");\n\r\n\r\n\r\nvar gameBoard = new _js_components_board__WEBPACK_IMPORTED_MODULE_0__.Board();\r\ngameBoard.drawBoard();\r\n\r\nvar kingWhite = new _js_components_pieces_king__WEBPACK_IMPORTED_MODULE_1__.King('white', 7, 4);\r\n//kingWhite.setOnBoard(0, 0);\n\n//# sourceURL=webpack://projekt3-chess/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/index1.js":
-/*!***********************!*\
-  !*** ./src/index1.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"secretButton\": () => /* binding */ secretButton,\n/* harmony export */   \"secretParagraph\": () => /* binding */ secretParagraph\n/* harmony export */ });\n  \r\nvar secretButton = document.querySelector('#secret-button');\r\nvar secretParagraph = document.querySelector('#secret-paragraph');\n\n//# sourceURL=webpack://projekt3-chess/./src/index1.js?");
-
-/***/ }),
-
-/***/ "./src/js-components/hello.js":
+/***/ "./src/js-components/board.js":
 /*!************************************!*\
-  !*** ./src/js-components/hello.js ***!
+  !*** ./src/js-components/board.js ***!
   \************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, exports) => {
 
-eval("\r\nconst hello = console.log(\"hello!\");\r\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/hello.js?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.Board = void 0;\r\nclass Board {\r\n    drawBoard() {\r\n        const boardContainer = document.createElement('div');\r\n        boardContainer.classList.add('board-container');\r\n        for (let i = 0; i < 8; i++) {\r\n            for (let j = 0; j < 8; j++) {\r\n                const div = document.createElement('div');\r\n                div.id = `${i}-${j}`; //<-- ważne żeby każdą komórkę na planszy dało się zidentyfikować za pomocą dwóch współrzędnych\r\n                if (i % 2 === 0)\r\n                    div.classList.add(`${j % 2 === 0 ? 'light' : 'dark'}`);\r\n                else\r\n                    div.classList.add(`${j % 2 === 0 ? 'dark' : 'light'}`);\r\n                boardContainer.appendChild(div);\r\n            }\r\n        }\r\n        document.querySelector('body').appendChild(boardContainer);\r\n    }\r\n}\r\nexports.Board = Board;\r\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/board.js?");
+
+/***/ }),
+
+/***/ "./src/js-components/pieces/king.js":
+/*!******************************************!*\
+  !*** ./src/js-components/pieces/king.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.King = void 0;\r\nconst piece_1 = __webpack_require__(/*! ./piece */ \"./src/js-components/pieces/piece.js\");\r\nclass King extends piece_1.Piece {\r\n    constructor(color, positionX, positionY) {\r\n        super(color, positionX, positionY);\r\n        this.symbol = color === 'white' ? '♔' : '♚'; //<-- w przyszłości bedzie tu ścieżka do img figury\r\n        this.setOnBoard(this.positionX, this.positionY);\r\n    }\r\n    showPossibleMoves() {\r\n        //kod odpowiadający za pokazanie możliwych ruchów\r\n    }\r\n}\r\nexports.King = King;\r\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/king.js?");
+
+/***/ }),
+
+/***/ "./src/js-components/pieces/piece.js":
+/*!*******************************************!*\
+  !*** ./src/js-components/pieces/piece.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.Piece = void 0;\r\nclass Piece {\r\n    //zastanawiam się czy nie zrobić tych wszystkich właściwości private...\r\n    constructor(color, positionX, positionY) {\r\n        this.symbol = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol\r\n        this.color = color;\r\n        this.positionX = positionX;\r\n        this.positionY = positionY;\r\n        this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura\r\n    }\r\n    setOnBoard(pX, pY) {\r\n        this.parentSquare.innerHTML = '';\r\n        this.updatePosition(pX, pY);\r\n        this.parentSquare.appendChild(document.createTextNode(this.symbol));\r\n    }\r\n    updatePosition(pX, pY) {\r\n        this.positionX = pX;\r\n        this.positionY = pY;\r\n        this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`);\r\n    }\r\n}\r\nexports.Piece = Piece;\r\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/piece.js?");
 
 /***/ })
 
@@ -66,35 +76,6 @@ eval("\r\nconst hello = console.log(\"hello!\");\r\n\n\n//# sourceURL=webpack://
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
