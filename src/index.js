@@ -1,5 +1,5 @@
 import {secretButton, secretParagraph} from "./index1"
-console.log("hello there...");
+// import hello from "./js-components/hello"
 
 var showSecret = false;
 
