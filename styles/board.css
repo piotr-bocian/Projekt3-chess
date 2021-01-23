@@ -1,0 +1,19 @@
+.board-container{
+   display: grid;
+   grid-template-columns: 90px 90px 90px 90px 90px 90px 90px 90px;
+   border: 2px solid black;
+}
+
+.light{
+   width: 90px;
+   height: 90px;
+   background-color: #eee;
+   color: black;
+}
+
+.dark{
+   width: 90px;
+   height: 90px;
+   background-color: #111;
+   color: white;
+}
