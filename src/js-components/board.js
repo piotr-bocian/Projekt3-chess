@@ -24,11 +24,13 @@ class Board {
         boardContainer.classList.add('board-container');
         for (let i = 1; i < 9; i++) {
             const div = document.createElement('div');
-            const num = document.createElement('div');
             div.classList.add('notation');
             div.innerText = `${ID[i]}`;
-            num.innerText = `${i}`;
             letters.appendChild(div);
+        }
+        for (let i = 8; i > 0; i--) {
+            const num = document.createElement('div');
+            num.innerText = `${i}`;
             numbers.appendChild(num);
         }
         for (let i = 8; i > 0; i--) {
