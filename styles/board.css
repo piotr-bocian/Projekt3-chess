@@ -4,25 +4,31 @@
    padding: 0;
 }
 .board-wrapper{
+   margin: 0 auto;
    display: grid;
-   grid-template-columns: repeat(2, 50px);
-   grid-template-rows: 100px;
+   grid-template-columns: 50px 1fr 50px;
+   width: fit-content;
+   padding-top: 50px;
+   background-color: rgb(238, 209, 165);
+   border-radius: 30px;
 }
 
 .letters{
    width: fit-content;
+   grid-column: 2/ -1;
    display: grid;
    grid-template-columns: repeat(8, 90px);
    text-align: center;
    font-size: 1.2em;
-   margin-top: .5em;
+   height: 50px;
+   align-items: center;
 }
 .numbers{
-   width: fit-content;
    display: grid;
    grid-template-rows: repeat(8, 90px);
    text-align: center;
    font-size: 1.2em;
+   align-items: center;
 }
 
 .board-container{
