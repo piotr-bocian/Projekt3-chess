@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_components_board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js-components/board */ \"./src/js-components/board.js\");\n/* harmony import */ var _js_components_pieces_king__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js-components/pieces/king */ \"./src/js-components/pieces/king.js\");\n\n\n\nvar gameBoard = new _js_components_board__WEBPACK_IMPORTED_MODULE_0__.Board();\ngameBoard.drawBoard();\n\nvar kingWhite = new _js_components_pieces_king__WEBPACK_IMPORTED_MODULE_1__.King('white', 'C', 4);\nkingWhite.setOnBoard('C', 1);\n\n//# sourceURL=webpack://projekt3-chess/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _js_components_board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js-components/board */ \"./src/js-components/board.js\");\n/* harmony import */ var _js_components_pieces_king__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js-components/pieces/king */ \"./src/js-components/pieces/king.js\");\n/* harmony import */ var _js_components_pieces_queen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js-components/pieces/queen */ \"./src/js-components/pieces/queen.js\");\n/* harmony import */ var _js_components_pieces_bishop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js-components/pieces/bishop */ \"./src/js-components/pieces/bishop.js\");\n/* harmony import */ var _js_components_pieces_knight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js-components/pieces/knight */ \"./src/js-components/pieces/knight.js\");\n/* harmony import */ var _js_components_pieces_rook__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js-components/pieces/rook */ \"./src/js-components/pieces/rook.js\");\n/* harmony import */ var _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js-components/pieces/pawn */ \"./src/js-components/pieces/pawn.js\");\n\n\n\n\n\n\n\n\nvar gameBoard = new _js_components_board__WEBPACK_IMPORTED_MODULE_0__.Board();\ngameBoard.drawBoard();\n\nvar kingWhite = new _js_components_pieces_king__WEBPACK_IMPORTED_MODULE_1__.King('white', 'E', 1);\n// kingWhite.setOnBoard('C', 1);\n\nvar queenWhite = new _js_components_pieces_queen__WEBPACK_IMPORTED_MODULE_2__.Queen('white', 'D', 1);\nvar bishopWhite = new _js_components_pieces_bishop__WEBPACK_IMPORTED_MODULE_3__.Bishop('white', 'C', 1);\nvar bishopWhite2 = new _js_components_pieces_bishop__WEBPACK_IMPORTED_MODULE_3__.Bishop('white', 'F', 1);\nvar knightWhite = new _js_components_pieces_knight__WEBPACK_IMPORTED_MODULE_4__.Knight('white', 'B', 1);\nvar knightWhite2 = new _js_components_pieces_knight__WEBPACK_IMPORTED_MODULE_4__.Knight('white', 'G', 1);\nvar rookWhite = new _js_components_pieces_rook__WEBPACK_IMPORTED_MODULE_5__.Rook('white', 'A', 1);\nvar rookWhite2 = new _js_components_pieces_rook__WEBPACK_IMPORTED_MODULE_5__.Rook('white', 'H', 1);\nvar pawnWhite = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'A', 2);\nvar pawnWhite2 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'B', 2);\nvar pawnWhite3 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'C', 2);\nvar pawnWhite4 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'D', 2);\nvar pawnWhite5 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'E', 2);\nvar pawnWhite6 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'F', 2);\nvar pawnWhite7 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'G', 2);\nvar pawnWhite8 = new _js_components_pieces_pawn__WEBPACK_IMPORTED_MODULE_6__.Pawn('white', 'H', 2);\n\n//# sourceURL=webpack://projekt3-chess/./src/index.js?");
 
 /***/ }),
 
@@ -30,6 +30,16 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 
 /***/ }),
 
+/***/ "./src/js-components/pieces/bishop.js":
+/*!********************************************!*\
+  !*** ./src/js-components/pieces/bishop.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Bishop = void 0;\nconst piece_1 = __webpack_require__(/*! ./piece */ \"./src/js-components/pieces/piece.js\");\n//goniec / laufer\nclass Bishop extends piece_1.Piece {\n    constructor(color, positionX, positionY) {\n        super(color, positionX, positionY);\n        this.symbol = '../../../static/assets/bishop.png';\n        this.setOnBoard(this.positionX, this.positionY);\n    }\n    showPossibleMoves() {\n        //kod odpowiadający za pokazanie możliwych ruchów\n    }\n}\nexports.Bishop = Bishop;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/bishop.js?");
+
+/***/ }),
+
 /***/ "./src/js-components/pieces/king.js":
 /*!******************************************!*\
   !*** ./src/js-components/pieces/king.js ***!
@@ -40,13 +50,53 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 
 /***/ }),
 
+/***/ "./src/js-components/pieces/knight.js":
+/*!********************************************!*\
+  !*** ./src/js-components/pieces/knight.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Knight = void 0;\nconst piece_1 = __webpack_require__(/*! ./piece */ \"./src/js-components/pieces/piece.js\");\n//skoczek / koń\nclass Knight extends piece_1.Piece {\n    constructor(color, positionX, positionY) {\n        super(color, positionX, positionY);\n        this.symbol = '../../../static/assets/knight.png';\n        this.setOnBoard(this.positionX, this.positionY);\n    }\n    showPossibleMoves() {\n        //kod odpowiadający za pokazanie możliwych ruchów\n    }\n}\nexports.Knight = Knight;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/knight.js?");
+
+/***/ }),
+
+/***/ "./src/js-components/pieces/pawn.js":
+/*!******************************************!*\
+  !*** ./src/js-components/pieces/pawn.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Pawn = void 0;\nconst piece_1 = __webpack_require__(/*! ./piece */ \"./src/js-components/pieces/piece.js\");\n//pion\nclass Pawn extends piece_1.Piece {\n    constructor(color, positionX, positionY) {\n        super(color, positionX, positionY);\n        this.symbol = '../../../static/assets/pawn.png';\n        this.setOnBoard(this.positionX, this.positionY);\n    }\n    showPossibleMoves() {\n        //kod odpowiadający za pokazanie możliwych ruchów\n    }\n}\nexports.Pawn = Pawn;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/pawn.js?");
+
+/***/ }),
+
 /***/ "./src/js-components/pieces/piece.js":
 /*!*******************************************!*\
   !*** ./src/js-components/pieces/piece.js ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Piece = void 0;\nclass Piece {\n    //zastanawiam się czy nie zrobić tych wszystkich właściwości private...\n    constructor(color, positionX, positionY) {\n        this.symbol = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol\n        this.color = color;\n        this.positionX = positionX;\n        this.positionY = positionY;\n        this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura\n    }\n    setOnBoard(pX, pY) {\n        // this.parentSquare.innerHTML = '';\n        this.updatePosition(pX, pY);\n        this.parentSquare.appendChild(document.createTextNode(this.symbol));\n    }\n    updatePosition(pX, pY) {\n        this.positionX = pX;\n        this.positionY = pY;\n        this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`);\n    }\n}\nexports.Piece = Piece;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/piece.js?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Piece = void 0;\nclass Piece {\n    //zastanawiam się czy nie zrobić tych wszystkich właściwości private...\n    constructor(color, positionX, positionY) {\n        this.symbol = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol\n        this.color = color;\n        this.positionX = positionX;\n        this.positionY = positionY;\n        this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura\n    }\n    setOnBoard(pX, pY) {\n        const img = document.createElement('img');\n        img.classList.add('image');\n        img.setAttribute('src', this.symbol);\n        this.updatePosition(pX, pY);\n        this.parentSquare.appendChild(img);\n        const imgContainer = img.parentElement;\n        imgContainer.classList.add('pieceInside');\n    }\n    updatePosition(pX, pY) {\n        this.positionX = pX;\n        this.positionY = pY;\n        this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`);\n    }\n}\nexports.Piece = Piece;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/piece.js?");
+
+/***/ }),
+
+/***/ "./src/js-components/pieces/queen.js":
+/*!*******************************************!*\
+  !*** ./src/js-components/pieces/queen.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Queen = void 0;\nconst piece_1 = __webpack_require__(/*! ./piece */ \"./src/js-components/pieces/piece.js\");\n//królowa / hetman\nclass Queen extends piece_1.Piece {\n    constructor(color, positionX, positionY) {\n        super(color, positionX, positionY);\n        this.symbol = '../../../static/assets/queen.png';\n        this.setOnBoard(this.positionX, this.positionY);\n    }\n    showPossibleMoves() {\n        //kod odpowiadający za pokazanie możliwych ruchów\n    }\n}\nexports.Queen = Queen;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/queen.js?");
+
+/***/ }),
+
+/***/ "./src/js-components/pieces/rook.js":
+/*!******************************************!*\
+  !*** ./src/js-components/pieces/rook.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Rook = void 0;\nconst piece_1 = __webpack_require__(/*! ./piece */ \"./src/js-components/pieces/piece.js\");\n//wieża\nclass Rook extends piece_1.Piece {\n    constructor(color, positionX, positionY) {\n        super(color, positionX, positionY);\n        this.symbol = '../../../static/assets/rook.png';\n        this.setOnBoard(this.positionX, this.positionY);\n    }\n    showPossibleMoves() {\n        //kod odpowiadający za pokazanie możliwych ruchów\n    }\n}\nexports.Rook = Rook;\n\n\n//# sourceURL=webpack://projekt3-chess/./src/js-components/pieces/rook.js?");
 
 /***/ })
 
