@@ -63,6 +63,38 @@ function time(): HTMLDivElement {
     return timeDiv;
 }
 
+function patCheckList(): HTMLDivElement {
+
+    const titleDiv : HTMLDivElement = document.createElement("div");
+    titleDiv.className = "menuCheckList";
+
+    const title : HTMLHeadingElement = document.createElement("h1");
+    title.innerHTML = "PAT JAKO WYGRANA";
+
+    const input1 = document.createElement("input");
+    input1.type = "checkbox";
+    input1.id = "pat1";
+    input1.name = "pat1";
+    const label1 = document.createElement("label");
+    label1.innerHTML = "PATUJĄCEGO";
+
+    const input2 = document.createElement("input");
+    input2.type = "checkbox";
+    input2.id = "pat2";
+    input2.name = "pat2";
+    const label2 = document.createElement("label");
+    label2.innerHTML = "PATOWANEGO";
+
+
+    titleDiv.appendChild(title);
+    titleDiv.appendChild(input1);
+    titleDiv.appendChild(label1);
+    titleDiv.appendChild(input2);
+    titleDiv.appendChild(label2);
+  
+    return titleDiv;
+}
+
 
 function menuContainer(): HTMLDivElement {
 
@@ -72,6 +104,7 @@ function menuContainer(): HTMLDivElement {
     menu.appendChild(title());
     menu.appendChild(menuNames());
     menu.appendChild(time());
+    menu.appendChild(patCheckList());
   
     return menu;
 }
