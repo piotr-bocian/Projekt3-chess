@@ -114,6 +114,7 @@ function patCheckList(): HTMLDivElement {
     input1.type = "radio";
     input1.id = "pat1";
     input1.name = "pat";
+    input1.checked = true;
     const inputSpan1 = document.createElement("span");
     inputSpan1.innerHTML = "PATUJĄCEGO";
     label1.appendChild(input1);
