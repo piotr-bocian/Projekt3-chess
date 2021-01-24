@@ -4,7 +4,7 @@ class Bishop extends Piece{
 
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
-        this.symbol = color === 'white' ? '♔' : '♚'; //<-- w przyszłości bedzie tu ścieżka do img figury
+        this.symbol = '../../../static/assets/bishop.png';
 
         this.setOnBoard(this.positionX, this.positionY);
     }
