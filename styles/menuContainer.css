@@ -18,6 +18,7 @@
 }
 
 /* MENUNAMES */
+
 .menuNames {
     text-align: left;
 }
@@ -27,7 +28,7 @@
 }
 
 .menuNames fieldset {
-    border: 2px solid #0075FF;
+    box-sizing: border-box;
 }
 
 .menuNames legend {
