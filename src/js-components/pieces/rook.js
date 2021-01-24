@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.King = void 0;
+exports.Rook = void 0;
 const piece_1 = require("./piece");
-class King extends piece_1.Piece {
+//wieża
+class Rook extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = '../../../static/assets/king.png'; //<-- w przyszłości bedzie tu ścieżka do img figury
+        this.symbol = color === 'white' ? '♔' : '♚'; //<-- w przyszłości bedzie tu ścieżka do img figury
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
         //kod odpowiadający za pokazanie możliwych ruchów
     }
 }
-exports.King = King;
+exports.Rook = Rook;

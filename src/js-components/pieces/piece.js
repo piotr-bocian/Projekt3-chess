@@ -11,7 +11,7 @@ class Piece {
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
     }
     setOnBoard(pX, pY) {
-        this.parentSquare.innerHTML = '';
+        // this.parentSquare.innerHTML = '';
         this.updatePosition(pX, pY);
         this.parentSquare.appendChild(document.createTextNode(this.symbol));
     }
