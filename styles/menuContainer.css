@@ -1,14 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .menuContainer {
-    display: block;
-    position: absolute;
-    width: 30vw;
-    height: 60vh;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    grid-area: menuContainer;
+    display: grid;
+    width: 25vw;
+    height: 50vh;
     background-color: white;
     margin: auto;
     font-family: 'Montserrat', sans-serif;
@@ -35,7 +31,7 @@
 }
 
 .menuNames legend {
-    font-size: 14px;
+    font-size: 0.75em;
     font-weight: bold;
     text-align: left;
     color: #0075FF;
@@ -43,7 +39,7 @@
 
 .menuNames input {
     border: none;
-    font-size: 18px;
+    font-size: 1.25em;
     text-align: left;
     width: 100%;
     outline: none;
@@ -53,7 +49,6 @@
 
 .menuTime {
     text-align: left;
-    
 }
 
 .menuTime h4 {
@@ -73,7 +68,7 @@
 }
 
 .rs-range {
-    width: 80%;
+    width: 85%;
     padding-bottom: 0.3em;
     -webkit-appearance: none;
 }
@@ -118,8 +113,9 @@
     text-align: center;
     border-radius: 3px;
     background: white;
-    padding: 5px 10px;
+    padding: 0;
     margin-left: 8px;
+    box-sizing: border-box;
 }
 
     /* PAT CHECKLIST */

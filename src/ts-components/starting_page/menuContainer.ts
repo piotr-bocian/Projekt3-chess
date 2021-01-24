@@ -76,14 +76,15 @@ function time(): HTMLDivElement {
 
     const span : HTMLSpanElement = document.createElement("span");
     span.className = "rs-label";
+    span.innerHTML = "60";
 
     const range : HTMLInputElement = document.createElement("input");
     range.type = "range";
     range.className = "rs-range";
-    range.value = "60";
     range.min = "60";
     range.max = "180";
     range.step = "10";
+    
 
     rangeSlider.addEventListener("input", showSliderValue, false);
 

@@ -56,10 +56,10 @@ function time() {
     rangeSlider.className = "range-slider";
     const span = document.createElement("span");
     span.className = "rs-label";
+    span.innerHTML = "60";
     const range = document.createElement("input");
     range.type = "range";
     range.className = "rs-range";
-    range.value = "60";
     range.min = "60";
     range.max = "180";
     range.step = "10";
