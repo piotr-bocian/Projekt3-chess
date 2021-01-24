@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .menuContainer {
+    display: block;
+    position: absolute;
     width: 30vw;
+    height: 60vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: white;
     margin: auto;
     font-family: 'Montserrat', sans-serif;
@@ -44,18 +51,30 @@
 
 /* MENUTIME */
 
+.menuTime {
+    text-align: left;
+    
+}
+
 .menuTime h4 {
     margin: 0.5em;
+    margin-top: 1.25em;
 }
 
 .menuTime span{
-    font-size: 10px;
+    font-size: 0.75em;
     color: #747474;
     padding-left: 3px;
 }
 
+.range-slider span {
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
 .rs-range {
     width: 80%;
+    padding-bottom: 0.3em;
     -webkit-appearance: none;
 }
 
@@ -76,7 +95,7 @@
 .rs-range::-webkit-slider-thumb {
     box-shadow: none;
     border: 0px solid #FA6009;
-    box-shadow: 0px 10px 10px rgba(0,0,0,0.25);
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
     height: 15px;
     width: 15px;
     border-radius: 15px;
@@ -84,10 +103,15 @@
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -7.5px;
+    transition: 0.5s;
 }
+
+.rs-range::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 3px 10px rgba(250,96,9, 0.25);
+}
+
 .rs-label {
     display: inline-block;
-    position: relative;
     width: 8%;
     color: black;
     line-height: 20px;
@@ -96,4 +120,70 @@
     background: white;
     padding: 5px 10px;
     margin-left: 8px;
+}
+
+    /* PAT CHECKLIST */
+
+.menuCheckList {
+    text-align: center;
+}
+
+.menuCheckList h4 {
+    margin: 0.5em;
+    margin-top: 1.25em;
+    text-align: left;
+}
+
+#pat2 {
+    margin-left: 3em;
+}
+
+.menuCheckList label {
+    cursor: pointer;
+}
+
+.menuCheckList input[type='radio']:after {
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+.menuCheckList input[type='radio']:checked:after {
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #FA6009;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+/* START-BUTTON */
+
+.start-button {
+    width: 50%;
+    margin: auto;
+    margin-top: 1.5em;
+    background-color: #1A90FF;
+    box-shadow: 0px 2px 15px #0075FF;
+    border-radius: 5px;
+}
+
+.start-button p {
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    padding: 0.5em;
 }

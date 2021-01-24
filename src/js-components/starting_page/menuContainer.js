@@ -47,6 +47,7 @@ function time() {
     const timeDiv = document.createElement("div");
     timeDiv.className = "menuTime";
     const title = document.createElement("h4");
+    title.className = "title-time";
     title.innerHTML = "CZAS GRY";
     const inMinutes = document.createElement("span");
     inMinutes.innerHTML = "[W MINUTACH]";
@@ -61,6 +62,7 @@ function time() {
     range.value = "60";
     range.min = "60";
     range.max = "180";
+    range.step = "10";
     rangeSlider.addEventListener("input", showSliderValue, false);
     function showSliderValue() {
         span.innerHTML = range.value;
@@ -76,24 +78,36 @@ function patCheckList() {
     titleDiv.className = "menuCheckList";
     const title = document.createElement("h4");
     title.innerHTML = "PAT JAKO WYGRANA";
-    const input1 = document.createElement("input");
-    input1.type = "checkbox";
-    input1.id = "pat1";
-    input1.name = "pat1";
     const label1 = document.createElement("label");
-    label1.innerHTML = "PATUJĄCEGO";
-    const input2 = document.createElement("input");
-    input2.type = "checkbox";
-    input2.id = "pat2";
-    input2.name = "pat2";
+    const input1 = document.createElement("input");
+    input1.type = "radio";
+    input1.id = "pat1";
+    input1.name = "pat";
+    const inputSpan1 = document.createElement("span");
+    inputSpan1.innerHTML = "PATUJĄCEGO";
+    label1.appendChild(input1);
+    label1.appendChild(inputSpan1);
     const label2 = document.createElement("label");
-    label2.innerHTML = "PATOWANEGO";
+    const input2 = document.createElement("input");
+    input2.type = "radio";
+    input2.id = "pat2";
+    input2.name = "pat";
+    const inputSpan2 = document.createElement("span");
+    inputSpan2.innerHTML = "PATOWANEGO";
+    label2.appendChild(input2);
+    label2.appendChild(inputSpan2);
     titleDiv.appendChild(title);
-    titleDiv.appendChild(input1);
     titleDiv.appendChild(label1);
-    titleDiv.appendChild(input2);
     titleDiv.appendChild(label2);
     return titleDiv;
+}
+function startButton() {
+    const startButtonContainer = document.createElement("div");
+    startButtonContainer.className = "start-button";
+    const startButtonText = document.createElement("p");
+    startButtonText.innerHTML = "ROZPOCZNIJ GRĘ!";
+    startButtonContainer.appendChild(startButtonText);
+    return startButtonContainer;
 }
 function menuContainer() {
     const menu = document.createElement("div");
@@ -102,6 +116,7 @@ function menuContainer() {
     menu.appendChild(menuNames());
     menu.appendChild(time());
     menu.appendChild(patCheckList());
+    menu.appendChild(startButton());
     return menu;
 }
 module.exports = menuContainer;
