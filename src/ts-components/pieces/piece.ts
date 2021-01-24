@@ -15,10 +15,13 @@ abstract class Piece{
     }
 
     setOnBoard(pX:string, pY:number):void{ //<-- ta metoda zmienia miejsce na szachownicy w którym wyświetla się figura
-        // this.parentSquare.innerHTML = '';
-        
+        const img = document.createElement('img');
+        img.classList.add('image');
+        img.setAttribute('src', this.symbol);
         this.updatePosition(pX, pY);
-        this.parentSquare.appendChild(document.createTextNode(this.symbol));
+        this.parentSquare.appendChild(img);
+        const imgContainer = img.parentElement !as HTMLElement;
+        imgContainer.classList.add('pieceInside');
     }
 
     updatePosition(pX:string, pY:number):void{ //<-- ta metoda aktualizuje stan właściwości positionX i positionY (ale za samo wyświetlenie figury w nowym miejscu odpowiada setOnBoard())
