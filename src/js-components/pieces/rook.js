@@ -6,7 +6,7 @@ const piece_1 = require("./piece");
 class Rook extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = '../../../static/assets/rook.png';
+        this.symbol = `../../../static/assets/${this.color}Rook.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {

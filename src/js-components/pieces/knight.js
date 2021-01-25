@@ -6,7 +6,7 @@ const piece_1 = require("./piece");
 class Knight extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = '../../../static/assets/knight.png';
+        this.symbol = `../../../static/assets/${this.color}Knight.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {

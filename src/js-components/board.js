@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Board = void 0;
+exports.ID = exports.Board = void 0;
 var ID;
 (function (ID) {
     ID[ID["A"] = 1] = "A";
@@ -12,6 +12,7 @@ var ID;
     ID[ID["G"] = 7] = "G";
     ID[ID["H"] = 8] = "H";
 })(ID || (ID = {}));
+exports.ID = ID;
 class Board {
     drawBoard() {
         const boardWrapper = document.createElement('div');

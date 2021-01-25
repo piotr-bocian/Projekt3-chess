@@ -4,7 +4,7 @@ class Pawn extends Piece{
 
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
-        this.symbol = '../../../static/assets/pawn.png';
+        this.symbol = `../../../static/assets/${this.color}Pawn.png`;
 
         this.setOnBoard(this.positionX, this.positionY);
     }

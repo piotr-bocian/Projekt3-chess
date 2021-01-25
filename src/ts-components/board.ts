@@ -48,4 +48,4 @@ class Board{
     }
 }
 
-export {Board};
+export {Board, ID};

@@ -6,7 +6,7 @@ const piece_1 = require("./piece");
 class Pawn extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = '../../../static/assets/pawn.png';
+        this.symbol = `../../../static/assets/${this.color}Pawn.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
