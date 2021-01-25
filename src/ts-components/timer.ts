@@ -2,21 +2,22 @@ class Timer {
     seconds: number;
     player: string;
     timerHandler: Element;
-    constructor (minutes: number, player: string) {
+    interval: number;
+    constructor (minutes: number, player: string, interval?:number) {
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
         this.player = player;
         this.seconds = minutes * 60;
-        this.timerHandler = document.querySelector(`#${this.player}`)!; 
+        this.timerHandler = document.querySelector(`#${this.player}`)!;
+        this.interval = 0;
     }
 
     start(){
-    var interval = setInterval(() => this.timedown(), 1000);
-    return interval;
+    this.interval = window.setInterval(() => this.timedown(), 1000);
     };
 
     stop() {
-    clearInterval(this.start())
+    window.clearInterval(this.interval);
     };
     
     timedown() {
