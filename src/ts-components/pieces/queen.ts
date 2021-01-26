@@ -11,12 +11,25 @@ protected possibleMoves:void;
     }
 
     showPossibleMoves():void{
-        const moves = [];
-        for(let i=1; i<9; i++){
+        const movesUpDown:string[] = [];
+        const movesleftRight:string[] = [];
+        const diagonalMoves:string[] = [];
+        const upDown=()=>{for(let i=1; i<9; i++){
             if (`${this.positionX}-${i}` !== `${this.positionX}-${this.positionY}`)
-                moves.push(`${this.positionX}-${i}`)
-        }
-        console.log(moves);
+            movesUpDown.push(`${this.positionX}-${i}`)
+        }}
+        const leftRight=()=>{for(let i=1; i<9; i++){
+            if (`${ID[i]}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
+            movesleftRight.push(`${ID[i]}-${this.positionY}`)
+        }}
+        // const diagonal()=>{
+
+        // }
+
+
+        upDown()
+        leftRight()
+        console.log(movesUpDown,movesleftRight);
 
     }
 }
