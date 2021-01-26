@@ -3,6 +3,7 @@ class Timer {
     player: string;
     timerHandler: Element;
     interval: number;
+    
     constructor (minutes: number, player: string) {
         this.start = this.start.bind(this);
         this.pause = this.pause.bind(this);
@@ -21,7 +22,8 @@ class Timer {
     };
 
     stop() {
-      
+      this.pause();
+      console.log("STOP");
     }
     
     timedown() {
