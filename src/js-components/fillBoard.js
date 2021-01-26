@@ -9,7 +9,7 @@ const rook_1 = require("./pieces/rook");
 const pawn_1 = require("./pieces/pawn");
 const board_1 = require("./board");
 const fillBoard = () => {
-    //whites
+    // whites
     const kingWhite = new king_1.King('white', `${board_1.ID[5]}`, 1);
     const queenWhite = new queen_1.Queen('white', `${board_1.ID[4]}`, 1);
     for (let i = 3; i <= 6; i += 3) {
@@ -24,7 +24,7 @@ const fillBoard = () => {
     for (let i = 1; i <= 8; i++) {
         const pawnWhite = new pawn_1.Pawn('white', `${board_1.ID[i]}`, 2);
     }
-    //blacks
+    // blacks
     const kingBlack = new king_1.King('white', `${board_1.ID[5]}`, 8);
     const queenBlack = new queen_1.Queen('white', `${board_1.ID[4]}`, 8);
     for (let i = 3; i <= 6; i += 3) {

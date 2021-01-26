@@ -7,7 +7,7 @@ import {Pawn} from "./pieces/pawn";
 import {ID} from './board';
 
 const fillBoard = (): void => {
-    //whites
+    // whites
     const kingWhite = new King('white', `${ID[5]}`, 1);
     const queenWhite = new Queen('white', `${ID[4]}`, 1);
 
@@ -27,7 +27,7 @@ const fillBoard = (): void => {
         const pawnWhite = new Pawn('white', `${ID[i]}`, 2);
     }
 
-    //blacks
+    // blacks
     const kingBlack = new King('white', `${ID[5]}`, 8);
     const queenBlack = new Queen('white', `${ID[4]}`, 8);
 

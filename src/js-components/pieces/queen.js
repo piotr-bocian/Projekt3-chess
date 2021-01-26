@@ -6,7 +6,7 @@ const piece_1 = require("./piece");
 class Queen extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {

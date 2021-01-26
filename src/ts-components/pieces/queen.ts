@@ -4,7 +4,7 @@ class Queen extends Piece{
 
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
-        this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
 
         this.setOnBoard(this.positionX, this.positionY);
     }
