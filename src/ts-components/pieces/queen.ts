@@ -11,25 +11,29 @@ protected possibleMoves:void;
     }
 
     showPossibleMoves():void{
-        const movesUpDown:string[] = [];
-        const movesleftRight:string[] = [];
         const diagonalMoves:string[] = [];
+        const moves:string[]=[]
+        const movesShow=(id:string)=>{
+           const movesPossibilities = [...document.querySelectorAll(`#${id}`)]
+           movesPossibilities.forEach(el=>el.classList.add('active'))
+        }
         const upDown=()=>{for(let i=1; i<9; i++){
             if (`${this.positionX}-${i}` !== `${this.positionX}-${this.positionY}`)
-            movesUpDown.push(`${this.positionX}-${i}`)
+            moves.push(`${this.positionX}-${i}`)
         }}
         const leftRight=()=>{for(let i=1; i<9; i++){
             if (`${ID[i]}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
-            movesleftRight.push(`${ID[i]}-${this.positionY}`)
+            moves.push(`${ID[i]}-${this.positionY}`)
         }}
         // const diagonal()=>{
 
         // }
 
-
         upDown()
         leftRight()
-        console.log(movesUpDown,movesleftRight);
+        moves.forEach(id=>{
+            movesShow(id)
+        })
 
     }
 }
