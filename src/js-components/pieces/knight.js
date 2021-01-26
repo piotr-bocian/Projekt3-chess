@@ -10,7 +10,11 @@ class Knight extends piece_1.Piece {
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        //kod odpowiadający za pokazanie możliwych ruchów
+        const canMoveToSquare = [];
+        const targetDiv = document.getElementById(`${this.positionX}-${this.positionY + 1}`);
+        targetDiv.classList.add('active');
+        // targetDiv.classList.remove('active');
+        return canMoveToSquare;
     }
 }
 exports.Knight = Knight;

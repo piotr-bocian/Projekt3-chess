@@ -46,8 +46,10 @@ class Game {
         const y:number = parseInt(square.id.charAt(2));
         
         for(let p of this.whites){
-            if(p.getPositionX() == x && p.getPositionY() == y)
+            if(p.getPositionX() == x && p.getPositionY() == y) {
                 console.log(p);
+                return p.showPossibleMoves();
+            }
         }
     }
 }

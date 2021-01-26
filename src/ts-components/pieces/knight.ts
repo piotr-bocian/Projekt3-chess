@@ -1,4 +1,5 @@
-import {Piece} from "./piece";
+import { Piece } from "./piece";
+import { ID } from "../board";
 //skoczek / koń
 class Knight extends Piece{
 
@@ -9,9 +10,16 @@ class Knight extends Piece{
         this.setOnBoard(this.positionX, this.positionY);
     }
 
-    showPossibleMoves():void{
-        //kod odpowiadający za pokazanie możliwych ruchów
+    showPossibleMoves():string[]{
+        const canMoveToSquare: string[] = [];
+
+        const targetDiv = document.getElementById(`${this.positionX}-${this.positionY + 1}`) !as HTMLElement;
+        targetDiv.classList.add('active');
+        // targetDiv.classList.remove('active');
+        return canMoveToSquare;
     }
 }
+
+
 
 export {Knight};
