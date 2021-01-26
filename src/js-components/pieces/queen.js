@@ -30,8 +30,18 @@ class Queen extends piece_1.Piece {
                     moves.push(`${board_1.ID[i]}-${this.positionY}`);
             }
         };
-        // const diagonal()=>{
-        // }
+        const diagonal = () => {
+            for (let i = 1; i < 9; i++) {
+                if (`${board_1.ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
+                    moves.push(`${board_1.ID[i]}-${i}`);
+            }
+            // for(let i=7; i>0; i--){
+            //     if (`${ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
+            //     diagonalMoves.push(`${ID[i]}-${i}`)
+            // }
+        };
+        diagonal();
+        console.log(diagonalMoves);
         upDown();
         leftRight();
         moves.forEach(id => {
