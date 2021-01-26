@@ -36,8 +36,8 @@ class Timer {
     convertSeconds(s: number) {
         let min : number | string = Math.floor(s / 60);
         let sec : number | string = s % 60;
-        min = min < 10 ? parseInt('0' + min) : min;
-        sec = sec < 10 ? parseInt('0' + sec) : sec;
+        min = min < 10 ? '0' + min : min;
+        sec = sec < 10 ? '0' + sec : sec;
         return min + ':' + sec;
     }
 }

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap');
+
+
+.time-history-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "timer"
+        "game-history"
+        "buttons";
+    justify-content: center;
+    width: 40vw;
+    height: 80vh;
+    background-color: white;
+    border-radius: 27px;
+}
+
+.time-div {
+    display: block;
+    grid-area: timer;
+    justify-content: center;
+    font-family: Montserrat;
+    text-align: center;
+}
+
+.time-div h4{
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 1em;
+}
+
+#timer1 {
+    display: inline-block;
+    padding: 0;
+    margin-right: 1.5em;
+}
+
+#timer1 h5 {
+    margin: auto;
+}
+
+#timer-white {
+    background-color: #D9D9D9;
+    border: 0.25em solid #BEC0CA;
+    border-radius: 14px;
+    font-size: 2em;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#timer2 {
+    display: inline-block;
+}
+
+#timer2 h5 {
+    margin: auto;
+}
+
+#timer-black {
+    background-color: #212121;
+    border: 0.25em solid #111217;
+    border-radius: 14px;
+    color: white;
+    font-size: 2em;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.game-history {
+    grid-area: game-history;
+}
+
+.buttons {
+    grid-area: buttons;
+}
