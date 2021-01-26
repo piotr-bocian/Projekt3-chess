@@ -31,6 +31,14 @@ abstract class Piece{
     }
 
     abstract showPossibleMoves():void;
+
+    getPositionX(){
+        return this.positionX;
+    }
+
+    getPositionY(){
+        return this.positionY;
+    }
 }
 
 export {Piece};

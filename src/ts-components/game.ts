@@ -39,6 +39,17 @@ class Game {
             this.whites.push(new Pawn('white', `${ID[i]}`, 2));
         }
     }
+
+    startMove(square:HTMLElement){
+        
+        const x:string = square.id.charAt(0);
+        const y:number = parseInt(square.id.charAt(2));
+        
+        for(let p of this.whites){
+            if(p.getPositionX() == x && p.getPositionY() == y)
+                console.log(p);
+        }
+    }
 }
 
 export {Game};

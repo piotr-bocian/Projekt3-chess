@@ -24,5 +24,11 @@ class Piece {
         this.positionY = pY;
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`);
     }
+    getPositionX() {
+        return this.positionX;
+    }
+    getPositionY() {
+        return this.positionY;
+    }
 }
 exports.Piece = Piece;
