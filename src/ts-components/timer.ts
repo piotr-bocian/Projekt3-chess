@@ -3,9 +3,9 @@ class Timer {
     player: string;
     timerHandler: Element;
     interval: number;
-    constructor (minutes: number, player: string, interval?:number) {
+    constructor (minutes: number, player: string) {
         this.start = this.start.bind(this);
-        this.stop = this.stop.bind(this);
+        this.pause = this.pause.bind(this);
         this.player = player;
         this.seconds = minutes * 60;
         this.timerHandler = document.querySelector(`#${this.player}`)!;
@@ -16,9 +16,13 @@ class Timer {
     this.interval = window.setInterval(() => this.timedown(), 1000);
     };
 
-    stop() {
+    pause() {
     window.clearInterval(this.interval);
     };
+
+    stop() {
+      
+    }
     
     timedown() {
         this.timerHandler.innerHTML = this.convertSeconds(this.seconds);
@@ -26,11 +30,12 @@ class Timer {
           this.seconds--;
           return this.seconds;
         } else this.stop();
+          return;
       }
 
     convertSeconds(s: number) {
-        let min = Math.floor(s / 60);
-        let sec = s % 60;
+        let min : number | string = Math.floor(s / 60);
+        let sec : number | string = s % 60;
         min = min < 10 ? parseInt('0' + min) : min;
         sec = sec < 10 ? parseInt('0' + sec) : sec;
         return min + ':' + sec;
