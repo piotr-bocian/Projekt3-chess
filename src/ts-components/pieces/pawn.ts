@@ -9,15 +9,13 @@ class Pawn extends Piece{
 
         this.setOnBoard(this.positionX, this.positionY);
         
-        // this.parentSquare.addEventListener('click', this.showPossibleMoves);
         let $self = this;
         this.parentSquare.addEventListener("click", this.showPossibleMoves.bind(this));
     }
 
 
     showPossibleMoves(): void {
-
-
+        this.removeClassActive();
         if (this.color === 'white') {
             let positionY1 = this.positionY + 1;
 
@@ -27,7 +25,7 @@ class Pawn extends Piece{
             }
 
             if (this.positionY === 2) {
-                for(let i=2; i<5; i++){
+                for(let i=3; i<5; i++){
                     document.getElementById(`${this.positionX}-${i}`)!.classList.add('active');
                 }
             } else {
@@ -37,7 +35,7 @@ class Pawn extends Piece{
             let positionY1 = this.positionY - 1;
 
             if (this.positionY === 7) {
-                for(let i=7; i>4; i--){
+                for(let i=6; i>4; i--){
                     document.getElementById(`${this.positionX}-${i}`)!.classList.add('active');
                 }
             } else {
@@ -46,9 +44,12 @@ class Pawn extends Piece{
         }
     }
 
-    // addEventList() {
-        
-    // }
+    removeClassActive(): void {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i]!.classList.remove('active');
+          }
+    }
 
 
 }
