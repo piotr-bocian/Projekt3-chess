@@ -12,11 +12,17 @@ class Queen extends piece_1.Piece {
         this.possibleMoves = this.showPossibleMoves();
     }
     showPossibleMoves() {
+        const moves = document.querySelector('.white-queen');
+        moves.addEventListener('click', () => {
+            this.collectPossibleMoves();
+        });
+    }
+    collectPossibleMoves() {
         const diagonalMoves = [];
         const moves = [];
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
-            movesPossibilities.forEach(el => el.classList.add('active'));
+            movesPossibilities.forEach(el => el.classList.toggle('active'));
         };
         const upDown = () => {
             for (let i = 1; i < 9; i++) {
@@ -30,10 +36,11 @@ class Queen extends piece_1.Piece {
                     moves.push(`${board_1.ID[i]}-${this.positionY}`);
             }
         };
+        ///////NIE DZIALA JAK TRZEBA//////////
         const diagonal = () => {
             for (let i = 1; i < 9; i++) {
-                if (`${board_1.ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
-                    moves.push(`${board_1.ID[i]}-${i}`);
+                // if (`${this.positionX}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
+                diagonalMoves.push(`${board_1.ID[i]}-${i}`);
             }
             // for(let i=7; i>0; i--){
             //     if (`${ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
@@ -42,6 +49,7 @@ class Queen extends piece_1.Piece {
         };
         diagonal();
         console.log(diagonalMoves);
+        ///////NIE DZIALA JAK TRZEBA//////////
         upDown();
         leftRight();
         moves.forEach(id => {

@@ -7,15 +7,22 @@ protected possibleMoves:void;
         super(color, positionX, positionY);
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        this.possibleMoves = this.showPossibleMoves()
+        this.possibleMoves = this.showPossibleMoves();
     }
 
     showPossibleMoves():void{
+        const moves = document.querySelector('.white-queen');
+        moves!.addEventListener('click', ()=>{
+            this.collectPossibleMoves();
+        })
+    }
+
+    collectPossibleMoves():void{
         const diagonalMoves:string[] = [];
         const moves:string[]=[]
         const movesShow=(id:string)=>{
            const movesPossibilities = [...document.querySelectorAll(`#${id}`)]
-           movesPossibilities.forEach(el=>el.classList.add('active'))
+           movesPossibilities.forEach(el=>el.classList.toggle('active'))
         }
         const upDown=()=>{for(let i=1; i<9; i++){
             if (`${this.positionX}-${i}` !== `${this.positionX}-${this.positionY}`)
@@ -25,10 +32,12 @@ protected possibleMoves:void;
             if (`${ID[i]}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
             moves.push(`${ID[i]}-${this.positionY}`)
         }}
+
+        ///////NIE DZIALA JAK TRZEBA//////////
         const diagonal=()=>{
             for(let i=1; i<9; i++){
-                if (`${ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
-                moves.push(`${ID[i]}-${i}`)
+                // if (`${this.positionX}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
+                diagonalMoves.push(`${ID[i]}-${i}`)
             }
             // for(let i=7; i>0; i--){
             //     if (`${ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
@@ -37,12 +46,12 @@ protected possibleMoves:void;
         }
         diagonal()
         console.log(diagonalMoves);
+        ///////NIE DZIALA JAK TRZEBA//////////
         upDown()
         leftRight()
         moves.forEach(id=>{
             movesShow(id)
         })
-
     }
 }
 

@@ -16,7 +16,7 @@ abstract class Piece{
 
     setOnBoard(pX:string, pY:number):void{ //<-- ta metoda zmienia miejsce na szachownicy w którym wyświetla się figura
         const img = document.createElement('img');
-        img.classList.add(`${this.constructor.name.toLowerCase()}`);
+        img.classList.add(`${this.color.toLowerCase()}-${this.constructor.name.toLowerCase()}`);
         img.setAttribute('src', this.symbol);
         this.updatePosition(pX, pY);
         this.parentSquare.appendChild(img);
