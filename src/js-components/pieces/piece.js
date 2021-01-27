@@ -11,8 +11,11 @@ class Piece {
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
     }
     setOnBoard(pX, pY) {
+        this.parentSquare.innerHTML = '';
+        this.parentSquare.classList.remove('pieceInside');
         const img = document.createElement('img');
         img.classList.add('image');
+        img.classList.add(`${this.color.toLowerCase()}-${this.constructor.name.toLowerCase()}`);
         img.setAttribute('src', this.symbol);
         this.updatePosition(pX, pY);
         this.parentSquare.appendChild(img);
