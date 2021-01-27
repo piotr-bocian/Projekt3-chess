@@ -7,7 +7,7 @@ protected possibleMoves:void;
         super(color, positionX, positionY);
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        this.possibleMoves = this.showPossibleMoves();
+        this.possibleMoves = this.collectPossibleMoves();
     }
 
     showPossibleMoves():void{
@@ -18,6 +18,8 @@ protected possibleMoves:void;
     }
 
     collectPossibleMoves():void{
+        // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery/ a=1,b=2 itd
+        //RUCHY PO PRZEKĄTNEJ DZIAŁAJĄ JEDNAK DO TABLICY DODAWANE SĄ DZIWNE WYNKI
         const diagonalMoves:string[] = [];
         const moves:string[]=[]
         const movesShow=(id:string)=>{
@@ -33,20 +35,52 @@ protected possibleMoves:void;
             moves.push(`${ID[i]}-${this.positionY}`)
         }}
 
-        ///////NIE DZIALA JAK TRZEBA//////////
-        const diagonal=()=>{
-            for(let i=1; i<9; i++){
-                // if (`${this.positionX}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
-                diagonalMoves.push(`${ID[i]}-${i}`)
+    const diagonal=()=>{
+            for(let i=1; i<=8; i++){
+                //x+1,y+1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.includes('undefined')){
+        moves.push(`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`);
+    }
+    // x-1,y-1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.includes('undefined')){
+        moves.push(`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`);
+    }
+    //x+1,y-1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.includes('undefined')){
+        moves.push(`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`);
+    }
+    //x-1,y+1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.includes('undefined')){
+        moves.push(`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`);
+    }
             }
-            // for(let i=7; i>0; i--){
-            //     if (`${ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
-            //     diagonalMoves.push(`${ID[i]}-${i}`)
-            // }
         }
+
+////////////////////////////////tu się dzieją dziwy//////////////////
+        const diagonalWeird=()=>{
+            for(let i=1; i<=8; i++){
+                //x+1,y+1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.includes('undefined')){
+        diagonalMoves.push(`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`);
+    }
+    // x-1,y-1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.includes('undefined')){
+        diagonalMoves.push(`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`);
+    }
+    //x+1,y-1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.includes('undefined')){
+        diagonalMoves.push(`${ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`);
+    }
+    //x-1,y+1
+    if(!`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.includes('undefined')){
+        diagonalMoves.push(`${ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`);
+    }
+            }
+        }
+        diagonalWeird()
+console.log(diagonalMoves);
+////////////////////////////////////////////////////////////////////
         diagonal()
-        console.log(diagonalMoves);
-        ///////NIE DZIALA JAK TRZEBA//////////
         upDown()
         leftRight()
         moves.forEach(id=>{

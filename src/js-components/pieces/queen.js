@@ -9,7 +9,7 @@ class Queen extends piece_1.Piece {
         super(color, positionX, positionY);
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        this.possibleMoves = this.showPossibleMoves();
+        this.possibleMoves = this.collectPossibleMoves();
     }
     showPossibleMoves() {
         const moves = document.querySelector('.white-queen');
@@ -18,6 +18,8 @@ class Queen extends piece_1.Piece {
         });
     }
     collectPossibleMoves() {
+        // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery/ a=1,b=2 itd
+        //RUCHY PO PRZEKĄTNEJ DZIAŁAJĄ JEDNAK DO TABLICY DODAWANE SĄ DZIWNE WYNKI
         const diagonalMoves = [];
         const moves = [];
         const movesShow = (id) => {
@@ -36,20 +38,51 @@ class Queen extends piece_1.Piece {
                     moves.push(`${board_1.ID[i]}-${this.positionY}`);
             }
         };
-        ///////NIE DZIALA JAK TRZEBA//////////
         const diagonal = () => {
-            for (let i = 1; i < 9; i++) {
-                // if (`${this.positionX}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
-                diagonalMoves.push(`${board_1.ID[i]}-${i}`);
+            for (let i = 1; i <= 8; i++) {
+                //x+1,y+1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.includes('undefined')) {
+                    moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`);
+                }
+                // x-1,y-1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.includes('undefined')) {
+                    moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`);
+                }
+                //x+1,y-1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.includes('undefined')) {
+                    moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`);
+                }
+                //x-1,y+1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.includes('undefined')) {
+                    moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`);
+                }
             }
-            // for(let i=7; i>0; i--){
-            //     if (`${ID[i]}-${i}` !== `${this.positionX}-${this.positionY}`)
-            //     diagonalMoves.push(`${ID[i]}-${i}`)
-            // }
         };
-        diagonal();
+        ////////////////////////////////tu się dzieją dziwy//////////////////
+        const diagonalWeird = () => {
+            for (let i = 1; i <= 8; i++) {
+                //x+1,y+1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.includes('undefined')) {
+                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`);
+                }
+                // x-1,y-1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.includes('undefined')) {
+                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`);
+                }
+                //x+1,y-1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.includes('undefined')) {
+                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`);
+                }
+                //x-1,y+1
+                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.includes('undefined')) {
+                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`);
+                }
+            }
+        };
+        diagonalWeird();
         console.log(diagonalMoves);
-        ///////NIE DZIALA JAK TRZEBA//////////
+        ////////////////////////////////////////////////////////////////////
+        diagonal();
         upDown();
         leftRight();
         moves.forEach(id => {

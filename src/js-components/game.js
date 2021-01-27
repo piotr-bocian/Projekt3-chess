@@ -10,7 +10,7 @@ class Game {
         this.whites = [];
         this.gameBoard = new board_1.Board;
         this.gameBoard.drawBoard();
-        this.whites.push(new queen_1.Queen('white', `${board_2.ID[2]}`, 4));
+        this.whites.push(new queen_1.Queen('white', `${board_2.ID[2]}`, 3));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
         // for(let i = 3; i <= 6; i+=3) {
         //     this.whites.push(new Bishop('white', `${ID[i]}`, 1));
