@@ -9,8 +9,6 @@ class King extends piece_1.Piece {
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        //kod odpowiadający za pokazanie możliwych ruchów
-        const possibleMoves = [];
         const arrayOfX = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         const indexOfX = arrayOfX.indexOf(this.getPositionX());
         for (let i = -1; i <= 1; i++) {

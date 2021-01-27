@@ -11,8 +11,6 @@ class King extends Piece{
     }
 
     showPossibleMoves():void{
-        //kod odpowiadający za pokazanie możliwych ruchów
-        const possibleMoves:[string, number][] = [];
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
 

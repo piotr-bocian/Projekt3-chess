@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Game = void 0;
 const board_1 = require("./board");
 const king_1 = require("./pieces/king");
+const queen_1 = require("./pieces/queen");
 const board_2 = require("./board");
 class Game {
     constructor() {
@@ -10,7 +11,7 @@ class Game {
         this.whites = [];
         this.gameBoard = new board_1.Board;
         this.gameBoard.drawBoard();
-        //this.whites.push(new Queen('white', `${ID[4]}`, 1));
+        this.whites.push(new queen_1.Queen('white', `${board_2.ID[4]}`, 1));
         this.whites.push(new king_1.King('white', `${board_2.ID[5]}`, 1));
         // for(let i = 3; i <= 6; i+=3) {
         //     this.whites.push(new Bishop('white', `${ID[i]}`, 1));
