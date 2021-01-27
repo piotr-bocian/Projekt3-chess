@@ -5,27 +5,42 @@ const board_1 = require("../board");
 const piece_1 = require("./piece");
 //królowa / hetman
 class Queen extends piece_1.Piece {
-    constructor(color, positionX, positionY, possibleMoves) {
+    constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        this.possibleMoves = this.collectPossibleMoves();
     }
     showPossibleMoves() {
-        const moves = document.querySelector('.white-queen');
-        moves.addEventListener('click', () => {
-            this.collectPossibleMoves();
+        console.log(this.parentSquare);
+        const movesArr = this.collectPossibleMoves();
+        const movesShow = (id) => {
+            const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
+            movesPossibilities.forEach(el => {
+                el.classList.add('active');
+            });
+        };
+        const queen = document.querySelector('.white-queen');
+        queen.addEventListener('click', () => {
+            movesArr.forEach(id => {
+                movesShow(id);
+                this.queenMove();
+            });
+        });
+    }
+    queenMove() {
+        const squares = document.querySelectorAll('.board-container div');
+        squares.forEach(square => {
+            square.addEventListener('click', () => {
+                if (!(square.classList.contains('pieceInside')) && square.classList.contains('active')) {
+                    this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2)));
+                    squares.forEach(square => square.classList.remove('active'));
+                }
+            });
         });
     }
     collectPossibleMoves() {
         // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery/ a=1,b=2 itd
-        //RUCHY PO PRZEKĄTNEJ DZIAŁAJĄ JEDNAK DO TABLICY DODAWANE SĄ DZIWNE WYNKI
-        const diagonalMoves = [];
         const moves = [];
-        const movesShow = (id) => {
-            const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
-            movesPossibilities.forEach(el => el.classList.toggle('active'));
-        };
         const upDown = () => {
             for (let i = 1; i < 9; i++) {
                 if (`${this.positionX}-${i}` !== `${this.positionX}-${this.positionY}`)
@@ -39,55 +54,41 @@ class Queen extends piece_1.Piece {
             }
         };
         const diagonal = () => {
+            const regexLetters = /[A-H]+/;
+            const regexNumbers = /[1-8]+/;
             for (let i = 1; i <= 8; i++) {
                 //x+1,y+1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.includes('undefined')) {
+                if (`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.match(regexNumbers) &&
+                    `${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.match(regexLetters)) {
                     moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`);
                 }
                 // x-1,y-1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.includes('undefined')) {
+                if (`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.match(regexNumbers) &&
+                    `${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.match(regexLetters)) {
                     moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`);
                 }
                 //x+1,y-1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.includes('undefined')) {
+                if (`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.match(regexNumbers) &&
+                    `${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.match(regexLetters)) {
                     moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`);
                 }
                 //x-1,y+1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.includes('undefined')) {
+                if (`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.match(regexNumbers) &&
+                    `${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.match(regexLetters)) {
                     moves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`);
                 }
             }
         };
-        ////////////////////////////////tu się dzieją dziwy//////////////////
-        const diagonalWeird = () => {
-            for (let i = 1; i <= 8; i++) {
-                //x+1,y+1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`.includes('undefined')) {
-                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY + i}`);
-                }
-                // x-1,y-1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`.includes('undefined')) {
-                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY - i}`);
-                }
-                //x+1,y-1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`.includes('undefined')) {
-                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) + i]}-${this.positionY - i}`);
-                }
-                //x-1,y+1
-                if (!`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`.includes('undefined')) {
-                    diagonalMoves.push(`${board_1.ID[(parseInt(this.positionX, 36) - 9) - i]}-${this.positionY + i}`);
-                }
-            }
-        };
-        diagonalWeird();
-        console.log(diagonalMoves);
-        ////////////////////////////////////////////////////////////////////
         diagonal();
         upDown();
         leftRight();
-        moves.forEach(id => {
-            movesShow(id);
-        });
+        return moves;
+    }
+    removeClassActive() {
+        let elems = [...document.querySelectorAll('.active')];
+        for (let i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('active');
+        }
     }
 }
 exports.Queen = Queen;

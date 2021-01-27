@@ -10,7 +10,7 @@ class Game {
         this.whites = [];
         this.gameBoard = new board_1.Board;
         this.gameBoard.drawBoard();
-        this.whites.push(new queen_1.Queen('white', `${board_2.ID[2]}`, 3));
+        this.whites.push(new queen_1.Queen('white', `${board_2.ID[4]}`, 6));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
         // for(let i = 3; i <= 6; i+=3) {
         //     this.whites.push(new Bishop('white', `${ID[i]}`, 1));
@@ -30,7 +30,8 @@ class Game {
         const y = parseInt(square.id.charAt(2));
         for (let p of this.whites) {
             if (p.getPositionX() == x && p.getPositionY() == y)
-                console.log(p);
+                // console.log(p);
+                p.showPossibleMoves();
         }
     }
 }

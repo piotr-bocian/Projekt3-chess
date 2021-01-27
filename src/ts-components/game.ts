@@ -20,7 +20,7 @@ class Game {
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
 
-        this.whites.push(new Queen('white', `${ID[2]}`, 3));
+        this.whites.push(new Queen('white', `${ID[4]}`, 6));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
 
         // for(let i = 3; i <= 6; i+=3) {
@@ -47,7 +47,8 @@ class Game {
 
         for(let p of this.whites){
             if(p.getPositionX() == x && p.getPositionY() == y)
-                console.log(p);
+                // console.log(p);
+                p.showPossibleMoves()
         }
     }
 }
