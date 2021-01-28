@@ -7,19 +7,19 @@ const piece_1 = require("./piece");
 class Queen extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
+        this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        console.log(this.parentSquare);
         const movesArr = this.collectPossibleMoves();
+        const queen = document.querySelector('.white-queen');
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
                 el.classList.add('active');
             });
         };
-        const queen = document.querySelector('.white-queen');
         queen.addEventListener('click', () => {
             movesArr.forEach(id => {
                 movesShow(id);
@@ -28,12 +28,12 @@ class Queen extends piece_1.Piece {
         });
     }
     queenMove() {
-        const squares = document.querySelectorAll('.board-container div');
+        const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if (!(square.classList.contains('pieceInside')) && square.classList.contains('active')) {
-                    this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2)));
-                    squares.forEach(square => square.classList.remove('active'));
+                if (!((square).classList.contains('pieceInside')) && (square).classList.contains('active')) {
+                    this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
+                    squares.forEach(square => (square).classList.remove('active'));
                 }
             });
         });
@@ -83,12 +83,6 @@ class Queen extends piece_1.Piece {
         upDown();
         leftRight();
         return moves;
-    }
-    removeClassActive() {
-        let elems = [...document.querySelectorAll('.active')];
-        for (let i = 0; i < elems.length; i++) {
-            elems[i].classList.remove('active');
-        }
     }
 }
 exports.Queen = Queen;

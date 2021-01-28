@@ -1,25 +1,25 @@
 import { ID } from "../board";
+import { MovesShow, FunctionsVoid } from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 //królowa / hetman
 class Queen extends Piece{
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
-        this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
+        this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
 
     showPossibleMoves():void{
-        console.log(this.parentSquare);
-
-        const movesArr = this.collectPossibleMoves()
-        const movesShow=(id:string)=>{
-            const movesPossibilities = [...document.querySelectorAll(`#${id}`)]
+        const movesArr = this.collectPossibleMoves();
+        const queen = document.querySelector('.white-queen')!;
+        const movesShow:MovesShow =(id)=>{
+            const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
                 movesPossibilities.forEach(el=>{
                     el.classList.add('active');
                 })
          }
-        const queen = document.querySelector('.white-queen');
-        queen!.addEventListener('click', ()=>{
+        queen.addEventListener('click', ()=>{
             movesArr.forEach(id=>{
                 movesShow(id)
                 this.queenMove()
@@ -28,12 +28,12 @@ class Queen extends Piece{
     }
 
     queenMove(){
-        const squares:NodeList = document.querySelectorAll('.board-container div');
+        const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')){
-                    this.setOnBoard((square as HTMLElement).id.charAt(0), parseInt((square as HTMLElement).id.charAt(2)));
-                    squares.forEach(square => (square as HTMLElement).classList.remove('active'));
+                if(!((square).classList.contains('pieceInside')) && (square).classList.contains('active')){
+                    this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
+                    squares.forEach(square => (square).classList.remove('active'));
                 }
             });
         });
@@ -42,15 +42,15 @@ class Queen extends Piece{
     collectPossibleMoves():string[]{
         // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery/ a=1,b=2 itd
         const moves:string[]=[];
-        const upDown=()=>{for(let i=1; i<9; i++){
+        const upDown:FunctionsVoid=()=>{for(let i=1; i<9; i++){
             if (`${this.positionX}-${i}` !== `${this.positionX}-${this.positionY}`)
             moves.push(`${this.positionX}-${i}`)
         }}
-        const leftRight=()=>{for(let i=1; i<9; i++){
+        const leftRight:FunctionsVoid=()=>{for(let i=1; i<9; i++){
             if (`${ID[i]}-${this.positionY}` !== `${this.positionX}-${this.positionY}`)
             moves.push(`${ID[i]}-${this.positionY}`)
         }}
-        const diagonal=()=>{
+        const diagonal:FunctionsVoid=()=>{
             const regexLetters = /[A-H]+/;
             const regexNumbers = /[1-8]+/;
             for(let i=1; i<=8; i++){
@@ -81,14 +81,7 @@ class Queen extends Piece{
         upDown()
         leftRight()
         return moves;
-    }
-
-    removeClassActive(): void {
-        let elems = [...document.querySelectorAll('.active')];
-        for (let i = 0; i < elems.length; i++) {
-            elems[i]!.classList.remove('active');
-          }
-    }
+   }
 }
 
 export {Queen};
