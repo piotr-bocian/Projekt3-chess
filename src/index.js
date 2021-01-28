@@ -1,10 +1,4 @@
-// import {Board} from "./js-components/board";
-// import {fillBoard} from "./js-components/fillBoard";
-import {Game} from "./js-components/game"
-
-// const gameBoard = new Board();
-// gameBoard.drawBoard();
-// fillBoard();
+import {Game} from "./js-components/game";
 
 const game = new Game();
 
@@ -24,10 +18,3 @@ function selectPiece(e){
         });
     }
 }
-
-// document.querySelectorAll('.knight').forEach(element => {
-//     element.addEventListener('click', () => {
-//         console.log('Knight clicked!');
-
-//     });
-// });
