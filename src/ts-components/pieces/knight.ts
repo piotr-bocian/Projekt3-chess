@@ -12,11 +12,13 @@ class Knight extends Piece{
 
     showPossibleMoves():void{
         document.querySelectorAll('.active')!.forEach((e) => {
+            // e.removeEventListener;
             e.classList.remove('active');
         });
-        const possibleMovesIds: string[] = [];
+        let possibleMovesIds: string[] = [];
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
         const coordinateY : number = this.positionY;
+        // console.log(coordinateX, coordinateY);
 
         for (let i = coordinateX -2; i <= coordinateX + 2; i += 4) {
             if (i >= 1 && i <= 8) {
@@ -39,20 +41,35 @@ class Knight extends Piece{
         }
         console.log(possibleMovesIds);
         possibleMovesIds.forEach((id) => {
-            if (!document.querySelector(`#${id}`)?.classList.contains('pieceInside')){
-                document.querySelector(`#${id}`)?.classList.add('active');
+            if (!document.querySelector(`#${id}`)!.classList.contains('pieceInside')){
+                document.querySelector(`#${id}`)!.classList.add('active');
             }
         });
 
+        // const moveKnight = (e: HTMLElement) => {
+        //     if(e.classList.contains('active')){
+        //         const coorX = e.id.charAt(0);
+        //         const coorY = parseInt(e.id.charAt(2));
+        //         // console.log(coordinateX, coordinateY);
+        //         this.setOnBoard(coorX, coorY);
+        //         document.querySelectorAll('.active')!.forEach(elem => {
+        //             elem.classList.remove('active');
+        //         });
+        //     }
+        // }
+
         document.querySelectorAll('.active')!.forEach((possMove) => {
-            console.log(possMove);
             possMove.addEventListener('click', () => {
+                console.log(possMove);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
-                this.setOnBoard(coorX, coorY);
-                document.querySelectorAll('.active')!.forEach(e => {
-                    e.classList.remove('active');
-                })
+                if(possMove.classList.contains('active')){
+                    // console.log(coordinateX, coordinateY);
+                    this.setOnBoard(coorX, coorY);
+                    document.querySelectorAll('.active')!.forEach(e => {
+                        e.classList.remove('active');
+                    });
+                }
             });
         });
     }

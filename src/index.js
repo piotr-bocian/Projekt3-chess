@@ -12,9 +12,9 @@ document.querySelectorAll('.dark').forEach(element => {
 function selectPiece(e){
     if(e.target.parentElement.classList.contains('pieceInside')) {
         game.startMove(e.target.parentElement);
-    } else if(e.target.parentElement.classList.contains('board-container')){
-        document.querySelector('.board-container').querySelectorAll('div').forEach(element => {
-            element.classList.remove('active');
-        });
+    // } else if(e.target.parentElement.classList.contains('board-container')){
+    //     document.querySelector('.board-container').querySelectorAll('div').forEach(element => {
+    //         element.classList.remove('active');
+    //     });
     }
 }

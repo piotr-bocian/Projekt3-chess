@@ -31,7 +31,7 @@ class Game {
         for (let p of this.whites) {
             if (p.getPositionX() == x && p.getPositionY() == y) {
                 console.log(p);
-                return p.showPossibleMoves();
+                p.showPossibleMoves();
             }
         }
     }
