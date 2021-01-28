@@ -1,20 +1,18 @@
 import {Piece} from "./piece";
 //pion
-class Pawn extends Piece{
+class Pawn extends Piece {
 
     
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Pawn.png`;
-
-        this.setOnBoard(this.positionX, this.positionY);
-        
+        this.setOnBoard(this.positionX, this.positionY);        
         let $self = this;
-        this.parentSquare.addEventListener("click", this.showPossibleMoves.bind(this));
+       // this.parentSquare.addEventListener("click", this.showPossibleMoves.bind(this));
     }
 
 
-    showPossibleMoves(): void {
+    showPossibleMoves(): void {       
         this.removeClassActive();
         if (this.color === 'white') {
             let positionY1 = this.positionY + 1;
@@ -31,9 +29,10 @@ class Pawn extends Piece{
             } else {
                 document.getElementById(`${this.positionX}-${positionY1}`)!.classList.add('active');
             }
-        } else {
+        } 
+        
+        else {
             let positionY1 = this.positionY - 1;
-
             if (this.positionY === 7) {
                 for(let i=6; i>4; i--){
                     document.getElementById(`${this.positionX}-${i}`)!.classList.add('active');
@@ -42,15 +41,31 @@ class Pawn extends Piece{
                 document.getElementById(`${this.positionX}-${positionY1}`)!.classList.add('active');
             }
         }
+        
+        document.querySelectorAll('.active').forEach((possibleMove) => {                 
+            possibleMove.addEventListener('click', () => {
+                if(possibleMove.classList.contains('active')){
+                    const posX = possibleMove.id.charAt(0);
+                    const posY = parseInt(possibleMove.id.charAt(2));
+                    this.setOnBoard(posX, posY);
+                    this.removeClassActive();
+                }                
+            });      
+        })
+    }
+
+    movePawn(possibleMove:HTMLElement):void {
+        const posX = possibleMove.id.charAt(0);
+        const posY = parseInt(possibleMove.id.charAt(2));
+        this.setOnBoard(posX, posY);
     }
 
     removeClassActive(): void {
         let elems = document.querySelectorAll('.active');
         for (var i = 0; i < elems.length; i++) {
             elems[i]!.classList.remove('active');
-          }
+        }
     }
-
 
 }
 

@@ -9,7 +9,7 @@ class Pawn extends piece_1.Piece {
         this.symbol = `../../../static/assets/${this.color}Pawn.png`;
         this.setOnBoard(this.positionX, this.positionY);
         let $self = this;
-        this.parentSquare.addEventListener("click", this.showPossibleMoves.bind(this));
+        // this.parentSquare.addEventListener("click", this.showPossibleMoves.bind(this));
     }
     showPossibleMoves() {
         this.removeClassActive();
@@ -39,6 +39,21 @@ class Pawn extends piece_1.Piece {
                 document.getElementById(`${this.positionX}-${positionY1}`).classList.add('active');
             }
         }
+        document.querySelectorAll('.active').forEach((possibleMove) => {
+            possibleMove.addEventListener('click', () => {
+                if (possibleMove.classList.contains('active')) {
+                    const posX = possibleMove.id.charAt(0);
+                    const posY = parseInt(possibleMove.id.charAt(2));
+                    this.setOnBoard(posX, posY);
+                    this.removeClassActive();
+                }
+            });
+        });
+    }
+    movePawn(possibleMove) {
+        const posX = possibleMove.id.charAt(0);
+        const posY = parseInt(possibleMove.id.charAt(2));
+        this.setOnBoard(posX, posY);
     }
     removeClassActive() {
         let elems = document.querySelectorAll('.active');
