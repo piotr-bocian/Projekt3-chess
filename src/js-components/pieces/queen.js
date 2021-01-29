@@ -12,34 +12,27 @@ class Queen extends piece_1.Piece {
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        const movesArr = this.collectAllPossibleMoves();
-        const queen = document.querySelector('.white-queen');
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
-                // console.log(parseInt(el.id.charAt(2), 32), parseInt(id.charAt(2), 32));
-                console.log(!el.innerHTML.match(/white/));
-                if (el.innerHTML.match(/white/) && el.id.charAt(2) < id.charAt(2))
-                    return;
-                el.classList.add('active');
+                el.classList.toggle('queenMove');
             });
         };
-        queen.addEventListener('click', () => {
-            movesArr.forEach(id => {
-                movesShow(id);
-                this.queenMove();
-            });
+        this.collectAllPossibleMoves().forEach(id => {
+            movesShow(id);
+            this.queenMove();
         });
     }
     queenMove() {
         const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if (!((square).classList.contains('pieceInside')) && (square).classList.contains('active')) {
+                if ((square).classList.contains('pieceInside'))
+                    return;
+                console.log('klik1');
+                if (!((square).classList.contains('pieceInside')) && (square).classList.contains('queenMove')) {
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
-                    squares.forEach(square => {
-                        (square).classList.remove('active');
-                    });
+                    this.removeClassActive();
                 }
             });
         });
@@ -89,6 +82,12 @@ class Queen extends piece_1.Piece {
         upDown();
         leftRight();
         return moves;
+    }
+    removeClassActive() {
+        let elems = [...document.querySelectorAll('.queenMove')];
+        for (let i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('queenMove');
+        }
     }
 }
 exports.Queen = Queen;

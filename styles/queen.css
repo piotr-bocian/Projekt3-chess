@@ -1,5 +1,5 @@
 
-.active:before{
+.queenMove:before{
    display: block;
    content:'';
    width: 50%;
@@ -10,3 +10,4 @@
    top: 25%;
    left: 25%;
 }
+
