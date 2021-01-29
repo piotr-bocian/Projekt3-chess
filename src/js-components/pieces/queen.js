@@ -7,16 +7,20 @@ const piece_1 = require("./piece");
 class Queen extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = `../../../static/assets/${this.color}Queen.png`;
-        // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
+        // this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        const movesArr = this.collectPossibleMoves();
+        const movesArr = this.collectAllPossibleMoves();
         const queen = document.querySelector('.white-queen');
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
+                // console.log(parseInt(el.id.charAt(2), 32), parseInt(id.charAt(2), 32));
+                console.log(!el.innerHTML.match(/white/));
+                if (el.innerHTML.match(/white/) && el.id.charAt(2) < id.charAt(2))
+                    return;
                 el.classList.add('active');
             });
         };
@@ -33,12 +37,14 @@ class Queen extends piece_1.Piece {
             square.addEventListener('click', () => {
                 if (!((square).classList.contains('pieceInside')) && (square).classList.contains('active')) {
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
-                    squares.forEach(square => (square).classList.remove('active'));
+                    squares.forEach(square => {
+                        (square).classList.remove('active');
+                    });
                 }
             });
         });
     }
-    collectPossibleMoves() {
+    collectAllPossibleMoves() {
         // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery/ a=1,b=2 itd
         const moves = [];
         const upDown = () => {

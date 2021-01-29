@@ -20,7 +20,7 @@ class Game {
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
 
-        this.whites.push(new Queen('white', `${ID[4]}`, 6));
+        this.whites.push(new Queen('white', `${ID[4]}`, 1));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
 
         // for(let i = 3; i <= 6; i+=3) {
@@ -35,9 +35,9 @@ class Game {
         //     this.whites.push(new Rook('white', `${ID[i]}`, 1));
         // }
 
-        // for(let i = 1; i <= 8; i++) {
-        //     this.whites.push(new Pawn('white', `${ID[i]}`, 2));
-        // }
+        for(let i = 1; i <= 8; i++) {
+            this.whites.push(new Pawn('white', `${ID[i]}`, 2));
+        }
     }
 
     startMove(square:HTMLElement){
@@ -49,6 +49,8 @@ class Game {
             if(p.getPositionX() == x && p.getPositionY() == y)
                 // console.log(p);
                 p.showPossibleMoves()
+                // console.log(p);
+
         }
     }
 }
