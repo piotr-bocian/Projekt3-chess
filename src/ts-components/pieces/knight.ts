@@ -10,14 +10,19 @@ class Knight extends Piece{
         this.setOnBoard(this.positionX, this.positionY);
     }
 
+    removeClassActive(): void {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i]!.classList.remove('active');
+        }
+    }
+
     showPossibleMoves():void{
-        document.querySelectorAll('.active')!.forEach((e) => {
-            // e.removeEventListener;
-            e.classList.remove('active');
-        });
+        this.removeClassActive();
         let possibleMovesIds: string[] = [];
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
         const coordinateY : number = this.positionY;
+
         // console.log(coordinateX, coordinateY);
 
         for (let i = coordinateX -2; i <= coordinateX + 2; i += 4) {
@@ -41,10 +46,11 @@ class Knight extends Piece{
         }
         console.log(possibleMovesIds);
         possibleMovesIds.forEach((id) => {
-            if (!document.querySelector(`#${id}`)!.classList.contains('pieceInside')){
+            if (!(document.querySelector(`#${id}`)!.classList.contains('pieceInside'))){
                 document.querySelector(`#${id}`)!.classList.add('active');
             }
         });
+        // console.log(this);
 
         // const moveKnight = (e: HTMLElement) => {
         //     if(e.classList.contains('active')){
@@ -58,17 +64,16 @@ class Knight extends Piece{
         //     }
         // }
 
-        document.querySelectorAll('.active')!.forEach((possMove) => {
+        document.querySelectorAll('.active').forEach((possMove) => {
             possMove.addEventListener('click', () => {
                 console.log(possMove);
+                // console.log(this);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 if(possMove.classList.contains('active')){
                     // console.log(coordinateX, coordinateY);
                     this.setOnBoard(coorX, coorY);
-                    document.querySelectorAll('.active')!.forEach(e => {
-                        e.classList.remove('active');
-                    });
+                    this.removeClassActive();
                 }
             });
         });

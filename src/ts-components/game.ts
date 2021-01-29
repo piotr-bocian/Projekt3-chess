@@ -44,10 +44,11 @@ class Game {
         
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
+        // console.log(this.whites);
         
         for(let p of this.whites){
             if(p.getPositionX() == x && p.getPositionY() == y) {
-                console.log(p);
+                // console.log(p);
                 p.showPossibleMoves();
             }
         }

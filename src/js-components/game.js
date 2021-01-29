@@ -28,9 +28,10 @@ class Game {
     startMove(square) {
         const x = square.id.charAt(0);
         const y = parseInt(square.id.charAt(2));
+        // console.log(this.whites);
         for (let p of this.whites) {
             if (p.getPositionX() == x && p.getPositionY() == y) {
-                console.log(p);
+                // console.log(p);
                 p.showPossibleMoves();
             }
         }

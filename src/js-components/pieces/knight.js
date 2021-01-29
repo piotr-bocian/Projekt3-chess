@@ -10,11 +10,14 @@ class Knight extends piece_1.Piece {
         this.symbol = `../../../static/assets/${this.color}Knight.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
+    removeClassActive() {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('active');
+        }
+    }
     showPossibleMoves() {
-        document.querySelectorAll('.active').forEach((e) => {
-            // e.removeEventListener;
-            e.classList.remove('active');
-        });
+        this.removeClassActive();
         let possibleMovesIds = [];
         const coordinateX = Object.values(board_1.ID).indexOf(this.positionX) + 1;
         const coordinateY = this.positionY;
@@ -39,10 +42,11 @@ class Knight extends piece_1.Piece {
         }
         console.log(possibleMovesIds);
         possibleMovesIds.forEach((id) => {
-            if (!document.querySelector(`#${id}`).classList.contains('pieceInside')) {
+            if (!(document.querySelector(`#${id}`).classList.contains('pieceInside'))) {
                 document.querySelector(`#${id}`).classList.add('active');
             }
         });
+        // console.log(this);
         // const moveKnight = (e: HTMLElement) => {
         //     if(e.classList.contains('active')){
         //         const coorX = e.id.charAt(0);
@@ -57,14 +61,13 @@ class Knight extends piece_1.Piece {
         document.querySelectorAll('.active').forEach((possMove) => {
             possMove.addEventListener('click', () => {
                 console.log(possMove);
+                // console.log(this);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 if (possMove.classList.contains('active')) {
                     // console.log(coordinateX, coordinateY);
                     this.setOnBoard(coorX, coorY);
-                    document.querySelectorAll('.active').forEach(e => {
-                        e.classList.remove('active');
-                    });
+                    this.removeClassActive();
                 }
             });
         });
