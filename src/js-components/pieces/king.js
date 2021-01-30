@@ -14,14 +14,17 @@ class King extends piece_1.Piece {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const square = document.querySelector(`#${arrayOfX[indexOfX + i]}-${this.getPositionY() + j}`);
-                if (square != null)
+                if (square != null && square.innerHTML == "")
                     square.classList.add('active');
             }
         }
+        this.move();
+    }
+    move() {
         const squares = document.querySelectorAll('.board-container div');
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if (!(square.classList.contains('pieceInside')) && square.classList.contains('active')) {
+                if (square.classList.contains('active')) {
                     this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2)));
                     squares.forEach(square => square.classList.remove('active'));
                 }
