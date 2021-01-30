@@ -8,10 +8,7 @@ import {Game} from "./js-components/game"
 
 const game = new Game();
 
-document.querySelectorAll('.light').forEach(element => {
-    element.addEventListener('click', selectPiece)
-});
-document.querySelectorAll('.dark').forEach(element => {
+document.querySelectorAll('.board-container div').forEach(element => {
     element.addEventListener('click', selectPiece)
 });
 

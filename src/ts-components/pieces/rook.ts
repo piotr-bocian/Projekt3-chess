@@ -2,6 +2,7 @@
 
 import {Piece} from "./piece";
 import {ID} from "./../board";
+import { Game } from "../game";
 
 //wieża
 class Rook extends Piece{
@@ -26,7 +27,7 @@ class Rook extends Piece{
             squareY.classList.add('active');
 
             arrayOfX.map((letter) => {
-                const squareX= document.querySelector(`#${letter}-${rookLineY}`);
+                const squareX = document.querySelector(`#${letter}-${rookLineY}`);
                 if (squareX != null)
                     squareX.classList.add('active');
             })
@@ -34,8 +35,12 @@ class Rook extends Piece{
 
         const squares:NodeList = document.querySelectorAll('.board-container div');
         squares.forEach(square => {
-            square.addEventListener('click', () => {
-                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')){
+            square.addEventListener('click', (e) => {
+                let pickedFigure = e.currentTarget;
+
+                const x = Game.lastChosen.getPositionX();
+                const y = Game.lastChosen.getPositionY();
+                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')   && this.getPositionX() === x && this.getPositionY() === y){
                     this.setOnBoard((square as HTMLElement).id.charAt(0), parseInt((square as HTMLElement).id.charAt(2)));
                     squares.forEach(square => (square as HTMLElement).classList.remove('active'));
                 }

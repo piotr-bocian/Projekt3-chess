@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Knight = void 0;
 const piece_1 = require("./piece");
 const board_1 = require("../board");
+const game_1 = require("../game");
 //skoczek / koń
 class Knight extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -64,7 +65,9 @@ class Knight extends piece_1.Piece {
                 // console.log(this);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
-                if (possMove.classList.contains('active')) {
+                const x = game_1.Game.lastChosen.getPositionX();
+                const y = game_1.Game.lastChosen.getPositionY();
+                if (possMove.classList.contains('active') && this.getPositionX() === x && this.getPositionY() === y) {
                     // console.log(coordinateX, coordinateY);
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();

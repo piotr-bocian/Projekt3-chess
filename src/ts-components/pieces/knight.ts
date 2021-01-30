@@ -1,5 +1,6 @@
 import { Piece } from "./piece";
 import { ID } from "../board";
+import { Game } from "../game"
 //skoczek / koń
 class Knight extends Piece{
 
@@ -70,7 +71,11 @@ class Knight extends Piece{
                 // console.log(this);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
-                if(possMove.classList.contains('active')){
+
+                const x = Game.lastChosen.getPositionX();
+                const y = Game.lastChosen.getPositionY();
+
+                if(possMove.classList.contains('active')  && this.getPositionX() === x && this.getPositionY() === y){
                     // console.log(coordinateX, coordinateY);
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
