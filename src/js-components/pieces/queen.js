@@ -5,16 +5,20 @@ const board_1 = require("../board");
 const piece_1 = require("./piece");
 //królowa / hetman
 class Queen extends piece_1.Piece {
-    constructor(color, positionX, positionY) {
+    constructor(color, positionX, positionY, history) {
         super(color, positionX, positionY);
+        this.history = history;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
+        this.history;
     }
     showPossibleMoves() {
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
+                if (el.classList.contains('pieceInside'))
+                    return;
                 el.classList.toggle('queenMove');
             });
         };
@@ -29,7 +33,12 @@ class Queen extends piece_1.Piece {
             square.addEventListener('click', () => {
                 if ((square).classList.contains('pieceInside'))
                     return;
-                if (!((square).classList.contains('pieceInside')) && (square).classList.contains('queenMove')) {
+                const history = [];
+                const x = this.getPositionX();
+                const y = this.getPositionY();
+                const h = `from ${x}-${y} to ${(square).id.charAt(0)}-${parseInt((square).id.charAt(2))}`;
+                history.push(h);
+                if (!(square).classList.contains('pieceInside') && (square).classList.contains('queenMove')) {
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
                 }

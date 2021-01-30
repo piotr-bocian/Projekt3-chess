@@ -3,17 +3,19 @@ import { MovesShow, QueenMethods } from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 //królowa / hetman
 class Queen extends Piece implements QueenMethods{
-    constructor(color:string, positionX:string, positionY:number){
+    constructor(color:string, positionX:string, positionY:number, public history?:string[]){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
+        this.history
     }
 
     showPossibleMoves(){
         const movesShow:MovesShow =(id)=>{
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
                 movesPossibilities.forEach(el=>{
+                    if (el.classList.contains('pieceInside')) return
                     el.classList.toggle('queenMove');
                 })
          }
@@ -27,8 +29,13 @@ class Queen extends Piece implements QueenMethods{
         const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if ((square).classList.contains('pieceInside')) return
-                if(!((square).classList.contains('pieceInside')) && (square).classList.contains('queenMove')){
+                if ((square).classList.contains('pieceInside')) return;
+                const history:string[]=[];
+                const x = this.getPositionX();
+                const y = this.getPositionY();
+                const h = `from ${x}-${y} to ${(square).id.charAt(0)}-${parseInt((square).id.charAt(2))}`
+                history.push(h)
+                if(!(square).classList.contains('pieceInside') && (square).classList.contains('queenMove')){
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive()
                 }
