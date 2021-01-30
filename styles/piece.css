@@ -6,3 +6,8 @@
 .pieceInside {
     display: flex;
 }
+
+.pawn {
+    height: 100%;
+    margin: auto;
+}
