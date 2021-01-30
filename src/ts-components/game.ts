@@ -21,7 +21,7 @@ class Game {
         this.gameBoard.drawBoard();
 
         this.whites.push(new Queen('white', `${ID[4]}`, 1));
-        this.whites.push(new King('white', `${ID[5]}`, 1));
+        // this.whites.push(new King('white', `${ID[5]}`, 1));
         
         // for(let i = 3; i <= 6; i+=3) {
         //     this.whites.push(new Bishop('white', `${ID[i]}`, 1));
@@ -31,9 +31,9 @@ class Game {
         //     this.whites.push(new Knight('white', `${ID[i]}`, 1));
         // }
 
-        // for(let i = 1; i <= 8; i+=7) {
-        //     this.whites.push(new Rook('white', `${ID[i]}`, 1));
-        // }
+        for(let i = 1; i <= 8; i+=7) {
+            this.whites.push(new Rook('white', `${ID[i]}`, 1));
+        }
 
         // for(let i = 1; i <= 8; i++) {
         //     this.whites.push(new Pawn('white', `${ID[i]}`, 2));
