@@ -7,7 +7,7 @@ const piece_1 = require("./piece");
 class Queen extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        // this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
@@ -29,7 +29,6 @@ class Queen extends piece_1.Piece {
             square.addEventListener('click', () => {
                 if ((square).classList.contains('pieceInside'))
                     return;
-                console.log('klik1');
                 if (!((square).classList.contains('pieceInside')) && (square).classList.contains('queenMove')) {
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
@@ -38,7 +37,7 @@ class Queen extends piece_1.Piece {
         });
     }
     collectAllPossibleMoves() {
-        // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery/ a=1,b=2 itd
+        // console.log(parseInt(this.positionX, 36) - 9); tworzy liczbę z litery a=1,b=2 itd, używam do enuma ID
         const moves = [];
         const upDown = () => {
             for (let i = 1; i < 9; i++) {
@@ -86,7 +85,7 @@ class Queen extends piece_1.Piece {
     removeClassActive() {
         let elems = [...document.querySelectorAll('.queenMove')];
         for (let i = 0; i < elems.length; i++) {
-            elems[i].classList.remove('queenMove');
+            elems[i]?.classList.remove('queenMove');
         }
     }
 }

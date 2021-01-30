@@ -2,8 +2,11 @@ interface MovesShow {
    (id:string):void
 }
 
-interface FunctionsVoid{
-   ():void
-}
+interface QueenMethods {
+   showPossibleMoves():void;
+   queenMove():void;
+   collectAllPossibleMoves():string[];
+   removeClassActive():void;
 
-export {MovesShow, FunctionsVoid }
+}
+export {MovesShow, QueenMethods }
