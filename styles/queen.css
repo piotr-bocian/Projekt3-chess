@@ -1,12 +1,4 @@
-@import './board.css';
-@import './piece.css';
-body {
-    height: 100%;
-    /* background-image: url(../static/assets/background.png); */
-    /* background-color: black; */
-}
-
-.active:before{
+.queenMove:before{
     display: block;
     content:'';
     width: 50%;
@@ -16,4 +8,4 @@ body {
     position:relative;
     top: 25%;
     left: 25%;
-}
+ }
