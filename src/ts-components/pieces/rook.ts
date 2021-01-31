@@ -20,68 +20,59 @@ class Rook extends Piece{
 
         const rookLineX:string = this.getPositionX();
         const rookLineY:number = this.getPositionY();
+// top
+console.log(rookLineX,rookLineY)
+for(let i=rookLineY+1;i<=8;i++){
+    let squareY = document.querySelector(`#${rookLineX}-${i}`);
+    if(!squareY?.classList.contains('pieceInside')){
+        if (squareY != null)
+        squareY.classList.add('active');
+    }
+    else{
+        break;
+    }
+}
+// bot
+for(let i=rookLineY-1;i>0;i--){
+    let squareY = document.querySelector(`#${rookLineX}-${i}`);
+    console.log(i,squareY)
+    if(!squareY?.classList.contains('pieceInside')){
+        squareY?.classList.add('active');
+    }
+    else{
+        break;
+    }
+}
+for(let i=0; i<=8; i++){
+    // let squareY = document.querySelector(`#${rookLineX}-${i}`);
+    // if(squareY?.classList.contains('pieceInside')){
+    //     console.log('shit')
+        
+    // }else{
+    //     break;
+    // }
+    // if (squareY != null){squareY.classList.add('active')};
+
+    arrayOfX.map((letter) => {
+        const squareX = document.querySelector(`#${letter}-${rookLineY}`);
 
 
-        // top
-        console.log(rookLineX,rookLineY)
-        for(let i=rookLineY+1;i<=8;i++){
-            let squareY = document.querySelector(`#${rookLineX}-${i}`);
-            if(!squareY?.classList.contains('pieceInside')){
-                if (squareY != null)
-                squareY.classList.add('active');
-            }
-            else{
-                break;
-            }
-        }
-        // bot
-        for(let i=rookLineY-1;i>0;i--){
-            let squareY = document.querySelector(`#${rookLineX}-${i}`);
-            console.log(i,squareY)
-            if(!squareY?.classList.contains('pieceInside')){
-                squareY?.classList.add('active');
-            }
-            else{
-                break;
-            }
-        }
-        for(let i=0; i<=8; i++){
-            // let squareY = document.querySelector(`#${rookLineX}-${i}`);
-            // if(squareY?.classList.contains('pieceInside')){
-            //     console.log('shit')
-            // }else{
-            //     break;
-            // }
-            // if (squareY != null){squareY.classList.add('active')};
-
-            arrayOfX.map((letter) => {
-                const squareX = document.querySelector(`#${letter}-${rookLineY}`);
-
-
-                if (squareX != null)
-                    squareX.classList.add('active');
-            })
-        }
+        if (squareX != null)
+            squareX.classList.add('active');
+    })
+}
 
         const squares:NodeList = document.querySelectorAll('.board-container div');
         squares.forEach(square => {
             square.addEventListener('click', (e) => {
                 let pickedFigure = e.currentTarget;
 
-                const x = Game.lastChosen.getPositionX();
-                const y = Game.lastChosen.getPositionY();
-                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')   && this.getPositionX() === x && this.getPositionY() === y){
+                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')){
                     this.setOnBoard((square as HTMLElement).id.charAt(0), parseInt((square as HTMLElement).id.charAt(2)));
                     squares.forEach(square => (square as HTMLElement).classList.remove('active'));
                 }
             });
         });
-    }
-    removeClassActive(): void {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i]!.classList.remove('active');
-        }
     }
 }
 

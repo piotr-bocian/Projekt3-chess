@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rook = void 0;
 const piece_1 = require("./piece");
-const game_1 = require("../game");
 //wieża
 class Rook extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -58,20 +57,12 @@ class Rook extends piece_1.Piece {
         squares.forEach(square => {
             square.addEventListener('click', (e) => {
                 let pickedFigure = e.currentTarget;
-                const x = game_1.Game.lastChosen.getPositionX();
-                const y = game_1.Game.lastChosen.getPositionY();
-                if (!(square.classList.contains('pieceInside')) && square.classList.contains('active') && this.getPositionX() === x && this.getPositionY() === y) {
+                if (!(square.classList.contains('pieceInside')) && square.classList.contains('active')) {
                     this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2)));
                     squares.forEach(square => square.classList.remove('active'));
                 }
             });
         });
-    }
-    removeClassActive() {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].classList.remove('active');
-        }
     }
 }
 exports.Rook = Rook;

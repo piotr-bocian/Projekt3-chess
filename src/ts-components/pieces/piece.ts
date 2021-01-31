@@ -32,7 +32,12 @@ abstract class Piece{
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!;
     }
 
-    abstract showPossibleMoves():void;
+    removeClassActive():void {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i]!.classList.remove('active');
+        }
+    }
 
     getPositionX(){
         return this.positionX;
@@ -41,6 +46,8 @@ abstract class Piece{
     getPositionY(){
         return this.positionY;
     }
+
+    abstract showPossibleMoves():void;
 }
 
 export {Piece};
