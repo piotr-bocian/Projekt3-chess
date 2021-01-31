@@ -45,7 +45,7 @@ class Knight extends Piece{
                 }
             }
         }
-        console.log(possibleMovesIds);
+        //console.log(possibleMovesIds);
         possibleMovesIds.forEach((id) => {
             if (!(document.querySelector(`#${id}`)!.classList.contains('pieceInside'))){
                 document.querySelector(`#${id}`)!.classList.add('active');
@@ -67,15 +67,12 @@ class Knight extends Piece{
 
         document.querySelectorAll('.active').forEach((possMove) => {
             possMove.addEventListener('click', () => {
-                console.log(possMove);
+                //console.log(possMove);
                 // console.log(this);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
 
-                const x = Game.lastChosen.getPositionX();
-                const y = Game.lastChosen.getPositionY();
-
-                if(possMove.classList.contains('active')  && this.getPositionX() === x && this.getPositionY() === y){
+                if(possMove.classList.contains('active') && (Game.getLastChosen() === this)){
                     // console.log(coordinateX, coordinateY);
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();

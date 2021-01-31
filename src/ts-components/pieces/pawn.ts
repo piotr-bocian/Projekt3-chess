@@ -1,4 +1,5 @@
 import {Piece} from "./piece";
+import {Game} from "../game";
 //pion
 class Pawn extends Piece {
 
@@ -18,7 +19,7 @@ class Pawn extends Piece {
             let positionY1 = this.positionY + 1;
 
             if (document.getElementById(`${this.positionX}-${positionY1}`)!.classList.contains('pieceInside')) {
-                console.log('no possible moves!');
+                //console.log('no possible moves!');
                 return;
             }
 
@@ -44,7 +45,7 @@ class Pawn extends Piece {
         
         document.querySelectorAll('.active').forEach((possibleMove) => {                 
             possibleMove.addEventListener('click', () => {
-                if(possibleMove.classList.contains('active')){
+                if(possibleMove.classList.contains('active') && (Game.getLastChosen() === this)){
                     const posX = possibleMove.id.charAt(0);
                     const posY = parseInt(possibleMove.id.charAt(2));
                     this.setOnBoard(posX, posY);

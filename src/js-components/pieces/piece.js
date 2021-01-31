@@ -26,6 +26,12 @@ class Piece {
         this.positionY = pY;
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`);
     }
+    removeClassActive() {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('active');
+        }
+    }
     getPositionX() {
         return this.positionX;
     }

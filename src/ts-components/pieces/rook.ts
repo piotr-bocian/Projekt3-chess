@@ -38,9 +38,7 @@ class Rook extends Piece{
             square.addEventListener('click', (e) => {
                 let pickedFigure = e.currentTarget;
 
-                const x = Game.lastChosen.getPositionX();
-                const y = Game.lastChosen.getPositionY();
-                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')   && this.getPositionX() === x && this.getPositionY() === y){
+                if(!((square as HTMLElement).classList.contains('pieceInside')) && (square as HTMLElement).classList.contains('active')){
                     this.setOnBoard((square as HTMLElement).id.charAt(0), parseInt((square as HTMLElement).id.charAt(2)));
                     squares.forEach(square => (square as HTMLElement).classList.remove('active'));
                 }

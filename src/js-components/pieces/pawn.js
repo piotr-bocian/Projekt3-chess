@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pawn = void 0;
 const piece_1 = require("./piece");
+const game_1 = require("../game");
 //pion
 class Pawn extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -16,7 +17,7 @@ class Pawn extends piece_1.Piece {
         if (this.color === 'white') {
             let positionY1 = this.positionY + 1;
             if (document.getElementById(`${this.positionX}-${positionY1}`).classList.contains('pieceInside')) {
-                console.log('no possible moves!');
+                //console.log('no possible moves!');
                 return;
             }
             if (this.positionY === 2) {
@@ -41,7 +42,7 @@ class Pawn extends piece_1.Piece {
         }
         document.querySelectorAll('.active').forEach((possibleMove) => {
             possibleMove.addEventListener('click', () => {
-                if (possibleMove.classList.contains('active')) {
+                if (possibleMove.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
                     const posX = possibleMove.id.charAt(0);
                     const posY = parseInt(possibleMove.id.charAt(2));
                     this.setOnBoard(posX, posY);
