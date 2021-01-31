@@ -6,15 +6,3 @@ body {
     /* background-image: url(../static/assets/background.png); */
     /* background-color: black; */
 }
-
-.active:before{
-    display: block;
-    content:'';
-    width: 50%;
-    height: 50%;
-    background-color: rgba(124, 124, 124, 0.5);
-    border-radius: 50%;
-    position:relative;
-    top: 25%;
-    left: 25%;
- }
