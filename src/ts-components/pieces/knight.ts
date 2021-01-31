@@ -11,19 +11,19 @@ class Knight extends Piece{
         this.setOnBoard(this.positionX, this.positionY);
     }
 
-    showPossibleMoves():void{
+    showPossibleMoves(): string []{
         this.removeClassActive();
-        let possibleMovesIds: string[] = [];
+        const allPossibleIds: string[] = []; // przechowuje wszystkie możliwe ID - łącznie z tymi na których stoją inne figury - przyda się do spr. czy stoją figury innego koloru i zbijania
+        const possibleMovesIds: string[] = []; // tu trafiają tylko możliwe ruchy figury
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
         const coordinateY : number = this.positionY;
 
-        // filling an array with id's of fields where knight maight move
-
+        // wypłenienie tablicy wszystkimi możliwymi ruchami - bez sprawdzenia czy stoją na polach inne bierki
         for (let i = coordinateX -2; i <= coordinateX + 2; i += 4) {
             if (i >= 1 && i <= 8) {
                 for (let j = coordinateY -1; j <= coordinateY +1; j += 2) {
                     if (j >= 1 && j <= 8) {
-                        possibleMovesIds.push(`${ID[i]}-${j}`);
+                        allPossibleIds.push(`${ID[i]}-${j}`);
                     }
                 }
             }
@@ -33,26 +33,32 @@ class Knight extends Piece{
             if (i >= 1 && i <= 8) {
                 for (let j = coordinateX -1; j <= coordinateX +1; j += 2) {
                     if (j >= 1 && j <= 8) {
-                        possibleMovesIds.push(`${ID[j]}-${i}`);
+                        allPossibleIds.push(`${ID[j]}-${i}`);
                     }
                 }
             }
         }
 
-        // if possible move filed is empty (no other figure on it), add a class to indicate
-        // that figure can move on it.
-        possibleMovesIds.forEach((id) => {
-            if (!(document.querySelector(`#${id}`)!.classList.contains('pieceInside'))){
-                document.querySelector(`#${id}`)!.classList.add('active');
+        // Sprawdzenie czy na polu nie stoi inna figura, jesli nie to dodaję ID do właściwej - zwracanej tablicy. W przyszłości będzie tu sprawdzanie czy stojąca figura jest innego koloru.
+        allPossibleIds.forEach((id) => {
+            if (document.querySelector(`#${id}`)!.innerHTML == ''){
+                possibleMovesIds.push(id);
             }
         });
 
-        //adding event listener to each field with active class to perform a fiuge's move after click
+        return possibleMovesIds;
+    }
+    
+    move(): void {
+        const possibilities: string [] = this.showPossibleMoves();
+        possibilities.forEach((id) => {
+            document.querySelector(`#${id}`)!.classList.add('active');
+        });
+        //adding event listener to each field with active class to perform a figure's move after click
         document.querySelectorAll('.active').forEach((possMove) => {
             possMove.addEventListener('click', () => {
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
-
                 if(possMove.classList.contains('active') && (Game.getLastChosen() === this)){
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
@@ -61,8 +67,5 @@ class Knight extends Piece{
         });
     }
 }
-
-
-
 
 export {Knight};
