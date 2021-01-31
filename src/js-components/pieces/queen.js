@@ -13,6 +13,7 @@ class Queen extends piece_1.Piece {
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
+        const possibleMoves = [];
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
@@ -20,9 +21,12 @@ class Queen extends piece_1.Piece {
             });
         };
         this.collectAllPossibleMoves().forEach(id => {
+            possibleMoves.push(id);
             movesShow(id);
             this.queenMove();
         });
+        console.log(possibleMoves);
+        return possibleMoves;
     }
     queenMove() {
         const squares = [...document.querySelectorAll('.board-container div')];

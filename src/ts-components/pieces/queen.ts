@@ -11,6 +11,7 @@ class Queen extends Piece implements QueenMethods{
     }
 
     showPossibleMoves(){
+        const possibleMoves:string[] = [];
         const movesShow:MovesShow =(id)=>{
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
                 movesPossibilities.forEach(el=>{
@@ -18,9 +19,12 @@ class Queen extends Piece implements QueenMethods{
                 })
          }
          this.collectAllPossibleMoves().forEach(id=>{
+             possibleMoves.push(id);
                 movesShow(id)
                 this.queenMove()
             })
+            console.log(possibleMoves);
+            return possibleMoves
     }
 
     queenMove(){
