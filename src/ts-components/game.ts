@@ -35,7 +35,7 @@ class Game {
         //     this.whites.push(new Rook('white', `${ID[i]}`, 1));
         // }
 
-        for(let i = 1; i <= 8; i++) {
+        for(let i = 1; i <= 3; i++) {
             this.whites.push(new Pawn('white', `${ID[i]}`, 2));
         }
     }
@@ -47,10 +47,7 @@ class Game {
 
         for(let p of this.whites){
             if(p.getPositionX() == x && p.getPositionY() == y)
-                // console.log(p);
-                p.showPossibleMoves()
-                // console.log(p);
-
+                p.move()
         }
     }
 }

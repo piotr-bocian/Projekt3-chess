@@ -5,33 +5,31 @@ const board_1 = require("../board");
 const piece_1 = require("./piece");
 //królowa / hetman
 class Queen extends piece_1.Piece {
-    constructor(color, positionX, positionY, possibleMoves) {
+    constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.possibleMoves = possibleMoves;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        this.possibleMoves = [];
     }
     showPossibleMoves() {
-        const possibleMoves = [];
+        const possibleLegalMoves = [];
+        this.collectAllPossibleMoves().forEach(id => {
+            possibleLegalMoves.push(id);
+        });
+        console.log(possibleLegalMoves);
+        return possibleLegalMoves;
+    }
+    move() {
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
                 el.classList.toggle('active');
             });
         };
-        this.collectAllPossibleMoves().forEach(id => {
-            possibleMoves.push(id);
+        //dodaje klase active na legalne ruchy
+        this.showPossibleMoves().forEach(id => {
             movesShow(id);
-            this.queenMove();
         });
-        console.log(possibleMoves);
-        this.possibleMoves = possibleMoves;
-        console.log(this.possibleMoves);
-        return possibleMoves;
-    }
-    queenMove() {
         const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {

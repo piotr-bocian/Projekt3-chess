@@ -22,7 +22,7 @@ class Game {
         // for(let i = 1; i <= 8; i+=7) {
         //     this.whites.push(new Rook('white', `${ID[i]}`, 1));
         // }
-        for (let i = 1; i <= 8; i++) {
+        for (let i = 1; i <= 3; i++) {
             this.whites.push(new pawn_1.Pawn('white', `${board_2.ID[i]}`, 2));
         }
     }
@@ -32,7 +32,8 @@ class Game {
         for (let p of this.whites) {
             if (p.getPositionX() == x && p.getPositionY() == y)
                 // console.log(p);
-                p.showPossibleMoves();
+                // p.showPossibleMoves()
+                p.move();
             // console.log(p);
         }
     }

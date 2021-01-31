@@ -33,7 +33,7 @@ abstract class Piece{
     }
 
     abstract showPossibleMoves():void;
-
+    abstract move():void;
     getPositionX(){
         return this.positionX;
     }

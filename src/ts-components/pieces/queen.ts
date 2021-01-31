@@ -3,34 +3,34 @@ import { MovesShow, QueenMethods } from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 //królowa / hetman
 class Queen extends Piece implements QueenMethods{
-    constructor(color:string, positionX:string, positionY:number, public possibleMoves?:string[]){
+    constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        this.possibleMoves = [] as string[]
     }
 
     showPossibleMoves(){
-        const possibleMoves:string[] = [];
+        const possibleLegalMoves:string[] = [];
+         this.collectAllPossibleMoves().forEach(id=>{
+             possibleLegalMoves.push(id);
+            })
+            console.log(possibleLegalMoves);
+            return possibleLegalMoves
+    }
+
+    move(){
         const movesShow:MovesShow =(id)=>{
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
                 movesPossibilities.forEach(el=>{
                     el.classList.toggle('active');
                 })
          }
-         this.collectAllPossibleMoves().forEach(id=>{
-             possibleMoves.push(id);
-                movesShow(id)
-                this.queenMove()
-            })
-            console.log(possibleMoves);
-            this.possibleMoves = possibleMoves;
-            console.log(this.possibleMoves);
-            return possibleMoves
-    }
+         //dodaje klase active na legalne ruchy
+         this.showPossibleMoves().forEach(id=>{
+            movesShow(id)
+         })
 
-    queenMove(){
         const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
