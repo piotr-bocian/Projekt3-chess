@@ -45,12 +45,6 @@ class Rook extends Piece{
             });
         });
     }
-    removeClassActive(): void {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i]!.classList.remove('active');
-        }
-    }
 }
 
 export {Rook};

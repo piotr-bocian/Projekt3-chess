@@ -11,13 +11,6 @@ class Knight extends Piece{
         this.setOnBoard(this.positionX, this.positionY);
     }
 
-    removeClassActive(): void {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i]!.classList.remove('active');
-        }
-    }
-
     showPossibleMoves():void{
         this.removeClassActive();
         let possibleMovesIds: string[] = [];

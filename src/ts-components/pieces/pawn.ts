@@ -61,13 +61,6 @@ class Pawn extends Piece {
         this.setOnBoard(posX, posY);
     }
 
-    removeClassActive(): void {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i]!.classList.remove('active');
-        }
-    }
-
 }
 
 export {Pawn};

@@ -84,12 +84,6 @@ class Queen extends Piece{
         leftRight()
         return moves;
    }
-    removeClassActive(): void {
-    let elems = [...document.querySelectorAll('.queenMove')];
-    for (let i = 0; i < elems.length; i++) {
-        elems[i]!.classList.remove('queenMove');
-    }
-}
 }
 
 export {Queen};
