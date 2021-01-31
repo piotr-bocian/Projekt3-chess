@@ -1,7 +1,9 @@
 "use strict";
+"use stricte";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rook = void 0;
 const piece_1 = require("./piece");
+const game_1 = require("../game");
 //wieża
 class Rook extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -10,7 +12,66 @@ class Rook extends piece_1.Piece {
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        //kod odpowiadający za pokazanie możliwych ruchów
+        this.removeClassActive();
+        const arrayOfX = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        // const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
+        const rookLineX = this.getPositionX();
+        const rookLineY = this.getPositionY();
+        // top
+        console.log(rookLineX, rookLineY);
+        for (let i = rookLineY + 1; i <= 8; i++) {
+            let squareY = document.querySelector(`#${rookLineX}-${i}`);
+            if (!squareY?.classList.contains('pieceInside')) {
+                if (squareY != null)
+                    squareY.classList.add('active');
+            }
+            else {
+                break;
+            }
+        }
+        // bot
+        for (let i = rookLineY - 1; i > 0; i--) {
+            let squareY = document.querySelector(`#${rookLineX}-${i}`);
+            console.log(i, squareY);
+            if (!squareY?.classList.contains('pieceInside')) {
+                squareY?.classList.add('active');
+            }
+            else {
+                break;
+            }
+        }
+        for (let i = 0; i <= 8; i++) {
+            // let squareY = document.querySelector(`#${rookLineX}-${i}`);
+            // if(squareY?.classList.contains('pieceInside')){
+            //     console.log('shit')
+            // }else{
+            //     break;
+            // }
+            // if (squareY != null){squareY.classList.add('active')};
+            arrayOfX.map((letter) => {
+                const squareX = document.querySelector(`#${letter}-${rookLineY}`);
+                if (squareX != null)
+                    squareX.classList.add('active');
+            });
+        }
+        const squares = document.querySelectorAll('.board-container div');
+        squares.forEach(square => {
+            square.addEventListener('click', (e) => {
+                let pickedFigure = e.currentTarget;
+                const x = game_1.Game.lastChosen.getPositionX();
+                const y = game_1.Game.lastChosen.getPositionY();
+                if (!(square.classList.contains('pieceInside')) && square.classList.contains('active') && this.getPositionX() === x && this.getPositionY() === y) {
+                    this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2)));
+                    squares.forEach(square => square.classList.remove('active'));
+                }
+            });
+        });
+    }
+    removeClassActive() {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('active');
+        }
     }
 }
 exports.Rook = Rook;
