@@ -20,17 +20,36 @@ class King extends piece_1.Piece {
                     square.classList.add('active');
             }
         }
+        // const squares:NodeList = document.querySelectorAll('.board-container div');
+        // squares.forEach(square => {
+        //     square.addEventListener('click', this.move.bind(this, square as HTMLElement));
+        // });
         this.move();
     }
+    // move(square:HTMLElement):void{
+    //     const x = Game.lastChosen.getPositionX();
+    //     const y = Game.lastChosen.getPositionY();
+    //     if((square as HTMLElement).classList.contains('active') && this.getPositionX() === x && this.getPositionY() === y){
+    //         this.setOnBoard((square as HTMLElement).id.charAt(0), parseInt((square as HTMLElement).id.charAt(2)));
+    //     }
+    // }
     move() {
         const squares = document.querySelectorAll('.board-container div');
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if (square.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
+                const x = game_1.Game.lastChosen.getPositionX();
+                const y = game_1.Game.lastChosen.getPositionY();
+                if (square.classList.contains('active') && this.getPositionX() === x && this.getPositionY() === y) {
                     this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2)));
                 }
             });
         });
+    }
+    removeClassActive() {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('active');
+        }
     }
 }
 exports.King = King;
