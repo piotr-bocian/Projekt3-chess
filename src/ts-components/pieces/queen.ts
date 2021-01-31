@@ -3,11 +3,12 @@ import { MovesShow, QueenMethods } from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 //królowa / hetman
 class Queen extends Piece implements QueenMethods{
-    constructor(color:string, positionX:string, positionY:number, public history?:string[]){
+    constructor(color:string, positionX:string, positionY:number, public possibleMoves?:string[]){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
+        this.possibleMoves = [] as string[]
     }
 
     showPossibleMoves(){
@@ -24,6 +25,8 @@ class Queen extends Piece implements QueenMethods{
                 this.queenMove()
             })
             console.log(possibleMoves);
+            this.possibleMoves = possibleMoves;
+            console.log(this.possibleMoves);
             return possibleMoves
     }
 
@@ -39,7 +42,7 @@ class Queen extends Piece implements QueenMethods{
         });
     }
 
-   collectAllPossibleMoves(){
+    collectAllPossibleMoves(){
     const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
     const moves:string[]=[];
 

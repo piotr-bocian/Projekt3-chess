@@ -5,12 +5,13 @@ const board_1 = require("../board");
 const piece_1 = require("./piece");
 //królowa / hetman
 class Queen extends piece_1.Piece {
-    constructor(color, positionX, positionY, history) {
+    constructor(color, positionX, positionY, possibleMoves) {
         super(color, positionX, positionY);
-        this.history = history;
+        this.possibleMoves = possibleMoves;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
+        this.possibleMoves = [];
     }
     showPossibleMoves() {
         const possibleMoves = [];
@@ -26,6 +27,8 @@ class Queen extends piece_1.Piece {
             this.queenMove();
         });
         console.log(possibleMoves);
+        this.possibleMoves = possibleMoves;
+        console.log(this.possibleMoves);
         return possibleMoves;
     }
     queenMove() {
