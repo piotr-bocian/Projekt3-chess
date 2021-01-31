@@ -47,7 +47,8 @@ abstract class Piece{
         return this.positionY;
     }
 
-    abstract showPossibleMoves():void;
+    abstract showPossibleMoves():string[];
+    abstract move():void;
 }
 
 export {Piece};
