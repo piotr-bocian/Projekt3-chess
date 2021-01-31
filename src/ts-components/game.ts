@@ -16,6 +16,7 @@ class Game {
     //private whoNext:string;
 
     private whites:Piece[] = [];
+    private blacks:Piece[] = [];
 
     constructor(){
         this.gameBoard = new Board;
@@ -23,21 +24,27 @@ class Game {
 
         this.whites.push(new Queen('white', `${ID[4]}`, 1));
         this.whites.push(new King('white', `${ID[5]}`, 1));
+        this.blacks.push(new Queen('black', `${ID[4]}`, 8));
+        this.blacks.push(new King('black', `${ID[5]}`, 8));
         
         for(let i = 3; i <= 6; i+=3) {
             this.whites.push(new Bishop('white', `${ID[i]}`, 1));
+            this.blacks.push(new Bishop('black', `${ID[i]}`, 8));
         }
 
         for(let i = 2; i <= 7; i+=5) {
             this.whites.push(new Knight('white', `${ID[i]}`, 1));
+            this.blacks.push(new Knight('black', `${ID[i]}`, 8));
         }
 
         for(let i = 1; i <= 8; i+=7) {
             this.whites.push(new Rook('white', `${ID[i]}`, 1));
+            this.blacks.push(new Rook('black', `${ID[i]}`, 8));
         }
 
         for(let i = 1; i <= 8; i++) {
            this.whites.push(new Pawn('white', `${ID[i]}`, 2));
+           this.blacks.push(new Pawn('black', `${ID[i]}`, 7));
         }
     }
 
@@ -47,6 +54,13 @@ class Game {
         const y:number = parseInt(square.id.charAt(2));
         
         for(let p of this.whites){
+            if(p.getPositionX() == x && p.getPositionY() == y){
+                this.setLastChosen(p);
+                p.move();
+            }
+        }
+
+        for(let p of this.blacks){
             if(p.getPositionX() == x && p.getPositionY() == y){
                 this.setLastChosen(p);
                 p.move();
