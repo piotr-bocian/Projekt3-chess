@@ -20,46 +20,80 @@ class Bishop extends Piece{
         if (this.color === 'white') {
 
             // move by one diagonal
-
+            // top right
             if (9 - coordinateX < 9 - coordinateY) {
                 for(let i=1; i<9 - coordinateX; i++){
-                    document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.add('active');
+                    if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.add('active');
+                    }
                 }
             } else {
                 for(let i=1; i < 9 - coordinateY; i++){
-                    document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.add('active');
+                    if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.add('active');
+                    }
                 }
             }
-
+            
+            // down left
             if (coordinateY - 1 < coordinateX - 1) {
-                for(let i=coordinateY -1 ; i > 0 ; i--){
-                    document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.classList.add('active');
+                for(let i=1 ; i < coordinateY; i++){
+                    if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.classList.add('active');
+                    }
                 }
             } else {
-                for(let i=coordinateX -1 ; i > 0 ; i--){
-                    document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.classList.add('active');
+                for(let i=1 ; i < coordinateX; i++){
+                    if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.classList.add('active');
+                    }
                 }
             }
 
             // move by second diagonal
-
-            if (coordinateX - 1 < 9 - coordinateY) {
-                for(let i=coordinateX - 1; i>0; i--){
-                    document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.add('active');
+            // top left
+            if (coordinateX < 9 - coordinateY) {
+                for(let i = 1; i < coordinateX; i++){
+                    if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.add('active');
+                    }
                 }
             } else {
-                for(let i=1; i < 9-coordinateY; i++) {
-                    document.getElementById(`${ID[coordinateX - i]}-${coordinateY + i}`)!.classList.add('active');
+                for(let i = 1 ; i < 9 - coordinateY; i++) {
+                    if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY + i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX - i]}-${coordinateY + i}`)!.classList.add('active');
+                    }
                 }
             }
             
-            if (coordinateY - 1 < 9 - coordinateX) {
-                for(let i=coordinateY -1 ; i > 0 ; i--){
-                    document.getElementById(`${ID[coordinateX + i]}-${coordinateY - i}`)!.classList.add('active');
+            // down right
+            if (coordinateY < 9 - coordinateX) {
+                for(let i = 1 ; i < coordinateY ; i++){
+                    if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX + i]}-${coordinateY - i}`)!.classList.add('active');
+                    }
                 }
             } else {
-                for(let i=1; i < 9-coordinateX; i++) {
-                    document.getElementById(`${ID[coordinateX + i]}-${coordinateY - i}`)!.classList.add('active');
+                for(let i=1; i < 9 - coordinateX; i++) {
+                    if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                        break;
+                    } else {
+                        document.getElementById(`${ID[coordinateX + i]}-${coordinateY - i}`)!.classList.add('active');
+                    }
                 }
             }
         } 
