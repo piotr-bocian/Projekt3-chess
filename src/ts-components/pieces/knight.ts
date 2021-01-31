@@ -17,7 +17,7 @@ class Knight extends Piece{
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
         const coordinateY : number = this.positionY;
 
-        // console.log(coordinateX, coordinateY);
+        // filling an array with id's of fields where knight maight move
 
         for (let i = coordinateX -2; i <= coordinateX + 2; i += 4) {
             if (i >= 1 && i <= 8) {
@@ -38,35 +38,22 @@ class Knight extends Piece{
                 }
             }
         }
-        //console.log(possibleMovesIds);
+
+        // if possible move filed is empty (no other figure on it), add a class to indicate
+        // that figure can move on it.
         possibleMovesIds.forEach((id) => {
             if (!(document.querySelector(`#${id}`)!.classList.contains('pieceInside'))){
                 document.querySelector(`#${id}`)!.classList.add('active');
             }
         });
-        // console.log(this);
 
-        // const moveKnight = (e: HTMLElement) => {
-        //     if(e.classList.contains('active')){
-        //         const coorX = e.id.charAt(0);
-        //         const coorY = parseInt(e.id.charAt(2));
-        //         // console.log(coordinateX, coordinateY);
-        //         this.setOnBoard(coorX, coorY);
-        //         document.querySelectorAll('.active')!.forEach(elem => {
-        //             elem.classList.remove('active');
-        //         });
-        //     }
-        // }
-
+        //adding event listener to each field with active class to perform a fiuge's move after click
         document.querySelectorAll('.active').forEach((possMove) => {
             possMove.addEventListener('click', () => {
-                //console.log(possMove);
-                // console.log(this);
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
 
                 if(possMove.classList.contains('active') && (Game.getLastChosen() === this)){
-                    // console.log(coordinateX, coordinateY);
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                 }
