@@ -120,11 +120,5 @@ class Bishop extends piece_1.Piece {
         const posY = parseInt(possibleMove.id.charAt(2));
         this.setOnBoard(posX, posY);
     }
-    removeClassActive() {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].classList.remove('active');
-        }
-    }
 }
 exports.Bishop = Bishop;
