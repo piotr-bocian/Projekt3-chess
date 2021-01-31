@@ -16,7 +16,7 @@ class Pawn extends piece_1.Piece {
         this.removeClassActive();
         if (this.color === 'white') {
             let positionY1 = this.positionY + 1;
-            if (document.getElementById(`${this.positionX}-${positionY1}`).classList.contains('pieceInside')) {
+            if (positionY1 > 8 || document.getElementById(`${this.positionX}-${positionY1}`).classList.contains('pieceInside')) {
                 //console.log('no possible moves!');
                 return;
             }
@@ -55,12 +55,6 @@ class Pawn extends piece_1.Piece {
         const posX = possibleMove.id.charAt(0);
         const posY = parseInt(possibleMove.id.charAt(2));
         this.setOnBoard(posX, posY);
-    }
-    removeClassActive() {
-        let elems = document.querySelectorAll('.active');
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].classList.remove('active');
-        }
     }
 }
 exports.Pawn = Pawn;

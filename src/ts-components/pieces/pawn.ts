@@ -18,7 +18,7 @@ class Pawn extends Piece {
         if (this.color === 'white') {
             let positionY1 = this.positionY + 1;
 
-            if (document.getElementById(`${this.positionX}-${positionY1}`)!.classList.contains('pieceInside')) {
+            if (positionY1 > 8 || document.getElementById(`${this.positionX}-${positionY1}`)!.classList.contains('pieceInside')) {
                 //console.log('no possible moves!');
                 return;
             }
