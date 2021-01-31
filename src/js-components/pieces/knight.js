@@ -14,7 +14,7 @@ class Knight extends piece_1.Piece {
     showPossibleMoves() {
         this.removeClassActive();
         const allPossibleIds = []; // przechowuje wszystkie możliwe ID - łącznie z tymi na których stoją inne figury - przyda się do spr. czy stoją figury innego koloru i zbijania
-        const possibleMovesIds = []; // tu trafiają tylko możliwe ruchy figury
+        this.possibleMovesIds = []; // tu trafiają tylko możliwe ruchy figury
         const coordinateX = Object.values(board_1.ID).indexOf(this.positionX) + 1;
         const coordinateY = this.positionY;
         // wypłenienie tablicy wszystkimi możliwymi ruchami - bez sprawdzenia czy stoją na polach inne bierki
@@ -39,10 +39,10 @@ class Knight extends piece_1.Piece {
         // Sprawdzenie czy na polu nie stoi inna figura, jesli nie to dodaję ID do właściwej - zwracanej tablicy. W przyszłości będzie tu sprawdzanie czy stojąca figura jest innego koloru.
         allPossibleIds.forEach((id) => {
             if (document.querySelector(`#${id}`).innerHTML == '') {
-                possibleMovesIds.push(id);
+                this.possibleMovesIds.push(id);
             }
         });
-        return possibleMovesIds;
+        return this.possibleMovesIds;
     }
     move() {
         const possibilities = this.showPossibleMoves();

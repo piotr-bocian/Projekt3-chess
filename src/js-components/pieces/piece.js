@@ -8,6 +8,7 @@ class Piece {
         this.color = color;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.possibleMovesIds = [];
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
     }
     setOnBoard(pX, pY) {

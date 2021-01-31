@@ -3,6 +3,7 @@ abstract class Piece{
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
     protected positionX:string;
     protected positionY:number;
+    protected possibleMovesIds: string[];
     protected parentSquare:HTMLElement;
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
@@ -10,7 +11,7 @@ abstract class Piece{
         this.color = color;
         this.positionX = positionX;
         this.positionY = positionY;
-
+        this.possibleMovesIds = [];
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
     }
 
