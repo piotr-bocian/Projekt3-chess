@@ -26,7 +26,7 @@ class Queen extends piece_1.Piece {
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
-                el.classList.toggle('active');
+                el.classList.add('active');
             });
         };
         //dodaje klase active na legalne ruchy
@@ -40,6 +40,7 @@ class Queen extends piece_1.Piece {
                     this.history(square);
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
+                    this.reverseMove();
                 }
             });
         });
@@ -57,6 +58,16 @@ class Queen extends piece_1.Piece {
         const actualMove = `${constructorName}${(square).id.charAt(0).toLowerCase()}${parseInt((square).id.charAt(2))}`;
         this.movesHistory.push(actualMove);
         console.log(actualMove, this.movesHistory);
+    }
+    //prototyp cofania ruchów
+    reverseMove() {
+        //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
+        const lastMove = this.movesHistory.slice();
+        const popLasMove = lastMove.pop();
+        //dodanie koloru na pole z możliwym cofnięciem
+        document.querySelector(`#${popLasMove[1]?.toUpperCase()}-${parseInt(popLasMove[2])}`)?.classList.add('activeReverse');
+        //ustawienie
+        this.setOnBoard(popLasMove[1]?.toUpperCase(), parseInt(popLasMove[2]));
     }
     collectAllPossibleMoves() {
         const coordinateX = Object.values(board_1.ID).indexOf(this.positionX) + 1;
