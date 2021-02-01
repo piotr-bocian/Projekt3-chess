@@ -48,6 +48,11 @@ class Queen extends piece_1.Piece {
     history(square) {
         // w szachowej notacji algebraicznej:
         // K = King	Q = Queen	R = Rook	B = Bishop	N = Knight - dlatego przy skoczku pobieramy drugą literę z nazwy konstruktora
+        //jeżeli ruch pionem to podajemy tylko samo pole na które wystąpił ruch
+        if (this.constructor.name === 'Pawn') {
+            const actualMove = `${(square).id.charAt(0).toLowerCase()}${parseInt((square).id.charAt(2))}`;
+            this.movesHistory.push(actualMove);
+        }
         const constructorName = this.constructor.name === 'Knight' ? this.constructor.name[1]?.toUpperCase() : this.constructor.name[0]?.toUpperCase();
         const actualMove = `${constructorName}${(square).id.charAt(0).toLowerCase()}${parseInt((square).id.charAt(2))}`;
         this.movesHistory.push(actualMove);
