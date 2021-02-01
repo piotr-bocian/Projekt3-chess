@@ -3,11 +3,13 @@ import { MovesShow, QueenMethods } from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 //królowa / hetman
 class Queen extends Piece implements QueenMethods{
-    constructor(color:string, positionX:string, positionY:number){
+    constructor(color:string, positionX:string, positionY:number, private movesHistory: string[]){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
+        //tutaj trzymamy historię;
+        this.movesHistory=[]
     }
 
     showPossibleMoves(){
@@ -35,11 +37,22 @@ class Queen extends Piece implements QueenMethods{
         squares.forEach(square => {
             square.addEventListener('click', () => {
                 if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')){
+                    this.history(square)
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive()
                 }
             });
         });
+    }
+
+    //historia ruchów
+    history(square:Element){
+        // w szachowej notacji algebraicznej:
+        // K = King	Q = Queen	R = Rook	B = Bishop	N = Knight - dlatego przy skoczku pobieramy drugą literę z nazwy konstruktora
+        const constructorName = this.constructor.name === 'Knight' ? this.constructor.name[1]?.toUpperCase() : this.constructor.name[0]?.toUpperCase();
+        const actualMove = `${constructorName}${(square).id.charAt(0).toLowerCase()}${parseInt((square).id.charAt(2))}`;
+        this.movesHistory.push(actualMove)
+        console.log(actualMove, this.movesHistory);
     }
 
     collectAllPossibleMoves(){
