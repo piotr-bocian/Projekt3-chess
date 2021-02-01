@@ -16,6 +16,7 @@ class Piece {
         this.parentSquare.classList.remove('pieceInside');
         const img = document.createElement('img');
         img.classList.add('image');
+        img.classList.add(`${this.color.toLocaleLowerCase()}`);
         img.setAttribute('src', this.symbol);
         this.updatePosition(pX, pY);
         this.parentSquare.appendChild(img);
