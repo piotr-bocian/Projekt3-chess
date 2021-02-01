@@ -39,12 +39,13 @@ class Knight extends Piece{
             }
         }
 
-        // Sprawdzenie czy na polu nie stoi inna figura, jesli nie to dodaję ID do właściwej - zwracanej tablicy. W przyszłości będzie tu sprawdzanie czy stojąca figura jest innego koloru.
+        // Sprawdzenie czy na polu nie stoi żadna figura lub czy figura ma taki kolor jak atakująca, jesli nie to dodaję ID do właściwej - zwracanej tablicy.
         allPossibleIds.forEach((id) => {
-            if (document.querySelector(`#${id}`)!.innerHTML == ''){
+            if (!(document.querySelector(`#${id}`)!.querySelector('img')?.classList.contains(`${this.color}`)) || document.querySelector(`#${id}`)!.innerHTML == ''){
                 this.possibleMovesIds.push(id);
             }
         });
+        console.log(this.possibleMovesIds);
 
         return this.possibleMovesIds;
     }
@@ -60,6 +61,10 @@ class Knight extends Piece{
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 if(possMove.classList.contains('active') && (Game.getLastChosen() === this)){
+                    // // próbna implementacja bicia
+                    // if (possMove.innerHTML != '') {
+                    //     possMove.innerHTML = '';
+                    // }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                 }
