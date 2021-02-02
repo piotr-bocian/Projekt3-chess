@@ -11,20 +11,21 @@ class Queen extends piece_1.Piece {
         this.history = history;
         //this.symbol = `../../../static/assets/${this.color}Queen.png`;
         //this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
-        this.symbol = `../../../static/assets/${this.color}King.png`;
+        this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
-        const movesShow = (id) => {
-            const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
-            movesPossibilities.forEach(el => {
-                el.classList.toggle('active');
-            });
-        };
-        this.collectAllPossibleMoves().forEach(id => {
-            movesShow(id);
-            this.queenMove();
-        });
+        // const movesShow:MovesShow =(id)=>{
+        //     const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
+        //         movesPossibilities.forEach(el=>{
+        //             el.classList.toggle('active');
+        //         })
+        //  }
+        //  this.collectAllPossibleMoves().forEach(id=>{
+        //         movesShow(id)
+        //         this.queenMove()
+        //     })
+        return [];
     }
     queenMove() {
         const squares = [...document.querySelectorAll('.board-container div')];
@@ -166,6 +167,8 @@ class Queen extends piece_1.Piece {
         moveLeft();
         moveRight();
         return moves;
+    }
+    move() {
     }
 }
 exports.Queen = Queen;

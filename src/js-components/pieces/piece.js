@@ -8,9 +8,11 @@ class Piece {
         this.color = color;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.possibleMovesIDs = this.showPossibleMoves();
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
     }
     setOnBoard(pX, pY) {
+        //w pierwszych dwóch linijkach usuwamy figurę z obecnego miejsca, następnie ustawiamy w nowym
         this.parentSquare.innerHTML = "";
         this.parentSquare.classList.remove('pieceInside');
         const img = document.createElement('img');

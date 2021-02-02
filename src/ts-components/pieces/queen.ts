@@ -8,21 +8,23 @@ class Queen extends Piece implements QueenMethods{
         super(color, positionX, positionY);
         //this.symbol = `../../../static/assets/${this.color}Queen.png`;
         //this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
-        this.symbol = `../../../static/assets/${this.color}King.png`;
+        this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
 
-    showPossibleMoves(){
-        const movesShow:MovesShow =(id)=>{
-            const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
-                movesPossibilities.forEach(el=>{
-                    el.classList.toggle('active');
-                })
-         }
-         this.collectAllPossibleMoves().forEach(id=>{
-                movesShow(id)
-                this.queenMove()
-            })
+    showPossibleMoves():string[]{
+        // const movesShow:MovesShow =(id)=>{
+        //     const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
+        //         movesPossibilities.forEach(el=>{
+        //             el.classList.toggle('active');
+        //         })
+        //  }
+        //  this.collectAllPossibleMoves().forEach(id=>{
+        //         movesShow(id)
+        //         this.queenMove()
+        //     })
+
+        return [];
     }
 
     queenMove(){
@@ -154,6 +156,10 @@ class Queen extends Piece implements QueenMethods{
     moveLeft()
     moveRight()
     return moves;
+}
+
+move():void{
+        
 }
 }
 
