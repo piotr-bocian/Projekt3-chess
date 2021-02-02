@@ -56,14 +56,16 @@ class Knight extends piece_1.Piece {
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 if (possMove.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
-                    // // próbna implementacja bicia
-                    // if (possMove.innerHTML != '') {
-                    //     possMove.innerHTML = '';
-                    // }
+                    // próbna implementacja bicia
+                    if (possMove.innerHTML != '') {
+                        console.log(possMove.innerHTML);
+                        possMove.innerHTML = '';
+                    }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
+                    console.log(possMove.innerHTML);
                 }
-            });
+            }, { capture: true });
         });
     }
 }
