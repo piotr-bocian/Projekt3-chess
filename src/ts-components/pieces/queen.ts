@@ -13,11 +13,13 @@ class Queen extends Piece implements QueenMethods{
     }
 
     showPossibleMoves(){
+        //TESTOWO WYWOLUJE TUTAJ
+        this.reverseMove()
+        ////
         const possibleLegalMoves:string[] = [];
          this.collectAllPossibleMoves().forEach(id=>{
              possibleLegalMoves.push(id);
             })
-            console.log(possibleLegalMoves);
             return possibleLegalMoves
     }
 
@@ -40,7 +42,6 @@ class Queen extends Piece implements QueenMethods{
                     this.history(square)
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
-                    this.reverseMove();
                 }
             });
         });
@@ -66,11 +67,11 @@ class Queen extends Piece implements QueenMethods{
     reverseMove(){
         //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
         const lastMove = this.movesHistory.slice();
-        const popLasMove = lastMove.pop()
-        //dodanie koloru na pole z możliwym cofnięciem
-            document.querySelector(`#${popLasMove![1]?.toUpperCase()!}-${parseInt(popLasMove![2]!)}`)?.classList.add('activeReverse');
-            //ustawienie
-        this.setOnBoard(popLasMove![1]?.toUpperCase()!, parseInt(popLasMove![2]!))
+            document.querySelector('.btn')?.addEventListener('click', ()=>{
+                if(lastMove.length === 0){return};
+                const popLasMove = lastMove.pop()
+                this.setOnBoard(popLasMove![1]?.toUpperCase()!, parseInt(popLasMove![2]!))
+            })
     }
 
     collectAllPossibleMoves(){

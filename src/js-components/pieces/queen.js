@@ -15,11 +15,13 @@ class Queen extends piece_1.Piece {
         this.movesHistory = [];
     }
     showPossibleMoves() {
+        //TESTOWO WYWOLUJE TUTAJ
+        this.reverseMove();
+        ////
         const possibleLegalMoves = [];
         this.collectAllPossibleMoves().forEach(id => {
             possibleLegalMoves.push(id);
         });
-        console.log(possibleLegalMoves);
         return possibleLegalMoves;
     }
     move() {
@@ -40,7 +42,6 @@ class Queen extends piece_1.Piece {
                     this.history(square);
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
-                    this.reverseMove();
                 }
             });
         });
@@ -63,11 +64,14 @@ class Queen extends piece_1.Piece {
     reverseMove() {
         //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
         const lastMove = this.movesHistory.slice();
-        const popLasMove = lastMove.pop();
-        //dodanie koloru na pole z możliwym cofnięciem
-        document.querySelector(`#${popLasMove[1]?.toUpperCase()}-${parseInt(popLasMove[2])}`)?.classList.add('activeReverse');
-        //ustawienie
-        this.setOnBoard(popLasMove[1]?.toUpperCase(), parseInt(popLasMove[2]));
+        document.querySelector('.btn')?.addEventListener('click', () => {
+            if (lastMove.length === 0) {
+                return;
+            }
+            ;
+            const popLasMove = lastMove.pop();
+            this.setOnBoard(popLasMove[1]?.toUpperCase(), parseInt(popLasMove[2]));
+        });
     }
     collectAllPossibleMoves() {
         const coordinateX = Object.values(board_1.ID).indexOf(this.positionX) + 1;
