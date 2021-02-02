@@ -15,6 +15,7 @@ class Rook extends piece_1.Piece {
         this.removeClassActive();
         const arrayOfX = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         // const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
+        const PossibleMoves = [];
         const rookLineX = this.getPositionX();
         const rookLineY = this.getPositionY();
         const checkYAxis = () => {
@@ -25,6 +26,7 @@ class Rook extends piece_1.Piece {
                 if (!squareY?.classList.contains('pieceInside')) {
                     if (squareY != null)
                         squareY.classList.add('active');
+                    PossibleMoves.push(`#${rookLineX}-${i}`);
                 }
                 else {
                     break;
@@ -36,6 +38,7 @@ class Rook extends piece_1.Piece {
                 if (!squareY?.classList.contains('pieceInside')) {
                     if (squareY != null)
                         squareY.classList.add('active');
+                    PossibleMoves.push(`#${rookLineX}-${i}`);
                 }
                 else {
                     break;
@@ -45,11 +48,12 @@ class Rook extends piece_1.Piece {
         const checkXAxis = () => {
             // right
             const clickedElementIndex = arrayOfX.indexOf(rookLineX);
-            for (let i = clickedElementIndex; i <= 8; i++) {
+            for (let i = clickedElementIndex; i <= 6; i++) {
                 let squareY = document.querySelector(`#${arrayOfX[i + 1]}-${rookLineY}`);
                 if (!squareY?.classList.contains('pieceInside')) {
                     if (squareY != null)
                         squareY.classList.add('active');
+                    PossibleMoves.push(`#${arrayOfX[i + 1]}-${rookLineY}`);
                 }
                 else {
                     break;
@@ -61,6 +65,7 @@ class Rook extends piece_1.Piece {
                 if (!squareY?.classList.contains('pieceInside')) {
                     if (squareY != null)
                         squareY.classList.add('active');
+                    PossibleMoves.push(`#${arrayOfX[i - 1]}-${rookLineY}`);
                 }
                 else {
                     break;
@@ -81,6 +86,8 @@ class Rook extends piece_1.Piece {
                 }
             });
         });
+        console.log(PossibleMoves);
+        return PossibleMoves;
     }
     removeClassActive() {
         let elems = document.querySelectorAll('.active');

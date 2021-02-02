@@ -12,11 +12,13 @@ class Rook extends Piece{
         this.symbol = `../../../static/assets/${this.color}Rook.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
+    
 
-    showPossibleMoves():void{
+    showPossibleMoves():[]{
         this.removeClassActive();
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         // const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
+        const PossibleMoves:any  = [];
 
         const rookLineX:string = this.getPositionX();
         const rookLineY:number = this.getPositionY();
@@ -29,6 +31,7 @@ class Rook extends Piece{
                 if(!squareY?.classList.contains('pieceInside')){
                     if (squareY != null)
                     squareY.classList.add('active');
+                    PossibleMoves.push(`#${rookLineX}-${i}`)
                 }
                 else{
                     break;
@@ -40,6 +43,7 @@ class Rook extends Piece{
                 if(!squareY?.classList.contains('pieceInside')){
                     if (squareY != null)
                     squareY.classList.add('active');
+                    PossibleMoves.push(`#${rookLineX}-${i}`)
                 }
                 else{
                     break;
@@ -49,11 +53,12 @@ class Rook extends Piece{
         const checkXAxis = ()=>{
             // right
             const clickedElementIndex = arrayOfX.indexOf(rookLineX)
-            for(let i=clickedElementIndex;i<=8;i++){
+            for(let i=clickedElementIndex;i<=6;i++){
                 let squareY = document.querySelector(`#${arrayOfX[i+1]}-${rookLineY}`);
                 if(!squareY?.classList.contains('pieceInside')){
                     if (squareY != null)
                     squareY.classList.add('active');
+                    PossibleMoves.push(`#${arrayOfX[i+1]}-${rookLineY}`)
                 }
                 else{
                     break;
@@ -65,6 +70,7 @@ class Rook extends Piece{
                 if(!squareY?.classList.contains('pieceInside')){
                     if (squareY != null)
                     squareY.classList.add('active');
+                    PossibleMoves.push(`#${arrayOfX[i-1]}-${rookLineY}`)
                 }
                 else{
                     break;
@@ -73,7 +79,6 @@ class Rook extends Piece{
         }
         checkYAxis();
         checkXAxis();
-
         const squares:NodeList = document.querySelectorAll('.board-container div');
         squares.forEach(square => {
             square.addEventListener('click', (e) => {
@@ -87,6 +92,8 @@ class Rook extends Piece{
                 }
             });
         });
+        console.log(PossibleMoves)
+        return PossibleMoves;
     }
     removeClassActive(): void {
         let elems = document.querySelectorAll('.active');
