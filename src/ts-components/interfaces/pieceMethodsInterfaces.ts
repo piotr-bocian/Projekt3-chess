@@ -7,6 +7,5 @@ interface QueenMethods {
    move():void;
    collectAllPossibleMoves():string[];
    removeClassActive():void;
-
 }
 export {MovesShow, QueenMethods }

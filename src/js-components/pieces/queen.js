@@ -60,17 +60,26 @@ class Queen extends piece_1.Piece {
         this.movesHistory.push(actualMove);
         console.log(actualMove, this.movesHistory);
     }
-    //prototyp cofania ruchów
+    // prototyp cofania ruchów
     reverseMove() {
         //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
         const lastMove = this.movesHistory.slice();
+        //ponieważ usuwamy coś z tablicy mamy unie string|undefined, tworzymny więc type guard by wyeliminować undefined
         document.querySelector('.btn')?.addEventListener('click', () => {
-            if (lastMove.length === 0) {
+            if (lastMove.length === 0)
+                return;
+            const popLasMove = lastMove.pop();
+            if (popLasMove) {
+                const positionX = popLasMove[1];
+                const positionY = popLasMove[2];
+                if (positionX && positionY) {
+                    //w tym iejscu wiemy, że pracujemy na string
+                    this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
+                }
+            }
+            else {
                 return;
             }
-            ;
-            const popLasMove = lastMove.pop();
-            this.setOnBoard(popLasMove[1]?.toUpperCase(), parseInt(popLasMove[2]));
         });
     }
     collectAllPossibleMoves() {
