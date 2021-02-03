@@ -3,6 +3,11 @@
     margin: auto;
 }
 
+.queen {
+    height: 100%;
+    margin: auto;
+}
+
 .pieceInside {
     display: flex;
 }

@@ -27,9 +27,9 @@ class Game {
         //     this.whites.push(new Bishop('white', `${ID[i]}`, 1));
         // }
 
-        // for(let i = 2; i <= 7; i+=5) {
-        //     this.whites.push(new Knight('white', `${ID[i]}`, 1));
-        // }
+        for(let i = 2; i <= 7; i+=5) {
+            this.whites.push(new Knight('white', `${ID[i]}`, 1));
+        }
 
         // for(let i = 1; i <= 8; i+=7) {
         //     this.whites.push(new Rook('white', `${ID[i]}`, 1));
