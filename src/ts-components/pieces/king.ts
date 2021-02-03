@@ -2,6 +2,7 @@ import { Piece } from "./piece";
 import { Game } from "../game";
 import { Knight } from "./knight";
 import { Rook } from "./rook";
+import { Bishop } from "./bishop";
 
 class King extends Piece{
 
@@ -69,7 +70,7 @@ class King extends Piece{
 
         if(this.color === 'white'){
             for(let p of Game.getBlacks()){
-                if(p instanceof Knight || p instanceof Rook){
+                if(p instanceof Knight || p instanceof Rook || p instanceof Bishop){
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
@@ -79,7 +80,7 @@ class King extends Piece{
         }
         else{
             for(let p of Game.getWhites()){
-                if(p instanceof Knight || p instanceof Rook){
+                if(p instanceof Knight || p instanceof Rook || p instanceof Bishop){
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);

@@ -5,6 +5,7 @@ const piece_1 = require("./piece");
 const game_1 = require("../game");
 const knight_1 = require("./knight");
 const rook_1 = require("./rook");
+const bishop_1 = require("./bishop");
 class King extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
@@ -53,7 +54,7 @@ class King extends piece_1.Piece {
         const dangerArr = [];
         if (this.color === 'white') {
             for (let p of game_1.Game.getBlacks()) {
-                if (p instanceof knight_1.Knight || p instanceof rook_1.Rook) {
+                if (p instanceof knight_1.Knight || p instanceof rook_1.Rook || p instanceof bishop_1.Bishop) {
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
@@ -63,7 +64,7 @@ class King extends piece_1.Piece {
         }
         else {
             for (let p of game_1.Game.getWhites()) {
-                if (p instanceof knight_1.Knight || p instanceof rook_1.Rook) {
+                if (p instanceof knight_1.Knight || p instanceof rook_1.Rook || p instanceof bishop_1.Bishop) {
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);

@@ -11,116 +11,115 @@ class Bishop extends Piece{
         this.symbol = `../../../static/assets/${this.color}Bishop.png`;
 
         this.setOnBoard(this.positionX, this.positionY);
-        let $self = this;
+        //let $self = this;
     }
 
     showPossibleMoves():string[]{
-        // this.removeClassActive();
-        // const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
-        // const coordinateY : number = this.positionY;
-        // if (this.color === 'white') {
+        this.removeClassActive();
+        const possibleMoves: string[] = [];
+        const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
+        const coordinateY : number = this.positionY;
 
-        //     // move by one diagonal
-        //     // top right
-        //     if (9 - coordinateX < 9 - coordinateY) {
-        //         for(let i=1; i<9 - coordinateX; i++){
-        //             if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     } else {
-        //         for(let i=1; i < 9 - coordinateY; i++){
-        //             if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     }
-            
-        //     // down left
-        //     if (coordinateY - 1 < coordinateX - 1) {
-        //         for(let i=1 ; i < coordinateY; i++){
-        //             if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     } else {
-        //         for(let i=1 ; i < coordinateX; i++){
-        //             if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     }
-
-        //     // move by second diagonal
-        //     // top left
-        //     if (coordinateX < 9 - coordinateY) {
-        //         for(let i = 1; i < coordinateX; i++){
-        //             if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     } else {
-        //         for(let i = 1 ; i < 9 - coordinateY; i++) {
-        //             if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY + i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX - i]}-${coordinateY + i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     }
-            
-        //     // down right
-        //     if (coordinateY < 9 - coordinateX) {
-        //         for(let i = 1 ; i < coordinateY ; i++){
-        //             if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX + i]}-${coordinateY - i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     } else {
-        //         for(let i=1; i < 9 - coordinateX; i++) {
-        //             if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-        //                 break;
-        //             } else {
-        //                 document.getElementById(`${ID[coordinateX + i]}-${coordinateY - i}`)!.classList.add('active');
-        //             }
-        //         }
-        //     }
-        // } 
+        // move by first diagonal
+        // top right
+        if (9 - coordinateX < 9 - coordinateY) {
+            for(let i=1; i<9 - coordinateX; i++){
+                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
+                }
+            }
+        } else {
+            for(let i=1; i < 9 - coordinateY; i++){
+                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
+                }
+            }
+        }
         
-        // document.querySelectorAll('.active').forEach((possibleMove) => {                 
-        //     possibleMove.addEventListener('click', () => {
-        //         const posX = possibleMove.id.charAt(0);
-        //         const posY = parseInt(possibleMove.id.charAt(2));
-        //         if(possibleMove.classList.contains('active') && (Game.getLastChosen() === this)){
-        //             this.setOnBoard(posX, posY);
-        //             this.removeClassActive();
-        //         }                
-        //     });      
-        // })
+        // down left
+        if (coordinateY - 1 < coordinateX - 1) {
+            for(let i=1 ; i < coordinateY; i++){
+                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
+                }
+            }
+        } else {
+            for(let i=1 ; i < coordinateX; i++){
+                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
+                }
+            }
+        }
 
-        return [];
+        // move by second diagonal
+        // top left
+        if (coordinateX < 9 - coordinateY) {
+            for(let i = 1; i < coordinateX; i++){
+                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
+                }
+            }
+        } else {
+            for(let i = 1 ; i < 9 - coordinateY; i++) {
+                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY + i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY + i}`);
+                }
+            }
+        }
+        
+        // down right
+        if (coordinateY < 9 - coordinateX) {
+            for(let i = 1 ; i < coordinateY ; i++){
+                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
+                }
+            }
+        } else {
+            for(let i=1; i < 9 - coordinateX; i++) {
+                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    break;
+                } else {
+                    possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
+                }
+            }
+        }
+
+        return possibleMoves;
     }
     
     move():void{
-        
-    }
+        this.removeClassActive();
 
-    moveBishop(possibleMove:HTMLElement):void {
-        const posX = possibleMove.id.charAt(0);
-        const posY = parseInt(possibleMove.id.charAt(2));
-        this.setOnBoard(posX, posY);
+        const possibleMovesArr:string[] = this.showPossibleMoves();
+        // console.log(possibleMovesArr);
+        
+        possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
+            const square = document.querySelector(`#${id}`);
+        
+            square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
+            square!.addEventListener('click', () => {
+                if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
+                    this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
+                    this.removeClassActive();
+                    Game.checkingKings();
+                }
+            });
+
+        });
     }
 
 }
