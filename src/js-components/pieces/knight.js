@@ -62,6 +62,7 @@ class Knight extends piece_1.Piece {
                     // }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
+                    game_1.Game.checkingKings();
                 }
             });
         });

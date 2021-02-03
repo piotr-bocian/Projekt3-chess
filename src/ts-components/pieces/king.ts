@@ -6,13 +6,13 @@ import { Knight } from "./knight";
 class King extends Piece{
 
     private dangerZones:string[]; //<-- ID pól na które król nie może się przemieścić
-    private isChecked:boolean;
+    private checked:boolean;
 
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
         this.dangerZones = this.getKnightDanger();
-        this.isChecked = this.getChecked();
+        this.checked = this.isChecked();
 
         this.setOnBoard(this.positionX, this.positionY);
     }
@@ -40,23 +40,24 @@ class King extends Piece{
         this.removeClassActive();
 
         const possibleMovesArr:string[] = this.showPossibleMoves();
-
+        
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
-            
+        
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
+                    Game.checkingKings();
                 }
             });
 
         });
     }
 
-    getChecked():boolean{
-        if(this.getKnightDanger().indexOf(`#${this.positionX}-${this.positionY}`) !== -1){
+    isChecked():boolean{
+        if(this.getKnightDanger().indexOf(`${this.positionX}-${this.positionY}`) !== -1){
             return true;
         }
         else

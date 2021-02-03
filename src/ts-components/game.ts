@@ -12,8 +12,8 @@ class Game {
 
     private gameBoard:Board;
     private static lastChosen:Piece;    //<-- ta składowa klasy Game przechowuje informację o tym jaka figura została wybrana jako ostatnia
-    private isWhiteKingChecked:boolean = false;
-    private isBlackKingChecked:boolean = false;
+    private static whiteKing:King;
+    private static blackKing:King;
 
     //private whoNext:string;
 
@@ -25,10 +25,13 @@ class Game {
         this.gameBoard.drawBoard();
 
         //ustawianie figur
+        Game.whiteKing = new King('white', `${ID[5]}`, 1);
+        Game.blackKing = new King('black', `${ID[5]}`, 8);
+
         Game.whites.push(new Queen('white', `${ID[4]}`, 1));
-        Game.whites.push(new King('white', `${ID[5]}`, 1));
+        Game.whites.push(Game.whiteKing);
         Game.blacks.push(new Queen('black', `${ID[4]}`, 8));
-        Game.blacks.push(new King('black', `${ID[5]}`, 8));
+        Game.blacks.push(Game.blackKing);
         
         for(let i = 3; i <= 6; i+=3) {
             Game.whites.push(new Bishop('white', `${ID[i]}`, 1));
@@ -69,8 +72,13 @@ class Game {
                 p.move();
             }
         }
+    }
 
-
+    static checkingKings(){ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
+        if(Game.whiteKing.isChecked())
+            console.log('WHITE KING CHECKED');
+        if(Game.blackKing.isChecked())
+            console.log('BLACK KING CHECKED');
     }
 
     static setLastChosen(piece:Piece):void{

@@ -9,7 +9,7 @@ class King extends piece_1.Piece {
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
         this.dangerZones = this.getKnightDanger();
-        this.isChecked = this.getChecked();
+        this.checked = this.isChecked();
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
@@ -36,12 +36,13 @@ class King extends piece_1.Piece {
                 if (square.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
                     this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2))); //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
+                    game_1.Game.checkingKings();
                 }
             });
         });
     }
-    getChecked() {
-        if (this.getKnightDanger().indexOf(`#${this.positionX}-${this.positionY}`) !== -1) {
+    isChecked() {
+        if (this.getKnightDanger().indexOf(`${this.positionX}-${this.positionY}`) !== -1) {
             return true;
         }
         else

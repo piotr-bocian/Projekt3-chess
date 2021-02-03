@@ -10,15 +10,15 @@ const rook_1 = require("./pieces/rook");
 const board_2 = require("./board");
 class Game {
     constructor() {
-        this.isWhiteKingChecked = false;
-        this.isBlackKingChecked = false;
         this.gameBoard = new board_1.Board;
         this.gameBoard.drawBoard();
         //ustawianie figur
+        Game.whiteKing = new king_1.King('white', `${board_2.ID[5]}`, 1);
+        Game.blackKing = new king_1.King('black', `${board_2.ID[5]}`, 8);
         Game.whites.push(new queen_1.Queen('white', `${board_2.ID[4]}`, 1));
-        Game.whites.push(new king_1.King('white', `${board_2.ID[5]}`, 1));
+        Game.whites.push(Game.whiteKing);
         Game.blacks.push(new queen_1.Queen('black', `${board_2.ID[4]}`, 8));
-        Game.blacks.push(new king_1.King('black', `${board_2.ID[5]}`, 8));
+        Game.blacks.push(Game.blackKing);
         for (let i = 3; i <= 6; i += 3) {
             Game.whites.push(new bishop_1.Bishop('white', `${board_2.ID[i]}`, 1));
             Game.blacks.push(new bishop_1.Bishop('black', `${board_2.ID[i]}`, 8));
@@ -51,6 +51,12 @@ class Game {
                 p.move();
             }
         }
+    }
+    static checkingKings() {
+        if (Game.whiteKing.isChecked())
+            console.log('WHITE KING CHECKED');
+        if (Game.blackKing.isChecked())
+            console.log('BLACK KING CHECKED');
     }
     static setLastChosen(piece) {
         Game.lastChosen = piece;
