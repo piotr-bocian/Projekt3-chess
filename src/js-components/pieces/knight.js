@@ -58,8 +58,27 @@ class Knight extends piece_1.Piece {
                 if (possMove.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
                     // próbna implementacja bicia
                     if (possMove.innerHTML != '') {
-                        console.log(possMove.innerHTML);
-                        possMove.innerHTML = '';
+                        if (this.color === 'white') {
+                            const pieces = game_1.Game.getPieces('black');
+                            for (let p of pieces) {
+                                if (p.getPositionX() == coorX && p.getPositionY() == coorY) {
+                                    pieces.splice(pieces.indexOf(p), 1);
+                                    possMove.innerHTML = '';
+                                }
+                            }
+                        }
+                        else {
+                            const pieces = game_1.Game.getPieces('white');
+                            for (let p of pieces) {
+                                if (p.getPositionX() == coorX && p.getPositionY() == coorY) {
+                                    pieces.splice(pieces.indexOf(p), 1);
+                                    possMove.innerHTML = '';
+                                }
+                            }
+                        }
+                        // const img: HTMLElement = possMove.querySelector('img')!;
+                        // console.log(possMove.innerHTML)
+                        // possMove.removeChild(img);
                     }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
