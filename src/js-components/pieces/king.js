@@ -4,11 +4,12 @@ exports.King = void 0;
 const piece_1 = require("./piece");
 const game_1 = require("../game");
 const knight_1 = require("./knight");
+const rook_1 = require("./rook");
 class King extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
-        this.dangerZones = this.getKnightDanger();
+        this.dangerZones = this.getDangerZones();
         this.checked = this.isChecked();
         this.setOnBoard(this.positionX, this.positionY);
     }
@@ -16,7 +17,7 @@ class King extends piece_1.Piece {
         const possibleMoves = [];
         const arrayOfX = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         const indexOfX = arrayOfX.indexOf(this.getPositionX());
-        this.dangerZones = this.getKnightDanger();
+        this.dangerZones = this.getDangerZones();
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const square = document.querySelector(`#${arrayOfX[indexOfX + i]}-${this.getPositionY() + j}`);
@@ -42,17 +43,17 @@ class King extends piece_1.Piece {
         });
     }
     isChecked() {
-        if (this.getKnightDanger().indexOf(`${this.positionX}-${this.positionY}`) !== -1) {
+        if (this.getDangerZones().indexOf(`${this.positionX}-${this.positionY}`) !== -1) {
             return true;
         }
         else
             return false;
     }
-    getKnightDanger() {
+    getDangerZones() {
         const dangerArr = [];
         if (this.color === 'white') {
             for (let p of game_1.Game.getBlacks()) {
-                if (p instanceof knight_1.Knight) {
+                if (p instanceof knight_1.Knight || p instanceof rook_1.Rook) {
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
@@ -62,7 +63,7 @@ class King extends piece_1.Piece {
         }
         else {
             for (let p of game_1.Game.getWhites()) {
-                if (p instanceof knight_1.Knight) {
+                if (p instanceof knight_1.Knight || p instanceof rook_1.Rook) {
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);

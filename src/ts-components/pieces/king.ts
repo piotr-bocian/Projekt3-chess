@@ -1,7 +1,7 @@
-import {Piece} from "./piece";
-import {ID} from "./../board";
+import { Piece } from "./piece";
 import { Game } from "../game";
 import { Knight } from "./knight";
+import { Rook } from "./rook";
 
 class King extends Piece{
 
@@ -11,7 +11,7 @@ class King extends Piece{
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
-        this.dangerZones = this.getKnightDanger();
+        this.dangerZones = this.getDangerZones();
         this.checked = this.isChecked();
 
         this.setOnBoard(this.positionX, this.positionY);
@@ -23,7 +23,7 @@ class King extends Piece{
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
 
-        this.dangerZones = this.getKnightDanger();
+        this.dangerZones = this.getDangerZones();
 
         for(let i=-1; i<=1; i++){
             for(let j=-1; j<=1; j++){
@@ -57,19 +57,19 @@ class King extends Piece{
     }
 
     isChecked():boolean{
-        if(this.getKnightDanger().indexOf(`${this.positionX}-${this.positionY}`) !== -1){
+        if(this.getDangerZones().indexOf(`${this.positionX}-${this.positionY}`) !== -1){
             return true;
         }
         else
             return false;
     }
 
-    getKnightDanger():string[]{ //<-- metoda zwracająca pola, na których król mogłby zostać "zbity" przez skoczka
+    getDangerZones():string[]{
         const dangerArr:string[] = [];
 
         if(this.color === 'white'){
             for(let p of Game.getBlacks()){
-                if(p instanceof Knight){
+                if(p instanceof Knight || p instanceof Rook){
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
@@ -79,7 +79,7 @@ class King extends Piece{
         }
         else{
             for(let p of Game.getWhites()){
-                if(p instanceof Knight){
+                if(p instanceof Knight || p instanceof Rook){
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
