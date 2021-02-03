@@ -17,7 +17,7 @@ class Bishop extends piece_1.Piece {
         const possibleMoves = [];
         const coordinateX = Object.values(board_1.ID).indexOf(this.positionX) + 1;
         const coordinateY = this.positionY;
-        // move by one diagonal
+        // move by first diagonal
         // top right
         if (9 - coordinateX < 9 - coordinateY) {
             for (let i = 1; i < 9 - coordinateX; i++) {
@@ -116,7 +116,6 @@ class Bishop extends piece_1.Piece {
                 if (square.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
                     this.setOnBoard(square.id.charAt(0), parseInt(square.id.charAt(2))); //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
-                    game_1.Game.checkingKings();
                 }
             });
         });
