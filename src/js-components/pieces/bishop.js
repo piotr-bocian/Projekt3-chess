@@ -103,22 +103,12 @@ class Bishop extends piece_1.Piece {
                 }
             }
         }
-        // document.querySelectorAll('.active').forEach((possibleMove) => {                 
-        //     possibleMove.addEventListener('click', () => {
-        //         const posX = possibleMove.id.charAt(0);
-        //         const posY = parseInt(possibleMove.id.charAt(2));
-        //         if(possibleMove.classList.contains('active') && (Game.getLastChosen() === this)){
-        //             this.setOnBoard(posX, posY);
-        //             this.removeClassActive();
-        //         }                
-        //     });      
-        // })
         return possibleMoves;
     }
     move() {
         this.removeClassActive();
         const possibleMovesArr = this.showPossibleMoves();
-        console.log(possibleMovesArr);
+        // console.log(possibleMovesArr);
         possibleMovesArr.forEach(id => {
             const square = document.querySelector(`#${id}`);
             square.classList.add('active'); //<--oznaczenie wizualne na szachownicy
