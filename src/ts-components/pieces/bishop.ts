@@ -20,7 +20,7 @@ class Bishop extends Piece{
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
         const coordinateY : number = this.positionY;
 
-        // move by one diagonal
+        // move by first diagonal
         // top right
         if (9 - coordinateX < 9 - coordinateY) {
             for(let i=1; i<9 - coordinateX; i++){
