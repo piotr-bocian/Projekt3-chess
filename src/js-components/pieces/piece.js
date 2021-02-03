@@ -8,10 +8,12 @@ class Piece {
         this.color = color;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.possibleMovesIDs = this.showPossibleMoves();
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`); //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
     }
     setOnBoard(pX, pY) {
-        this.parentSquare.innerHTML = '';
+        //w pierwszych dwóch linijkach usuwamy figurę z obecnego miejsca, następnie ustawiamy w nowym
+        this.parentSquare.innerHTML = "";
         this.parentSquare.classList.remove('pieceInside');
         const img = document.createElement('img');
         img.classList.add('image');
@@ -25,6 +27,12 @@ class Piece {
         this.positionX = pX;
         this.positionY = pY;
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`);
+    }
+    removeClassActive() {
+        let elems = document.querySelectorAll('.active');
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('active');
+        }
     }
     getPositionX() {
         return this.positionX;
