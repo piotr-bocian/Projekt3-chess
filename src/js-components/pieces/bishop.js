@@ -22,6 +22,10 @@ class Bishop extends piece_1.Piece {
         if (9 - coordinateX < 9 - coordinateY) {
             for (let i = 1; i < 9 - coordinateX; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY + i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY + i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX + i]}-${coordinateY + i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -32,6 +36,10 @@ class Bishop extends piece_1.Piece {
         else {
             for (let i = 1; i < 9 - coordinateY; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY + i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY + i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX + i]}-${coordinateY + i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -43,6 +51,10 @@ class Bishop extends piece_1.Piece {
         if (coordinateY - 1 < coordinateX - 1) {
             for (let i = 1; i < coordinateY; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY - i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY - i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX - i]}-${coordinateY - i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -53,6 +65,10 @@ class Bishop extends piece_1.Piece {
         else {
             for (let i = 1; i < coordinateX; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY - i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY - i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX - i]}-${coordinateY - i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -65,6 +81,10 @@ class Bishop extends piece_1.Piece {
         if (coordinateX < 9 - coordinateY) {
             for (let i = 1; i < coordinateX; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY + i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY + i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX - i]}-${coordinateY + i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -75,6 +95,10 @@ class Bishop extends piece_1.Piece {
         else {
             for (let i = 1; i < 9 - coordinateY; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY + i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX - i]}-${coordinateY + i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX - i]}-${coordinateY + i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -86,6 +110,10 @@ class Bishop extends piece_1.Piece {
         if (coordinateY < 9 - coordinateX) {
             for (let i = 1; i < coordinateY; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY - i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY - i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX + i]}-${coordinateY - i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -96,6 +124,10 @@ class Bishop extends piece_1.Piece {
         else {
             for (let i = 1; i < 9 - coordinateX; i++) {
                 if (document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY - i}`).classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${board_1.ID[coordinateX + i]}-${coordinateY - i}`).getElementsByTagName("img")[0].classList.contains(`${this.color}`))) {
+                        possibleMoves.push(`${board_1.ID[coordinateX + i]}-${coordinateY - i}`);
+                    }
+                    ;
                     break;
                 }
                 else {
@@ -108,7 +140,7 @@ class Bishop extends piece_1.Piece {
     move() {
         this.removeClassActive();
         const possibleMovesArr = this.showPossibleMoves();
-        // console.log(possibleMovesArr);
+        console.log(possibleMovesArr);
         possibleMovesArr.forEach(id => {
             const square = document.querySelector(`#${id}`);
             square.classList.add('active'); //<--oznaczenie wizualne na szachownicy
