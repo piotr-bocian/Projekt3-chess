@@ -23,7 +23,7 @@ class Game {
         //     this.whites.push(new Rook('white', `${ID[i]}`, 1));
         // }
         for (let i = 1; i <= 3; i++) {
-            this.whites.push(new pawn_1.Pawn('white', `${board_2.ID[i]}`, 2));
+            this.whites.push(new pawn_1.Pawn('black', `${board_2.ID[i]}`, 2));
         }
     }
     startMove(square) {

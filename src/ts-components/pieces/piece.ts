@@ -18,7 +18,7 @@ abstract class Piece{
         this.parentSquare.innerHTML = '';
         this.parentSquare.classList.remove('pieceInside');
         const img = document.createElement('img');
-        img.classList.add(`${this.color.toLowerCase()}-${this.constructor.name.toLowerCase()}`);
+        img.classList.add(`${this.color}`);
         img.setAttribute('src', this.symbol);
         this.updatePosition(pX, pY);
         this.parentSquare.appendChild(img);

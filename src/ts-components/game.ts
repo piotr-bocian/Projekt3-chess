@@ -36,7 +36,7 @@ class Game {
         // }
 
         for(let i = 1; i <= 3; i++) {
-            this.whites.push(new Pawn('white', `${ID[i]}`, 2));
+            this.whites.push(new Pawn('black', `${ID[i]}`, 2));
         }
     }
 

@@ -13,8 +13,8 @@ it('should be true if Queen instance is ok', () => {
 
 it('should have empty array of possible moves', () => {
   const queen = new Queen('white', 'A', 1);
-  queen.possibleMoves = ['A-1'];
-  expect(queen.possibleMoves).toStrictEqual(['A-1']);
+  queen.possibleMoves = [];
+  expect(queen.possibleMoves).toStrictEqual([]);
 });
 
 
