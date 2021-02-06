@@ -21,9 +21,9 @@ class Pawn extends Piece {
         this.removeClassActive();
 
         let posXAttack1 = this.nextChar(this.positionX);
-        console.log(posXAttack1);
+        
         let posXAttack2 = this.previousChar(this.positionX);
-        console.log(posXAttack2);
+        
 
         let possibleMovesIds: string[] = [];
         let possibleAttackMovesIds: string[] = [];
@@ -107,7 +107,9 @@ class Pawn extends Piece {
                 }
                 if (this.color === 'white' && coorY === 8 && this.parentSquare.querySelector('img')!.src.includes('Pawn')) {
                     this.parentSquare.appendChild(this.pawnPromotion(this))
-                } 
+                } else if (coorY === 1 && this.parentSquare.querySelector('img')!.src.includes('Pawn')){
+                    this.parentSquare.appendChild(this.pawnPromotion(this))
+                }
             })
         })
     }
@@ -123,40 +125,63 @@ class Pawn extends Piece {
     // promotion
 
     pawnPromotion (pawn:Pawn) {
-        console.log(Game.getWhites());
-        const modalWindowPawn = document.createElement("div");
-        modalWindowPawn.className = "modal-window";
-    
-        const promotionArray = ['Knight', 'Queen', 'Bishop', 'Rook'];
-        const parentSquare = document.getElementById(`${pawn.getPositionX}`)!;
-    
-    
+
         const pieces = [
             {pieceName: Queen, name: "Queen", handler: ''},
             {pieceName: Rook, name: "Rook", handler: ''},
             {pieceName: Knight, name: "Knight", handler: ''},
             {pieceName: Bishop, name: "Bishop", handler: ''}
         ]
+
+        const modalWindowPawn = document.createElement("div");
+
+        const promotionArray = ['Knight', 'Queen', 'Bishop', 'Rook'];
+        const parentSquare = document.getElementById(`${pawn.getPositionX}`)!;
+        
+        if (this.color === 'white') {
+            
+            modalWindowPawn.className = "modal-window-white";
+
+            for (const piece of pieces) {
+                const selectableFigure = document.createElement("img");
+                selectableFigure.setAttribute('src', `../../../static/assets/white${piece.name}.png`)
+                selectableFigure.style.height = '90px';
+                const { handler, pieceName: PieceName } = piece;
     
-         
-        for (const piece of pieces) {
-            const { handler, pieceName: PieceName } = piece;
+                modalWindowPawn.appendChild(selectableFigure);
+    
+                selectableFigure.addEventListener('click', () => {
+                    console.log(`#${pawn.getPositionX()}-8`);
+                    document.querySelector(`#${pawn.getPositionX()}-8`)!.removeChild(modalWindowPawn);
+                    const pieceToCreate = new PieceName('white', `${pawn.getPositionX()}`, 8);
+                    let whites = Game.getWhites();
+                    whites.push(pieceToCreate);
+                    const pawnToRemove = whites.indexOf(pawn);
+                    whites.splice(pawnToRemove, 1);
+                })            
+            }   
+        } else {
+            modalWindowPawn.className = "modal-window-black";
 
-            const selectableFigure = document.createElement("img");
-            selectableFigure.setAttribute('src', `../../../static/assets/white${piece.name}.png`)
-            selectableFigure.style.height = '90px';
-            modalWindowPawn.appendChild(selectableFigure);
-
-            selectableFigure.addEventListener('click', () => {
-                console.log(`#${pawn.getPositionX()}-8`);
-                document.querySelector(`#${pawn.getPositionX()}-8`)!.removeChild(modalWindowPawn);
-                const pieceToCreate = new PieceName('white', `${pawn.getPositionX()}`, 8);
-                let whites = Game.getWhites();
-                whites.push(pieceToCreate);
-                const pawnToRemove = whites.indexOf(pawn);
-                whites.splice(pawnToRemove, 1);
-            })            
-        }    
+            for (const piece of pieces) {
+                const selectableFigure = document.createElement("img");
+                selectableFigure.setAttribute('src', `../../../static/assets/black${piece.name}.png`)
+                selectableFigure.style.height = '90px';
+                const { handler, pieceName: PieceName } = piece;
+    
+                modalWindowPawn.appendChild(selectableFigure);
+    
+                selectableFigure.addEventListener('click', () => {
+                    console.log(`#${pawn.getPositionX()}-1`);
+                    document.querySelector(`#${pawn.getPositionX()}-1`)!.removeChild(modalWindowPawn);
+                    const pieceToCreate = new PieceName('black', `${pawn.getPositionX()}`, 1);
+                    let blacks = Game.getBlacks();
+                    blacks.push(pieceToCreate);
+                    const pawnToRemove = blacks.indexOf(pawn);
+                    blacks.splice(pawnToRemove, 1);
+                })            
+            }   
+        }
     
         return modalWindowPawn;
     };

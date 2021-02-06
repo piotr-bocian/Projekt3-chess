@@ -46,8 +46,8 @@ class Game {
         }
 
         for(let i = 1; i <= 8; i++) {
-           Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
-        //    Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
+        //    Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
+           Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
         }
     }
 

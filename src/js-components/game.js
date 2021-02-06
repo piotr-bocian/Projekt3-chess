@@ -7,6 +7,7 @@ const king_1 = require("./pieces/king");
 const knight_1 = require("./pieces/knight");
 const queen_1 = require("./pieces/queen");
 const rook_1 = require("./pieces/rook");
+const pawn_1 = require("./pieces/pawn");
 const board_2 = require("./board");
 class Game {
     constructor() {
@@ -17,23 +18,23 @@ class Game {
         //ustawianie figur
         Game.whites.push(new queen_1.Queen('white', `${board_2.ID[4]}`, 1));
         Game.whites.push(new king_1.King('white', `${board_2.ID[5]}`, 1));
-        Game.blacks.push(new queen_1.Queen('black', `${board_2.ID[4]}`, 8));
-        Game.blacks.push(new king_1.King('black', `${board_2.ID[5]}`, 8));
+        // Game.blacks.push(new Queen('black', `${ID[4]}`, 8));
+        // Game.blacks.push(new King('black', `${ID[5]}`, 8));
         for (let i = 3; i <= 6; i += 3) {
             Game.whites.push(new bishop_1.Bishop('white', `${board_2.ID[i]}`, 1));
-            Game.blacks.push(new bishop_1.Bishop('black', `${board_2.ID[i]}`, 8));
+            // Game.blacks.push(new Bishop('black', `${ID[i]}`, 8));
         }
         for (let i = 2; i <= 7; i += 5) {
             Game.whites.push(new knight_1.Knight('white', `${board_2.ID[i]}`, 1));
-            Game.blacks.push(new knight_1.Knight('black', `${board_2.ID[i]}`, 8));
+            // Game.blacks.push(new Knight('black', `${ID[i]}`, 8));
         }
         for (let i = 1; i <= 8; i += 7) {
             Game.whites.push(new rook_1.Rook('white', `${board_2.ID[i]}`, 1));
-            Game.blacks.push(new rook_1.Rook('black', `${board_2.ID[i]}`, 8));
+            // Game.blacks.push(new Rook('black', `${ID[i]}`, 8));
         }
         for (let i = 1; i <= 8; i++) {
-            //Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
-            //Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
+            //    Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
+            Game.blacks.push(new pawn_1.Pawn('black', `${board_2.ID[i]}`, 7));
         }
     }
     startMove(square) {
