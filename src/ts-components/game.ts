@@ -11,15 +11,17 @@ import { ID } from "./board";
 class Game {
 
     private gameBoard:Board;
+    private static lastChosen:Piece;
 
-    //private whoNext:string;
-
-    private whites:Piece[] = [];
+    private movesHistory:string[]
+    private lastMove: string
+    private  whites:Piece[] = [];
 
     constructor(){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
-
+        this.movesHistory=[];
+        this.lastMove = '';
         this.whites.push(new Queen('white', `${ID[4]}`, 1));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
 
@@ -39,17 +41,39 @@ class Game {
             this.whites.push(new Pawn('black', `${ID[i]}`, 2));
         }
     }
+    // history(piece: Piece){
+    //     const PositionX = piece.getPositionX();
+    //     const PositionY = piece.getPositionY().toString();
+    //     // const opisowo = `${piece.color} ${piece.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${(square).id.charAt(0).toLowerCase()}-${parseInt((square).id.charAt(2))}`;
+
+    //     this.movesHistory.push(`${PositionX}${PositionY}`);
+    //     // this.lastMove = opisowo;
+    // }
 
     startMove(square:HTMLElement){
-
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
 
+
         for(let p of this.whites){
             if(p.getPositionX() == x && p.getPositionY() == y)
-                p.move()
+                // this.setLastChosen(p);
+                p.move();
+                // this.movesHistory.push(p.)
+                // p.history(p);
+                // console.log(this.movesHistory);
+
         }
     }
+
+    setLastChosen(piece:Piece):void{
+        Game.lastChosen = piece;
+    }
+
+    static getLastChosen():Piece{
+        return Game.lastChosen;
+    }
+
 }
 
 export {Game};

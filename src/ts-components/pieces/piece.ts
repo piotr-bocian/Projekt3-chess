@@ -1,9 +1,9 @@
 abstract class Piece{
-    protected color:string;
+    public color:string;
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
     protected positionX:string;
     protected positionY:number;
-    protected parentSquare:HTMLElement;
+    public parentSquare:HTMLElement;
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
     constructor(color:string, positionX:string, positionY:number){
@@ -32,8 +32,10 @@ abstract class Piece{
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!;
     }
 
+
     abstract showPossibleMoves():void;
     abstract move():void;
+    abstract history(square:Element):void;
     getPositionX(){
         return this.positionX;
     }
