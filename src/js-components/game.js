@@ -10,7 +10,7 @@ class Game {
         this.whites = [];
         this.gameBoard = new board_1.Board;
         this.gameBoard.drawBoard();
-        this.movesHistory = [];
+        this.allMovesHistory = [];
         this.lastMove = '';
         this.whites.push(new queen_1.Queen('white', `${board_2.ID[4]}`, 1));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
@@ -39,11 +39,11 @@ class Game {
         const y = parseInt(square.id.charAt(2));
         for (let p of this.whites) {
             if (p.getPositionX() == x && p.getPositionY() == y)
-                // this.setLastChosen(p);
-                p.move();
-            // this.movesHistory.push(p.)
-            // p.history(p);
-            // console.log(this.movesHistory);
+                this.setLastChosen(p);
+            p.move();
+            this.allMovesHistory.push(p.movesHistory);
+            console.log(this.allMovesHistory);
+            p.reverseMove();
         }
     }
     setLastChosen(piece) {

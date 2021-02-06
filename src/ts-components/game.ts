@@ -13,14 +13,14 @@ class Game {
     private gameBoard:Board;
     private static lastChosen:Piece;
 
-    private movesHistory:string[]
-    private lastMove: string
+    private allMovesHistory:string[][][];
+    private lastMove: string;
     private  whites:Piece[] = [];
 
     constructor(){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
-        this.movesHistory=[];
+        this.allMovesHistory=[];
         this.lastMove = '';
         this.whites.push(new Queen('white', `${ID[4]}`, 1));
         // this.whites.push(new King('white', `${ID[5]}`, 1));
@@ -57,12 +57,11 @@ class Game {
 
         for(let p of this.whites){
             if(p.getPositionX() == x && p.getPositionY() == y)
-                // this.setLastChosen(p);
+                this.setLastChosen(p);
                 p.move();
-                // this.movesHistory.push(p.)
-                // p.history(p);
-                // console.log(this.movesHistory);
-
+                this.allMovesHistory.push(p.movesHistory)
+                console.log(this.allMovesHistory);
+                p.reverseMove()
         }
     }
 

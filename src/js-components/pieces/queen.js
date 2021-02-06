@@ -3,18 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Queen = void 0;
 const board_1 = require("../board");
 const piece_1 = require("./piece");
+const game_1 = require("../game");
 //królowa / hetman
 class Queen extends piece_1.Piece {
-    constructor(color, positionX, positionY, movesHistory, lastMove) {
+    constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.movesHistory = movesHistory;
-        this.lastMove = lastMove;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        //tutaj trzymamy historię;
-        this.movesHistory = [];
-        this.lastMove;
     }
     showPossibleMoves() {
         const allPossibleMoves = [];
@@ -24,9 +20,6 @@ class Queen extends piece_1.Piece {
         return allPossibleMoves;
     }
     move() {
-        //TESTOWO WYWOLUJE TUTAJ
-        this.reverseMove();
-        ////
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
@@ -40,50 +33,13 @@ class Queen extends piece_1.Piece {
         squares.forEach(square => {
             square.addEventListener('click', () => {
                 if (!(square).classList.contains('pieceInside') && (square).classList.contains('active')
-                // &&(Game.getLastChosen() === this) <=RZUCA BŁĄD
+                    && (game_1.Game.getLastChosen() === this) //<=RZUCA BŁĄD
                 ) {
                     this.history(square);
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
                 }
             });
-        });
-    }
-    //historia ruchów
-    history(square) {
-        const fromPositionX = this.getPositionX();
-        const fromPositionY = this.getPositionY().toString();
-        const toPositionX = `${(square).id.charAt(0)}`;
-        const toPositionY = `${parseInt((square).id.charAt(2))}`;
-        const descriptive = `${this.color} ${this.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${toPositionX}-${toPositionY}`;
-        this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
-        this.lastMove = descriptive;
-        console.log(this.movesHistory);
-        console.log(this.lastMove);
-    }
-    // prototyp cofania ruchów
-    reverseMove() {
-        //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
-        const lastMove = this.movesHistory.slice();
-        document.querySelector('.btn')?.addEventListener('click', () => {
-            this.removeClassActive();
-            if (lastMove.length === 0) {
-                return;
-            }
-            ;
-            const popLasMove = lastMove.pop();
-            this.movesHistory.length = lastMove.length;
-            if (popLasMove) {
-                console.log(lastMove.length);
-                const positionX = popLasMove[0];
-                const positionY = popLasMove[1];
-                if (positionX && positionY) {
-                    this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
-                }
-            }
-            else {
-                return;
-            }
         });
     }
     collectAllPossibleMoves() {
@@ -246,12 +202,6 @@ class Queen extends piece_1.Piece {
         moveLeft();
         moveRight();
         return moves;
-    }
-    removeClassActive() {
-        let elems = [...document.querySelectorAll('.active')];
-        for (let i = 0; i < elems.length; i++) {
-            elems[i]?.classList.remove('active');
-        }
     }
 }
 exports.Queen = Queen;

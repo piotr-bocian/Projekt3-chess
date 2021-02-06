@@ -4,14 +4,11 @@ import {Piece} from "./piece";
 import { Game } from "../game"
 //królowa / hetman
 class Queen extends Piece implements QueenMethods{
-    constructor(color:string, positionX:string, positionY:number, private movesHistory: string[][], private lastMove: string){
+    constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        //tutaj trzymamy historię;
-        this.movesHistory=[];
-        this.lastMove
     }
 
     showPossibleMoves(){
@@ -24,9 +21,6 @@ class Queen extends Piece implements QueenMethods{
     }
 
     move(){
-        //TESTOWO WYWOLUJE TUTAJ
-        this.reverseMove()
-        ////
         const movesShow:MovesShow =(id)=>{
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
                 movesPossibilities.forEach(el=>{
@@ -42,7 +36,7 @@ class Queen extends Piece implements QueenMethods{
         squares.forEach(square => {
             square.addEventListener('click', () => {
                 if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')
-                // &&(Game.getLastChosen() === this) <=RZUCA BŁĄD
+                &&(Game.getLastChosen() === this) //<=RZUCA BŁĄD
                 ){
                     this.history(square);
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
@@ -50,44 +44,6 @@ class Queen extends Piece implements QueenMethods{
                 }
             });
         });
-    }
-
-    //historia ruchów
-    history(square:Element){
-        const fromPositionX = this.getPositionX();
-        const fromPositionY = this.getPositionY().toString();
-        const toPositionX = `${(square).id.charAt(0)}`;
-        const toPositionY = `${parseInt((square).id.charAt(2))}`;
-        const descriptive = `${this.color} ${this.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${toPositionX}-${toPositionY}`;
-        this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
-        this.lastMove = descriptive
-        console.log(this.movesHistory);
-        console.log(this.lastMove);
-    }
-
-
-
-    // prototyp cofania ruchów
-    reverseMove(){
-        //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
-        const lastMove= this.movesHistory.slice();
-
-            document.querySelector('.btn')?.addEventListener('click', ()=>{
-            this.removeClassActive();
-            if(lastMove.length === 0){return};
-            const popLasMove = lastMove.pop();
-            this.movesHistory.length = lastMove.length;
-            if (popLasMove){
-                console.log(lastMove.length);
-                    const positionX = popLasMove[0];
-                    const positionY = popLasMove[1];
-                    if(positionX && positionY){
-                        this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
-                    }
-                } else {
-                    return
-                }
-            })
     }
 
 collectAllPossibleMoves(){
@@ -249,12 +205,7 @@ const diagonalMoves=()=>{
     return moves;
 }
 
-    removeClassActive(){
-    let elems= [...document.querySelectorAll('.active')];
-    for (let i = 0; i < elems.length; i++) {
-            elems[i]?.classList.remove('active');
-    }
-}
+
 }
 
 export {Queen};
