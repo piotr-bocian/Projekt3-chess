@@ -8,7 +8,7 @@ class Queen extends Piece implements QueenMethods{
         super(color, positionX, positionY);
         //this.symbol = `../../../static/assets/${this.color}Queen.png`;
         //this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
-        this.symbol = `../../../static/assets/${this.color}King.png`;
+        this.symbol = `../../../static/assets/${this.color}Queen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
 

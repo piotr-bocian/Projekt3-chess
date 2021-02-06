@@ -50,16 +50,14 @@ class Game {
 
     startMove(square:HTMLElement):void{
         
-        let chosenPiece = this.getPiece(square);
-        console.log(chosenPiece);
+        let chosenPiece = Game.getPiece(square);
         if (chosenPiece) {
-            console.log(chosenPiece);
             this.setLastChosen(chosenPiece);
             chosenPiece.move();
         }
     }
 
-    getPiece(square: HTMLElement): Piece | void {
+    static getPiece(square: HTMLElement): Piece | void {
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
         
@@ -78,6 +76,24 @@ class Game {
         } else {
             return;
         }        
+    }
+
+    static beat(square: HTMLElement): void {
+        const x:string = square.id.charAt(0);
+        const y:number = parseInt(square.id.charAt(2));
+
+        let p = Game.getPiece(square);
+        if (p) {
+            if (p.getColor() === 'white') {
+                this.whites.splice(this.whites.indexOf(p),1);
+                square.innerHTML = '';
+            } else {
+                this.blacks.splice(this.blacks.indexOf(p),1);
+                square.innerHTML = '';
+            }
+        } else {
+            return;
+        }
     }
 
     setLastChosen(piece:Piece):void{

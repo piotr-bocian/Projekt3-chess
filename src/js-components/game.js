@@ -35,15 +35,13 @@ class Game {
         }
     }
     startMove(square) {
-        let chosenPiece = this.getPiece(square);
-        console.log(chosenPiece);
+        let chosenPiece = Game.getPiece(square);
         if (chosenPiece) {
-            console.log(chosenPiece);
             this.setLastChosen(chosenPiece);
             chosenPiece.move();
         }
     }
-    getPiece(square) {
+    static getPiece(square) {
         const x = square.id.charAt(0);
         const y = parseInt(square.id.charAt(2));
         if (square.innerHTML != '') {
@@ -56,6 +54,24 @@ class Game {
                 if (p.getPositionX() == x && p.getPositionY() == y) {
                     return p;
                 }
+            }
+        }
+        else {
+            return;
+        }
+    }
+    static beat(square) {
+        const x = square.id.charAt(0);
+        const y = parseInt(square.id.charAt(2));
+        let p = Game.getPiece(square);
+        if (p) {
+            if (p.getColor() === 'white') {
+                this.whites.splice(this.whites.indexOf(p), 1);
+                square.innerHTML = '';
+            }
+            else {
+                this.blacks.splice(this.blacks.indexOf(p), 1);
+                square.innerHTML = '';
             }
         }
         else {
