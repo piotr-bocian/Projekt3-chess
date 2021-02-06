@@ -77,13 +77,13 @@ class Bishop extends Piece{
         }
         
         // down right
-        var downLeft: number;
+        var downRight: number;
         if (coordinateY < 9 - coordinateX) {
-            downLeft = coordinateY;
+            downRight = coordinateY;
         } else {
-            downLeft = 9 - coordinateX;
+            downRight = 9 - coordinateX;
         }
-        for(let i = 1 ; i < downLeft ; i++){
+        for(let i = 1 ; i < downRight ; i++){
             if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
                 if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
                     possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY-i}`);
