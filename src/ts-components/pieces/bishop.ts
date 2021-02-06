@@ -22,103 +22,75 @@ class Bishop extends Piece{
 
         // move by first diagonal
         // top right
+        var topRight: number;
         if (9 - coordinateX < 9 - coordinateY) {
-            for(let i=1; i<9 - coordinateX; i++){
-                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
-                    };
-                    break;
-                } else {
-                    possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
-                }
-            }
+            topRight = 9 - coordinateX;
         } else {
-            for(let i=1; i < 9 - coordinateY; i++){
-                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
-                    };
-                    break;
-                } else {
+            topRight = 9 - coordinateY;
+        }
+        for(let i=1; i< topRight; i++){
+            if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
                     possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
-                }
+                };
+                break;
+            } else {
+                possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
             }
         }
         
         // down left
+        var downLeft: number;
         if (coordinateY - 1 < coordinateX - 1) {
-            for(let i=1 ; i < coordinateY; i++){
-                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
-                    };
-                    break;
-                } else {
-                    possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
-                }
-            }
+            downLeft = coordinateY;
         } else {
-            for(let i=1 ; i < coordinateX; i++){
-                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
-                    };
-                    break;
-                } else {
+            downLeft = coordinateX;
+        }
+        for(let i=1 ; i < downLeft; i++){
+            if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                if (!(document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
                     possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
-                }
+                };
+                break;
+            } else {
+                possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
             }
         }
 
         // move by second diagonal
         // top left
+        var topLeft: number;
         if (coordinateX < 9 - coordinateY) {
-            for(let i = 1; i < coordinateX; i++){
-                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
-                    };
-                    break;
-                } else {
-                    possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
-                }
-            }
+            topLeft = coordinateX;
         } else {
-            for(let i = 1 ; i < 9 - coordinateY; i++) {
-                if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY + i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
-                    };
-                    break;
-                } else {
-                    possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY + i}`);
-                }
+            topLeft = 9 - coordinateY;
+        }
+        for(let i = 1; i < topLeft; i++){
+            if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                if (!(document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                    possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
+                };
+                break;
+            } else {
+                possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
             }
         }
         
         // down right
+        var downLeft: number;
         if (coordinateY < 9 - coordinateX) {
-            for(let i = 1 ; i < coordinateY ; i++){
-                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY-i}`);
-                    };
-                    break;
-                } else {
-                    possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
-                }
-            }
+            downLeft = coordinateY;
         } else {
-            for(let i=1; i < 9 - coordinateX; i++) {
-                if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
-                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
-                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY-i}`);
-                    };
-                    break;
-                } else {
-                    possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
-                }
+            downLeft = 9 - coordinateX;
+        }
+        for(let i = 1 ; i < downLeft ; i++){
+            if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                    possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY-i}`);
+                };
+                break;
+            } else {
+                possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
             }
         }
 
