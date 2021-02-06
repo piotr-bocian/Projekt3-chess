@@ -51,6 +51,10 @@ abstract class Piece{
         return this.positionY;
     }
 
+    getColor(){
+        return this.color;
+    }
+
     abstract showPossibleMoves():string[];
     abstract move():void;
 }

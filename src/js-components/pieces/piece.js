@@ -41,5 +41,8 @@ class Piece {
     getPositionY() {
         return this.positionY;
     }
+    getColor() {
+        return this.color;
+    }
 }
 exports.Piece = Piece;

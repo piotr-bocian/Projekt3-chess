@@ -15,7 +15,7 @@ class Game {
     private static whiteKing:King;
     private static blackKing:King;
 
-    //private whoNext:string;
+    private whoNext:string = 'white';
 
     private static whites:Piece[] = [];
     private static blacks:Piece[] = [];
@@ -49,8 +49,8 @@ class Game {
         }
 
         for(let i = 1; i <= 8; i++) {
-           //Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
-           //Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
+           Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
+           Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
         }
     }
 
@@ -59,17 +59,22 @@ class Game {
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
         
-        for(let p of Game.whites){
-            if(p.getPositionX() == x && p.getPositionY() == y){
-                Game.setLastChosen(p);
-                p.move();
+        if(this.whoNext === 'white'){
+            for(let p of Game.whites){
+                if(p.getPositionX() == x && p.getPositionY() == y){
+                    Game.setLastChosen(p);
+                    this.whoNext = 'black';
+                    p.move();
+                }
             }
         }
-
-        for(let p of Game.blacks){
-            if(p.getPositionX() == x && p.getPositionY() == y){
-                Game.setLastChosen(p);
-                p.move();
+        else{
+            for(let p of Game.blacks){
+                if(p.getPositionX() == x && p.getPositionY() == y){
+                    Game.setLastChosen(p);
+                    this.whoNext = 'white';
+                    p.move();
+                }
             }
         }
     }

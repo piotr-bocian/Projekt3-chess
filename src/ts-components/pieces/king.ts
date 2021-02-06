@@ -3,17 +3,14 @@ import { Game } from "../game";
 import { Knight } from "./knight";
 import { Rook } from "./rook";
 import { Bishop } from "./bishop";
+import { Pawn } from "./pawn";
+import { Queen } from "./queen";
 
 class King extends Piece{
-
-    private dangerZones:string[]; //<-- ID pól na które król nie może się przemieścić
-    private checked:boolean;
 
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
-        this.dangerZones = this.getDangerZones();
-        this.checked = this.isChecked();
 
         this.setOnBoard(this.positionX, this.positionY);
     }
@@ -24,12 +21,10 @@ class King extends Piece{
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
 
-        this.dangerZones = this.getDangerZones();
-
         for(let i=-1; i<=1; i++){
             for(let j=-1; j<=1; j++){
                 const square = document.querySelector(`#${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
-                if(square != null && square.innerHTML == "" && this.dangerZones.indexOf(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`) === -1)
+                if(square != null && square.innerHTML == "")
                     possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
             }
         }
@@ -41,16 +36,20 @@ class King extends Piece{
         this.removeClassActive();
 
         const possibleMovesArr:string[] = this.showPossibleMoves();
+        const dangerZones:string[] = this.getDangerZones();
         
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
-        
+            
+            if(dangerZones.indexOf(`${square!.id.charAt(0)}-${parseInt(square!.id.charAt(2))}`) !== -1){
+                return;
+            }
+
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
-                    Game.checkingKings();
                 }
             });
 
@@ -70,25 +69,25 @@ class King extends Piece{
 
         if(this.color === 'white'){
             for(let p of Game.getBlacks()){
-                if(p instanceof Knight || p instanceof Rook || p instanceof Bishop){
+                //if(p instanceof Knight || p instanceof Rook || p instanceof Bishop || p instanceof King){
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
                     })
-                }
+                //}
             }
         }
         else{
             for(let p of Game.getWhites()){
-                if(p instanceof Knight || p instanceof Rook || p instanceof Bishop){
+                //if(p instanceof Knight || p instanceof Rook || p instanceof Bishop || p instanceof King){
                     const possibleOpponentMoves = p.showPossibleMoves();
                     possibleOpponentMoves.forEach(id => {
                         dangerArr.push(id);
                     })
-                }
+                //}
             }
         }
-
+        
         return dangerArr;
     }
 }

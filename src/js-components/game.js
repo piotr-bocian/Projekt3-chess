@@ -7,9 +7,11 @@ const king_1 = require("./pieces/king");
 const knight_1 = require("./pieces/knight");
 const queen_1 = require("./pieces/queen");
 const rook_1 = require("./pieces/rook");
+const pawn_1 = require("./pieces/pawn");
 const board_2 = require("./board");
 class Game {
     constructor() {
+        this.whoNext = 'white';
         this.gameBoard = new board_1.Board;
         this.gameBoard.drawBoard();
         //ustawianie figur
@@ -32,23 +34,29 @@ class Game {
             Game.blacks.push(new rook_1.Rook('black', `${board_2.ID[i]}`, 8));
         }
         for (let i = 1; i <= 8; i++) {
-            //Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
-            //Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
+            Game.whites.push(new pawn_1.Pawn('white', `${board_2.ID[i]}`, 2));
+            Game.blacks.push(new pawn_1.Pawn('black', `${board_2.ID[i]}`, 7));
         }
     }
     startMove(square) {
         const x = square.id.charAt(0);
         const y = parseInt(square.id.charAt(2));
-        for (let p of Game.whites) {
-            if (p.getPositionX() == x && p.getPositionY() == y) {
-                Game.setLastChosen(p);
-                p.move();
+        if (this.whoNext === 'white') {
+            for (let p of Game.whites) {
+                if (p.getPositionX() == x && p.getPositionY() == y) {
+                    Game.setLastChosen(p);
+                    this.whoNext = 'black';
+                    p.move();
+                }
             }
         }
-        for (let p of Game.blacks) {
-            if (p.getPositionX() == x && p.getPositionY() == y) {
-                Game.setLastChosen(p);
-                p.move();
+        else {
+            for (let p of Game.blacks) {
+                if (p.getPositionX() == x && p.getPositionY() == y) {
+                    Game.setLastChosen(p);
+                    this.whoNext = 'white';
+                    p.move();
+                }
             }
         }
     }
@@ -72,6 +80,5 @@ class Game {
     }
 }
 exports.Game = Game;
-//private whoNext:string;
 Game.whites = [];
 Game.blacks = [];

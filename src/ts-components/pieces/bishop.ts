@@ -25,6 +25,9 @@ class Bishop extends Piece{
         if (9 - coordinateX < 9 - coordinateY) {
             for(let i=1; i<9 - coordinateX; i++){
                 if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
@@ -33,6 +36,9 @@ class Bishop extends Piece{
         } else {
             for(let i=1; i < 9 - coordinateY; i++){
                 if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
@@ -44,6 +50,9 @@ class Bishop extends Piece{
         if (coordinateY - 1 < coordinateX - 1) {
             for(let i=1 ; i < coordinateY; i++){
                 if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
@@ -52,6 +61,9 @@ class Bishop extends Piece{
         } else {
             for(let i=1 ; i < coordinateX; i++){
                 if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX - i]}-${coordinateY - i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY - i}`);
@@ -64,6 +76,9 @@ class Bishop extends Piece{
         if (coordinateX < 9 - coordinateY) {
             for(let i = 1; i < coordinateX; i++){
                 if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
@@ -72,6 +87,9 @@ class Bishop extends Piece{
         } else {
             for(let i = 1 ; i < 9 - coordinateY; i++) {
                 if (document.getElementById(`${ID[coordinateX-i]}-${coordinateY + i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX-i]}-${coordinateY+i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX - i]}-${coordinateY + i}`);
@@ -83,6 +101,9 @@ class Bishop extends Piece{
         if (coordinateY < 9 - coordinateX) {
             for(let i = 1 ; i < coordinateY ; i++){
                 if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY-i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
@@ -91,6 +112,9 @@ class Bishop extends Piece{
         } else {
             for(let i=1; i < 9 - coordinateX; i++) {
                 if (document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.classList.contains('pieceInside')) {
+                    if (!(document.getElementById(`${ID[coordinateX+i]}-${coordinateY-i}`)!.getElementsByTagName("img")[0]!.classList.contains(`${this.color}`))){
+                        possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY-i}`);
+                    };
                     break;
                 } else {
                     possibleMoves.push(`${ID[coordinateX + i]}-${coordinateY - i}`);
