@@ -1,8 +1,9 @@
 const { Queen } = require('../src/js-components/pieces/queen');
 const {Board} = require('../src/js-components/board')
 const {fillboard} = require('../src/js-components/fillBoard')
+
 jest.mock('../src/js-components/pieces/queen');
-const jestfn = jest.fn();
+// const jestfn = jest.fn();
 
 //testy konstruktora
 it('should be true if Queen instance is ok', () => {

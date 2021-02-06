@@ -18,3 +18,7 @@ function selectPiece(e) {
   if (e.target.parentElement.classList.contains('pieceInside'))
     game.startMove(e.target.parentElement);
 }
+//COFANIE RUCHÓW
+document.querySelector('.btn')?.addEventListener('click', ()=>{
+  game.reverseMove();
+})

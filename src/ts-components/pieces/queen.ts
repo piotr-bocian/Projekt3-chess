@@ -213,21 +213,3 @@ const diagonalMoves=()=>{
 }
 
 export {Queen};
-
-        //długa notacja algebraiczna dla piona
-        // if (this.constructor.name === 'Pawn'){
-        //     const actualMove = `${fromPositionX}${fromPositionY}-${(square).id.charAt(0).toLowerCase()}${parseInt((square).id.charAt(2))}`;
-        //     this.movesHistory.push(actualMove)
-        // }
-        // const constructorName = this.constructor.name === 'Knight' ? this.constructor.name[1]?.toUpperCase() : this.constructor.name[0]?.toUpperCase();
-
-        //długa notacja algebraiczna
-        // const actualMove = `${constructorName}${fromPositionX}${fromPositionY}-${(square).id.charAt(0).toLowerCase()}${parseInt((square).id.charAt(2))}`;
-        // this.movesHistory.push(actualMove)
-         ///////////////////////////////////////////////////////////
-        // const opisowo = `${this.color} ${this.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${(square).id.charAt(0).toLowerCase()}-${parseInt((square).id.charAt(2))}`;
-        // // this.movesHistory.push(opisowo);
-        // this.lastMove = opisowo;
-
-        // // console.log(this.movesHistory);
-        // console.log(this.lastMove);

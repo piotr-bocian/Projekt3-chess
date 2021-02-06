@@ -42,8 +42,9 @@ abstract class Piece{
         const toPositionX = `${(square).id.charAt(0)}`;
         const toPositionY = `${parseInt((square).id.charAt(2))}`;
         this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
+        // console.log(this.movesHistory);
     }
-
+    //OPIS RUCHÓW
     historyNotation(){
         const movesHistoryClone = this.movesHistory.slice();
         const createNotation = movesHistoryClone.pop();
@@ -52,23 +53,20 @@ abstract class Piece{
         if(typeof createNotation[0] === 'undefined') return;
         const descriptive = `${this.color} ${this.constructor.name} moved from ${createNotation[0]}-${createNotation[1]} to ${createNotation[2]}-${createNotation[3]}`;
         const longAlgebraicNotation = `${this.constructor.name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
-
         this.lastMove = descriptive;
         // this.lastMove = longAlgebraicNotation;
-        console.log(this.lastMove);
+        // console.log(this.lastMove);
     }
 
-    //COFANIE RUCHÓW
+    //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
     reverseMove(){
-        //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
-        const lastMove= this.movesHistory.slice();
-            document.querySelector('.btn')?.addEventListener('click', ()=>{
+        const lastMove = this.movesHistory;
             this.removeClassActive();
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
-            this.movesHistory.length = lastMove.length;
+            console.log(popLastMove);
+            // this.movesHistory.length = lastMove.length;
             if (popLastMove){
-                console.log(popLastMove);
                     const positionX = popLastMove[0];
                     const positionY = popLastMove[1];
                     if(positionX && positionY){
@@ -77,7 +75,7 @@ abstract class Piece{
                 } else {
                     return
                 }
-            })
+
     }
 
     removeClassActive(){

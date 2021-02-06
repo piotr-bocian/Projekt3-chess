@@ -36,10 +36,15 @@ class Game {
             if (p.getPositionX() == x && p.getPositionY() == y) {
                 this.setLastChosen(p);
                 p.move();
-                p.reverseMove();
                 this.allMovesHistory.push(p.movesHistory);
-                console.log(this.allMovesHistory);
+                // console.log(this.allMovesHistory);
             }
+        }
+    }
+    //COFANIE RUCHÓW
+    reverseMove() {
+        for (let p of this.whites) {
+            p.reverseMove();
         }
     }
     setLastChosen(piece) {
