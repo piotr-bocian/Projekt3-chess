@@ -55,13 +55,15 @@ collectAllPossibleMoves(){
         const doc = document.getElementById(`${this.positionX}-${i}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+        if(checker) return;
     if (checker) {
         if(!colorCheck){
+            console.log(1);
                 moves.push(`${this.positionX}-${i}`);
                 return
             }
     } else {
-               moves.push(`${this.positionX}-${i}`)
+        moves.push(`${this.positionX}-${i}`);
             }
 }
 }
@@ -70,6 +72,7 @@ collectAllPossibleMoves(){
             const doc = document.getElementById(`${this.positionX}-${j}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+        if(checker) return;
     if (checker) {
         if(!colorCheck){
                 moves.push(`${this.positionX}-${j}`);
@@ -85,6 +88,7 @@ collectAllPossibleMoves(){
             const doc = document.getElementById(`${ID[i]}-${this.positionY}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+        if(checker) return;
     if (checker) {
         if(!colorCheck){
             moves.push(`${ID[i]}-${this.positionY}`)
@@ -100,6 +104,7 @@ collectAllPossibleMoves(){
                     const doc = document.getElementById(`${ID[i]}-${this.positionY}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+        if(checker) return;
     if (checker) {
         if(!colorCheck){
             moves.push(`${ID[i]}-${this.positionY}`)

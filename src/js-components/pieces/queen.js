@@ -50,8 +50,11 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${this.positionX}-${i}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
+                        console.log(1);
                         moves.push(`${this.positionX}-${i}`);
                         return;
                     }
@@ -66,6 +69,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${this.positionX}-${j}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${this.positionX}-${j}`);
@@ -82,6 +87,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${board_1.ID[i]}-${this.positionY}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${board_1.ID[i]}-${this.positionY}`);
@@ -98,6 +105,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${board_1.ID[i]}-${this.positionY}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${board_1.ID[i]}-${this.positionY}`);

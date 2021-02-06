@@ -44,7 +44,7 @@ abstract class Piece{
         const descriptive = `${this.color} ${this.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${toPositionX}-${toPositionY}`;
         this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
         this.lastMove = descriptive
-        console.log(this.movesHistory);
+        // console.log(this.movesHistory);
         console.log(this.lastMove);
     }
 
