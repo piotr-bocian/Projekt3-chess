@@ -29,23 +29,17 @@ class Game {
             this.whites.push(new pawn_1.Pawn('white', `${board_2.ID[i]}`, 2));
         }
     }
-    // history(piece: Piece){
-    //     const PositionX = piece.getPositionX();
-    //     const PositionY = piece.getPositionY().toString();
-    //     // const opisowo = `${piece.color} ${piece.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${(square).id.charAt(0).toLowerCase()}-${parseInt((square).id.charAt(2))}`;
-    //     this.movesHistory.push(`${PositionX}${PositionY}`);
-    //     // this.lastMove = opisowo;
-    // }
     startMove(square) {
         const x = square.id.charAt(0);
         const y = parseInt(square.id.charAt(2));
         for (let p of this.whites) {
-            if (p.getPositionX() == x && p.getPositionY() == y)
+            if (p.getPositionX() == x && p.getPositionY() == y) {
                 this.setLastChosen(p);
-            p.move();
-            this.allMovesHistory.push(p.movesHistory);
-            console.log(this.allMovesHistory);
-            p.reverseMove();
+                p.move();
+                p.reverseMove();
+                this.allMovesHistory.push(p.movesHistory);
+                console.log(this.allMovesHistory);
+            }
         }
     }
     setLastChosen(piece) {

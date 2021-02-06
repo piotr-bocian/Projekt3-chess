@@ -33,9 +33,9 @@ class Queen extends piece_1.Piece {
         squares.forEach(square => {
             square.addEventListener('click', () => {
                 if (!(square).classList.contains('pieceInside') && (square).classList.contains('active')
-                    && (game_1.Game.getLastChosen() === this) //<=RZUCA BŁĄD
-                ) {
+                    && (game_1.Game.getLastChosen() === this)) {
                     this.history(square);
+                    this.historyNotation();
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
                 }
@@ -54,7 +54,6 @@ class Queen extends piece_1.Piece {
                     return;
                 if (checker) {
                     if (!colorCheck) {
-                        console.log(1);
                         moves.push(`${this.positionX}-${i}`);
                         return;
                     }

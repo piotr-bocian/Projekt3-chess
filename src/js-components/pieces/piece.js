@@ -34,13 +34,24 @@ class Piece {
         const fromPositionY = this.getPositionY().toString();
         const toPositionX = `${(square).id.charAt(0)}`;
         const toPositionY = `${parseInt((square).id.charAt(2))}`;
-        const descriptive = `${this.color} ${this.constructor.name} moved from ${fromPositionX}-${fromPositionY} to ${toPositionX}-${toPositionY}`;
         this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
+    }
+    historyNotation() {
+        const movesHistoryClone = this.movesHistory.slice();
+        const createNotation = movesHistoryClone.pop();
+        if (typeof createNotation === 'undefined')
+            return;
+        if (typeof createNotation[2] === 'undefined')
+            return;
+        if (typeof createNotation[0] === 'undefined')
+            return;
+        const descriptive = `${this.color} ${this.constructor.name} moved from ${createNotation[0]}-${createNotation[1]} to ${createNotation[2]}-${createNotation[3]}`;
+        const longAlgebraicNotation = `${this.constructor.name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
         this.lastMove = descriptive;
-        // console.log(this.movesHistory);
+        // this.lastMove = longAlgebraicNotation;
         console.log(this.lastMove);
     }
-    //PROTOTYP COFANIA RUCHÓW
+    //COFANIE RUCHÓW
     reverseMove() {
         //tablica ce wszystkimi ruchami pozostaje, działamy na kopii
         const lastMove = this.movesHistory.slice();
@@ -71,7 +82,6 @@ class Piece {
             elems[i]?.classList.remove('active');
         }
     }
-    // abstract history(square:Element):void;
     getPositionX() {
         return this.positionX;
     }
