@@ -35,19 +35,31 @@ class Game {
         }
     }
     startMove(square) {
+        let chosenPiece = this.getPiece(square);
+        console.log(chosenPiece);
+        if (chosenPiece) {
+            console.log(chosenPiece);
+            this.setLastChosen(chosenPiece);
+            chosenPiece.move();
+        }
+    }
+    getPiece(square) {
         const x = square.id.charAt(0);
         const y = parseInt(square.id.charAt(2));
-        for (let p of Game.whites) {
-            if (p.getPositionX() == x && p.getPositionY() == y) {
-                this.setLastChosen(p);
-                p.move();
+        if (square.innerHTML != '') {
+            for (let p of Game.whites) {
+                if (p.getPositionX() == x && p.getPositionY() == y) {
+                    return p;
+                }
+            }
+            for (let p of Game.blacks) {
+                if (p.getPositionX() == x && p.getPositionY() == y) {
+                    return p;
+                }
             }
         }
-        for (let p of Game.blacks) {
-            if (p.getPositionX() == x && p.getPositionY() == y) {
-                this.setLastChosen(p);
-                p.move();
-            }
+        else {
+            return;
         }
     }
     setLastChosen(piece) {

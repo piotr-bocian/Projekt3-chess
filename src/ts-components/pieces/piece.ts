@@ -1,3 +1,5 @@
+import { Game } from "../game"
+
 abstract class Piece{
     protected color:string;
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
@@ -51,6 +53,26 @@ abstract class Piece{
 
     abstract showPossibleMoves():void;
     abstract move():void;
+
+    // beat() {
+    //     if (this.color === 'white') {
+    //         const pieces = Game.getPieces('black');
+    //         for(let p of pieces){
+    //             if(p.getPositionX() == coorX && p.getPositionY() == coorY){
+    //                 pieces.splice(pieces.indexOf(p),1);
+    //                 possMove.innerHTML = '';
+    //             }
+    //         }
+    //     } else {
+    //         const pieces = Game.getPieces('white');
+    //         for(let p of pieces){
+    //             if(p.getPositionX() == coorX && p.getPositionY() == coorY){
+    //                 pieces.splice(pieces.indexOf(p),1);
+    //                 possMove.innerHTML = '';
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 export {Piece};

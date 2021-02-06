@@ -80,9 +80,6 @@ class Knight extends Piece{
                                 }
                             }
                         }
-                        // const img: HTMLElement = possMove.querySelector('img')!;
-                        // console.log(possMove.innerHTML)
-                        // possMove.removeChild(img);
                     }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();

@@ -50,22 +50,34 @@ class Game {
 
     startMove(square:HTMLElement):void{
         
+        let chosenPiece = this.getPiece(square);
+        console.log(chosenPiece);
+        if (chosenPiece) {
+            console.log(chosenPiece);
+            this.setLastChosen(chosenPiece);
+            chosenPiece.move();
+        }
+    }
+
+    getPiece(square: HTMLElement): Piece | void {
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
         
-        for(let p of Game.whites){
-            if(p.getPositionX() == x && p.getPositionY() == y){
-                this.setLastChosen(p);
-                p.move();
+        if (square.innerHTML != '' ){
+            for(let p of Game.whites){
+                if(p.getPositionX() == x && p.getPositionY() == y){
+                    return p;
+                }
             }
-        }
-
-        for(let p of Game.blacks){
-            if(p.getPositionX() == x && p.getPositionY() == y){
-                this.setLastChosen(p);
-                p.move();
-            }
-        }
+    
+            for(let p of Game.blacks){
+                if(p.getPositionX() == x && p.getPositionY() == y){
+                    return p;
+                }
+            }  
+        } else {
+            return;
+        }        
     }
 
     setLastChosen(piece:Piece):void{
