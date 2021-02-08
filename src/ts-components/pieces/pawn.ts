@@ -65,13 +65,13 @@ class Pawn extends Piece {
 
              // ATTACK
              if (attack1 !== null) {
-                if (attack1.classList.contains('pieceInside')) {
+                if (attack1.classList.contains('pieceInside') && attack1.querySelector('img')!.classList.contains(`${this.color}`)) {
                     possibleAttackMovesIds.push(`${posXAttack1}-${positionY1}`);
                 }
             }
 
             if (attack2 !== null) {
-                if (attack2.classList.contains('pieceInside')) {
+                if (attack2.classList.contains('pieceInside') && attack1.querySelector('img')!.classList.contains(`${this.color}`)) {
                     possibleAttackMovesIds.push(`${posXAttack2}-${positionY1}`);
                 }
             }
@@ -182,7 +182,7 @@ class Pawn extends Piece {
                 })            
             }   
         }
-    
+        console.log('xd');
         return modalWindowPawn;
     };
 
