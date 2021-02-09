@@ -35,7 +35,16 @@ class Queen extends piece_1.Piece {
                 if (!(square).classList.contains('pieceInside') && (square).classList.contains('active')
                     && (game_1.Game.getLastChosen() === this)) {
                     this.history(square);
-                    this.historyNotation();
+                    //PL
+                    const lang = document.documentElement.lang;
+                    if (lang === 'pl') {
+                        (this.color === 'white' || this.color === 'Biały/a') ? this.color = 'Biały/a' : this.color = 'Czarny/a';
+                        this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
+                    }
+                    else {
+                        this.color;
+                        this.historyNotation();
+                    }
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
                 }

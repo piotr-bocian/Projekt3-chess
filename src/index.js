@@ -22,3 +22,9 @@ function selectPiece(e) {
 document.querySelector('.btn')?.addEventListener('click', ()=>{
   game.reverseMove();
 })
+document.querySelector('.en')?.addEventListener('click', ()=>{
+  document.documentElement.lang = 'en'
+})
+document.querySelector('.pl')?.addEventListener('click', ()=>{
+  document.documentElement.lang = 'pl'
+})

@@ -45,17 +45,17 @@ abstract class Piece{
         // console.log(this.movesHistory);
     }
     //OPIS RUCHÓW
-    historyNotation(){
+    historyNotation(move = 'moved from', to ='to', name = this.constructor.name){
         const movesHistoryClone = this.movesHistory.slice();
         const createNotation = movesHistoryClone.pop();
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
-        const descriptive = `${this.color} ${this.constructor.name} moved from ${createNotation[0]}-${createNotation[1]} to ${createNotation[2]}-${createNotation[3]}`;
-        const longAlgebraicNotation = `${this.constructor.name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
+        const descriptive = `${this.color} ${name} ${move} ${createNotation[0]}-${createNotation[1]} ${to} ${createNotation[2]}-${createNotation[3]}`;
+        const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
         this.lastMove = descriptive;
         // this.lastMove = longAlgebraicNotation;
-        // console.log(this.lastMove);
+        console.log(this.lastMove);
     }
 
     //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
