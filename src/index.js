@@ -1,5 +1,5 @@
 import logo from './js-components/starting_page/logo'
-import menuContainer from './js-components/starting_page/menuContainer'
+import endPage from './js-components/end-page/endPage'
 
 document.body.appendChild(logo());
-document.body.appendChild(menuContainer());
+document.body.appendChild(endPage());
