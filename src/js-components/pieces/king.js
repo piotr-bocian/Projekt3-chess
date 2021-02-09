@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.King = void 0;
 const piece_1 = require("./piece");
 const game_1 = require("../game");
+const pawn_1 = require("./pawn");
 class King extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
@@ -16,8 +17,12 @@ class King extends piece_1.Piece {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const square = document.querySelector(`#${arrayOfX[indexOfX + i]}-${this.getPositionY() + j}`);
-                if (square != null && square.innerHTML == "")
-                    possibleMoves.push(`${arrayOfX[indexOfX + i]}-${this.getPositionY() + j}`);
+                if (square !== null) {
+                    if (square.innerHTML === '')
+                        possibleMoves.push(`${arrayOfX[indexOfX + i]}-${this.getPositionY() + j}`);
+                    else if (!square.querySelector('img').classList.contains(this.color))
+                        possibleMoves.push(`${arrayOfX[indexOfX + i]}-${this.getPositionY() + j}`);
+                }
             }
         }
         return possibleMoves;
@@ -51,22 +56,30 @@ class King extends piece_1.Piece {
         const dangerArr = [];
         if (this.color === 'white') {
             for (let p of game_1.Game.getBlacks()) {
-                //if(p instanceof Knight || p instanceof Rook || p instanceof Bishop || p instanceof King){
-                const possibleOpponentMoves = p.showPossibleMoves();
-                possibleOpponentMoves.forEach(id => {
-                    dangerArr.push(id);
-                });
-                //}
+                if (!(p instanceof pawn_1.Pawn)) {
+                    const possibleOpponentMoves = p.showPossibleMoves();
+                    possibleOpponentMoves.forEach(id => {
+                        dangerArr.push(id);
+                    });
+                }
+                else {
+                    const possiblePawnAttacks = p.getAttacks();
+                    possiblePawnAttacks.forEach(attack => dangerArr.push(attack));
+                }
             }
         }
         else {
             for (let p of game_1.Game.getWhites()) {
-                //if(p instanceof Knight || p instanceof Rook || p instanceof Bishop || p instanceof King){
-                const possibleOpponentMoves = p.showPossibleMoves();
-                possibleOpponentMoves.forEach(id => {
-                    dangerArr.push(id);
-                });
-                //}
+                if (!(p instanceof pawn_1.Pawn)) {
+                    const possibleOpponentMoves = p.showPossibleMoves();
+                    possibleOpponentMoves.forEach(id => {
+                        dangerArr.push(id);
+                    });
+                }
+                else {
+                    const possiblePawnAttacks = p.getAttacks();
+                    possiblePawnAttacks.forEach(attack => dangerArr.push(attack));
+                }
             }
         }
         return dangerArr;

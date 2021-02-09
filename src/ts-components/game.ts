@@ -59,24 +59,24 @@ class Game {
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
         
-        if(this.whoNext === 'white'){
+        //if(this.whoNext === 'white'){
             for(let p of Game.whites){
                 if(p.getPositionX() == x && p.getPositionY() == y){
                     Game.setLastChosen(p);
-                    this.whoNext = 'black';
+                    //this.whoNext = 'black';
                     p.move();
                 }
             }
-        }
-        else{
+        //}
+        //else{
             for(let p of Game.blacks){
                 if(p.getPositionX() == x && p.getPositionY() == y){
                     Game.setLastChosen(p);
-                    this.whoNext = 'white';
+                    //this.whoNext = 'white';
                     p.move();
                 }
             }
-        }
+        //}
     }
 
     static checkingKings(){ //<-- ta metoda sprawdza czy któryś z królów jest szachowany

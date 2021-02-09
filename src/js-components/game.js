@@ -41,24 +41,24 @@ class Game {
     startMove(square) {
         const x = square.id.charAt(0);
         const y = parseInt(square.id.charAt(2));
-        if (this.whoNext === 'white') {
-            for (let p of Game.whites) {
-                if (p.getPositionX() == x && p.getPositionY() == y) {
-                    Game.setLastChosen(p);
-                    this.whoNext = 'black';
-                    p.move();
-                }
+        //if(this.whoNext === 'white'){
+        for (let p of Game.whites) {
+            if (p.getPositionX() == x && p.getPositionY() == y) {
+                Game.setLastChosen(p);
+                //this.whoNext = 'black';
+                p.move();
             }
         }
-        else {
-            for (let p of Game.blacks) {
-                if (p.getPositionX() == x && p.getPositionY() == y) {
-                    Game.setLastChosen(p);
-                    this.whoNext = 'white';
-                    p.move();
-                }
+        //}
+        //else{
+        for (let p of Game.blacks) {
+            if (p.getPositionX() == x && p.getPositionY() == y) {
+                Game.setLastChosen(p);
+                //this.whoNext = 'white';
+                p.move();
             }
         }
+        //}
     }
     static checkingKings() {
         if (Game.whiteKing.isChecked())

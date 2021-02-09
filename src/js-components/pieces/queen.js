@@ -8,14 +8,9 @@ const game_1 = require("../game");
 class Queen extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        // this.symbol = `../../../static/assets/${this.color}Queen.png`;
-        //this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
-        //tutaj trzymamy historię;
-    }
-    queenMove() {
-        throw new Error("Method not implemented.");
     }
     showPossibleMoves() {
         const allPossibleMoves = [];
@@ -25,24 +20,24 @@ class Queen extends piece_1.Piece {
         return allPossibleMoves;
     }
     move() {
-        this.removeClassActive();
         const movesShow = (id) => {
             const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
             movesPossibilities.forEach(el => {
                 el.classList.add('active');
             });
         };
-        //dodaje klase active na legalne ruchy
         this.showPossibleMoves().forEach(id => {
             movesShow(id);
         });
         const squares = [...document.querySelectorAll('.board-container div')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if (!(square).classList.contains('pieceInside') && (square).classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
+                if (!(square).classList.contains('pieceInside') && (square).classList.contains('active')
+                    && (game_1.Game.getLastChosen() === this)) {
+                    //this.history(square);
+                    //this.historyNotation();
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
-                    game_1.Game.checkingKings();
                 }
             });
         });
@@ -55,6 +50,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${this.positionX}-${i}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${this.positionX}-${i}`);
@@ -71,6 +68,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${this.positionX}-${j}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${this.positionX}-${j}`);
@@ -87,6 +86,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${board_1.ID[i]}-${this.positionY}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${board_1.ID[i]}-${this.positionY}`);
@@ -103,6 +104,8 @@ class Queen extends piece_1.Piece {
                 const doc = document.getElementById(`${board_1.ID[i]}-${this.positionY}`);
                 const checker = doc.classList.contains('pieceInside');
                 const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
+                if (checker)
+                    return;
                 if (checker) {
                     if (!colorCheck) {
                         moves.push(`${board_1.ID[i]}-${this.positionY}`);
@@ -116,135 +119,88 @@ class Queen extends piece_1.Piece {
         };
         const diagonalMoves = () => {
             // top right
+            let position;
             if (9 - coordinateX < 9 - this.positionY) {
-                for (let i = 1; i < 9 - coordinateX; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
-                        }
-                        break;
-                    }
-                    else {
-                        moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
-                    }
-                }
+                position = 9 - coordinateX;
             }
             else {
-                for (let i = 1; i < 9 - this.positionY; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
-                        }
-                        break;
-                    }
-                    else {
+                position = 9 - this.positionY;
+            }
+            for (let i = 1; i < position; i++) {
+                const doc = document.getElementById(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
+                const checker = doc.classList.contains('pieceInside');
+                const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
+                if (checker) {
+                    if (!colorCheck) {
                         moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
                     }
+                    break;
+                }
+                else {
+                    moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY + i}`);
                 }
             }
             // down left
             if (this.positionY - 1 < coordinateX - 1) {
-                for (let i = 1; i < this.positionY; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
-                        }
-                        break;
-                    }
-                    else {
-                        moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
-                    }
-                }
+                position = this.positionY;
             }
             else {
-                for (let i = 1; i < coordinateX; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
-                        }
-                        break;
-                    }
-                    else {
+                position = coordinateX;
+            }
+            for (let i = 1; i < position; i++) {
+                const doc = document.getElementById(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
+                const checker = doc.classList.contains('pieceInside');
+                const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
+                if (checker) {
+                    if (!colorCheck) {
                         moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
                     }
+                    break;
+                }
+                else {
+                    moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY - i}`);
                 }
             }
             // top left
             if (coordinateX < 9 - this.positionY) {
-                for (let i = 1; i < coordinateX; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
-                        }
-                        break;
-                    }
-                    else {
-                        moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
-                    }
-                }
+                position = coordinateX;
             }
             else {
-                for (let i = 1; i < 9 - this.positionY; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
-                        }
-                        break;
-                    }
-                    else {
+                position = 9 - this.positionY;
+            }
+            for (let i = 1; i < position; i++) {
+                const doc = document.getElementById(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
+                const checker = doc.classList.contains('pieceInside');
+                const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
+                if (checker) {
+                    if (!colorCheck) {
                         moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
                     }
+                    break;
+                }
+                else {
+                    moves.push(`${board_1.ID[coordinateX - i]}-${this.positionY + i}`);
                 }
             }
             // down right
             if (this.positionY < 9 - coordinateX) {
-                for (let i = 1; i < this.positionY; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
-                        }
-                        break;
-                    }
-                    else {
-                        moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
-                    }
-                }
+                position = this.positionY;
             }
             else {
-                for (let i = 1; i < 9 - coordinateX; i++) {
-                    const doc = document.getElementById(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
-                    const checker = doc.classList.contains('pieceInside');
-                    const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
-                    if (checker) {
-                        if (!colorCheck) {
-                            moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
-                        }
-                        break;
-                    }
-                    else {
+                position = 9 - coordinateX;
+            }
+            for (let i = 1; i < position; i++) {
+                const doc = document.getElementById(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
+                const checker = doc.classList.contains('pieceInside');
+                const colorCheck = doc.querySelector("img")?.classList.contains(`${this.color}`);
+                if (checker) {
+                    if (!colorCheck) {
                         moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
                     }
+                    break;
+                }
+                else {
+                    moves.push(`${board_1.ID[coordinateX + i]}-${this.positionY - i}`);
                 }
             }
         };
@@ -254,12 +210,6 @@ class Queen extends piece_1.Piece {
         moveLeft();
         moveRight();
         return moves;
-    }
-    removeClassActive() {
-        let elems = [...document.querySelectorAll('.active')];
-        for (let i = 0; i < elems.length; i++) {
-            elems[i]?.classList.remove('active');
-        }
     }
 }
 exports.Queen = Queen;

@@ -4,7 +4,7 @@ interface MovesShow {
 
 interface QueenMethods {
    showPossibleMoves():void;
-   queenMove():void;
+   //queenMove():void;
    collectAllPossibleMoves():string[];
    removeClassActive():void;
 

@@ -8,7 +8,7 @@ import {Bishop} from "./bishop";
 
 //pion
 class Pawn extends Piece {
-    
+
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Pawn.png`;
@@ -88,6 +88,32 @@ class Pawn extends Piece {
 
         let allPossibleMovesIds: string[] = possibleMovesIds.concat(possibleAttackMovesIds);
         return allPossibleMovesIds;
+    }
+
+    getAttacks():string[]{
+        const attacksArr:string[] = [];
+
+        const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
+
+        if(this.color === 'white'){
+            const upLeft = document.querySelector(`#${arrayOfX[indexOfX-1]}-${this.positionY + 1}`);
+            const upRight = document.querySelector(`#${arrayOfX[indexOfX+1]}-${this.positionY + 1}`);
+            if(upLeft !== null)
+                attacksArr.push(`${arrayOfX[indexOfX-1]}-${this.positionY + 1}`);
+            if(upRight !== null)
+            attacksArr.push(`${arrayOfX[indexOfX+1]}-${this.positionY + 1}`);
+        }
+        else{
+            const downLeft = document.querySelector(`#${arrayOfX[indexOfX-1]}-${this.positionY - 1}`);
+            const downRight = document.querySelector(`#${arrayOfX[indexOfX+1]}-${this.positionY - 1}`);
+            if(downLeft !== null)
+                attacksArr.push(`${arrayOfX[indexOfX-1]}-${this.positionY - 1}`);
+            if(downRight !== null)
+            attacksArr.push(`${arrayOfX[indexOfX+1]}-${this.positionY - 1}`);
+        }
+
+        return attacksArr;
     }
 
     move(): void {

@@ -77,6 +77,28 @@ class Pawn extends piece_1.Piece {
         let allPossibleMovesIds = possibleMovesIds.concat(possibleAttackMovesIds);
         return allPossibleMovesIds;
     }
+    getAttacks() {
+        const attacksArr = [];
+        const arrayOfX = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        const indexOfX = arrayOfX.indexOf(this.getPositionX());
+        if (this.color === 'white') {
+            const upLeft = document.querySelector(`#${arrayOfX[indexOfX - 1]}-${this.positionY + 1}`);
+            const upRight = document.querySelector(`#${arrayOfX[indexOfX + 1]}-${this.positionY + 1}`);
+            if (upLeft !== null)
+                attacksArr.push(`${arrayOfX[indexOfX - 1]}-${this.positionY + 1}`);
+            if (upRight !== null)
+                attacksArr.push(`${arrayOfX[indexOfX + 1]}-${this.positionY + 1}`);
+        }
+        else {
+            const downLeft = document.querySelector(`#${arrayOfX[indexOfX - 1]}-${this.positionY - 1}`);
+            const downRight = document.querySelector(`#${arrayOfX[indexOfX + 1]}-${this.positionY - 1}`);
+            if (downLeft !== null)
+                attacksArr.push(`${arrayOfX[indexOfX - 1]}-${this.positionY - 1}`);
+            if (downRight !== null)
+                attacksArr.push(`${arrayOfX[indexOfX + 1]}-${this.positionY - 1}`);
+        }
+        return attacksArr;
+    }
     move() {
         const possibilities = this.showPossibleMoves();
         possibilities.forEach((id) => {
