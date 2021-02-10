@@ -12,7 +12,7 @@ function addMoveHistory(history: string, color:string) {
 
     timeHistoryContainer.appendChild(moveHeader);
     timeHistoryContainer.appendChild(move);
-
+    timeHistoryContainer .scrollTop = moveHeader.offsetHeight + moveHeader.offsetTop;
     return timeHistoryContainer;
 }
 

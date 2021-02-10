@@ -34,9 +34,9 @@ function selectPiece(e) {
 document.querySelector('.undo-button').addEventListener('click', () => {
   game.reverseMove();
 });
-document.querySelector('.en')?.addEventListener('click', () => {
-  document.documentElement.lang = 'en';
-});
-document.querySelector('.pl').addEventListener('click', () => {
-  document.documentElement.lang = 'pl';
-});
+// document.querySelector('.en')?.addEventListener('click', () => {
+//   document.documentElement.lang = 'en';
+// });
+// document.querySelector('.pl').addEventListener('click', () => {
+//   document.documentElement.lang = 'pl';
+// });
