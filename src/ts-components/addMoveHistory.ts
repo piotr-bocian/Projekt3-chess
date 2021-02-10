@@ -1,13 +1,14 @@
-function addMoveHistory(history: string[]) {
+
+function addMoveHistory(history: string, color:string) {
     const timeHistoryContainer = document.getElementsByClassName("history-div-body")[0]!;
 
     const moveHeader = document.createElement("div");
     moveHeader.className = "history-moveHeader";
-    moveHeader.innerHTML = "BIAŁE";
+    moveHeader.innerHTML = color;
 
     const move = document.createElement("div");
     move.className = "history-move";
-    move.innerHTML = history[history.length - 1]!;
+    move.innerHTML = history;
 
     timeHistoryContainer.appendChild(moveHeader);
     timeHistoryContainer.appendChild(move);
@@ -15,4 +16,4 @@ function addMoveHistory(history: string[]) {
     return timeHistoryContainer;
 }
 
-module.exports = addMoveHistory;
+export {addMoveHistory};

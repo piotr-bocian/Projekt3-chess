@@ -46,7 +46,7 @@ class Queen extends Piece implements QueenMethods{
                         (this.color === 'white'|| this.color === 'Biały/a') ? this.color ='Biały/a' : this.color = 'Czarny/a';
                         this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
                     } else {
-                        this.color;
+                        this.color = this.color;
                         this.historyNotation();
                     }
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));

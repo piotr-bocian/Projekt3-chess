@@ -18,7 +18,7 @@ function timeHistoryContainer () {
     timer1.appendChild(white);
     timer1.appendChild(timerWhite);
 
-    
+
     const timer2 = document.createElement("div");
     timer2.id = "timer2";
     const timerBlack = document.createElement("div");

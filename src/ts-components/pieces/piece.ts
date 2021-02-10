@@ -1,3 +1,4 @@
+import {addMoveHistory} from '../addMoveHistory';
 abstract class Piece{
     public color:string;
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
@@ -51,9 +52,10 @@ abstract class Piece{
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
-        const descriptive = `${this.color} ${name} ${move} ${createNotation[0]}-${createNotation[1]} ${to} ${createNotation[2]}-${createNotation[3]}`;
+        const descriptive = `${name} ${move} ${createNotation[0]}-${createNotation[1]} ${to} ${createNotation[2]}-${createNotation[3]}`;
         const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
         this.lastMove = descriptive;
+        addMoveHistory(this.lastMove, this.color)
         // this.lastMove = longAlgebraicNotation;
         console.log(this.lastMove);
     }

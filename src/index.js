@@ -6,6 +6,18 @@ import Timer from './js-components/timer';
 // import addMoveHistory from './js-components/addMoveHistory';
 
 const game = new Game();
+document.body.appendChild(timeHistoryContainer());
+var TimerTry = new Timer(1, 'timer-white');
+var TimerTry1 = new Timer(1, 'timer-black');
+
+// TEST:
+if (true) {
+  TimerTry.start();
+}
+let el = document.getElementById('timer-black');
+if (true) {
+  TimerTry1.start();
+}
 
 document.querySelectorAll('.light').forEach((element) => {
   element.addEventListener('click', selectPiece);
@@ -19,23 +31,12 @@ function selectPiece(e) {
     game.startMove(e.target.parentElement);
 }
 //COFANIE RUCHÓW
-document.querySelector('.btn')?.addEventListener('click', ()=>{
+document.querySelector('.undo-button').addEventListener('click', () => {
   game.reverseMove();
-})
-document.querySelector('.en')?.addEventListener('click', ()=>{
-  document.documentElement.lang = 'en'
-})
-document.querySelector('.pl')?.addEventListener('click', ()=>{
-  document.documentElement.lang = 'pl'
-})
-
-
-document.body.appendChild(timeHistoryContainer());
-var TimerTry = new Timer(1, 'timer-white');
-var TimerTry1 = new Timer(1, 'timer-black');
-
-// TEST:
-if (true) {TimerTry.start()};
-let el = document.getElementById('timer-black');
-if (true) {TimerTry1.start()};
-
+});
+document.querySelector('.en')?.addEventListener('click', () => {
+  document.documentElement.lang = 'en';
+});
+document.querySelector('.pl').addEventListener('click', () => {
+  document.documentElement.lang = 'pl';
+});
