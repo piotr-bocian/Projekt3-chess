@@ -24,7 +24,7 @@ abstract class Piece{
         this.parentSquare.classList.remove('pieceInside');
         const img = document.createElement('img');
         img.classList.add('image');
-        img.classList.add(`${this.color.toLocaleLowerCase()}`);
+        img.classList.add(`${this.color}`.toLowerCase());
         img.setAttribute('src', this.symbol);
         this.updatePosition(pX, pY);
         this.parentSquare.appendChild(img);
@@ -42,6 +42,9 @@ abstract class Piece{
         let elems = document.querySelectorAll('.active');
         for (var i = 0; i < elems.length; i++) {
             elems[i]!.classList.remove('active');
+            if (elems[i]!.classList.contains('en-pass')) {
+                elems[i]!.classList.remove('en-pass');
+            }
         }
     }
 
