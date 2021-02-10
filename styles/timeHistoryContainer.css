@@ -67,10 +67,93 @@
     font-family: 'Roboto Mono', monospace;
 }
 
-.game-history {
+
+/* HISTORY CONTAINER */
+
+.history-div {
+    display: block;
     grid-area: game-history;
+    font-family: Montserrat;
 }
 
-.buttons {
+.history-div h4{
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 1em;
+}
+
+.history-div-body {
+    height: 200px;
+    overflow-y: auto;
+    width: 90%;
+    padding: 0.9em;
+
+    background: #292929;
+    border: 2px solid #0075FF;
+    box-sizing: border-box;
+    border-radius: 27px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+::-webkit-scrollbar {
+    width: 3px;
+  }
+
+.history-move {
+    text-align: justify;
+    font-size: 0.75em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1em;
+}
+
+.history-moveHeader {
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4em;
+    font-size: 0.75em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* BUTTONS */
+  
+.button-div {
+    display: block;
     grid-area: buttons;
+    width: 100%;
+    margin: auto;
+
+    text-align:justify;
+    text-align-last:center;
+}
+
+.exit-button {
+    display: inline-block;
+    border: 3px solid #FA6009;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 0.5em 1.5em;
+    margin-right: 1.5em;
+
+    font-family: Montserrat;
+    font-size: 0.8em;
+    color: #FA6009;
+
+    cursor: pointer;
+}
+
+.undo-button {
+    display: inline-block;
+    background: #0075FF;
+    box-shadow: 0px 2px 15px #FF6E00;
+    border-radius: 5px;
+    padding: 0.75em 1.5em;
+
+    font-family: Montserrat;
+    font-size: 0.8em;
+    color: #FFFFFF;
+
+    cursor: pointer;
 }

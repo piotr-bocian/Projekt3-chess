@@ -32,6 +32,38 @@ function timeHistoryContainer () {
     timeHeader.appendChild(timer2);
     timeHistoryContainer.appendChild(timeHeader);
 
+    // HISTORY CONTAINER
+
+    const historyContainer = document.createElement("div");
+    historyContainer.className = "history-div";
+
+    const historyHeader = document.createElement("h4");
+    historyHeader.innerHTML = "HISTORIA GRY";
+    historyContainer.appendChild(historyHeader);
+
+    const historyBody = document.createElement("div");
+    historyBody.className = "history-div-body";
+    historyContainer.appendChild(historyBody);
+
+    timeHistoryContainer.appendChild(historyContainer);
+
+    // BUTTONS
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "button-div";
+
+    const exitButton = document.createElement("p");
+    exitButton.className = "exit-button"
+    exitButton.innerHTML = "WYJDŹ Z GRY";
+
+    const undoButton = document.createElement("p");
+    undoButton.className = "undo-button"
+    undoButton.innerHTML = "COFNIJ RUCH";
+
+    buttonContainer.appendChild(exitButton);
+    buttonContainer.appendChild(undoButton);
+
+    timeHistoryContainer.appendChild(buttonContainer);
+
     return timeHistoryContainer;
 }
 

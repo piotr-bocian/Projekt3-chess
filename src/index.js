@@ -1,5 +1,6 @@
 import timeHistoryContainer from './js-components/timeHistoryContainer';
 import Timer from './js-components/timer';
+import addMoveHistory from './js-components/addMoveHistory';
 
 document.body.appendChild(timeHistoryContainer());
 var TimerTry = new Timer(1, 'timer-white');

@@ -17,6 +17,8 @@ class Timer {
     }
     ;
     stop() {
+        this.pause();
+        console.log("STOP");
     }
     timedown() {
         this.timerHandler.innerHTML = this.convertSeconds(this.seconds);
