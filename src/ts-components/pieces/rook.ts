@@ -7,6 +7,8 @@ import { Game } from "../game";
 //wieża
 class Rook extends Piece{
 
+    public hasMoved:boolean = false;
+
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Rook.png`;
@@ -105,6 +107,7 @@ class Rook extends Piece{
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
+                    this.hasMoved = true;
                     this.removeClassActive();
                     Game.checkingKings();
                 }

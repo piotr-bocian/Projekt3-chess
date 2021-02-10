@@ -8,6 +8,8 @@ import { Queen } from "./queen";
 
 class King extends Piece{
 
+    public hasMoved:boolean = false;
+
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
@@ -53,6 +55,7 @@ class King extends Piece{
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
+                    this.hasMoved = true;
                     this.removeClassActive();
                 }
             });
@@ -66,6 +69,15 @@ class King extends Piece{
         }
         else
             return false;
+    }
+
+    isCheckmated():boolean{
+        const possibleMovesArr = this.showPossibleMoves().filter(id => {
+            const dangerArr = this.getDangerZones();
+            return (dangerArr.indexOf(id) === -1);
+        });
+
+        return (this.isChecked() && possibleMovesArr.length === 0);
     }
 
     getDangerZones():string[]{
