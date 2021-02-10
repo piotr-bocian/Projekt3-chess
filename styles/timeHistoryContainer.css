@@ -117,6 +117,10 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
+.history-div-body :last-child, .history-div-body :nth-last-child(2) {
+    color: #0075FF;
+}
+
 /* BUTTONS */
 
 .button-div {
