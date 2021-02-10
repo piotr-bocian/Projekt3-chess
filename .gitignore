@@ -1,2 +1,3 @@
 node_modules/
-src/js-components
+src/js-components/
+dist/bundle.js
