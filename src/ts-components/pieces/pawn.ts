@@ -122,7 +122,7 @@ class Pawn extends Piece {
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 const enPass = document.getElementById(`${coorX}-${(coorY - 1)}`)!;
-                console.log(enPass);
+                
                 if (possMove.classList.contains('active') && (Game.getLastChosen() === this)) {
                     if (possMove.innerHTML != '') {
                         Game.beat(possMove as HTMLElement);
