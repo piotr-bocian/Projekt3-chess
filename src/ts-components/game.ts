@@ -56,21 +56,49 @@ class Game {
 
     startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
         
+        let chosenPiece = Game.getPiece(square);
+        if (chosenPiece) {
+            Game.setLastChosen(chosenPiece);
+            chosenPiece.move();
+        }
+    }
+
+    static getPiece(square: HTMLElement): Piece | void {
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
         
-        for(let p of Game.whites){
-            if(p.getPositionX() == x && p.getPositionY() == y){
-                Game.setLastChosen(p);
-                p.move();
+        if (square.innerHTML != '' ){
+            for(let p of Game.whites){
+                if(p.getPositionX() == x && p.getPositionY() == y){
+                    return p;
+                }
             }
-        }
+    
+            for(let p of Game.blacks){
+                if(p.getPositionX() == x && p.getPositionY() == y){
+                    return p;
+                }
+            }  
+        } else {
+            return;
+        }        
+    }
 
-        for(let p of Game.blacks){
-            if(p.getPositionX() == x && p.getPositionY() == y){
-                Game.setLastChosen(p);
-                p.move();
+    static beat(square: HTMLElement): void {
+        const x:string = square.id.charAt(0);
+        const y:number = parseInt(square.id.charAt(2));
+
+        let p = Game.getPiece(square);
+        if (p) {
+            if (p.getColor() === 'white') {
+                this.whites.splice(this.whites.indexOf(p),1);
+                square.innerHTML = '';
+            } else {
+                this.blacks.splice(this.blacks.indexOf(p),1);
+                square.innerHTML = '';
             }
+        } else {
+            return;
         }
     }
 
@@ -104,6 +132,13 @@ class Game {
 
     static getBlacks():Piece[]{
         return Game.blacks;
+    }
+
+    static getPieces(color: string): Piece[] {
+        if (color == 'white') {
+            return this.whites;
+        }
+        return this.blacks;
     }
 }
 

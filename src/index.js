@@ -1,8 +1,5 @@
 import {Game} from "./js-components/game"
 
-// const gameBoard = new Board();
-// gameBoard.drawBoard();
-// fillBoard();
 
 const game = new Game();
 

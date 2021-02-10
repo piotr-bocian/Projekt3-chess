@@ -1,3 +1,5 @@
+import { Game } from "../game"
+
 abstract class Piece{
     protected color:string;
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
