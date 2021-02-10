@@ -27,6 +27,7 @@ class Pawn extends Piece {
 
         let possibleMovesIds: string[] = [];
         let possibleAttackMovesIds: string[] = [];
+        let possibleEnPassant: string[] = [];
 
         if (this.color === 'white') {
             let positionY1 = this.positionY + 1;
@@ -34,6 +35,8 @@ class Pawn extends Piece {
 
             let attack1 = document.getElementById(`${posXAttack1}-${positionY1}`)!;
             let attack2 = document.getElementById(`${posXAttack2}-${positionY1}`)!;
+
+            let pawnPos = document.getElementById(`${posXAttack1}-${this.positionY}`)!;
 
             // ATTACK
             if (attack1 !== null) {
@@ -57,6 +60,15 @@ class Pawn extends Piece {
                 possibleMovesIds.push(`${this.positionX}-${positionY1}`);
             }
 
+            //EN PASSANT
+            // if (this.color === 'white' 
+            // && this.positionY === 5 
+            // && pawnPos.querySelector('img')!.src.includes('Pawn')
+            // && !(attack1.classList.contains('pieceInside'))) {
+            // possibleEnPassant.push(`${posXAttack1}-${positionY1}`);
+            // console.log(possibleEnPassant);
+            // }
+
         } else {
             let positionY1 = this.positionY - 1;
             let positionY2 = document.getElementById(`${this.positionX}-${positionY1}`)!;
@@ -65,13 +77,13 @@ class Pawn extends Piece {
 
              // ATTACK
              if (attack1 !== null) {
-                if (attack1.classList.contains('pieceInside') && attack1.querySelector('img')!.classList.contains(`${this.color}`)) {
+                if (attack1.classList.contains('pieceInside') && !(attack1.querySelector('img')!.classList.contains(`${this.color}`))) {
                     possibleAttackMovesIds.push(`${posXAttack1}-${positionY1}`);
                 }
             }
 
             if (attack2 !== null) {
-                if (attack2.classList.contains('pieceInside') && attack1.querySelector('img')!.classList.contains(`${this.color}`)) {
+                if (attack2.classList.contains('pieceInside') && !(attack2.querySelector('img')!.classList.contains(`${this.color}`))) {
                     possibleAttackMovesIds.push(`${posXAttack2}-${positionY1}`);
                 }
             }
@@ -86,14 +98,22 @@ class Pawn extends Piece {
             }
         }
 
-        let allPossibleMovesIds: string[] = possibleMovesIds.concat(possibleAttackMovesIds);
+        let allPossibleMovesIds: string[] = possibleMovesIds.concat(possibleAttackMovesIds).concat(possibleEnPassant);
         return allPossibleMovesIds;
     }
 
     move(): void {
+        console.log(this.enPassant());
+        const showEnPassant: string[] = this.enPassant();
         const possibilities: string[] = this.showPossibleMoves();
+        
         possibilities.forEach((id) => {
             document.querySelector(`#${id}`)!.classList.add('active');
+        });
+
+        showEnPassant.forEach((id) => {
+            document.querySelector(`#${id}`)!.classList.add('active');
+            document.querySelector(`#${id}`)!.classList.add('en-pass');
         });
 
         //adding event listener to each field with active class to perform a figure's move after click
@@ -101,16 +121,27 @@ class Pawn extends Piece {
             possMove.addEventListener('click', () => {
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
+                const enPass = document.getElementById(`${coorX}-${(coorY - 1)}`)!;
+                console.log(enPass);
                 if (possMove.classList.contains('active') && (Game.getLastChosen() === this)) {
+                    if (possMove.innerHTML != '') {
+                        Game.beat(possMove as HTMLElement);
+                    }
+                    if (possMove.classList.contains('en-pass')) {
+                        Game.beat(enPass as HTMLElement);
+                        possMove.classList.remove('en-pass');
+                        enPass.classList.remove('pieceInside');
+                    }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
+
                 }
                 if (this.color === 'white' && coorY === 8 && this.parentSquare.querySelector('img')!.src.includes('Pawn')) {
                     this.parentSquare.appendChild(this.pawnPromotion(this))
                 } else if (coorY === 1 && this.parentSquare.querySelector('img')!.src.includes('Pawn')){
                     this.parentSquare.appendChild(this.pawnPromotion(this))
                 }
-            })
+            }, {capture: true})
         })
     }
 
@@ -182,9 +213,40 @@ class Pawn extends Piece {
                 })            
             }   
         }
-        console.log('xd');
+        
         return modalWindowPawn;
     };
+
+    //en passant
+    enPassant() {
+        let pawnPosX = this.nextChar(this.positionX) //|| this.previousChar(this.positionX);
+        let pawnPos = document.getElementById(`${pawnPosX}-${this.positionY}`)!;
+    
+        let positionY1 = this.positionY + 1;
+        let emptySquare1 = document.getElementById(`${pawnPosX}-${positionY1}`)!;
+
+        let positionY2 = this.positionY - 1;
+        let emptySquare2 = document.getElementById(`${pawnPosX}-${positionY2}`)!;
+        const enPassant = [];
+
+        if (this.color === 'white' 
+        && this.positionY === 5
+        && pawnPos.querySelector('img')?.src.includes('Pawn')
+        && !(emptySquare1.classList.contains('pieceInside'))) {
+            enPassant.push(`${pawnPosX}-${positionY1}`);
+        }
+
+        if (this.color === 'black' 
+        && this.positionY === 4 
+        && pawnPos.querySelector('img')!.src.includes('Pawn')
+        && emptySquare1.classList.contains('pieceInside')) {
+            enPassant.push(`${pawnPosX}-${positionY1}`);
+        }
+
+        return enPassant;
+    }
+
+
 
 }
 

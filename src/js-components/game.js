@@ -33,7 +33,7 @@ class Game {
             // Game.blacks.push(new Rook('black', `${ID[i]}`, 8));
         }
         for (let i = 1; i <= 8; i++) {
-            //    Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
+            Game.whites.push(new pawn_1.Pawn('white', `${board_2.ID[i]}`, 2));
             Game.blacks.push(new pawn_1.Pawn('black', `${board_2.ID[i]}`, 7));
         }
     }
@@ -51,6 +51,43 @@ class Game {
                 Game.setLastChosen(p);
                 p.move();
             }
+        }
+    }
+    static getPiece(square) {
+        const x = square.id.charAt(0);
+        const y = parseInt(square.id.charAt(2));
+        if (square.innerHTML != '') {
+            for (let p of Game.whites) {
+                if (p.getPositionX() == x && p.getPositionY() == y) {
+                    return p;
+                }
+            }
+            for (let p of Game.blacks) {
+                if (p.getPositionX() == x && p.getPositionY() == y) {
+                    return p;
+                }
+            }
+        }
+        else {
+            return;
+        }
+    }
+    static beat(square) {
+        const x = square.id.charAt(0);
+        const y = parseInt(square.id.charAt(2));
+        let p = Game.getPiece(square);
+        if (p) {
+            if (p.getColor() === 'white') {
+                this.whites.splice(this.whites.indexOf(p), 1);
+                square.innerHTML = '';
+            }
+            else {
+                this.blacks.splice(this.blacks.indexOf(p), 1);
+                square.innerHTML = '';
+            }
+        }
+        else {
+            return;
         }
     }
     static setLastChosen(piece) {

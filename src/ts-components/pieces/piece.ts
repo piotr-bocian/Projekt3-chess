@@ -40,6 +40,9 @@ abstract class Piece{
         let elems = document.querySelectorAll('.active');
         for (var i = 0; i < elems.length; i++) {
             elems[i]!.classList.remove('active');
+            if (elems[i]!.classList.contains('en-pass')) {
+                elems[i]!.classList.remove('en-pass');
+            }
         }
     }
 
@@ -49,6 +52,10 @@ abstract class Piece{
 
     getPositionY(){
         return this.positionY;
+    }
+
+    getColor(){
+        return this.color;
     }
 
     abstract showPossibleMoves():string[];
