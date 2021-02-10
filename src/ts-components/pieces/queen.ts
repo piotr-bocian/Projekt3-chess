@@ -43,7 +43,7 @@ class Queen extends Piece implements QueenMethods{
                     //PL
                     const lang = document.documentElement.lang;
                     if(lang === 'pl'){
-                        (this.color === 'white'|| this.color === 'Biały/a') ? this.color ='Biały/a' : this.color = 'Czarny/a';
+                        (this.color === 'white'|| this.color === 'Biały') ? this.color ='Biały' : this.color = 'Czarny';
                         this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
                     } else {
                         this.color = this.color;

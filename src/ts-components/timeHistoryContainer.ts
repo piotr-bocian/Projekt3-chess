@@ -58,6 +58,13 @@ function timeHistoryContainer () {
     const undoButton = document.createElement("p");
     undoButton.className = "undo-button"
     undoButton.innerHTML = "COFNIJ RUCH";
+    if(document.documentElement.lang === 'en'){
+        gameTime.innerHTML = "GAME TIME";
+        white.innerHTML = "WHITE";
+        black.innerHTML = "BLACK";
+        historyHeader.innerHTML = "CHESS MOVES";
+        exitButton.innerHTML = "LEAVE GAME";
+    }
 
     buttonContainer.appendChild(exitButton);
     buttonContainer.appendChild(undoButton);
