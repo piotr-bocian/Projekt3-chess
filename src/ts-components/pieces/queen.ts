@@ -6,6 +6,8 @@ import { Game } from "../game"
 class Queen extends Piece implements QueenMethods{
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
+        //this.symbol = `../../../static/assets/${this.color}Queen.png`;
+        //this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
         // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
@@ -208,7 +210,6 @@ const diagonalMoves=()=>{
     moveRight()
     return moves;
 }
-
 
 }
 

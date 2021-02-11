@@ -202,6 +202,15 @@ class Game {
         return false;
     }
 
+
+
+    static getPieces(color: string): Piece[] {
+        if (color == 'white') {
+            return this.whites;
+        }
+        return this.blacks;
+    }
+
     static setLastChosen(piece:Piece):void{
         Game.lastChosen = piece;
     }
@@ -216,13 +225,6 @@ class Game {
 
     static getBlacks():Piece[]{
         return Game.blacks;
-    }
-
-    static getPieces(color: string): Piece[] {
-        if (color == 'white') {
-            return this.whites;
-        }
-        return this.blacks;
     }
 }
 
