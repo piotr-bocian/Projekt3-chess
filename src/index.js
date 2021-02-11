@@ -1,5 +1,5 @@
 import {Board} from "./js-components/board";
-import {fillBoard} from "./js-components/fillBoard";
+// import {fillBoard} from "./js-components/fillBoard";
 import {Game} from "./js-components/game"
 
 // const gameBoard = new Board();
