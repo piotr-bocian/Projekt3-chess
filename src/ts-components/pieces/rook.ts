@@ -28,7 +28,7 @@ class Rook extends Piece{
             //console.log(rookLineX,rookLineY)
             for(let i=rookLineY+1;i<=8;i++){
                 let squareY = document.querySelector(`#${rookLineX}-${i}`);
-                if(!(squareY?.querySelector('img')?.classList.contains(`${this.color}`)) || squareY.innerHTML === ""){
+                if(!(squareY?.querySelector('img')) || squareY.innerHTML === ""){
                     if (squareY != null)
                     // squareY.classList.add('active');
                     PossibleMoves.push(`${rookLineX}-${i}`)
@@ -40,7 +40,7 @@ class Rook extends Piece{
             // bot
             for(let i=rookLineY-1;i>0;i--){
                 let squareY = document.querySelector(`#${rookLineX}-${i}`);
-                if(!(squareY?.querySelector('img')?.classList.contains(`${this.color}`)) || squareY.innerHTML === ""){
+                if(!(squareY?.querySelector('img')) || squareY.innerHTML === ""){
                     if (squareY != null)
                     // squareY.classList.add('active');
                     PossibleMoves.push(`${rookLineX}-${i}`)
@@ -55,7 +55,7 @@ class Rook extends Piece{
             const clickedElementIndex = arrayOfX.indexOf(rookLineX)
             for(let i=clickedElementIndex;i<=6;i++){
                 let squareY = document.querySelector(`#${arrayOfX[i+1]}-${rookLineY}`);
-                if(!(squareY?.querySelector('img')?.classList.contains(`${this.color}`)) || squareY.innerHTML === ""){
+                if(!(squareY?.querySelector('img')) || squareY.innerHTML === ""){
                     if (squareY != null)
                     // squareY.classList.add('active');
                     PossibleMoves.push(`${arrayOfX[i+1]}-${rookLineY}`)
@@ -67,7 +67,7 @@ class Rook extends Piece{
             // left
             for(let i=clickedElementIndex;i>0;i--){
                 let squareY = document.querySelector(`#${arrayOfX[i-1]}-${rookLineY}`);
-                if(!(squareY?.querySelector('img')?.classList.contains(`${this.color}`)) || squareY.innerHTML === ""){
+                if(!(squareY?.querySelector('img')) || squareY.innerHTML === ""){
                     if (squareY != null)
                     // squareY.classList.add('active');
                     PossibleMoves.push(`${arrayOfX[i-1]}-${rookLineY}`)
