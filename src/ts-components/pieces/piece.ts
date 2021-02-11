@@ -30,6 +30,7 @@ abstract class Piece{
         this.parentSquare.appendChild(img);
         const imgContainer = img.parentElement !as HTMLElement;
         imgContainer.classList.add('pieceInside');
+        Game.changeTurn();
     }
 
     updatePosition(pX:string, pY:number):void{ //<-- ta metoda aktualizuje stan właściwości positionX i positionY (ale za samo wyświetlenie figury w nowym miejscu odpowiada setOnBoard())

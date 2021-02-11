@@ -15,10 +15,11 @@ class Game {
     private static whiteKing:King;
     private static blackKing:King;
 
-    private whoNext:string = 'white';
-
     private static whites:Piece[] = [];
     private static blacks:Piece[] = [];
+
+    private static currentPlayer = Game.whites;
+    private static round:number = 0;
 
     constructor(){
         this.gameBoard = new Board;
@@ -54,19 +55,25 @@ class Game {
         }
     }
 
+    static changeTurn() {
+        if (Game.round % 2 === 0) {Game.currentPlayer = Game.blacks};
+        if (Game.round % 2 === 1) {Game.currentPlayer = Game.whites};
+        this.round++;
+      };
+
     startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
         
         let chosenPiece = Game.getPiece(square);
-        if (chosenPiece && !(chosenPiece instanceof Rook)) {
+        if (chosenPiece && !(chosenPiece instanceof Rook) && Game.currentPlayer.includes(chosenPiece)) {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
         }
         else{
-            if(chosenPiece && !(Game.lastChosen instanceof King)){
+            if(chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
             }
-            else if(chosenPiece){
+            else if(chosenPiece && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);
                 Game.castling();
             }
