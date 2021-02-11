@@ -156,6 +156,8 @@ class Pawn extends Piece {
                         possMove.classList.remove('en-pass');
                         enPass.classList.remove('pieceInside');
                     }
+                    this.history(possMove);
+                    this.historyNotation();
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                     Game.checkingKings();
@@ -189,7 +191,7 @@ class Pawn extends Piece {
 
         const modalWindowPawn = document.createElement("div");
 
-        const promotionArray = ['Knight', 'Queen', 'Bishop', 'Rook'];
+        
         const parentSquare = document.getElementById(`${pawn.getPositionX}`)!;
 
         if (this.color === 'white') {
