@@ -261,7 +261,7 @@ class Pawn extends Piece {
 
         if (this.color === 'black' 
         && this.positionY === 4 
-        && pawnPos.querySelector('img')!.src.includes('Pawn')
+        && pawnPos.querySelector('img')?.src.includes('Pawn')
         && emptySquare1.classList.contains('pieceInside')) {
             enPassant.push(`${pawnPosX}-${positionY1}`);
         }

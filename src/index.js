@@ -8,6 +8,7 @@ document.querySelectorAll('.board-container div').forEach(element => {
 });
 
 function selectPiece(e){
-    if(e.target.parentElement.classList.contains('pieceInside'))
+    if(e.target.parentElement.classList.contains('pieceInside')) {
         game.startMove(e.target.parentElement);
+}
 }
