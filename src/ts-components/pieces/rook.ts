@@ -14,7 +14,6 @@ class Rook extends Piece{
         this.symbol = `../../../static/assets/${this.color}Rook.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
-
     showPossibleMoves():[]{
         this.removeClassActive();
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -102,7 +101,6 @@ class Rook extends Piece{
 
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
-        
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
@@ -116,5 +114,4 @@ class Rook extends Piece{
         });
     }
 }
-
 export {Rook};

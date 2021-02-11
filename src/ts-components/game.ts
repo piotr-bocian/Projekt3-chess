@@ -33,7 +33,6 @@ class Game {
         Game.whites.push(Game.whiteKing);
         Game.blacks.push(new Queen('black', `${ID[4]}`, 8));
         Game.blacks.push(Game.blackKing);
-        
         for(let i = 3; i <= 6; i+=3) {
             Game.whites.push(new Bishop('white', `${ID[i]}`, 1));
             Game.blacks.push(new Bishop('black', `${ID[i]}`, 8));
@@ -62,7 +61,6 @@ class Game {
       };
 
     startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
-        
         let chosenPiece = Game.getPiece(square);
         if (chosenPiece && !(chosenPiece instanceof Rook) && Game.currentPlayer.includes(chosenPiece)) {
             Game.setLastChosen(chosenPiece);
@@ -83,7 +81,6 @@ class Game {
     static getPiece(square: HTMLElement): Piece | void {
         const x:string = square.id.charAt(0);
         const y:number = parseInt(square.id.charAt(2));
-        
         if (square.innerHTML != '' ){
             for(let p of Game.whites){
                 if(p.getPositionX() == x && p.getPositionY() == y){
