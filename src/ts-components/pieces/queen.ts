@@ -16,6 +16,7 @@ class Queen extends Piece implements QueenMethods{
          this.collectAllPossibleMoves().forEach(id=>{
              allPossibleMoves.push(id);
             })
+            console.log(allPossibleMoves);
             return allPossibleMoves
     }
 
@@ -35,8 +36,10 @@ class Queen extends Piece implements QueenMethods{
         squares.forEach(square => {
             square.addEventListener('click', () => {
                 if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')
-                &&(Game.getLastChosen() === this)
-                ){
+                &&(Game.getLastChosen() === this)) {
+                    if (square.innerHTML != '') {
+                        Game.beat(square as HTMLElement);
+                    }
                     //ZBIERANIE HISTORII RUCHÓW
                     this.history(square);
                     //PL
@@ -51,8 +54,8 @@ class Queen extends Piece implements QueenMethods{
                     //
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
-            }
-            });
+                }
+            }, {capture: true});
         });
     }
 
