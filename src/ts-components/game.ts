@@ -17,6 +17,7 @@ class Game {
 
     private static whites:Piece[] = [];
     private static blacks:Piece[] = [];
+    private static beated:Piece[] = [];
 //ZBIERANIE HISTORII RYCHÓW BIEREK
     private allMovesHistory:string[][][];
     private lastMove: string;
@@ -117,11 +118,14 @@ class Game {
         if (p) {
             if (p.getColor() === 'white') {
                 this.whites.splice(this.whites.indexOf(p),1);
+                this.beated.push(p);
                 square.innerHTML = '';
             } else {
                 this.blacks.splice(this.blacks.indexOf(p),1);
+                this.beated.push(p);
                 square.innerHTML = '';
             }
+            console.log(this.beated);
         } else {
             return;
         }
