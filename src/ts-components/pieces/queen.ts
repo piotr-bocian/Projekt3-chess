@@ -1,5 +1,5 @@
 import { ID } from "../board";
-import { MovesShow, QueenMethods} from "../interfaces/pieceMethodsIntefaces";
+import { MovesShow, QueenMethods} from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 import { Game } from "../game"
 //królowa / hetman
@@ -21,21 +21,22 @@ class Queen extends Piece implements QueenMethods{
     }
 
     move(){
-        const movesShow:MovesShow =(id:string)=>{
-            const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
-                movesPossibilities.forEach(el=>{
-                        el.classList.add('active');
-                })
-         }
+        // const movesShow:MovesShow =(id:string)=>{
+        //     const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
+        //         movesPossibilities.forEach(el=>{
+        //                 el.classList.add('active');
+        //         })
+        //  }
 
          this.showPossibleMoves().forEach(id=>{
-            movesShow(id)
+            document.querySelector(`#${id}`)!.classList.add('active');
+            // movesShow(id)
          })
 
-        const squares = [...document.querySelectorAll('.board-container div')];
+        const squares = [...document.querySelectorAll('.active')];
         squares.forEach(square => {
             square.addEventListener('click', () => {
-                if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')
+                if((square).classList.contains('active')
                 &&(Game.getLastChosen() === this)) {
                     if (square.innerHTML != '') {
                         Game.beat(square as HTMLElement);
@@ -44,8 +45,8 @@ class Queen extends Piece implements QueenMethods{
                     this.history(square);
                     //PL
                     const lang = document.documentElement.lang;
-                    if(lang === 'pl'){
-                        (this.color === 'white'|| this.color === 'Biały') ? this.color ='Biały' : this.color = 'Czarny';
+                    if(lang === 'pl'){ //zmieniłem tu kolory na white i black jak zmieniały się klasy w DOM to biecie źle działało dla królowej.
+                        (this.color === 'white'|| this.color === 'Biały') ? this.color ='white' : this.color = 'black';
                         this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
                     } else {
                         this.color = this.color;
@@ -67,27 +68,33 @@ collectAllPossibleMoves(){
         const doc = document.getElementById(`${this.positionX}-${i}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        if(checker) return;
-    if (checker) {
-        if(!colorCheck){
-                moves.push(`${this.positionX}-${i}`);
-                return
-            }
-    } else {
-        moves.push(`${this.positionX}-${i}`);
-            }
-}
+        // if(checker) return; <- z tego powodu nie dochodziło do sprawdzania koloru
+        // to samo zrobiłem dla down, left i right
+        if (checker) {
+            if(!colorCheck){
+                    moves.push(`${this.positionX}-${i}`);
+                    return;
+                } else {
+                    return; //dlatego przeniosłem to tutaj, dzięki temu działa bicie
+                }
+        } else {
+            moves.push(`${this.positionX}-${i}`);
+            // return;
+        }
+    }
 }
     const moveDown = ()=>{
         for(let j=this.positionY - 1; j>0; j--){
             const doc = document.getElementById(`${this.positionX}-${j}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        if(checker) return;
+        // if(checker) return;
     if (checker) {
         if(!colorCheck){
                 moves.push(`${this.positionX}-${j}`);
-                return
+                return;
+            } else {
+                return;
             }
     } else {
                moves.push(`${this.positionX}-${j}`)
@@ -99,11 +106,13 @@ collectAllPossibleMoves(){
             const doc = document.getElementById(`${ID[i]}-${this.positionY}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        if(checker) return;
+        // if(checker) return;
     if (checker) {
         if(!colorCheck){
             moves.push(`${ID[i]}-${this.positionY}`)
                 return
+            } else {
+                return;
             }
     } else {
         moves.push(`${ID[i]}-${this.positionY}`)
@@ -115,11 +124,13 @@ collectAllPossibleMoves(){
                     const doc = document.getElementById(`${ID[i]}-${this.positionY}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        if(checker) return;
+        // if(checker) return;
     if (checker) {
         if(!colorCheck){
             moves.push(`${ID[i]}-${this.positionY}`)
                 return
+            } else {
+                return;
             }
     } else {
         moves.push(`${ID[i]}-${this.positionY}`)
