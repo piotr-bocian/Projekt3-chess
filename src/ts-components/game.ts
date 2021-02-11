@@ -125,7 +125,6 @@ class Game {
                 this.beated.push(p);
                 square.innerHTML = '';
             }
-            console.log(this.beated);
         } else {
             return;
         }
