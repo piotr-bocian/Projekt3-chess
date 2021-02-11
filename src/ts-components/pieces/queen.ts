@@ -17,6 +17,7 @@ class Queen extends Piece implements QueenMethods{
          this.collectAllPossibleMoves().forEach(id=>{
              allPossibleMoves.push(id);
             })
+            console.log(allPossibleMoves);
             return allPossibleMoves
     }
 
@@ -38,12 +39,15 @@ class Queen extends Piece implements QueenMethods{
                 if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')
                 &&(Game.getLastChosen() === this)
                 ){
+                    if (square.innerHTML != '') {
+                        Game.beat(square as HTMLElement);
+                    }
                     //this.history(square);
                     //this.historyNotation();
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
                 }
-            });
+            }, {capture: true});
         });
     }
 

@@ -121,7 +121,6 @@ class Bishop extends Piece{
                 }
             }
         }
-        console.log(possibleMoves);
         return possibleMoves;
     }
     
