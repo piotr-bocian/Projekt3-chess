@@ -6,10 +6,7 @@ import { Game } from "../game"
 class Queen extends Piece implements QueenMethods{
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
-        //this.symbol = `../../../static/assets/${this.color}Queen.png`;
-        //this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
-        // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
 
@@ -40,11 +37,21 @@ class Queen extends Piece implements QueenMethods{
                 if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')
                 &&(Game.getLastChosen() === this)
                 ){
-                    //this.history(square);
-                    //this.historyNotation();
+                    //ZBIERANIE HISTORII RUCHÓW
+                    this.history(square);
+                    //PL
+                    const lang = document.documentElement.lang;
+                    if(lang === 'pl'){
+                        (this.color === 'white'|| this.color === 'Biały') ? this.color ='Biały' : this.color = 'Czarny';
+                        this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
+                    } else {
+                        this.color = this.color;
+                        this.historyNotation();
+                    }
+                    //
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
-                }
+            }
             });
         });
     }

@@ -14,7 +14,7 @@ class Rook extends Piece{
         this.symbol = `../../../static/assets/${this.color}Rook.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
-    showPossibleMoves():[]{
+    showPossibleMoves(): string[]{
         this.removeClassActive();
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         // const indexOfX:number = arrayOfX.indexOf(this.getPositionX());

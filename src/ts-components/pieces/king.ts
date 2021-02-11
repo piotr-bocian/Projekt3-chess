@@ -1,10 +1,6 @@
 import { Piece } from "./piece";
 import { Game } from "../game";
-import { Knight } from "./knight";
-import { Rook } from "./rook";
-import { Bishop } from "./bishop";
 import { Pawn } from "./pawn";
-import { Queen } from "./queen";
 
 class King extends Piece{
 
@@ -30,11 +26,11 @@ class King extends Piece{
                     if(square.innerHTML === '')
                         possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
                     else if(!square.querySelector('img')!.classList.contains(this.color))
-                        possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);    
-                }    
+                        possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
+                }
             }
         }
-        
+
         return possibleMoves;
     }
 
@@ -43,10 +39,10 @@ class King extends Piece{
 
         const possibleMovesArr:string[] = this.showPossibleMoves();
         const dangerZones:string[] = this.getDangerZones();
-        
+
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
-            
+
             if(dangerZones.indexOf(`${square!.id.charAt(0)}-${parseInt(square!.id.charAt(2))}`) !== -1){
                 return;
             }
@@ -111,7 +107,7 @@ class King extends Piece{
                 }
             }
         }
-        
+
         return dangerArr;
     }
 }

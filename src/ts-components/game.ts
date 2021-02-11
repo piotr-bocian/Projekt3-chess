@@ -17,14 +17,19 @@ class Game {
 
     private static whites:Piece[] = [];
     private static blacks:Piece[] = [];
-
+//ZBIERANIE HISTORII RYCHÓW BIEREK
+    private allMovesHistory:string[][][];
+    private lastMove: string;
     private static currentPlayer = Game.whites;
     private static round:number = 0;
 
     constructor(){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
-
+        //DO SPRAWDZENIA
+        this.allMovesHistory = []
+        this.lastMove = ''
+        //
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -65,11 +70,17 @@ class Game {
         if (chosenPiece && !(chosenPiece instanceof Rook) && Game.currentPlayer.includes(chosenPiece)) {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
+            //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
+            this.allMovesHistory.push(chosenPiece.movesHistory)
+            // console.log(this.allMovesHistory);
         }
         else{
             if(chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
+                //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
+                this.allMovesHistory.push(chosenPiece.movesHistory)
+                // console.log(this.allMovesHistory);
             }
             else if(chosenPiece && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);
@@ -87,15 +98,15 @@ class Game {
                     return p;
                 }
             }
-    
+
             for(let p of Game.blacks){
                 if(p.getPositionX() == x && p.getPositionY() == y){
                     return p;
                 }
-            }  
+            }
         } else {
             return;
-        }        
+        }
     }
 
     static beat(square: HTMLElement): void {
@@ -123,17 +134,17 @@ class Game {
             else
                 console.log('WHITE KING CHECKED');
         }
-           
+
         if(Game.blackKing.isChecked()){
             if(Game.blackKing.isCheckmated())
                 console.log('BLACK KING CHECKMATED');
             else
             console.log('BLACK KING CHECKED');
-        }  
+        }
     }
 
     static castling():void{
-        
+
         if(!this.isCastlingPossible())
             return;
 
@@ -145,7 +156,7 @@ class Game {
             else{
                 this.whiteKing.setOnBoard('G', 1);
                 Game.lastChosen.setOnBoard('F', 1);
-            }  
+            }
         }
         else{
             if(Game.lastChosen.getPositionX() === 'A'){
@@ -155,14 +166,14 @@ class Game {
             else{
                 this.blackKing.setOnBoard('G', 8);
                 Game.lastChosen.setOnBoard('F', 8);
-            }  
-        }    
+            }
+        }
     }
 
     static isCastlingPossible():boolean{
         const color:string = Game.lastChosen.getColor();
         const posX:string = Game.lastChosen.getPositionX();
-        
+
         if(!(Game.lastChosen as Rook).hasMoved && (color === 'white' ? !this.whiteKing.hasMoved : !this.blackKing.hasMoved)){
             if(posX === 'A'){
                 if(color === 'white'){
@@ -215,10 +226,6 @@ class Game {
         Game.lastChosen = piece;
     }
 
-    static getLastChosen():Piece{
-        return Game.lastChosen;
-    }
-
     static getWhites():Piece[]{
         return Game.whites;
     }
@@ -226,6 +233,17 @@ class Game {
     static getBlacks():Piece[]{
         return Game.blacks;
     }
+//COFANIE RUCHÓW
+    reverseMove(){
+        for(let p of Game.whites){
+                p.reverseMove();
+        }
+    }
+
+    static getLastChosen():Piece{
+        return Game.lastChosen;
+    }
+
 }
 
 export {Game};

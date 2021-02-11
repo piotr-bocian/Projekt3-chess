@@ -1,12 +1,15 @@
 import { Game } from "../game"
 
+import {addMoveHistory} from '../addMoveHistory';
 abstract class Piece{
-    protected color:string;
+    public color:string;
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
     protected positionX:string;
     protected positionY:number;
     protected possibleMovesIDs:string[];    //<-- tablica ID pól na które może przemieścić się figura
     protected parentSquare:HTMLElement; //<-- div w którym "siedzi" img z obrazkiem danej figury
+    public movesHistory: string[][];
+    public lastMove: string;
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
     constructor(color:string, positionX:string, positionY:number){
@@ -16,6 +19,9 @@ abstract class Piece{
         this.possibleMovesIDs = this.showPossibleMoves();
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
+
+        this.movesHistory=[];
+        this.lastMove ='';
     }
 
     setOnBoard(pX:string, pY:number):void{ //<-- ta metoda zmienia miejsce na szachownicy w którym wyświetla się figura (ale za zmienienie składowych positionX i positionY odpowiada metoda updatePosition())
@@ -48,6 +54,55 @@ abstract class Piece{
             }
         }
     }
+    //HISTORIA RUCHÓW
+    history(square:Element){
+        const fromPositionX = this.getPositionX();
+        const fromPositionY = this.getPositionY().toString();
+        const toPositionX = `${(square).id.charAt(0)}`;
+        const toPositionY = `${parseInt((square).id.charAt(2))}`;
+        this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
+        // console.log(this.movesHistory);
+    }
+    //OPIS RUCHÓW
+    historyNotation(move = 'moved from', to ='to', name = this.constructor.name){
+        const movesHistoryClone = this.movesHistory.slice();
+        const createNotation = movesHistoryClone.pop();
+        if(typeof createNotation === 'undefined') return;
+        if(typeof createNotation[2] === 'undefined') return;
+        if(typeof createNotation[0] === 'undefined') return;
+        const descriptive = `${name} ${move} ${createNotation[0]}-${createNotation[1]} ${to} ${createNotation[2]}-${createNotation[3]}`;
+        // const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
+        this.lastMove = descriptive;
+        addMoveHistory(this.lastMove, this.color)
+        // this.lastMove = longAlgebraicNotation;
+        console.log(this.lastMove);
+    }
+
+    //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
+    reverseMove(){
+        const lastMove = this.movesHistory;
+            this.removeClassActive();
+            if(lastMove.length === 0){return};
+            const popLastMove = lastMove.pop();
+            console.log(popLastMove);
+            // this.movesHistory.length = lastMove.length;
+            if (popLastMove){
+                    const positionX = popLastMove[0];
+                    const positionY = popLastMove[1];
+                    if(positionX && positionY){
+                        this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
+                    }
+                } else {
+                    return
+                }
+
+    }
+
+
+
+    abstract showPossibleMoves():string[];
+
+    abstract move():void;
 
     getPositionX(){
         return this.positionX;
@@ -60,9 +115,6 @@ abstract class Piece{
     getColor(){
         return this.color;
     }
-
-    abstract showPossibleMoves():string[];
-    abstract move():void;
 }
 
 export {Piece};
