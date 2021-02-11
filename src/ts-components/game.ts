@@ -57,9 +57,19 @@ class Game {
     startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
         
         let chosenPiece = Game.getPiece(square);
-        if (chosenPiece) {
+        if (chosenPiece && !(chosenPiece instanceof Rook)) {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
+        }
+        else{
+            if(chosenPiece && !(Game.lastChosen instanceof King)){
+                Game.setLastChosen(chosenPiece);
+                chosenPiece.move();
+            }
+            else if(chosenPiece){
+                Game.setLastChosen(chosenPiece);
+                Game.castling();
+            }
         }
     }
 
@@ -102,7 +112,7 @@ class Game {
         }
     }
 
-    static checkingKings(){ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
+    static checkingKings():void{ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
         if(Game.whiteKing.isChecked()){
             if(Game.whiteKing.isCheckmated())
                 console.log('WHITE KING CHECKMATED');
@@ -118,6 +128,75 @@ class Game {
         }  
     }
 
+    static castling():void{
+        
+        if(!this.isCastlingPossible())
+            return;
+
+        if(Game.lastChosen.getColor() === 'white'){
+            if(Game.lastChosen.getPositionX() === 'A'){
+                this.whiteKing.setOnBoard('C', 1);
+                Game.lastChosen.setOnBoard('D', 1);
+            }
+            else{
+                this.whiteKing.setOnBoard('G', 1);
+                Game.lastChosen.setOnBoard('F', 1);
+            }  
+        }
+        else{
+            if(Game.lastChosen.getPositionX() === 'A'){
+                this.blackKing.setOnBoard('C', 8);
+                Game.lastChosen.setOnBoard('D', 8);
+            }
+            else{
+                this.blackKing.setOnBoard('G', 8);
+                Game.lastChosen.setOnBoard('F', 8);
+            }  
+        }    
+    }
+
+    static isCastlingPossible():boolean{
+        const color:string = Game.lastChosen.getColor();
+        const posX:string = Game.lastChosen.getPositionX();
+        
+        if(!(Game.lastChosen as Rook).hasMoved && (color === 'white' ? !this.whiteKing.hasMoved : !this.blackKing.hasMoved)){
+            if(posX === 'A'){
+                if(color === 'white'){
+                    return (
+                        document.querySelector('#B-1')!.innerHTML === ''
+                        && document.querySelector('#C-1')!.innerHTML === ''
+                        && document.querySelector('#D-1')!.innerHTML === ''
+                        && this.whiteKing.getDangerZones().indexOf('C-1') === -1
+                    );
+                }
+                else{
+                    return (
+                        document.querySelector('#B-8')!.innerHTML === ''
+                        && document.querySelector('#C-8')!.innerHTML === ''
+                        && document.querySelector('#D-8')!.innerHTML === ''
+                        && this.blackKing.getDangerZones().indexOf('C-8') === -1
+                    );
+                }
+            }
+            if(posX === 'H'){
+                if(color === 'white'){
+                    return (
+                        document.querySelector('#F-1')!.innerHTML === ''
+                        && document.querySelector('#G-1')!.innerHTML === ''
+                        && this.whiteKing.getDangerZones().indexOf('G-1') === -1
+                    )
+                }
+                else{
+                    return (
+                        document.querySelector('#F-8')!.innerHTML === ''
+                        && document.querySelector('#G-8')!.innerHTML === ''
+                        && this.blackKing.getDangerZones().indexOf('G-8') === -1
+                    )
+                }
+            }
+        }
+        return false;
+    }
 
     static setLastChosen(piece:Piece):void{
         Game.lastChosen = piece;
