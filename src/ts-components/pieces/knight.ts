@@ -45,7 +45,6 @@ class Knight extends Piece{
                 this.possibleMovesIDs.push(id);
             }
         });
-        //console.log(this.possibleMovesIDs);
 
         return this.possibleMovesIDs;
     }
@@ -61,7 +60,6 @@ class Knight extends Piece{
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 if(possMove.classList.contains('active') && (Game.getLastChosen() === this)){
-                    // próbna implementacja bicia
                     if (possMove.innerHTML != '') {
                         Game.beat(possMove as HTMLElement);
                     }

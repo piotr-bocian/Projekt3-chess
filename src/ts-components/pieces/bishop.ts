@@ -121,7 +121,7 @@ class Bishop extends Piece{
                 }
             }
         }
-
+        console.log(possibleMoves);
         return possibleMoves;
     }
     
@@ -137,11 +137,14 @@ class Bishop extends Piece{
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
+                    if (square!.innerHTML != '') {
+                        Game.beat(square as HTMLElement);
+                    }
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
                     Game.checkingKings();
                 }
-            });
+            },{capture: true});
 
         });
     }
