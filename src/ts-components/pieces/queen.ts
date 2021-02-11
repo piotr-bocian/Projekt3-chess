@@ -42,6 +42,7 @@ class Queen extends Piece implements QueenMethods{
                     //this.historyNotation();
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
+                    Game.checkingKings();
                 }
             });
         });

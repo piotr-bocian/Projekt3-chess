@@ -104,20 +104,13 @@ class Game {
 
     static checkingKings(){ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
         if(Game.whiteKing.isChecked()){
-            if(Game.whiteKing.isCheckmated())
-                console.log('WHITE KING CHECKMATED');
-            else
-                console.log('WHITE KING CHECKED');
+            console.log('WHITE KING CHECKED');
         }
            
         if(Game.blackKing.isChecked()){
-            if(Game.blackKing.isCheckmated())
-                console.log('BLACK KING CHECKMATED');
-            else
             console.log('BLACK KING CHECKED');
         }  
     }
-
 
     static setLastChosen(piece:Piece):void{
         Game.lastChosen = piece;
@@ -140,6 +133,14 @@ class Game {
             return this.whites;
         }
         return this.blacks;
+    }
+
+    static getWhiteKing(){
+        return Game.whiteKing;
+    }
+
+    static getBlackKing(){
+        return Game.blackKing;
     }
 }
 

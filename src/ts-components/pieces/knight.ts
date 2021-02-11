@@ -51,7 +51,10 @@ class Knight extends Piece{
     }
     
     move(): void {
-        const possibilities: string[] = this.showPossibleMoves();
+        let possibilities: string[] = this.showPossibleMoves();
+        if(this.color === 'white' ? Game.getWhiteKing().isChecked() : Game.getBlackKing().isChecked()){
+            possibilities = this.defendKing(possibilities);
+        }
         possibilities.forEach((id) => {
             document.querySelector(`#${id}`)!.classList.add('active');
         });
@@ -68,7 +71,7 @@ class Knight extends Piece{
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                     Game.checkingKings();
-                    console.log(possMove.innerHTML);
+                    //console.log(possMove.innerHTML);
                 }
             },{capture: true});
         });

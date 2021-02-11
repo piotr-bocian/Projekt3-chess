@@ -60,6 +60,25 @@ abstract class Piece{
         return this.color;
     }
 
+    defendKing(possibleMoves:string[]){
+        const initialX = this.positionX;
+        const initialY = this.positionY;
+        const king = this.color === 'white' ? Game.getWhiteKing() : Game.getBlackKing();
+        const defendingIDs:string[] = [];
+
+        possibleMoves.forEach(move => {
+            if(document.querySelector(`#${move}`)!.innerHTML === ''){
+                this.setOnBoard(move.charAt(0), parseFloat(move.charAt(2)));
+                if(!king.isChecked())
+                    defendingIDs.push(move);
+            }
+        });
+
+        this.setOnBoard(initialX, initialY);
+
+        return defendingIDs;
+    }
+
     abstract showPossibleMoves():string[];
     abstract move():void;
 }

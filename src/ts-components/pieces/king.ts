@@ -65,19 +65,22 @@ class King extends Piece{
 
     isChecked():boolean{
         if(this.getDangerZones().indexOf(`${this.positionX}-${this.positionY}`) !== -1){
+            //console.log(this.checkedBy());
             return true;
         }
         else
             return false;
     }
 
-    isCheckmated():boolean{
-        const possibleMovesArr = this.showPossibleMoves().filter(id => {
-            const dangerArr = this.getDangerZones();
-            return (dangerArr.indexOf(id) === -1);
-        });
+    checkedBy():Piece[]{
+        const checkedByArr:Piece[] = [];
+        
+        for(let p of (this.getColor() === 'white' ? Game.getBlacks() : Game.getWhites())){
+            if(p.showPossibleMoves().indexOf(this.positionX+'-'+this.positionY) !== -1)
+                checkedByArr.push(p);
+        }
 
-        return (this.isChecked() && possibleMovesArr.length === 0);
+        return checkedByArr;
     }
 
     getDangerZones():string[]{
