@@ -3,7 +3,6 @@ import { fillBoard } from './js-components/fillBoard';
 import { Game } from './js-components/game';
 import timeHistoryContainer from './js-components/timeHistoryContainer';
 import Timer from './js-components/timer';
-// import addMoveHistory from './js-components/addMoveHistory';
 
 const game = new Game();
 document.body.appendChild(timeHistoryContainer());

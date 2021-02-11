@@ -12,7 +12,7 @@ class Game {
 
     private gameBoard:Board;
     private static lastChosen:Piece;
-
+    //ZBIERANIE HISTORII RYCHÓW BIEREK
     private allMovesHistory:string[][][];
     private lastMove: string;
     private  whites:Piece[] = [];
@@ -51,6 +51,7 @@ class Game {
             if(p.getPositionX() == x && p.getPositionY() == y){
                 this.setLastChosen(p);
                 p.move();
+                //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
                 this.allMovesHistory.push(p.movesHistory)
                 // console.log(this.allMovesHistory);
             }

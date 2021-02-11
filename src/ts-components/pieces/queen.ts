@@ -7,7 +7,6 @@ class Queen extends Piece implements QueenMethods{
     constructor(color:string, positionX:string, positionY:number){
         super(color, positionX, positionY);
         this.symbol = `../../../static/assets/${this.color}Queen.png`;
-        // this.symbol = `../../../../Projekt3-chess/static/assets/whiteQueen.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
 
@@ -38,7 +37,7 @@ class Queen extends Piece implements QueenMethods{
                 if(!(square).classList.contains('pieceInside') && (square).classList.contains('active')
                 &&(Game.getLastChosen() === this)
                 ){
-
+                    //ZBIERANIE HISTORII RUCHÓW
                     this.history(square);
                     //PL
                     const lang = document.documentElement.lang;
@@ -49,6 +48,7 @@ class Queen extends Piece implements QueenMethods{
                         this.color = this.color;
                         this.historyNotation();
                     }
+                    //
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
             }
