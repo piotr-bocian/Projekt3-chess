@@ -1,7 +1,6 @@
 "use stricte"
 
 import {Piece} from "./piece";
-import {ID} from "./../board";
 import { Game } from "../game";
 
 //wieża
