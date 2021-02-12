@@ -83,10 +83,12 @@ class King extends Piece{
             }
 
             position!.addEventListener('click', () => {
-                this.setOnBoard('C', 1);
-                rook.setOnBoard('D', 1);
-                this.removeClassActive();
-                Game.changeTurn();
+                if(Game.getLastChosen() === this){
+                    this.setOnBoard('C', 1);
+                    rook.setOnBoard('D', 1);
+                    this.removeClassActive();
+                    Game.changeTurn();
+                }
             })
         }
         else{
@@ -101,10 +103,12 @@ class King extends Piece{
             }
             
             position!.addEventListener('click', () => {
-                this.setOnBoard('C', 8);
-                rook.setOnBoard('D', 8);
-                this.removeClassActive();
-                Game.changeTurn();
+                if(Game.getLastChosen() === this){
+                    this.setOnBoard('C', 8);
+                    rook.setOnBoard('D', 8);
+                    this.removeClassActive();
+                    Game.changeTurn();
+                }
             })
         }
     }
@@ -124,10 +128,12 @@ class King extends Piece{
             }
 
             position!.addEventListener('click', () => {
-                this.setOnBoard('G', 1);
-                rook.setOnBoard('F', 1);
-                this.removeClassActive();
-                Game.changeTurn();
+                if(Game.getLastChosen() === this){
+                    this.setOnBoard('G', 1);
+                    rook.setOnBoard('F', 1);
+                    this.removeClassActive();
+                    Game.changeTurn();
+                }
             })
         }
         else{
@@ -141,10 +147,12 @@ class King extends Piece{
             }
 
             position!.addEventListener('click', () => {
-                this.setOnBoard('G', 8);
-                rook.setOnBoard('F', 8);
-                this.removeClassActive();
-                Game.changeTurn();
+                if(Game.getLastChosen() === this){
+                    this.setOnBoard('G', 8);
+                    rook.setOnBoard('F', 8);
+                    this.removeClassActive();
+                    Game.changeTurn();
+                }
             })
         }
     }
