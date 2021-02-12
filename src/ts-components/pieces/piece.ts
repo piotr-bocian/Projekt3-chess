@@ -10,6 +10,7 @@ abstract class Piece{
     protected parentSquare:HTMLElement; //<-- div w którym "siedzi" img z obrazkiem danej figury
     public movesHistory: string[][];
     public lastMove: string;
+    public static beated:Piece[] = [];
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
     constructor(color:string, positionX:string, positionY:number){
@@ -68,37 +69,32 @@ abstract class Piece{
         let name:string;
         let movedTo:string;
         let movedFrom:string;
+        let beatedPiece = Piece.beated.pop();
         const movesHistoryClone = this.movesHistory.slice();
-        //TABLICA Z BICIEM
-        const beated = Game.beated.slice();
-        const beatedPiece = beated.pop();
-        // console.log(beatedPiece)
-        ///////////////////////////
+        /////////////
         const createNotation = movesHistoryClone.pop();
+        const getName = (constructorName:string)=>{
+            switch (constructorName){
+            case 'Queen':
+              return 'Królowa';
+            case 'Rook':
+             return 'Wieża';
+            case 'Knight':
+              return 'Skoczek';
+            case 'Bishop':
+            return 'Goniec';
+            case 'King':
+            return 'Król';
+            default:
+            return 'Pion';
+        }
+        }
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
-
         if (document.documentElement.lang === 'pl'){
             movedFrom = 'poruszył/a się z pola';
             movedTo = 'na pole'
-            const getName = (constructorName:string)=>{
-                switch (constructorName){
-                case 'Queen':
-                  return 'Królowa';
-                case 'Rook':
-                 return 'Wieża';
-                case 'Knight':
-                  return 'Skoczek';
-                case 'Bishop':
-                return 'Goniec';
-                case 'King':
-                return 'Król';
-                default:
-                return 'Pion';
-            }
-            }
-
             name = getName(this.constructor.name);
             //RUCHY
             const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
@@ -106,13 +102,11 @@ abstract class Piece{
 
             //SZACHOWANIE
 
-            //BICIE
+            //NOTACJA DLA BICIA
             if (beatedPiece){
-            const beated = getName(beatedPiece.constructor.name)
-            const descriptive = `${beated} został zbity przez ${name}`;
+            const descriptive = `${getName(beatedPiece.constructor.name)} został zbity przez ${name}`;
             this.lastMove = descriptive;
             }
-
         } else if (document.documentElement.lang === 'en'){
             movedFrom = 'moved from';
             movedTo = 'to';
@@ -121,6 +115,13 @@ abstract class Piece{
              const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
              this.lastMove = descriptive;
 
+            //SZACHOWANIE
+
+            //BICIE
+            if (beatedPiece){
+            const descriptive = `${beatedPiece.constructor.name} został zbity przez ${name}`;
+            this.lastMove = descriptive;
+            }
         }
 
         // const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
@@ -134,7 +135,6 @@ abstract class Piece{
             this.removeClassActive();
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
-            console.log(popLastMove);
             // this.movesHistory.length = lastMove.length;
             if (popLastMove){
                     const positionX = popLastMove[0];

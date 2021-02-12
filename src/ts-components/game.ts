@@ -19,7 +19,7 @@ class Game {
     private static blacks:Piece[] = [];
     public static beated:Piece[] = [];
 //ZBIERANIE HISTORII RYCHÓW BIEREK
-    private allMovesHistory:string[][][];
+    private static allMovesHistory:string[][][];
     private lastMove: string;
     private static currentPlayer = Game.whites;
     private static round:number = 0;
@@ -28,9 +28,10 @@ class Game {
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
         //DO SPRAWDZENIA
-        this.allMovesHistory = []
         this.lastMove = ''
         //
+
+        Game.allMovesHistory = []
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -72,15 +73,14 @@ class Game {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
             //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-            this.allMovesHistory.push(chosenPiece.movesHistory)
-            // console.log(this.allMovesHistory);
+            Game.allMovesHistory.push(chosenPiece.movesHistory);
         }
         else{
             if(chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
                 //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-                this.allMovesHistory.push(chosenPiece.movesHistory)
+                Game.allMovesHistory.push(chosenPiece.movesHistory);
                 // console.log(this.allMovesHistory);
             }
             else if(chosenPiece && Game.currentPlayer.includes(chosenPiece)){
@@ -119,10 +119,12 @@ class Game {
             if (p.getColor() === 'white') {
                 this.whites.splice(this.whites.indexOf(p),1);
                 this.beated.push(p);
+                Piece.beated.push(p);
                 square.innerHTML = '';
             } else {
                 this.blacks.splice(this.blacks.indexOf(p),1);
                 this.beated.push(p);
+                Piece.beated.push(p);
                 square.innerHTML = '';
             }
         } else {
@@ -249,6 +251,10 @@ class Game {
 
     static getLastChosen():Piece{
         return Game.lastChosen;
+    }
+
+    static getAllMovesHistory(){
+        return Game.allMovesHistory;
     }
 
 }

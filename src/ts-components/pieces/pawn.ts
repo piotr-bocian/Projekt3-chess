@@ -191,7 +191,7 @@ class Pawn extends Piece {
 
         const modalWindowPawn = document.createElement("div");
 
-        
+
         const parentSquare = document.getElementById(`${pawn.getPositionX}`)!;
 
         if (this.color === 'white') {
