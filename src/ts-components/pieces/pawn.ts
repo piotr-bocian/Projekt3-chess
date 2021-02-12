@@ -204,7 +204,7 @@ class Pawn extends Piece {
                 modalWindowPawn.appendChild(selectableFigure);
     
                 selectableFigure.addEventListener('click', () => {
-                    console.log(`#${pawn.getPositionX()}-8`);
+                    
                     document.querySelector(`#${pawn.getPositionX()}-8`)!.removeChild(modalWindowPawn);
                     const pieceToCreate = new PieceName('white', `${pawn.getPositionX()}`, 8);
                     let whites = Game.getWhites();
@@ -227,12 +227,12 @@ class Pawn extends Piece {
                 modalWindowPawn.appendChild(selectableFigure);
     
                 selectableFigure.addEventListener('click', () => {
-                    // console.log(`#${pawn.getPositionX()}-1`);
+                    
                     document.querySelector(`#${pawn.getPositionX()}-1`)!.removeChild(modalWindowPawn);
                     const pieceToCreate = new PieceName('black', `${pawn.getPositionX()}`, 1);
                     let blacks = Game.getBlacks();
-                    this.parentSquare.classList.remove('promotion');
                     blacks.push(pieceToCreate);
+                    this.parentSquare.classList.remove('promotion');
                     const pawnToRemove = blacks.indexOf(pawn);
                     blacks.splice(pawnToRemove, 1);
                     Game.changeTurn();
