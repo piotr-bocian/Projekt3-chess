@@ -7,6 +7,7 @@ import { Queen } from "./pieces/queen";
 import { Rook } from "./pieces/rook";
 import { Pawn } from "./pieces/pawn"
 import { ID } from "./board";
+import { ifPromotion } from "./promotion"
 
 class Game {
 
@@ -23,6 +24,7 @@ class Game {
     private lastMove: string;
     private static currentPlayer = Game.whites;
     private static round:number = 0;
+
 
     constructor(){
         this.gameBoard = new Board;
@@ -66,26 +68,28 @@ class Game {
         this.round++;
       };
 
-    startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
-        let chosenPiece = Game.getPiece(square);
-        if (chosenPiece && !(chosenPiece instanceof Rook) && Game.currentPlayer.includes(chosenPiece)) {
-            Game.setLastChosen(chosenPiece);
-            chosenPiece.move();
-            //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-            this.allMovesHistory.push(chosenPiece.movesHistory)
-            // console.log(this.allMovesHistory);
-        }
-        else{
-            if(chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)){
+    startMove(square: HTMLElement): void { //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
+        if (!ifPromotion()) {
+            let chosenPiece = Game.getPiece(square);
+            if (chosenPiece && !(chosenPiece instanceof Rook) && Game.currentPlayer.includes(chosenPiece)) {
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
                 //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
                 this.allMovesHistory.push(chosenPiece.movesHistory)
                 // console.log(this.allMovesHistory);
             }
-            else if(chosenPiece && Game.currentPlayer.includes(chosenPiece)){
-                Game.setLastChosen(chosenPiece);
-                Game.castling();
+            else {
+                if (chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)) {
+                    Game.setLastChosen(chosenPiece);
+                    chosenPiece.move();
+                    //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
+                    this.allMovesHistory.push(chosenPiece.movesHistory)
+                    // console.log(this.allMovesHistory);
+                }
+                else if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
+                    Game.setLastChosen(chosenPiece);
+                    Game.castling();
+                }
             }
         }
     }
