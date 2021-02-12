@@ -75,7 +75,7 @@ abstract class Piece{
         this.lastMove = descriptive;
         addMoveHistory(this.lastMove, this.color)
         // this.lastMove = longAlgebraicNotation;
-        console.log(this.lastMove);
+        //console.log(this.lastMove);
     }
 
     //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY

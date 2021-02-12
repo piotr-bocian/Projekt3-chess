@@ -16,11 +16,12 @@ class Queen extends Piece implements QueenMethods{
          this.collectAllPossibleMoves().forEach(id=>{
              allPossibleMoves.push(id);
             })
-            console.log(allPossibleMoves);
+            //console.log(allPossibleMoves);
             return allPossibleMoves
     }
 
     move(){
+        this.removeClassActive();
         // const movesShow:MovesShow =(id:string)=>{
         //     const movesPossibilities = [...document.querySelectorAll(`#${id}`)];
         //         movesPossibilities.forEach(el=>{

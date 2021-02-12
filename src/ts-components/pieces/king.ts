@@ -1,6 +1,7 @@
 import { Piece } from "./piece";
 import { Game } from "../game";
 import { Pawn } from "./pawn";
+import { Rook } from "./rook";
 
 class King extends Piece{
 
@@ -40,6 +41,13 @@ class King extends Piece{
         const possibleMovesArr:string[] = this.showPossibleMoves();
         const dangerZones:string[] = this.getDangerZones();
 
+        if(Game.isQueensideCastlingPossible())
+        this.queensideCastling();
+
+        if(Game.isKingsideCastlingPossible())
+            this.kingsideCastling();
+
+        
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
 
@@ -58,8 +66,83 @@ class King extends Piece{
                     this.removeClassActive();
                 }
             }, {capture: true});
-
         });
+    }
+
+    queensideCastling(){
+        if(this.color === 'white'){
+            const position = document.querySelector('#C-1');
+            position!.classList.add('active');
+            //console.log('nadalem klase active na skrzydle hetmanskim')
+            console.log(document.querySelector('#C-1'))
+
+            let rook:Rook;
+            for(let p of Game.getWhites()){
+                if(p instanceof Rook && p.getPositionX() === 'A' && p.getPositionY() === 1)
+                    rook = p;
+            }
+
+            position!.addEventListener('click', () => {
+                this.setOnBoard('C', 1);
+                rook.setOnBoard('D', 1);
+                this.removeClassActive();
+            })
+        }
+        else{
+            const position = document.querySelector('#C-8');
+            position!.classList.add('active');
+
+            let rook:Rook;
+            for(let p of Game.getBlacks()){
+                if(p instanceof Rook && p.getPositionX() === 'A' && p.getPositionY() === 8){
+                    rook = p;
+                }
+            }
+            
+            position!.addEventListener('click', () => {
+                this.setOnBoard('C', 8);
+                rook.setOnBoard('D', 8);
+                this.removeClassActive();
+            })
+        }
+    }
+
+    kingsideCastling(){
+        if(this.color === 'white'){
+            
+            const position = document.querySelector('#G-1');
+            position!.classList.add('active');
+            //console.log('nadalem klase active na skrzydle krolweskim')
+            console.log(document.querySelector('#G-1'))
+
+            let rook:Rook;
+            for(let p of Game.getWhites()){
+                if(p instanceof Rook && p.getPositionX() === 'H' && p.getPositionY() === 1)
+                    rook = p;
+            }
+
+            position!.addEventListener('click', () => {
+                this.setOnBoard('G', 1);
+                rook.setOnBoard('F', 1);
+                this.removeClassActive();
+            })
+        }
+        else{
+            const position = document.querySelector('#G-8');
+            position!.classList.add('active');
+
+            let rook:Rook;
+            for(let p of Game.getBlacks()){
+                if(p instanceof Rook && p.getPositionX() === 'H' && p.getPositionY() === 8)
+                    rook = p;
+            }
+
+            position!.addEventListener('click', () => {
+                this.setOnBoard('G', 8);
+                rook.setOnBoard('F', 8);
+                this.removeClassActive();
+            })
+        }
     }
 
     isChecked():boolean{

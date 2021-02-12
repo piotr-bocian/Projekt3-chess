@@ -18,7 +18,7 @@ class Pawn extends Piece {
 
 
     showPossibleMoves(): string[] {
-        this.removeClassActive();
+        //this.removeClassActive();
 
         let posXAttack1 = this.nextChar(this.positionX);
 
@@ -126,6 +126,7 @@ class Pawn extends Piece {
     }
 
     move(): void {
+        this.removeClassActive();
         const showEnPassant: string[] = this.enPassant();
         const possibilities: string[] = this.showPossibleMoves();
         

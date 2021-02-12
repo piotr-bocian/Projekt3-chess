@@ -15,7 +15,7 @@ class Rook extends Piece{
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves(): string[]{
-        this.removeClassActive();
+        //this.removeClassActive();
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         // const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
         const PossibleMoves:any  = [];
