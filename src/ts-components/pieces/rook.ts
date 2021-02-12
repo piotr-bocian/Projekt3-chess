@@ -34,7 +34,12 @@ class Rook extends Piece{
                     PossibleMoves.push(`${rookLineX}-${i}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${rookLineX}-${i}`);
+                        break;
+                    }
                     break;
+                    
                 }
             }
             // bot
@@ -46,6 +51,10 @@ class Rook extends Piece{
                     PossibleMoves.push(`${rookLineX}-${i}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${rookLineX}-${i}`);
+                        break;
+                    }
                     break;
                 }
             }
@@ -53,7 +62,7 @@ class Rook extends Piece{
         const checkXAxis = ()=>{
             // right
             const clickedElementIndex = arrayOfX.indexOf(rookLineX)
-            for(let i=clickedElementIndex;i<=6;i++){
+            for(let i=clickedElementIndex;i<=7;i++){
                 let squareY = document.querySelector(`#${arrayOfX[i+1]}-${rookLineY}`);
                 if(!(squareY?.querySelector('img')) || squareY.innerHTML === ""){
                     if (squareY != null)
@@ -61,6 +70,10 @@ class Rook extends Piece{
                     PossibleMoves.push(`${arrayOfX[i+1]}-${rookLineY}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${arrayOfX[i+1]}-${rookLineY}`);
+                        break;
+                    }
                     break;
                 }
             }
@@ -73,6 +86,10 @@ class Rook extends Piece{
                     PossibleMoves.push(`${arrayOfX[i-1]}-${rookLineY}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${arrayOfX[i-1]}-${rookLineY}`);
+                        break;
+                    }
                     break;
                 }
             }
@@ -90,7 +107,7 @@ class Rook extends Piece{
         //         }
         //     });
         // });
-        // console.log(PossibleMoves)
+        console.log(PossibleMoves)
         return PossibleMoves;
     }
 
