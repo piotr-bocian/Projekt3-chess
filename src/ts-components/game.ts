@@ -148,6 +148,7 @@ class Game {
                         && document.querySelector('#B-1')!.innerHTML === ''
                         && document.querySelector('#C-1')!.innerHTML === ''
                         && document.querySelector('#D-1')!.innerHTML === ''
+                        && !this.whiteKing.isChecked()
                         && this.whiteKing.getDangerZones().indexOf('C-1') === -1
                     )
                 }
@@ -162,6 +163,7 @@ class Game {
                         && document.querySelector('#B-8')!.innerHTML === ''
                         && document.querySelector('#C-8')!.innerHTML === ''
                         && document.querySelector('#D-8')!.innerHTML === ''
+                        && !this.blackKing.isChecked()
                         && this.blackKing.getDangerZones().indexOf('C-8') === -1
                     )
                 }
@@ -179,6 +181,7 @@ class Game {
                         && !p.hasMoved
                         && document.querySelector('#F-1')!.innerHTML === ''
                         && document.querySelector('#G-1')!.innerHTML === ''
+                        && !this.whiteKing.isChecked()
                         && this.whiteKing.getDangerZones().indexOf('G-1') === -1
                     )
                 }
@@ -192,6 +195,7 @@ class Game {
                         && !p.hasMoved
                         && document.querySelector('#F-8')!.innerHTML === ''
                         && document.querySelector('#G-8')!.innerHTML === ''
+                        && !this.blackKing.isChecked()
                         && this.blackKing.getDangerZones().indexOf('G-8') === -1
                     )
                 }
