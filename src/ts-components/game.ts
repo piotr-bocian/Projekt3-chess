@@ -7,6 +7,7 @@ import { Queen } from "./pieces/queen";
 import { Rook } from "./pieces/rook";
 import { Pawn } from "./pieces/pawn"
 import { ID } from "./board";
+import { ifPromotion } from "./promotion"
 
 class Game {
 
@@ -63,11 +64,12 @@ class Game {
       };
 
     startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
-        
-        let chosenPiece = Game.getPiece(square);
-        if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
-            Game.setLastChosen(chosenPiece);
-            chosenPiece.move();
+        if (!ifPromotion()) {
+            let chosenPiece = Game.getPiece(square);
+            if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
+                Game.setLastChosen(chosenPiece);
+                chosenPiece.move();
+            }
         }
     }
 
