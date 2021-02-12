@@ -3,7 +3,7 @@ class Timer {
     player: string;
     timerHandler: Element;
     interval: number;
-    
+
     constructor (minutes: number, player: string) {
         this.start = this.start.bind(this);
         this.pause = this.pause.bind(this);
@@ -26,7 +26,7 @@ class Timer {
       this.pause();
       console.log("STOP");
     }
-    
+
     timedown() {
         this.timerHandler.innerHTML = this.convertSeconds(this.seconds);
         if (this.seconds > 0) {

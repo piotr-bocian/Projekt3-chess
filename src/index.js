@@ -4,8 +4,8 @@ import Timer from './js-components/timer';
 
 const game = new Game();
 document.body.appendChild(timeHistoryContainer());
-var TimerTry = new Timer(1, 'timer-white');
-var TimerTry1 = new Timer(1, 'timer-black');
+var TimerTry = new Timer(3, 'timer-white');
+var TimerTry1 = new Timer(5, 'timer-black');
 
 // TEST:
 if (true) {

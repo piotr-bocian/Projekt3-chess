@@ -1,5 +1,4 @@
-import { Game } from "../game"
-
+import { Game } from "../game";
 import {addMoveHistory} from '../addMoveHistory';
 abstract class Piece{
     public color:string;
@@ -86,10 +85,15 @@ abstract class Piece{
         let name:string;
         let movedTo:string;
         let movedFrom:string;
+        let timeStampWhite = document.querySelector('#timer-white')?.innerHTML;
+        let timeStampBlack = document.querySelector('#timer-black')?.innerHTML;
+        const time = Game.round % 2 === 0 ? timeStampWhite : timeStampBlack;
         let beatedPiece = Piece.beated.pop();
         const movesHistoryClone = this.movesHistory.slice();
         /////////////
         const createNotation = movesHistoryClone.pop();
+        console.log(movesHistoryClone);
+
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
@@ -97,19 +101,20 @@ abstract class Piece{
             movedFrom = 'poruszył/a się z pola';
             movedTo = 'na pole'
             name = getName(this.constructor.name);
+
             //RUCHY
-            const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+            const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
             this.lastMove = descriptive;
 
-            //SZACHOWANIE
+            //SZACHOWANIE DO POPRAWY
             if (Piece.isChecked){
-                const descriptive = `${Piece.isChecked}`;
+                const descriptive = `${time} ${Piece.isChecked}`;
                 this.lastMove = descriptive;
                 }
 
             //NOTACJA DLA BICIA
             if (beatedPiece){
-            const descriptive = `${getName(beatedPiece.constructor.name)} został zbity przez ${name}`;
+            const descriptive = `${time} ${getName(beatedPiece.constructor.name)} został zbity przez ${name}`;
             this.lastMove = descriptive;
             }
         } else if (document.documentElement.lang === 'en'){
@@ -117,7 +122,7 @@ abstract class Piece{
             movedTo = 'to';
             name = this.constructor.name;
             //RUCHY
-             const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+             const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
              this.lastMove = descriptive;
 
             //SZACHOWANIE
@@ -127,7 +132,7 @@ abstract class Piece{
                 }
             //BICIE
             if (beatedPiece){
-            const descriptive = `${beatedPiece.constructor.name} was beaten by ${name}`;
+            const descriptive = `${time} ${beatedPiece.constructor.name} was beaten by ${name}`;
             this.lastMove = descriptive;
             }
         }
@@ -143,7 +148,7 @@ abstract class Piece{
             this.removeClassActive();
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
-            // this.movesHistory.length = lastMove.length;
+
             if (popLastMove){
                     const positionX = popLastMove[0];
                     const positionY = popLastMove[1];

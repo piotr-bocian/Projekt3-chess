@@ -22,7 +22,7 @@ class Game {
     private static allMovesHistory:string[][][];
     private lastMove: string;
     private static currentPlayer = Game.whites;
-    private static round:number = 0;
+    public static round:number = 0;
 
     constructor(){
         this.gameBoard = new Board;
@@ -62,8 +62,12 @@ class Game {
     }
 
     static changeTurn() {
-        if (Game.round % 2 === 0) {Game.currentPlayer = Game.blacks};
-        if (Game.round % 2 === 1) {Game.currentPlayer = Game.whites};
+        if (Game.round % 2 === 0) {
+            Game.currentPlayer = Game.blacks
+        };
+        if (Game.round % 2 === 1) {
+            Game.currentPlayer = Game.whites
+        };
         this.round++;
       };
 
