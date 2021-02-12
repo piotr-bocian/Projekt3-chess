@@ -37,7 +37,7 @@ class Bishop extends Piece{
                 possibleMoves.push(`${ID[coordinateX+i]}-${coordinateY+i}`);
             }
         }
-        
+
         // down left
         var downLeft: number;
         if (coordinateY - 1 < coordinateX - 1) {
@@ -74,7 +74,7 @@ class Bishop extends Piece{
                 possibleMoves.push(`${ID[coordinateX-i]}-${coordinateY+i}`);
             }
         }
-        
+
         // down right
         var downRight: number;
         if (coordinateY < 9 - coordinateX) {
@@ -94,22 +94,26 @@ class Bishop extends Piece{
         }
         return possibleMoves;
     }
-    
+
     move():void{
         this.removeClassActive();
 
         const possibleMovesArr:string[] = this.showPossibleMoves();
         // console.log(possibleMovesArr);
-        
+
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
-        
+
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
                     if (square!.innerHTML != '') {
                         Game.beat(square as HTMLElement);
                     }
+                    //ZBIERANIE HISTORII RUCHÓW
+                    this.history(square!);
+                    this.historyNotation();
+                    //
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
                     Game.checkingKings();

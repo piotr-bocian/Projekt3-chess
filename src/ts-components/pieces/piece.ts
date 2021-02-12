@@ -64,18 +64,68 @@ abstract class Piece{
         // console.log(this.movesHistory);
     }
     //OPIS RUCHÓW
-    historyNotation(move = 'moved from', to ='to', name = this.constructor.name){
+    historyNotation(isChecked = null){
+        let name:string;
+        let movedTo:string;
+        let movedFrom:string;
         const movesHistoryClone = this.movesHistory.slice();
+        //TABLICA Z BICIEM
+        const beated = Game.beated.slice();
+        const beatedPiece = beated.pop();
+        // console.log(beatedPiece)
+        ///////////////////////////
         const createNotation = movesHistoryClone.pop();
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
-        const descriptive = `${name} ${move} ${createNotation[0]}-${createNotation[1]} ${to} ${createNotation[2]}-${createNotation[3]}`;
+
+        if (document.documentElement.lang === 'pl'){
+            movedFrom = 'poruszył/a się z pola';
+            movedTo = 'na pole'
+            const getName = (constructorName:string)=>{
+                switch (constructorName){
+                case 'Queen':
+                  return 'Królowa';
+                case 'Rook':
+                 return 'Wieża';
+                case 'Knight':
+                  return 'Skoczek';
+                case 'Bishop':
+                return 'Goniec';
+                case 'King':
+                return 'Król';
+                default:
+                return 'Pion';
+            }
+            }
+
+            name = getName(this.constructor.name);
+            //RUCHY
+            const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+            this.lastMove = descriptive;
+
+            //SZACHOWANIE
+
+            //BICIE
+            if (beatedPiece){
+            const beated = getName(beatedPiece.constructor.name)
+            const descriptive = `${beated} został zbity przez ${name}`;
+            this.lastMove = descriptive;
+            }
+
+        } else if (document.documentElement.lang === 'en'){
+            movedFrom = 'moved from';
+            movedTo = 'to';
+            name = this.constructor.name;
+            //RUCHY
+             const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+             this.lastMove = descriptive;
+
+        }
+
         // const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
-        this.lastMove = descriptive;
         addMoveHistory(this.lastMove, this.color)
         // this.lastMove = longAlgebraicNotation;
-        console.log(this.lastMove);
     }
 
     //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY

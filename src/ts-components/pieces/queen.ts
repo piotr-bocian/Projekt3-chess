@@ -16,7 +16,6 @@ class Queen extends Piece implements QueenMethods{
          this.collectAllPossibleMoves().forEach(id=>{
              allPossibleMoves.push(id);
             })
-            console.log(allPossibleMoves);
             return allPossibleMoves
     }
 
@@ -43,16 +42,10 @@ class Queen extends Piece implements QueenMethods{
                     }
                     //ZBIERANIE HISTORII RUCHÓW
                     this.history(square);
-                    //PL
-                    const lang = document.documentElement.lang;
-                    if(lang === 'pl'){ //zmieniłem tu kolory na white i black jak zmieniały się klasy w DOM to biecie źle działało dla królowej.
-                        (this.color === 'white'|| this.color === 'Biały') ? this.color ='white' : this.color = 'black';
-                        this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
-                    } else {
-                        this.color = this.color;
-                        this.historyNotation();
-                    }
-                    //
+                    this.historyNotation();
+                    ///////////////////
+                    console.log(Game.beated)
+                    //////////////
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
                 }

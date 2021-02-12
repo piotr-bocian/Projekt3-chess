@@ -17,7 +17,7 @@ class Game {
 
     private static whites:Piece[] = [];
     private static blacks:Piece[] = [];
-    private static beated:Piece[] = [];
+    public static beated:Piece[] = [];
 //ZBIERANIE HISTORII RYCHÓW BIEREK
     private allMovesHistory:string[][][];
     private lastMove: string;
@@ -216,6 +216,16 @@ class Game {
         return false;
     }
 
+    //COFANIE RUCHÓW
+    reverseMove(){
+        for(let p of Game.whites){
+                p.reverseMove();
+        }
+        for(let p of Game.blacks){
+            p.reverseMove();
+    }
+    }
+
 
 
     static getPieces(color: string): Piece[] {
@@ -235,12 +245,6 @@ class Game {
 
     static getBlacks():Piece[]{
         return Game.blacks;
-    }
-//COFANIE RUCHÓW
-    reverseMove(){
-        for(let p of Game.whites){
-                p.reverseMove();
-        }
     }
 
     static getLastChosen():Piece{

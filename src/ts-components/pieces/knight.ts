@@ -48,7 +48,7 @@ class Knight extends Piece{
 
         return this.possibleMovesIDs;
     }
-    
+
     move(): void {
         const possibilities: string[] = this.showPossibleMoves();
         possibilities.forEach((id) => {
@@ -63,10 +63,14 @@ class Knight extends Piece{
                     if (possMove.innerHTML != '') {
                         Game.beat(possMove as HTMLElement);
                     }
+                    //ZBIERANIE HISTORII RUCHÓW
+                    this.history(possMove);
+                    this.historyNotation();
+                    //
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                     Game.checkingKings();
-                    console.log(possMove.innerHTML);
+
                 }
             },{capture: true});
         });
