@@ -14,7 +14,7 @@ class Bishop extends Piece{
     }
 
     showPossibleMoves():string[]{
-        this.removeClassActive();
+        //this.removeClassActive();
         const possibleMoves: string[] = [];
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
         const coordinateY : number = this.positionY;
