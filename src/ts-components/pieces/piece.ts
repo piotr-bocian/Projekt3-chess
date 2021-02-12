@@ -11,6 +11,7 @@ abstract class Piece{
     public lastMove: string;
     public static beated:Piece[] = [];
     public static isChecked:string;
+    public static moveTimeArray: string[]
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
     constructor(color:string, positionX:string, positionY:number){
@@ -20,7 +21,8 @@ abstract class Piece{
         this.possibleMovesIDs = this.showPossibleMoves();
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
-        Piece.isChecked =''
+        Piece.isChecked ='';
+        Piece.moveTimeArray =[];
         this.movesHistory=[];
         this.lastMove ='';
     }
@@ -92,15 +94,20 @@ abstract class Piece{
         const movesHistoryClone = this.movesHistory.slice();
         /////////////
         const createNotation = movesHistoryClone.pop();
-        console.log(movesHistoryClone);
+
 
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
+        if(!time) return;
+        //CZAS WYKONANIA RUCHU
+        Piece.moveTimeArray.push(time);
+
         if (document.documentElement.lang === 'pl'){
             movedFrom = 'poruszył/a się z pola';
             movedTo = 'na pole'
             name = getName(this.constructor.name);
+
 
             //RUCHY
             const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
@@ -117,6 +124,7 @@ abstract class Piece{
             const descriptive = `${time} ${getName(beatedPiece.constructor.name)} został zbity przez ${name}`;
             this.lastMove = descriptive;
             }
+            //EN VERSION
         } else if (document.documentElement.lang === 'en'){
             movedFrom = 'moved from';
             movedTo = 'to';
@@ -144,10 +152,19 @@ abstract class Piece{
 
     //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
     reverseMove(){
+        let timeStampWhite = document.querySelector('#timer-white');
+        let timeStampBlack = document.querySelector('#timer-black');
         const lastMove = this.movesHistory;
             this.removeClassActive();
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
+
+            //DZIAŁA ALE NIE DZIAŁA
+            // if(Piece.moveTimeArray.length % 2 === 1){
+            //     timeStampWhite.innerHTML = Piece.moveTimeArray.pop()
+            // } else {
+            //     timeStampBlack.innerHTML = Piece.moveTimeArray.pop()
+            // }
 
             if (popLastMove){
                     const positionX = popLastMove[0];
@@ -158,6 +175,13 @@ abstract class Piece{
                 } else {
                     return
                 }
+                const last = Game.beated.pop();
+                const img = last?.symbol
+                const pos = last?.parentSquare.id;
+
+                console.log(pos)
+                // if (!pos) return;
+                last?.setOnBoard(pos[0]!, parseInt(pos[1]!))
 
     }
 
