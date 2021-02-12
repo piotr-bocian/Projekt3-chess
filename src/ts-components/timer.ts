@@ -11,7 +11,7 @@ class Timer {
         this.seconds = minutes * 60;
         this.timerHandler = document.querySelector(`#${this.player}`)!;
         this.interval = 0;
-        this.timerHandler.innerHTML = "--:--"
+        this.timerHandler.innerHTML = minutes < 10 ? `0${minutes}:00` : `${minutes}:00`;
     }
 
     start(){
