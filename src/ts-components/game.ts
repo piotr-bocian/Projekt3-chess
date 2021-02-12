@@ -136,15 +136,20 @@ class Game {
         if(Game.whiteKing.isChecked()){
             if(Game.whiteKing.isCheckmated())
                 console.log('WHITE KING CHECKMATED');
-            else
+            else{
+                Piece.isChecked = 'Szach na Królu';
                 console.log('WHITE KING CHECKED');
+            }
         }
 
         if(Game.blackKing.isChecked()){
-            if(Game.blackKing.isCheckmated())
+            if(Game.blackKing.isCheckmated()){
                 console.log('BLACK KING CHECKMATED');
-            else
-            console.log('BLACK KING CHECKED');
+            } else{
+                Piece.isChecked = 'Szach na Królu';
+                console.log('BLACK KING CHECKED');
+            }
+
         }
     }
 

@@ -11,6 +11,7 @@ abstract class Piece{
     public movesHistory: string[][];
     public lastMove: string;
     public static beated:Piece[] = [];
+    public static isChecked:string;
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
     constructor(color:string, positionX:string, positionY:number){
@@ -20,7 +21,7 @@ abstract class Piece{
         this.possibleMovesIDs = this.showPossibleMoves();
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
-
+        Piece.isChecked =''
         this.movesHistory=[];
         this.lastMove ='';
     }
@@ -65,14 +66,7 @@ abstract class Piece{
         // console.log(this.movesHistory);
     }
     //OPIS RUCHÓW
-    historyNotation(isChecked = null){
-        let name:string;
-        let movedTo:string;
-        let movedFrom:string;
-        let beatedPiece = Piece.beated.pop();
-        const movesHistoryClone = this.movesHistory.slice();
-        /////////////
-        const createNotation = movesHistoryClone.pop();
+    historyNotation(){
         const getName = (constructorName:string)=>{
             switch (constructorName){
             case 'Queen':
@@ -89,6 +83,13 @@ abstract class Piece{
             return 'Pion';
         }
         }
+        let name:string;
+        let movedTo:string;
+        let movedFrom:string;
+        let beatedPiece = Piece.beated.pop();
+        const movesHistoryClone = this.movesHistory.slice();
+        /////////////
+        const createNotation = movesHistoryClone.pop();
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
@@ -101,6 +102,10 @@ abstract class Piece{
             this.lastMove = descriptive;
 
             //SZACHOWANIE
+            if (Piece.isChecked){
+                const descriptive = `${Piece.isChecked}`;
+                this.lastMove = descriptive;
+                }
 
             //NOTACJA DLA BICIA
             if (beatedPiece){
@@ -116,10 +121,13 @@ abstract class Piece{
              this.lastMove = descriptive;
 
             //SZACHOWANIE
-
+            if (Piece.isChecked){
+                const descriptive = `King checked`;
+                this.lastMove = descriptive;
+                }
             //BICIE
             if (beatedPiece){
-            const descriptive = `${beatedPiece.constructor.name} został zbity przez ${name}`;
+            const descriptive = `${beatedPiece.constructor.name} was beaten by ${name}`;
             this.lastMove = descriptive;
             }
         }
