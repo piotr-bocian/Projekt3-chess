@@ -25,6 +25,7 @@ class Timer {
     stop() {
       this.pause();
       console.log("STOP");
+      // wywołanie okna modalnego
     }
     
     timedown() {
@@ -45,4 +46,4 @@ class Timer {
     }
 } 
 
-module.exports = Timer;
+export {Timer};

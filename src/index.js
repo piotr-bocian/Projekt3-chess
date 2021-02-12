@@ -1,20 +1,6 @@
 import {Game} from "./js-components/game"
-import timeHistoryContainer from './js-components/timeHistoryContainer';
-import Timer from './js-components/timer';
 
 const game = new Game();
-document.body.appendChild(timeHistoryContainer());
-var TimerTry = new Timer(1, 'timer-white');
-var TimerTry1 = new Timer(1, 'timer-black');
-
-// TEST:
-if (true) {
-  TimerTry.start();
-}
-let el = document.getElementById('timer-black');
-if (true) {
-  TimerTry1.start();
-}
 
 document.querySelectorAll('.board-container div').forEach(element => {
     element.addEventListener('click', selectPiece)
