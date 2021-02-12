@@ -26,8 +26,9 @@ class King extends Piece{
                 if(square !== null){
                     if(square.innerHTML === '')
                         possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
-                    else if(!square.querySelector('img')!.classList.contains(this.color))
+                    else if(!square.querySelector('img')!.classList.contains(this.color)){
                         possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
+                    }   
                 }
             }
         }
@@ -40,7 +41,7 @@ class King extends Piece{
 
         const possibleMovesArr:string[] = this.showPossibleMoves();
         const dangerZones:string[] = this.getDangerZones();
-
+        console.log(dangerZones);
         if(Game.isQueensideCastlingPossible())
         this.queensideCastling();
 
