@@ -8,7 +8,7 @@ abstract class Piece{
     protected positionY:number;
     protected possibleMovesIDs:string[];    //<-- tablica ID pól na które może przemieścić się figura
     protected parentSquare:HTMLElement; //<-- div w którym "siedzi" img z obrazkiem danej figury
-    public movesHistory: string[][];
+    public static movesHistory: string[][];
     public lastMove: string;
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
@@ -20,7 +20,7 @@ abstract class Piece{
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
 
-        this.movesHistory=[];
+        Piece.movesHistory=[];
         this.lastMove ='';
     }
 
@@ -54,18 +54,18 @@ abstract class Piece{
             }
         }
     }
-    //HISTORIA RUCHÓW
+    // HISTORIA RUCHÓW
     history(square:Element){
         const fromPositionX = this.getPositionX();
         const fromPositionY = this.getPositionY().toString();
         const toPositionX = `${(square).id.charAt(0)}`;
         const toPositionY = `${parseInt((square).id.charAt(2))}`;
-        this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
+        Piece.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
         // console.log(this.movesHistory);
     }
     //OPIS RUCHÓW
     historyNotation(move = 'moved from', to ='to', name = this.constructor.name){
-        const movesHistoryClone = this.movesHistory.slice();
+        const movesHistoryClone = Piece.movesHistory.slice();
         const createNotation = movesHistoryClone.pop();
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
@@ -80,7 +80,7 @@ abstract class Piece{
 
     //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
     reverseMove(){
-        const lastMove = this.movesHistory;
+        const lastMove = Piece.movesHistory;
             this.removeClassActive();
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();

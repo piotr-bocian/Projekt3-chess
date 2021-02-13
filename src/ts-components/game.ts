@@ -20,8 +20,8 @@ class Game {
     private static blacks:Piece[] = [];
     private static beated:Piece[] = [];
 //ZBIERANIE HISTORII RYCHÓW BIEREK
-    private allMovesHistory:string[][][];
-    private lastMove: string;
+    public static allMovesHistory:string[][][];
+    public lastMove: string;
     private static currentPlayer = Game.whites;
     private static round:number = 0;
 
@@ -30,9 +30,9 @@ class Game {
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
         //DO SPRAWDZENIA
-        this.allMovesHistory = []
         this.lastMove = ''
         //
+        Game.allMovesHistory = []
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -62,6 +62,7 @@ class Game {
         }
     }
 
+    //TURY
     static changeTurn() {
         if (Game.round % 2 === 0) {Game.currentPlayer = Game.blacks};
         if (Game.round % 2 === 1) {Game.currentPlayer = Game.whites};
@@ -75,16 +76,16 @@ class Game {
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
                 //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-                this.allMovesHistory.push(chosenPiece.movesHistory)
-                // console.log(this.allMovesHistory);
+                // Game.allMovesHistory.push(chosenPiece.movesHistory)
+                // console.log(Game.allMovesHistory);
             }
             else {
                 if (chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)) {
                     Game.setLastChosen(chosenPiece);
                     chosenPiece.move();
                     //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-                    this.allMovesHistory.push(chosenPiece.movesHistory)
-                    // console.log(this.allMovesHistory);
+                    // Game.allMovesHistory.push(chosenPiece.movesHistory)
+                    // console.log(Game.allMovesHistory);
                 }
                 else if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
                     Game.setLastChosen(chosenPiece);
@@ -241,15 +242,19 @@ class Game {
         return Game.blacks;
     }
 //COFANIE RUCHÓW
-    reverseMove(){
-        for(let p of Game.whites){
-                p.reverseMove();
-        }
-    }
+    // reverseMove(){
+    //     for(let p of Game.whites){
+    //             p.reverseMove();
+    //     }
+    // }
 
     static getLastChosen():Piece{
         return Game.lastChosen;
     }
+
+    // static getAllMovesHistory(){
+    //     return Game.allMovesHistory;
+    // }
 
 }
 

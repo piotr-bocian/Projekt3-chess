@@ -185,10 +185,10 @@ class Pawn extends Piece {
     pawnPromotion (pawn:Pawn) {
         this.removeClassActive();
         const pieces = [
-            {pieceName: Queen, name: "Queen", handler: ''},
-            {pieceName: Rook, name: "Rook", handler: ''},
-            {pieceName: Knight, name: "Knight", handler: ''},
-            {pieceName: Bishop, name: "Bishop", handler: ''}
+            {pieceName: Queen, name: "Queen"},
+            {pieceName: Rook, name: "Rook"},
+            {pieceName: Knight, name: "Knight"},
+            {pieceName: Bishop, name: "Bishop"}
         ]
 
         const modalWindowPawn = document.createElement("div");
@@ -203,7 +203,7 @@ class Pawn extends Piece {
                 const selectableFigure = document.createElement("img");
                 selectableFigure.setAttribute('src', `../../../static/assets/white${piece.name}.png`)
                 selectableFigure.style.height = '90px';
-                const { handler, pieceName: PieceName } = piece;
+                const { pieceName: PieceName } = piece;
 
                 modalWindowPawn.appendChild(selectableFigure);
 
@@ -226,7 +226,7 @@ class Pawn extends Piece {
                 const selectableFigure = document.createElement("img");
                 selectableFigure.setAttribute('src', `../../../static/assets/black${piece.name}.png`)
                 selectableFigure.style.height = '90px';
-                const { handler, pieceName: PieceName } = piece;
+                const { pieceName: PieceName } = piece;
 
                 modalWindowPawn.appendChild(selectableFigure);
 
@@ -259,20 +259,34 @@ class Pawn extends Piece {
         let emptySquare2 = document.getElementById(`${pawnPosX}-${positionY2}`)!;
         const enPassant = [];
 
-        if (this.color === 'white'
-        && this.positionY === 5
-        && pawnPos.querySelector('img')?.src.includes('Pawn')
-        && !(emptySquare1.classList.contains('pieceInside'))) {
-            enPassant.push(`${pawnPosX}-${positionY1}`);
-        }
+        console.log(Piece.movesHistory);
+        const lastMoveArray = Piece.movesHistory.slice();
+        const lastMovePawn = lastMoveArray.pop();
+        console.log(lastMovePawn);
 
-        if (this.color === 'black' 
-        && this.positionY === 4 
-        && pawnPos.querySelector('img')?.src.includes('Pawn')
-        && emptySquare1.classList.contains('pieceInside')) {
-            enPassant.push(`${pawnPosX}-${positionY1}`);
-        }
+        if (lastMovePawn) {
+            const differenceY: number = Math.abs(parseInt(lastMovePawn[1]) - parseInt(lastMovePawn[3]));
+            console.log(differenceY);
 
+
+
+            if (this.color === 'white'
+                && this.positionY === 5
+                && pawnPos.querySelector('img')?.src.includes('Pawn')
+                && differenceY === 2
+                && !(emptySquare1.classList.contains('pieceInside'))) {
+                enPassant.push(`${pawnPosX}-${positionY1}`);
+            }
+
+            if (this.color === 'black'
+                && this.positionY === 4
+                && pawnPos.querySelector('img')?.src.includes('Pawn')
+                && differenceY === 2
+                && emptySquare1.classList.contains('pieceInside')) {
+                enPassant.push(`${pawnPosX}-${positionY1}`);
+            }
+
+        }
         return enPassant;
     }
 
