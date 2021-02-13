@@ -1,5 +1,6 @@
 class Timer {
     seconds: number;
+    restart: number;
     player: string;
     timerHandler: Element;
     interval: number;
@@ -9,6 +10,7 @@ class Timer {
         this.pause = this.pause.bind(this);
         this.player = player;
         this.seconds = minutes * 60;
+        this.restart = minutes * 60;
         this.timerHandler = document.querySelector(`#${this.player}`)!;
         this.interval = 0;
         this.timerHandler.innerHTML = minutes < 10 ? `0${minutes}:00` : `${minutes}:00`;
@@ -33,6 +35,11 @@ class Timer {
       let seconds = parseInt(time.substring(3,5));
       this.seconds = minutes*60 + seconds;
     };
+
+    restartTimer(){
+      this.seconds = this.restart;
+      this.start();
+    }
     
     timedown() {
         this.timerHandler.innerHTML = this.convertSeconds(this.seconds);
