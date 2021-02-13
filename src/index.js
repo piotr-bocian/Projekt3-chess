@@ -21,14 +21,13 @@ export {time};
 // end test button
 const testButton = document.querySelector('.testEnd');
 testButton.addEventListener('click',()=>{
-  let endModalResul =  new endResult('USER1','USER2','Mateusz', '')
-  endModalResul.showResult()
+  let endModalResult =  new endResult('USER1','USER2','Mateusz', '')
+  endModalResult.showResult()
 });
 
 // start the game after click button
 const startButton = document.querySelector('.start-button');
 startButton.addEventListener('click',()=>{
-  console.log('clicled')
   // hide start box after start the game
   let logoElement = document.querySelector('.logo');
   let menuContainer = document.querySelector('.menuContainer');
