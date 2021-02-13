@@ -273,7 +273,7 @@ class Pawn extends Piece {
 
         if (lastMovePawn) {
             const differenceY: number = Math.abs(parseInt(lastMovePawn[1]) - parseInt(lastMovePawn[3]));
-            
+            const lastX: string = lastMovePawn[0];
 
             if (pawnPos1 !== null && pawnPos2 !== null) {
                 if (this.color === 'white'
@@ -281,7 +281,7 @@ class Pawn extends Piece {
                     && (pawnPos1.querySelector('img')?.src.includes('Pawn') || pawnPos2.querySelector('img')?.src.includes('Pawn'))
                     && differenceY === 2
                 ) {
-                    if (pawnPos1.querySelector('img')?.src.includes('Pawn')) {
+                    if (pawnPos1.querySelector('img')?.src.includes('Pawn') && lastX === pawnPosX1) {
                         enPassant.push(`${pawnPosX1}-${positionY1}`);
                     } else if (pawnPos2.querySelector('img')?.src.includes('Pawn')){
                         enPassant.push(`${pawnPosX2}-${positionY1}`)
@@ -295,7 +295,7 @@ class Pawn extends Piece {
                     && (pawnPos1.querySelector('img')?.src.includes('Pawn') || pawnPos2.querySelector('img')?.src.includes('Pawn'))
                     && differenceY === 2
                 ) {
-                    if (pawnPos1.querySelector('img')?.src.includes('Pawn')) {
+                    if (pawnPos1.querySelector('img')?.src.includes('Pawn') && lastX === pawnPosX1) {
                         enPassant.push(`${pawnPosX1}-${positionY2}`);
                     } else {
                         enPassant.push(`${pawnPosX2}-${positionY2}`);
