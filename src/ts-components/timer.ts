@@ -32,7 +32,6 @@ class Timer {
       let minutes = parseInt(time.substring(0,2));
       let seconds = parseInt(time.substring(3,5));
       this.seconds = minutes*60 + seconds;
-      console.log(seconds, minutes);
     };
     
     timedown() {
