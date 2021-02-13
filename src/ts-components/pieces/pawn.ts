@@ -273,6 +273,7 @@ class Pawn extends Piece {
 
         if (lastMovePawn) {
             const differenceY: number = Math.abs(parseInt(lastMovePawn[1]) - parseInt(lastMovePawn[3]));
+            
 
             if (pawnPos1 !== null && pawnPos2 !== null) {
                 if (this.color === 'white'
@@ -282,7 +283,7 @@ class Pawn extends Piece {
                 ) {
                     if (pawnPos1.querySelector('img')?.src.includes('Pawn')) {
                         enPassant.push(`${pawnPosX1}-${positionY1}`);
-                    } else {
+                    } else if (pawnPos2.querySelector('img')?.src.includes('Pawn')){
                         enPassant.push(`${pawnPosX2}-${positionY1}`)
                     }
                 }
