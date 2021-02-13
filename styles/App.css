@@ -1,10 +1,17 @@
 @import './board.css';
 @import './piece.css';
 @import './modal-pawn-promo.css';
+@import './queen.css';
+@import "./timeHistoryContainer.css";
+
 body {
+    margin-top: 10rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     height: 100%;
-    /* background-image: url(../static/assets/background.png); */
-    /* background-color: black; */
+    background-image: url(../static/assets/background.png);
+    background-color: black;
 }
 
 .active:before{

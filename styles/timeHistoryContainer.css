@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap');
+
+
+.time-history-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "timer"
+        "game-history"
+        "buttons";
+    justify-content: center;
+    width: 30vw;
+    height: 70vh;
+    background-color: white;
+    border-radius: 27px;
+}
+
+.time-div {
+    display: block;
+    grid-area: timer;
+    justify-content: center;
+    font-family: Montserrat;
+    text-align: center;
+}
+
+.time-div h4{
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 1em;
+}
+
+#timer1 {
+    display: inline-block;
+    padding: 0;
+    margin-right: 1.5em;
+}
+
+#timer1 h5 {
+    margin: auto;
+}
+
+#timer-white {
+    background-color: #D9D9D9;
+    border: 0.25em solid #BEC0CA;
+    border-radius: 14px;
+    font-size: 2em;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#timer2 {
+    display: inline-block;
+}
+
+#timer2 h5 {
+    margin: auto;
+}
+
+#timer-black {
+    background-color: #212121;
+    border: 0.25em solid #111217;
+    border-radius: 14px;
+    color: white;
+    font-size: 2em;
+    font-family: 'Roboto Mono', monospace;
+}
+
+
+/* HISTORY CONTAINER */
+
+.history-div {
+    display: block;
+    grid-area: game-history;
+    font-family: Montserrat;
+}
+
+.history-div h4{
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 1em;
+}
+
+.history-div-body {
+    height: 200px;
+    overflow-y: auto;
+    width: 90%;
+    padding: 0.9em;
+
+    background: #292929;
+    border: 2px solid #0075FF;
+    box-sizing: border-box;
+    border-radius: 27px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+::-webkit-scrollbar {
+    width: 3px;
+  }
+
+.history-move {
+    text-align: justify;
+    font-size: .8em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1em;
+}
+
+.history-moveHeader {
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4em;
+    font-size: .9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.history-div-body :last-child, .history-div-body :nth-last-child(2) {
+    color: #0075FF;
+}
+
+/* BUTTONS */
+
+.button-div {
+    display: block;
+    grid-area: buttons;
+    width: 100%;
+    margin: auto;
+
+    text-align:justify;
+    text-align-last:center;
+}
+
+.exit-button {
+    display: inline-block;
+    border: 3px solid #FA6009;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 0.5em 1.5em;
+    margin-right: 1.5em;
+
+    font-family: Montserrat;
+    font-size: 0.8em;
+    color: #FA6009;
+
+    cursor: pointer;
+}
+
+.undo-button {
+    display: inline-block;
+    background: #0075FF;
+    box-shadow: 0px 2px 15px #FF6E00;
+    border-radius: 5px;
+    padding: 0.75em 1.5em;
+
+    font-family: Montserrat;
+    font-size: 0.8em;
+    color: #FFFFFF;
+
+    cursor: pointer;
+}

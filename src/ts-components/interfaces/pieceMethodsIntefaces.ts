@@ -1,12 +1,12 @@
-interface MovesShow {
-   (id:string):void
-}
+// interface MovesShow {
+//    (id:string):void
+// }
 
-interface QueenMethods {
-   showPossibleMoves():void;
-   //queenMove():void;
-   collectAllPossibleMoves():string[];
-   removeClassActive():void;
+// interface QueenMethods {
+//    showPossibleMoves():void;
+//    //queenMove():void;
+//    collectAllPossibleMoves():string[];
+//    removeClassActive():void;
 
-}
-export {MovesShow, QueenMethods }
+// }
+// export {MovesShow, QueenMethods }

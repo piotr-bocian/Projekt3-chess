@@ -1,7 +1,6 @@
 "use stricte"
 
 import {Piece} from "./piece";
-import {ID} from "./../board";
 import { Game } from "../game";
 
 //wieża
@@ -14,8 +13,8 @@ class Rook extends Piece{
         this.symbol = `../../../static/assets/${this.color}Rook.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
-    showPossibleMoves():[]{
-        this.removeClassActive();
+    showPossibleMoves(): string[]{
+        //this.removeClassActive();
         const arrayOfX:string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         // const indexOfX:number = arrayOfX.indexOf(this.getPositionX());
         const PossibleMoves:any  = [];
@@ -34,7 +33,12 @@ class Rook extends Piece{
                     PossibleMoves.push(`${rookLineX}-${i}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${rookLineX}-${i}`);
+                        break;
+                    }
                     break;
+                    
                 }
             }
             // bot
@@ -46,6 +50,10 @@ class Rook extends Piece{
                     PossibleMoves.push(`${rookLineX}-${i}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${rookLineX}-${i}`);
+                        break;
+                    }
                     break;
                 }
             }
@@ -53,7 +61,7 @@ class Rook extends Piece{
         const checkXAxis = ()=>{
             // right
             const clickedElementIndex = arrayOfX.indexOf(rookLineX)
-            for(let i=clickedElementIndex;i<=6;i++){
+            for(let i=clickedElementIndex;i<=7;i++){
                 let squareY = document.querySelector(`#${arrayOfX[i+1]}-${rookLineY}`);
                 if(!(squareY?.querySelector('img')) || squareY.innerHTML === ""){
                     if (squareY != null)
@@ -61,6 +69,10 @@ class Rook extends Piece{
                     PossibleMoves.push(`${arrayOfX[i+1]}-${rookLineY}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${arrayOfX[i+1]}-${rookLineY}`);
+                        break;
+                    }
                     break;
                 }
             }
@@ -73,6 +85,10 @@ class Rook extends Piece{
                     PossibleMoves.push(`${arrayOfX[i-1]}-${rookLineY}`)
                 }
                 else{
+                    if(!(squareY?.querySelector('img')?.classList.contains(this.color))){
+                        PossibleMoves.push(`${arrayOfX[i-1]}-${rookLineY}`);
+                        break;
+                    }
                     break;
                 }
             }
@@ -90,7 +106,7 @@ class Rook extends Piece{
         //         }
         //     });
         // });
-        // console.log(PossibleMoves)
+        console.log(PossibleMoves)
         return PossibleMoves;
     }
 
@@ -104,12 +120,15 @@ class Rook extends Piece{
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
+                    if (square!.innerHTML != '') {
+                        Game.beat(square! as HTMLElement);
+                    }
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.hasMoved = true;
                     this.removeClassActive();
                     Game.checkingKings();
                 }
-            });
+            }, {capture: true});
 
         });
     }

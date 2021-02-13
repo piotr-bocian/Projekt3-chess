@@ -7,6 +7,7 @@ import { Queen } from "./pieces/queen";
 import { Rook } from "./pieces/rook";
 import { Pawn } from "./pieces/pawn"
 import { ID } from "./board";
+import { ifPromotion } from "./promotion"
 
 class Game {
 
@@ -17,14 +18,21 @@ class Game {
 
     private static whites:Piece[] = [];
     private static blacks:Piece[] = [];
-
+    private static beated:Piece[] = [];
+//ZBIERANIE HISTORII RYCHÓW BIEREK
+    private allMovesHistory:string[][][];
+    private lastMove: string;
     private static currentPlayer = Game.whites;
     private static round:number = 0;
+
 
     constructor(){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
-
+        //DO SPRAWDZENIA
+        this.allMovesHistory = []
+        this.lastMove = ''
+        //
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -60,20 +68,15 @@ class Game {
         this.round++;
       };
 
-    startMove(square:HTMLElement):void{ //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
-        let chosenPiece = Game.getPiece(square);
-        if (chosenPiece && !(chosenPiece instanceof Rook) && Game.currentPlayer.includes(chosenPiece)) {
-            Game.setLastChosen(chosenPiece);
-            chosenPiece.move();
-        }
-        else{
-            if(chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)){
+    startMove(square: HTMLElement): void { //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
+        if (!ifPromotion()) {
+            let chosenPiece = Game.getPiece(square);
+            if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
-            }
-            else if(chosenPiece && Game.currentPlayer.includes(chosenPiece)){
-                Game.setLastChosen(chosenPiece);
-                Game.castling();
+                //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
+                this.allMovesHistory.push(chosenPiece.movesHistory)
+                // console.log(this.allMovesHistory);
             }
         }
     }
@@ -87,15 +90,15 @@ class Game {
                     return p;
                 }
             }
-    
+
             for(let p of Game.blacks){
                 if(p.getPositionX() == x && p.getPositionY() == y){
                     return p;
                 }
-            }  
+            }
         } else {
             return;
-        }        
+        }
     }
 
     static beat(square: HTMLElement): void {
@@ -106,9 +109,11 @@ class Game {
         if (p) {
             if (p.getColor() === 'white') {
                 this.whites.splice(this.whites.indexOf(p),1);
+                this.beated.push(p);
                 square.innerHTML = '';
             } else {
                 this.blacks.splice(this.blacks.indexOf(p),1);
+                this.beated.push(p);
                 square.innerHTML = '';
             }
         } else {
@@ -123,77 +128,74 @@ class Game {
             else
                 console.log('WHITE KING CHECKED');
         }
-           
+
         if(Game.blackKing.isChecked()){
             if(Game.blackKing.isCheckmated())
                 console.log('BLACK KING CHECKMATED');
             else
             console.log('BLACK KING CHECKED');
-        }  
-    }
-
-    static castling():void{
-        
-        if(!this.isCastlingPossible())
-            return;
-
-        if(Game.lastChosen.getColor() === 'white'){
-            if(Game.lastChosen.getPositionX() === 'A'){
-                this.whiteKing.setOnBoard('C', 1);
-                Game.lastChosen.setOnBoard('D', 1);
-            }
-            else{
-                this.whiteKing.setOnBoard('G', 1);
-                Game.lastChosen.setOnBoard('F', 1);
-            }  
         }
-        else{
-            if(Game.lastChosen.getPositionX() === 'A'){
-                this.blackKing.setOnBoard('C', 8);
-                Game.lastChosen.setOnBoard('D', 8);
-            }
-            else{
-                this.blackKing.setOnBoard('G', 8);
-                Game.lastChosen.setOnBoard('F', 8);
-            }  
-        }    
     }
 
-    static isCastlingPossible():boolean{
-        const color:string = Game.lastChosen.getColor();
-        const posX:string = Game.lastChosen.getPositionX();
+    static isQueensideCastlingPossible(){
         
-        if(!(Game.lastChosen as Rook).hasMoved && (color === 'white' ? !this.whiteKing.hasMoved : !this.blackKing.hasMoved)){
-            if(posX === 'A'){
-                if(color === 'white'){
+        if(Game.lastChosen.getColor() === 'white'){
+            for(let p of Game.whites){
+                if(p instanceof Rook && p.getPositionX() === 'A' && p.getPositionY() === 1){
                     return (
-                        document.querySelector('#B-1')!.innerHTML === ''
+                        !Game.whiteKing.hasMoved
+                        && !p.hasMoved
+                        && document.querySelector('#B-1')!.innerHTML === ''
                         && document.querySelector('#C-1')!.innerHTML === ''
                         && document.querySelector('#D-1')!.innerHTML === ''
+                        && !this.whiteKing.isChecked()
                         && this.whiteKing.getDangerZones().indexOf('C-1') === -1
-                    );
-                }
-                else{
-                    return (
-                        document.querySelector('#B-8')!.innerHTML === ''
-                        && document.querySelector('#C-8')!.innerHTML === ''
-                        && document.querySelector('#D-8')!.innerHTML === ''
-                        && this.blackKing.getDangerZones().indexOf('C-8') === -1
-                    );
+                    )
                 }
             }
-            if(posX === 'H'){
-                if(color === 'white'){
+        }
+        else{
+            for(let p of Game.blacks){
+                if(p instanceof Rook && p.getPositionX() === 'A' && p.getPositionY() === 8){
                     return (
-                        document.querySelector('#F-1')!.innerHTML === ''
+                        !Game.blackKing.hasMoved
+                        && !p.hasMoved
+                        && document.querySelector('#B-8')!.innerHTML === ''
+                        && document.querySelector('#C-8')!.innerHTML === ''
+                        && document.querySelector('#D-8')!.innerHTML === ''
+                        && !this.blackKing.isChecked()
+                        && this.blackKing.getDangerZones().indexOf('C-8') === -1
+                    )
+                }
+            }
+        }
+        return false;
+    }
+
+    static isKingsideCastlingPossible(){
+        if(Game.lastChosen.getColor() === 'white'){
+            for(let p of Game.whites){
+                if(p instanceof Rook && p.getPositionX() === 'H' && p.getPositionY() === 1){
+                    return (
+                        !Game.whiteKing.hasMoved
+                        && !p.hasMoved
+                        && document.querySelector('#F-1')!.innerHTML === ''
                         && document.querySelector('#G-1')!.innerHTML === ''
+                        && !this.whiteKing.isChecked()
                         && this.whiteKing.getDangerZones().indexOf('G-1') === -1
                     )
                 }
-                else{
+            }
+        }
+        else{
+            for(let p of Game.blacks){
+                if(p instanceof Rook && p.getPositionX() === 'H' && p.getPositionY() === 8){
                     return (
-                        document.querySelector('#F-8')!.innerHTML === ''
+                        !Game.blackKing.hasMoved
+                        && !p.hasMoved
+                        && document.querySelector('#F-8')!.innerHTML === ''
                         && document.querySelector('#G-8')!.innerHTML === ''
+                        && !this.blackKing.isChecked()
                         && this.blackKing.getDangerZones().indexOf('G-8') === -1
                     )
                 }
@@ -202,12 +204,15 @@ class Game {
         return false;
     }
 
-    static setLastChosen(piece:Piece):void{
-        Game.lastChosen = piece;
+    static getPieces(color: string): Piece[] {
+        if (color == 'white') {
+            return this.whites;
+        }
+        return this.blacks;
     }
 
-    static getLastChosen():Piece{
-        return Game.lastChosen;
+    static setLastChosen(piece:Piece):void{
+        Game.lastChosen = piece;
     }
 
     static getWhites():Piece[]{
@@ -217,13 +222,17 @@ class Game {
     static getBlacks():Piece[]{
         return Game.blacks;
     }
-
-    static getPieces(color: string): Piece[] {
-        if (color == 'white') {
-            return this.whites;
+//COFANIE RUCHÓW
+    reverseMove(){
+        for(let p of Game.whites){
+                p.reverseMove();
         }
-        return this.blacks;
     }
+
+    static getLastChosen():Piece{
+        return Game.lastChosen;
+    }
+
 }
 
 export {Game};

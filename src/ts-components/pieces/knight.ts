@@ -12,7 +12,7 @@ class Knight extends Piece{
     }
 
     showPossibleMoves(): string []{
-        this.removeClassActive();
+        //this.removeClassActive();
         const allPossibleIds: string[] = []; // przechowuje wszystkie możliwe ID - łącznie z tymi na których stoją inne figury - przyda się do spr. czy stoją figury innego koloru i zbijania
         this.possibleMovesIDs = []; // tu trafiają tylko możliwe ruchy figury
         const coordinateX : number = Object.values(ID).indexOf(this.positionX) + 1;
@@ -45,12 +45,12 @@ class Knight extends Piece{
                 this.possibleMovesIDs.push(id);
             }
         });
-        //console.log(this.possibleMovesIDs);
 
         return this.possibleMovesIDs;
     }
     
     move(): void {
+        this.removeClassActive();
         const possibilities: string[] = this.showPossibleMoves();
         possibilities.forEach((id) => {
             document.querySelector(`#${id}`)!.classList.add('active');
@@ -61,14 +61,13 @@ class Knight extends Piece{
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
                 if(possMove.classList.contains('active') && (Game.getLastChosen() === this)){
-                    // próbna implementacja bicia
                     if (possMove.innerHTML != '') {
                         Game.beat(possMove as HTMLElement);
                     }
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                     Game.checkingKings();
-                    console.log(possMove.innerHTML);
+                    //console.log(possMove.innerHTML);
                 }
             },{capture: true});
         });
