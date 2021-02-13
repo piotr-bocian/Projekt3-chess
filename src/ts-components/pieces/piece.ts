@@ -138,6 +138,8 @@ abstract class Piece{
             const descriptive = `${time} ${getName(beatedPiece.color)} ${getName(beatedPiece.constructor.name).toLowerCase()} został zbity przez ${getName(this.color).toLowerCase()} ${name.toLowerCase()}`;
             this.lastMove = descriptive;
             }
+
+            addMoveHistory(this.lastMove, getName(this.color));
             //EN VERSION
         } else if (document.documentElement.lang === 'en'){
             movedFrom = 'moved from';
@@ -146,6 +148,12 @@ abstract class Piece{
             //RUCHY
              const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
              this.lastMove = descriptive;
+
+             //ROSZADA DO SPRAWDZENIA POWINNO DZIAŁAĆ
+            if (Piece.specialMove === 'krótka roszada' || Piece.specialMove === 'długa roszada'){
+                const descriptive = `${time} ${Piece.specialMove}`;
+                this.lastMove = descriptive;
+                }
 
             //SZACHOWANIE
             if (Piece.specialMove === 'Szach na Królu'){
@@ -160,9 +168,9 @@ abstract class Piece{
             const descriptive = `${time} ${beatedPiece.color} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
             this.lastMove = descriptive;
             }
+            addMoveHistory(this.lastMove, this.color);
         }
 
-        addMoveHistory(this.lastMove, this.color);
     }
 
     //DZIAŁAJĄ SAME RUCHY
