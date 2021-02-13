@@ -121,13 +121,13 @@ abstract class Piece{
             const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
             this.lastMove = descriptive;
 
-            //ROSZADA DO SPRAWDZENIA
+            //ROSZADA DO SPRAWDZENIA POWINNO DZIAŁAĆ
             if (Piece.specialMove === 'krótka roszada' || Piece.specialMove === 'długa roszada'){
                 const descriptive = `${time} ${Piece.specialMove}`;
                 this.lastMove = descriptive;
                 }
 
-            //SZACHOWANIE DO SPRAWDZENIA
+            //SZACHOWANIE DO SPRAWDZENIA POWINNO DZIAŁAĆ
             if (Piece.specialMove === 'Szach na Królu' || Piece.specialMove === 'Szach-Mat'){
                 const descriptive = `${time} ${Piece.specialMove}`;
                 this.lastMove = descriptive;

@@ -167,6 +167,8 @@ class Game {
             else{
                 this.whiteKing.setOnBoard('G', 1);
                 Game.lastChosen.setOnBoard('F', 1);
+                console.log('roszada');
+                Piece.specialMove = 'krótka roszada';
             }
         }
         else{
