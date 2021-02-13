@@ -3,6 +3,10 @@
 @import './modal-pawn-promo.css';
 @import './queen.css';
 @import "./timeHistoryContainer.css";
+@import "./menuContainer.css";
+@import "./logo.css";
+
+
 
 body {
     margin-top: 10rem;
@@ -12,8 +16,21 @@ body {
     height: 100%;
     background-image: url(../static/assets/background.png);
     background-color: black;
-}
 
+}
+.body-start-page{
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 2fr 0.25fr;
+    justify-content: center;
+    gap: 0px 0px;
+    grid-template-areas: 
+    "logo"
+    "menuContainer"
+    "buttons";
+}
 .active:before{
     display: block;
     content:'';
@@ -24,4 +41,216 @@ body {
     position:relative;
     top: 25%;
     left: 25%;
+}
+.start-button{
+    cursor: pointer;
+}
+.display-none{
+    display: none;
+}
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) 
+{ 
+    .menuContainer {
+        width: 27.5vw;
+        height: 60vh;
+    }
+
+    .menuContainer h2 {
+        font-size: 1.25em;
+        margin: 0.5em auto;
+    }
+
+    .menuContainer h4 {
+        font-size: 0.75em;
+    }
+
+    .menuNames input {
+        font-size: 1em;
+    }
+
+    .start-button {
+        margin-top: 1em;
+    }
+    
+    .start-button p {
+        font-size: 0.75em;
+        padding: 0.25em;
+    }
+}
+
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) 
+{
+    .menuContainer {
+        width: 35vw;
+        height: 55vh;
+    }
+
+    .menuContainer h2 {
+        font-size: 1.25em;
+        margin: 0.25em auto;
+    }
+
+    .menuContainer h4 {
+        font-size: 0.75em;
+    }
+
+    .menuNames input {
+        font-size: 1em;
+    }
+
+    .menuCheckList span {
+        font-size: 0.75em;
+    }
+
+    .start-button {
+        margin-top: 1em;
+    }
+    
+    .start-button p {
+        font-size: 0.75em;
+        padding: 0.25em;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) 
+{
+    .menuContainer {
+        width: 50vw;
+        height: 55vh;
+        margin: 2.5em auto auto;
+    }
+
+    .logo {
+        height: 15vh;
+    }
+    
+    .logo img {
+        max-height: 20vh;
+        max-width: 70vw;
+    }
+}
+
+@media only screen and (min-device-width: 415px) and (max-device-width: 736px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2)
+{ 
+    body {
+        grid-template-rows: 0.15fr 2fr 0.15fr;
+    }
+
+    .menuContainer {
+        width: 50vw;
+        height: 70vh;
+        margin: 0.75em auto auto;
+    }
+
+    .menuContainer h2 {
+        font-size: 1em;
+        margin: 0.25em auto;
+    }
+
+    .menuContainer h4 {
+        font-size: 0.75em;
+    }
+
+    .menuNames fieldset {
+        padding: 0.15em;
+    }
+
+    .menuNames legend {
+        font-size: 0.75em;
+    }
+    
+    .menuNames input {
+        font-size: 0.75em;
+        width: 90%;
+    }
+
+    .menuTime h4 {
+        margin-top: 0.75em;
+    }
+
+    .menuCheckList h4 {
+        margin-top: 0.75em;
+    }
+    
+    .menuCheckList span {
+        font-size: 0.75em;
+    }
+
+    .start-button {
+        margin-top: 0.75em;
+    }
+    
+    .start-button p {
+        font-size: 0.75em;
+        padding: 0.15em;
+        margin: 0.25em;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 414px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)
+{ 
+    body {
+        grid-template-rows: 0.15fr 2fr 0.15fr;
+    }
+    .logo {
+        height: 15vh;
+    }
+    
+    .logo img {
+        max-height: 20vh;
+        max-width: 70vw;
+    }
+    .menuContainer {
+        width: 75vw;
+        height: 60vh;
+        margin: 1.5em auto auto;
+    }
+
+    .menuContainer h2 {
+        font-size: 1em;
+        margin: 0.25em auto;
+    }
+
+    .menuContainer h4 {
+        font-size: 0.75em;
+    }
+
+    .menuNames fieldset {
+        padding: 0.15em;
+    }
+
+    .menuNames legend {
+        font-size: 0.75em;
+    }
+    
+    .menuNames input {
+        font-size: 0.85em;
+        width: 90%;
+    }
+
+    .menuTime h4 {
+        margin-top: 0.75em;
+    }
+
+    .menuCheckList h4 {
+        margin-top: 0.75em;
+    }
+
+    #pat2 {
+        margin-left: 1.75em;
+    }
+    
+    .menuCheckList span {
+        font-size: 0.75em;
+    }
+
+    .start-button {
+        margin-top: 0.75em;
+    }
+    
+    .start-button p {
+        font-size: 0.75em;
+        padding: 0.25em;
+        margin: 0.75em;
+    }
 }
