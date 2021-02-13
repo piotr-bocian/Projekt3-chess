@@ -179,12 +179,18 @@ class King extends Piece{
     }
 
     isCheckmated():boolean{
-        const possibleMovesArr = this.showPossibleMoves().filter(id => {
-            const dangerArr = this.getDangerZones();
-            return (dangerArr.indexOf(id) === -1);
-        });
+        //const possibleMovesArr = this.showPossibleMoves().filter(id => {
+        //    const dangerArr = this.getDangerZones();
+        //    return (dangerArr.indexOf(id) === -1);
+        //});
 
-        return (this.isChecked() && possibleMovesArr.length === 0);
+        //return (this.isChecked() && possibleMovesArr.length === 0);
+        const possMoves:string[] = [];
+        for(let p of (this.color === 'white' ? Game.getWhites() : Game.getBlacks())){
+            p.defendKing(p.showPossibleMoves()).forEach(id => possMoves.push(id));
+        }
+
+        return possMoves.length === 0;
     }
 
     getDangerZones():string[]{
