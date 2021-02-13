@@ -77,15 +77,14 @@ class Game {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
             //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-            Game.allMovesHistory.push(chosenPiece.movesHistory);
+            Game.allMovesHistory.push(Piece.movesHistory);
         }
         else{
             if(chosenPiece && !(Game.lastChosen instanceof King) && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);
                 chosenPiece.move();
                 //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-                Game.allMovesHistory.push(chosenPiece.movesHistory);
-                // console.log(this.allMovesHistory);
+                Game.allMovesHistory.push(Piece.movesHistory);
             }
             else if(chosenPiece && Game.currentPlayer.includes(chosenPiece)){
                 Game.setLastChosen(chosenPiece);

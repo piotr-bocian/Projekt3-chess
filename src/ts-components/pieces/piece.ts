@@ -7,11 +7,11 @@ abstract class Piece{
     protected positionY:number;
     protected possibleMovesIDs:string[];    //<-- tablica ID pól na które może przemieścić się figura
     protected parentSquare:HTMLElement; //<-- div w którym "siedzi" img z obrazkiem danej figury
-    public movesHistory: string[][];
+    public static movesHistory: string[][];
     public lastMove: string;
     public static beated:Piece[] = [];
     public static isChecked:string;
-    public static moveTimeArray: string[]
+    public static moveTimeArray: string[];
     //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
 
     constructor(color:string, positionX:string, positionY:number){
@@ -23,7 +23,7 @@ abstract class Piece{
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
         Piece.isChecked ='';
         Piece.moveTimeArray =[];
-        this.movesHistory=[];
+        Piece.movesHistory=[];
         this.lastMove ='';
     }
 
@@ -63,7 +63,7 @@ abstract class Piece{
         const fromPositionY = this.getPositionY().toString();
         const toPositionX = `${(square).id.charAt(0)}`;
         const toPositionY = `${parseInt((square).id.charAt(2))}`;
-        this.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
+        Piece.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
         // console.log(this.movesHistory);
     }
     //OPIS RUCHÓW
@@ -91,7 +91,7 @@ abstract class Piece{
         let timeStampBlack = document.querySelector('#timer-black')?.innerHTML;
         const time = Game.round % 2 === 0 ? timeStampWhite : timeStampBlack;
         let beatedPiece = Piece.beated.pop();
-        const movesHistoryClone = this.movesHistory.slice();
+        const movesHistoryClone = Piece.movesHistory.slice();
         /////////////
         const createNotation = movesHistoryClone.pop();
 
@@ -148,13 +148,14 @@ abstract class Piece{
         // const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
         addMoveHistory(this.lastMove, this.color)
         // this.lastMove = longAlgebraicNotation;
+        console.log(Piece.movesHistory);
     }
 
-    //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
+    //NIE DZIAŁA
     reverseMove(){
         let timeStampWhite = document.querySelector('#timer-white');
         let timeStampBlack = document.querySelector('#timer-black');
-        const lastMove = this.movesHistory;
+        const lastMove = Piece.movesHistory;
             this.removeClassActive();
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
@@ -170,16 +171,16 @@ abstract class Piece{
                     const positionX = popLastMove[0];
                     const positionY = popLastMove[1];
                     if(positionX && positionY){
-                        const last = Game.beated.pop();
-                        const pos = last?.parentSquare.id;
-                        if (!pos) return;
-                        last?.setOnBoard(pos[0]!, parseInt(pos[2]!))
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
+                        // last?.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
                     }
                 } else {
                     return
                 }
-
+                const last = Game.beated.pop();
+                const pos = last?.parentSquare.id;
+                if (!pos) return;
+                last?.setOnBoard(pos[0]!, parseInt(pos[2]!))
 
     }
 
