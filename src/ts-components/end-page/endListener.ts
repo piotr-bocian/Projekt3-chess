@@ -1,4 +1,6 @@
 class endResult {
+    user1: string;
+    user2: string;
     winer: string;
     how: string;
     boardWrapper:any;
@@ -7,7 +9,9 @@ class endResult {
     logoElement:any;
     menuContainer:any;
 
-    constructor (winer: string, how: string) {
+    constructor (user1:string, user2:string, winer: string, how: string) {
+        this.user1 = user1;
+        this.user2 = user2;
         this.winer = winer;
         this.how = how;
         this.boardWrapper = document.querySelector('.board-wrapper');
@@ -24,8 +28,8 @@ class endResult {
         this.boardWrapper.remove();
 
         const testObj = {
-            user1: "Kamil",
-            user2: "Maciek",
+            user1: this.user1,
+            user2: this.user2,
             winner: this.winer,
             how: this.how
         }
@@ -49,7 +53,7 @@ class endResult {
                 title2.innerHTML = `Gracz ${testObj.user1} zremisował z graczem ${testObj.user2}`;
             }
             else if (testObj.how == 'czas') {
-                title2.innerHTML = `Koniec Czasu Przeciwnika`;
+                title2.innerHTML = `Koniec czasu przeciwnika`;
                 title.innerHTML = `Wygrał gracz ${testObj.winner}`;
             }
             else {
@@ -64,9 +68,9 @@ class endResult {
         }
         function startButton() {
             const startButtonContainer = document.createElement("div");
-            startButtonContainer.className = "start-button";
+            startButtonContainer.className = "restart-button";
             const startButtonText = document.createElement("p");
-            startButtonText.innerHTML = "ROZPOCZNIJ GRĘ!";
+            startButtonText.innerHTML = "Strona główna";
             startButtonContainer.appendChild(startButtonText);
             return startButtonContainer;
         }
@@ -81,7 +85,6 @@ class endResult {
             return menu;
         }
     document.body.appendChild(menuContainer());
-    
     };
 }
 module.exports = endResult;

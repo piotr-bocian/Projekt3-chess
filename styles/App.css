@@ -42,11 +42,14 @@ body {
     top: 25%;
     left: 25%;
 }
-.start-button{
+.start-button , .restart-button{
     cursor: pointer;
 }
 .display-none{
     display: none;
+}
+.title-result{
+    text-align: center;
 }
 @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) 
 { 
@@ -68,11 +71,11 @@ body {
         font-size: 1em;
     }
 
-    .start-button {
+    .start-button , .restart-button{
         margin-top: 1em;
     }
     
-    .start-button p {
+    .start-button p , .restart-button p{
         font-size: 0.75em;
         padding: 0.25em;
     }
@@ -102,11 +105,11 @@ body {
         font-size: 0.75em;
     }
 
-    .start-button {
+    .start-button , .restart-button {
         margin-top: 1em;
     }
     
-    .start-button p {
+    .start-button p , .restart-button p{
         font-size: 0.75em;
         padding: 0.25em;
     }
@@ -176,11 +179,11 @@ body {
         font-size: 0.75em;
     }
 
-    .start-button {
+    .start-button , .restart-button{
         margin-top: 0.75em;
     }
     
-    .start-button p {
+    .start-button p , .restart-button p{
         font-size: 0.75em;
         padding: 0.15em;
         margin: 0.25em;
@@ -244,11 +247,11 @@ body {
         font-size: 0.75em;
     }
 
-    .start-button {
+    .start-button , .restart-button{
         margin-top: 0.75em;
     }
     
-    .start-button p {
+    .start-button p , .restart-button p{
         font-size: 0.75em;
         padding: 0.25em;
         margin: 0.75em;

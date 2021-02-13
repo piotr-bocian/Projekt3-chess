@@ -171,7 +171,7 @@
 
 /* START-BUTTON */
 
-.start-button {
+.start-button, .restart-button{
     width: 50%;
     margin: auto;
     margin-top: 1.5em;
@@ -180,7 +180,7 @@
     border-radius: 5px;
 }
 
-.start-button p {
+.start-button p , .restart-button{
     font-size: 1em;
     font-weight: bold;
     color: white;

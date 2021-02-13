@@ -6,6 +6,7 @@ import menuContainer from './js-components/starting_page/menuContainer'
 import endResult from "./js-components/end-page/endListener";
 
 
+
 // load start window
 document.body.appendChild(logo());
 document.body.appendChild(menuContainer());
@@ -20,7 +21,7 @@ export {time};
 // end test button
 const testButton = document.querySelector('.testEnd');
 testButton.addEventListener('click',()=>{
-  let endModalResul =  new endResult('Mateusz', 'czas')
+  let endModalResul =  new endResult('USER1','USER2','Mateusz', '')
   endModalResul.showResult()
 });
 
@@ -34,7 +35,7 @@ startButton.addEventListener('click',()=>{
   let bodyContainer = document.getElementsByTagName('body');
   bodyContainer[0].classList.remove('body-start-page');
   logoElement.classList.add('display-none');
-  menuContainer.classList.add('display-none');
+  menuContainer.remove();
 
   // new Game
   const game = new Game();
@@ -67,7 +68,4 @@ startButton.addEventListener('click',()=>{
   //   document.documentElement.lang = 'pl';
   // });
 })
-
-
-
 
