@@ -29,7 +29,7 @@ class Queen extends Piece implements QueenMethods{
         //         })
         //  }
 
-         this.showPossibleMoves().forEach(id=>{
+         this.defendKing(this.showPossibleMoves()).forEach(id=>{
             document.querySelector(`#${id}`)!.classList.add('active');
             // movesShow(id)
          })

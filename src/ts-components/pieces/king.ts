@@ -39,9 +39,11 @@ class King extends Piece{
     move():void{    //<-- ta metoda oznacza odpowiednie pola klasą css (aby gracz wiedział że można na nie przejść) oraz nadaje im listenery, które po kliknięciu ustawiają figurę na odpowienim polu
         this.removeClassActive();
 
-        const possibleMovesArr:string[] = this.showPossibleMoves();
+        let possibleMovesArr:string[] = this.showPossibleMoves();
         const dangerZones:string[] = this.getDangerZones();
-        console.log(dangerZones);
+
+        possibleMovesArr = this.defendKing(possibleMovesArr);
+        
         if(Game.isQueensideCastlingPossible())
         this.queensideCastling();
 
@@ -164,6 +166,16 @@ class King extends Piece{
         }
         else
             return false;
+    }
+
+    isKingCheckedByThisPiece(piece:Piece){
+        let moves:string[] = piece.showPossibleMoves();
+        if(moves.indexOf(`${this.positionX}-${this.positionY}`) !== -1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     isCheckmated():boolean{

@@ -123,17 +123,51 @@ abstract class Piece{
         const defendingIDs:string[] = [];
 
         possibleMoves.forEach(move => {
+            const posX:string = move.charAt(0);
+            const posY:number = parseFloat(move.charAt(2));
+            
             if(document.querySelector(`#${move}`)!.innerHTML === ''){
-                this.setOnBoard(move.charAt(0), parseFloat(move.charAt(2)));
+                this.setOnBoard(posX, posY);
+                Game.changeTurn();
                 if(!king.isChecked())
                     defendingIDs.push(move);
             }
+            else{
+                    let originalPiece:Piece;
+        
+                    if(this.color === 'white'){
+                        for(let p of Game.getBlacks()){
+                            if(p.getPositionX() === posX && p.getPositionY() === posY){
+                                originalPiece = p;
+                                break;
+                            }
+                        }
+                    }
+                    else{
+                        for(let p of Game.getWhites()){
+                            if(p.getPositionX() === posX && p.getPositionY() === posY){
+                                originalPiece = p;
+                                break;
+                            }
+                        }
+                    }
+                    if(king.isChecked()){
+                        if(king.isKingCheckedByThisPiece(originalPiece!)){
+                            console.log(123);
+                            defendingIDs.push(`${originalPiece!.getPositionX()}-${originalPiece!.getPositionY()}`);
+                        }
+                    }
+                    else{
+                        defendingIDs.push(`${originalPiece!.getPositionX()}-${originalPiece!.getPositionY()}`);
+                    }
+                    
+                }
         });
 
         this.setOnBoard(initialX, initialY);
+        Game.changeTurn();
 
         return defendingIDs;
     }
 }
-
 export {Piece};

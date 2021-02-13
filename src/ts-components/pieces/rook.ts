@@ -113,7 +113,9 @@ class Rook extends Piece{
     move():void{    //<-- ta metoda oznacza odpowiednie pola klasą css (aby gracz wiedział że można na nie przejść) oraz nadaje im listenery, które po kliknięciu ustawiają figurę na odpowienim polu
         this.removeClassActive();
 
-        const possibleMovesArr:string[] = this.showPossibleMoves();
+        let possibleMovesArr:string[] = this.showPossibleMoves();
+
+        possibleMovesArr = this.defendKing(possibleMovesArr);
 
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
