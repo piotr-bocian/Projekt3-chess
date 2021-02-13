@@ -10,7 +10,7 @@ import { ID } from "./board";
 import { ifPromotion } from "./promotion"
 
 class Game {
-
+    
     private gameBoard:Board;
     private static lastChosen:Piece;    //<-- ta składowa klasy Game przechowuje informację o tym jaka figura została wybrana jako ostatnia
     private static whiteKing:King;

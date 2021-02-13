@@ -1,4 +1,3 @@
-  
 function logo(): HTMLDivElement {
 
     const divLogo : HTMLDivElement = document.createElement("div");

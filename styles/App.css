@@ -4,6 +4,10 @@
 @import './modal-pawn-promo.css';
 @import './queen.css';
 @import "./timeHistoryContainer.css";
+@import "./menuContainer.css";
+@import "./logo.css";
+
+
 
 body {
     height: 100%;
@@ -19,8 +23,19 @@ body {
         "logo logo"
         "game timeHistoryContainer";
 }
-
-
+.body-start-page{
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 2fr 0.25fr;
+    justify-content: center;
+    gap: 0px 0px;
+    grid-template-areas: 
+    "logo"
+    "menuContainer"
+    "buttons";
+}
 .active:before{
     display: block;
     content:'';
