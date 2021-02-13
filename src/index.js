@@ -1,12 +1,12 @@
-import {Game} from "./js-components/game"
+import { Game } from './js-components/game';
 import timeHistoryContainer from './js-components/timeHistoryContainer';
 import Timer from './js-components/timer';
 import logo from './js-components/starting_page/logo';
 
 const game = new Game();
 document.body.appendChild(timeHistoryContainer());
-var TimerTry = new Timer(1, 'timer-white');
-var TimerTry1 = new Timer(1, 'timer-black');
+var TimerTry = new Timer(3, 'timer-white');
+var TimerTry1 = new Timer(5, 'timer-black');
 
 // TEST:
 if (true) {
@@ -17,8 +17,8 @@ if (true) {
   TimerTry1.start();
 }
 
-document.querySelectorAll('.board-container div').forEach(element => {
-    element.addEventListener('click', selectPiece)
+document.querySelectorAll('.board-container div').forEach((element) => {
+  element.addEventListener('click', selectPiece);
 });
 
 function selectPiece(e) {
@@ -27,7 +27,7 @@ function selectPiece(e) {
 }
 //COFANIE RUCHÓW
 document.querySelector('.undo-button').addEventListener('click', () => {
-  game.reverseMove();
+  Game.reverseMove();
 });
 // document.querySelector('.en')?.addEventListener('click', () => {
 //   document.documentElement.lang = 'en';

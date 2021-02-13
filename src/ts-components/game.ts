@@ -16,14 +16,12 @@ class Game {
     private static whiteKing:King;
     private static blackKing:King;
 
-    private static whites:Piece[] = [];
-    private static blacks:Piece[] = [];
-    private static beated:Piece[] = [];
-//ZBIERANIE HISTORII RYCHÓW BIEREK
-    public static allMovesHistory:string[][][];
-    public lastMove: string;
+    public static whites:Piece[] = [];
+    public static blacks:Piece[] = [];
+    public static beated:Piece[] = [];
+    private lastMove: string;
     private static currentPlayer = Game.whites;
-    private static round:number = 0;
+    public static round:number = 0;
 
 
     constructor(){
@@ -32,7 +30,6 @@ class Game {
         //DO SPRAWDZENIA
         this.lastMove = ''
         //
-        Game.allMovesHistory = []
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -64,8 +61,12 @@ class Game {
 
     //TURY
     static changeTurn() {
-        if (Game.round % 2 === 0) {Game.currentPlayer = Game.blacks};
-        if (Game.round % 2 === 1) {Game.currentPlayer = Game.whites};
+        if (Game.round % 2 === 0) {
+            Game.currentPlayer = Game.blacks
+        };
+        if (Game.round % 2 === 1) {
+            Game.currentPlayer = Game.whites
+        };
         this.round++;
       };
 
@@ -111,10 +112,12 @@ class Game {
             if (p.getColor() === 'white') {
                 this.whites.splice(this.whites.indexOf(p),1);
                 this.beated.push(p);
+                Piece.beated.push(p);
                 square.innerHTML = '';
             } else {
                 this.blacks.splice(this.blacks.indexOf(p),1);
                 this.beated.push(p);
+                Piece.beated.push(p);
                 square.innerHTML = '';
             }
         } else {
@@ -124,22 +127,30 @@ class Game {
 
     static checkingKings():void{ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
         if(Game.whiteKing.isChecked()){
-            if(Game.whiteKing.isCheckmated())
+            if(Game.whiteKing.isCheckmated()){
+                Piece.specialMove = 'Szach-Mat';
                 console.log('WHITE KING CHECKMATED');
-            else
+            }
+            else{
+                Piece.specialMove = 'Szach na Królu';
                 console.log('WHITE KING CHECKED');
+            }
         }
 
         if(Game.blackKing.isChecked()){
-            if(Game.blackKing.isCheckmated())
+            if(Game.blackKing.isCheckmated()){
+                Piece.specialMove = 'Szach-Mat';
                 console.log('BLACK KING CHECKMATED');
-            else
-            console.log('BLACK KING CHECKED');
+            } else{
+                Piece.specialMove = 'Szach na Królu';
+                console.log('BLACK KING CHECKED');
+            }
+
         }
     }
 
     static isQueensideCastlingPossible(){
-        
+
         if(Game.lastChosen.getColor() === 'white'){
             for(let p of Game.whites){
                 if(p instanceof Rook && p.getPositionX() === 'A' && p.getPositionY() === 1){
@@ -205,6 +216,13 @@ class Game {
         return false;
     }
 
+    //COFANIE RUCHÓW
+    static reverseMove(){
+        Game.getLastChosen().reverseLastMove();
+    }
+
+
+
     static getPieces(color: string): Piece[] {
         if (color == 'white') {
             return this.whites;
@@ -232,20 +250,9 @@ class Game {
         return Game.blackKing;
     }
 
-//COFANIE RUCHÓW
-    // reverseMove(){
-    //     for(let p of Game.whites){
-    //             p.reverseMove();
-    //     }
-    // }
-
     static getLastChosen():Piece{
         return Game.lastChosen;
     }
-
-    // static getAllMovesHistory(){
-    //     return Game.allMovesHistory;
-    // }
 
 }
 

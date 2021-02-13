@@ -1,5 +1,4 @@
-import { Game } from "../game"
-
+import { Game } from "../game";
 import {addMoveHistory} from '../addMoveHistory';
 abstract class Piece{
     public color:string;
@@ -8,9 +7,12 @@ abstract class Piece{
     protected positionY:number;
     protected possibleMovesIDs:string[];    //<-- tablica ID pól na które może przemieścić się figura
     protected parentSquare:HTMLElement; //<-- div w którym "siedzi" img z obrazkiem danej figury
-    public static movesHistory: string[][];
+    protected moves:string[][]
     public lastMove: string;
-    //zastanawiam się czy nie zrobić tych wszystkich właściwości private...
+    public static beated:Piece[] = [];
+    public static specialMove:string;
+    public static moveTimeArray: string[];
+    public static movesHistory: string[][];
 
     constructor(color:string, positionX:string, positionY:number){
         this.color = color;
@@ -19,9 +21,11 @@ abstract class Piece{
         this.possibleMovesIDs = this.showPossibleMoves();
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
-
+        Piece.specialMove ='';
+        Piece.moveTimeArray =[];
         Piece.movesHistory=[];
         this.lastMove ='';
+        this.moves = [];
     }
 
     setOnBoard(pX:string, pY:number):void{ //<-- ta metoda zmienia miejsce na szachownicy w którym wyświetla się figura (ale za zmienienie składowych positionX i positionY odpowiada metoda updatePosition())
@@ -61,31 +65,122 @@ abstract class Piece{
         const toPositionX = `${(square).id.charAt(0)}`;
         const toPositionY = `${parseInt((square).id.charAt(2))}`;
         Piece.movesHistory.push([fromPositionX, fromPositionY, toPositionX, toPositionY]);
-        // console.log(this.movesHistory);
+        this.moves.push([fromPositionX, fromPositionY, toPositionX, toPositionY])
     }
     //OPIS RUCHÓW
-    historyNotation(move = 'moved from', to ='to', name = this.constructor.name){
+    historyNotation(){
+        const getName = (constructorName:string)=>{
+            switch (constructorName){
+            case 'Queen':
+              return 'Królowa';
+            case 'Rook':
+             return 'Wieża';
+            case 'Knight':
+              return 'Skoczek';
+            case 'Bishop':
+            return 'Goniec';
+            case 'King':
+            return 'Król';
+            case 'white':
+            return 'Biały';
+            case 'black':
+            return 'Czarny';
+            default:
+            return 'Pion';
+        }
+        }
+        let name:string;
+        let movedTo:string;
+        let movedFrom:string;
+        let timeStampWhite = document.querySelector('#timer-white')?.innerHTML;
+        let timeStampBlack = document.querySelector('#timer-black')?.innerHTML;
+        const time = Game.round % 2 === 0 ? timeStampWhite : timeStampBlack;
+        let beatedPiece = Piece.beated.pop();
         const movesHistoryClone = Piece.movesHistory.slice();
         const createNotation = movesHistoryClone.pop();
         if(typeof createNotation === 'undefined') return;
         if(typeof createNotation[2] === 'undefined') return;
         if(typeof createNotation[0] === 'undefined') return;
-        const descriptive = `${name} ${move} ${createNotation[0]}-${createNotation[1]} ${to} ${createNotation[2]}-${createNotation[3]}`;
-        // const longAlgebraicNotation = `${name[0]}${createNotation[0].toLowerCase()}${createNotation[1]}-${createNotation[2].toLowerCase()}${createNotation[3]}`;
-        this.lastMove = descriptive;
-        addMoveHistory(this.lastMove, this.color)
-        // this.lastMove = longAlgebraicNotation;
-        //console.log(this.lastMove);
+        if(!time) return;
+        //CZAS WYKONANIA RUCHU
+        Piece.moveTimeArray.push(time);
+
+        if (document.documentElement.lang === 'pl'){
+            movedFrom = 'poruszył/a się z pola';
+            movedTo = 'na pole'
+            name = getName(this.constructor.name);
+
+            //PROMOCJA
+            if (Piece.specialMove === 'promocja Piona'){
+                const descriptive = `${time} ${Piece.specialMove} na .....`;
+                this.lastMove = descriptive;
+                }
+
+
+            //RUCHY
+            const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+            this.lastMove = descriptive;
+
+            //ROSZADA DO SPRAWDZENIA POWINNO DZIAŁAĆ
+            if (Piece.specialMove === 'krótka roszada' || Piece.specialMove === 'długa roszada'){
+                const descriptive = `${time} ${Piece.specialMove}`;
+                this.lastMove = descriptive;
+                }
+
+            //SZACHOWANIE DO SPRAWDZENIA POWINNO DZIAŁAĆ
+            if (Piece.specialMove === 'Szach na Królu' || Piece.specialMove === 'Szach-Mat'){
+                const descriptive = `${time} ${Piece.specialMove}`;
+                this.lastMove = descriptive;
+                }
+
+            //NOTACJA DLA BICIA
+            if (beatedPiece){
+            const descriptive = `${time} ${getName(beatedPiece.color)} ${getName(beatedPiece.constructor.name).toLowerCase()} został zbity przez ${getName(this.color).toLowerCase()} ${name.toLowerCase()}`;
+            this.lastMove = descriptive;
+            }
+
+            addMoveHistory(this.lastMove, getName(this.color));
+            //EN VERSION
+        } else if (document.documentElement.lang === 'en'){
+            movedFrom = 'moved from';
+            movedTo = 'to';
+            name = this.constructor.name;
+            //RUCHY
+             const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+             this.lastMove = descriptive;
+
+             //ROSZADA DO SPRAWDZENIA POWINNO DZIAŁAĆ
+            if (Piece.specialMove === 'krótka roszada' || Piece.specialMove === 'długa roszada'){
+                const descriptive = `${time} ${Piece.specialMove}`;
+                this.lastMove = descriptive;
+                }
+
+            //SZACHOWANIE
+            if (Piece.specialMove === 'Szach na Królu'){
+                const descriptive = `King checked`;
+                this.lastMove = descriptive;
+                } else if (Piece.specialMove === 'Szach-Mat'){
+                    const descriptive = `King checkamted`;
+                    this.lastMove = descriptive;
+                }
+            //BICIE
+            if (beatedPiece){
+            const descriptive = `${time} ${beatedPiece.color} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
+            this.lastMove = descriptive;
+            }
+            addMoveHistory(this.lastMove, this.color);
+        }
+
     }
 
-    //COFANIE RUCHÓW BEZ NASLUCHU WEWNĄTRZ METODY
-    reverseMove(){
-        const lastMove = Piece.movesHistory;
-            this.removeClassActive();
-            if(lastMove.length === 0){return};
+    //DZIAŁAJĄ SAME RUCHY
+    reverseLastMove(){
+        // let timeStampWhite = document.querySelector('#timer-white');
+        // let timeStampBlack = document.querySelector('#timer-black');
+        const lastMove = this.moves;
+        if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
-            console.log(popLastMove);
-            // this.movesHistory.length = lastMove.length;
+            this.removeClassActive();
             if (popLastMove){
                     const positionX = popLastMove[0];
                     const positionY = popLastMove[1];
@@ -96,7 +191,29 @@ abstract class Piece{
                     return
                 }
 
-    }
+            //    //ZBITE BIERKI, WRACAJA TYLKO JAKO IMG => ZOMBIE
+            //    const last = Game.beated.pop();
+            //    const pos = last?.parentSquare.id;
+            //    if(!last || !pos)return;
+            // //    const name = last?.constructor.name;
+            // //    const color = last?.color;
+            //    console.log(last)
+            //    const black = Game.getBlacks();
+            //    const white = Game.getWhites();
+
+            // // TIMER CHYBA DZIAŁA
+            // if(Piece.moveTimeArray.length % 2 === 1){
+            //     last.updatePosition(pos[0]!, parseInt(pos[2]!));
+            //     white.push(last)
+            //     // this.whitePlayerTimer.setTimer(Piece.moveTimeArray.pop());
+            // //     timeStampWhite.innerHTML = Piece.moveTimeArray.pop()
+            // } else {
+            //     black.push(last)
+            //     // this.blackPlayerTimer.setTimer(Piece.moveTimeArray.pop());
+            // //     timeStampBlack.innerHTML = Piece.moveTimeArray.pop()
+            // }
+        }
+
 
 
 
@@ -125,7 +242,7 @@ abstract class Piece{
         possibleMoves.forEach(move => {
             const posX:string = move.charAt(0);
             const posY:number = parseFloat(move.charAt(2));
-            
+
             if(document.querySelector(`#${move}`)!.innerHTML === ''){
                 this.setOnBoard(posX, posY);
                 Game.changeTurn();
@@ -134,7 +251,7 @@ abstract class Piece{
             }
             else{
                     let originalPiece:Piece;
-        
+
                     if(this.color === 'white'){
                         for(let p of Game.getBlacks()){
                             if(p.getPositionX() === posX && p.getPositionY() === posY){
@@ -160,7 +277,7 @@ abstract class Piece{
                     else{
                         defendingIDs.push(`${originalPiece!.getPositionX()}-${originalPiece!.getPositionY()}`);
                     }
-                    
+
                 }
         });
 

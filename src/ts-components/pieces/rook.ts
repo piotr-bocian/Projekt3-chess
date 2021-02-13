@@ -38,7 +38,7 @@ class Rook extends Piece{
                         break;
                     }
                     break;
-                    
+
                 }
             }
             // bot
@@ -125,6 +125,10 @@ class Rook extends Piece{
                     if (square!.innerHTML != '') {
                         Game.beat(square! as HTMLElement);
                     }
+                    //ZBIERANIE HISTORII RUCHÓW
+                    this.history(square!);
+                    this.historyNotation();
+                    //
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.hasMoved = true;
                     this.removeClassActive();

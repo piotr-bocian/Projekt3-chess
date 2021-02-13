@@ -28,7 +28,7 @@ class King extends Piece{
                         possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
                     else if(!square.querySelector('img')!.classList.contains(this.color)){
                         possibleMoves.push(`${arrayOfX[indexOfX+i]}-${this.getPositionY()+j}`);
-                    }   
+                    }
                 }
             }
         }
@@ -43,14 +43,14 @@ class King extends Piece{
         const dangerZones:string[] = this.getDangerZones();
 
         possibleMovesArr = this.defendKing(possibleMovesArr);
-        
+
         if(Game.isQueensideCastlingPossible())
         this.queensideCastling();
 
         if(Game.isKingsideCastlingPossible())
             this.kingsideCastling();
 
-        
+
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);
 
@@ -64,6 +64,10 @@ class King extends Piece{
                     if (square!.innerHTML != '') {
                         Game.beat(square! as HTMLElement);
                     }
+                    //ZBIERANIE HISTORII RUCHÓW
+                    this.history(square!);
+                    this.historyNotation();
+                    //
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.hasMoved = true;
                     this.removeClassActive();
@@ -89,6 +93,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 1);
                     rook.setOnBoard('D', 1);
+                    Piece.specialMove = 'Roszada długa';
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -104,11 +109,12 @@ class King extends Piece{
                     rook = p;
                 }
             }
-            
+
             position!.addEventListener('click', () => {
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 8);
                     rook.setOnBoard('D', 8);
+                    Piece.specialMove = 'Roszada długa';
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -118,7 +124,7 @@ class King extends Piece{
 
     kingsideCastling(){
         if(this.color === 'white'){
-            
+
             const position = document.querySelector('#G-1');
             position!.classList.add('active');
             //console.log('nadalem klase active na skrzydle krolweskim')
@@ -134,6 +140,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 1);
                     rook.setOnBoard('F', 1);
+                    Piece.specialMove = 'Roszada krótka';
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -153,6 +160,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 8);
                     rook.setOnBoard('F', 8);
+                    Piece.specialMove = 'Roszada krótka';
                     this.removeClassActive();
                     Game.changeTurn();
                 }

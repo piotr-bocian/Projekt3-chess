@@ -16,7 +16,6 @@ class Queen extends Piece implements QueenMethods{
          this.collectAllPossibleMoves().forEach(id=>{
              allPossibleMoves.push(id);
             })
-            //console.log(allPossibleMoves);
             return allPossibleMoves
     }
 
@@ -44,15 +43,7 @@ class Queen extends Piece implements QueenMethods{
                     }
                     //ZBIERANIE HISTORII RUCHÓW
                     this.history(square);
-                    //PL
-                    const lang = document.documentElement.lang;
-                    if(lang === 'pl'){ //zmieniłem tu kolory na white i black jak zmieniały się klasy w DOM to biecie źle działało dla królowej.
-                        (this.color === 'white'|| this.color === 'Biały') ? this.color ='white' : this.color = 'black';
-                        this.historyNotation('poruszył/a się z pola', 'na pole', 'Królowa');
-                    } else {
-                        this.color = this.color;
-                        this.historyNotation();
-                    }
+                    this.historyNotation();
                     //
                     this.setOnBoard((square).id.charAt(0), parseInt((square).id.charAt(2)));
                     this.removeClassActive();
@@ -70,14 +61,12 @@ collectAllPossibleMoves(){
         const doc = document.getElementById(`${this.positionX}-${i}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        // if(checker) return; <- z tego powodu nie dochodziło do sprawdzania koloru
-        // to samo zrobiłem dla down, left i right
         if (checker) {
             if(!colorCheck){
                     moves.push(`${this.positionX}-${i}`);
                     return;
                 } else {
-                    return; //dlatego przeniosłem to tutaj, dzięki temu działa bicie
+                    return;
                 }
         } else {
             moves.push(`${this.positionX}-${i}`);
@@ -90,7 +79,6 @@ collectAllPossibleMoves(){
             const doc = document.getElementById(`${this.positionX}-${j}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        // if(checker) return;
     if (checker) {
         if(!colorCheck){
                 moves.push(`${this.positionX}-${j}`);
@@ -108,7 +96,6 @@ collectAllPossibleMoves(){
             const doc = document.getElementById(`${ID[i]}-${this.positionY}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        // if(checker) return;
     if (checker) {
         if(!colorCheck){
             moves.push(`${ID[i]}-${this.positionY}`)
@@ -126,7 +113,6 @@ collectAllPossibleMoves(){
                     const doc = document.getElementById(`${ID[i]}-${this.positionY}`)!;
         const checker = doc.classList.contains('pieceInside')
         const colorCheck = doc.querySelector('img')?.classList.contains(`${this.color}`);
-        // if(checker) return;
     if (checker) {
         if(!colorCheck){
             moves.push(`${ID[i]}-${this.positionY}`)

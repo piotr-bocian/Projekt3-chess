@@ -128,7 +128,7 @@ class Pawn extends Piece {
         let possibilities: string[] = this.showPossibleMoves();
 
         possibilities = this.defendKing(possibilities);
-        
+
         possibilities.forEach((id) => {
             document.querySelector(`#${id}`)!.classList.add('active');
         });
@@ -157,10 +157,12 @@ class Pawn extends Piece {
                             Game.beat(enPass1 as HTMLElement);
                             possMove.classList.remove('en-pass');
                             enPass1.classList.remove('pieceInside');
+                            //BICIE W PRZELOCIE
                         } else {
                             Game.beat(enPass2 as HTMLElement);
                             possMove.classList.remove('en-pass');
                             enPass2.classList.remove('pieceInside');
+                            //BICIE W PRZELOCIE
                         }
 
                     }
@@ -176,9 +178,9 @@ class Pawn extends Piece {
                     } else if (this.positionY === 1 && this.parentSquare.querySelector('img')!.src.includes('Pawn')){
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
-                    } 
+                    }
                 }
-                
+
             }, {capture: true})
         })
     }
@@ -202,7 +204,7 @@ class Pawn extends Piece {
         ]
 
         const modalWindowPawn = document.createElement("div");
-        
+
         const parentSquare = document.getElementById(`${pawn.getPositionX}`)!;
 
         if (this.color === 'white') {
@@ -218,7 +220,7 @@ class Pawn extends Piece {
                 modalWindowPawn.appendChild(selectableFigure);
 
                 selectableFigure.addEventListener('click', () => {
-                    
+
                     document.querySelector(`#${pawn.getPositionX()}-8`)!.removeChild(modalWindowPawn);
                     const pieceToCreate = new PieceName('white', `${pawn.getPositionX()}`, 8);
                     let whites = Game.getWhites();
@@ -227,8 +229,10 @@ class Pawn extends Piece {
                     const pawnToRemove = whites.indexOf(pawn);
                     whites.splice(pawnToRemove, 1);
                     Game.changeTurn();
-                })            
-            }   
+                    Piece.specialMove = 'albo tu';
+                })
+                Piece.specialMove = 'Promocja biały';
+            }
         } else {
 
             modalWindowPawn.className = "modal-window-black";
@@ -242,7 +246,7 @@ class Pawn extends Piece {
                 modalWindowPawn.appendChild(selectableFigure);
 
                 selectableFigure.addEventListener('click', () => {
-                    
+
                     document.querySelector(`#${pawn.getPositionX()}-1`)!.removeChild(modalWindowPawn);
                     const pieceToCreate = new PieceName('black', `${pawn.getPositionX()}`, 1);
                     let blacks = Game.getBlacks();
@@ -251,8 +255,10 @@ class Pawn extends Piece {
                     const pawnToRemove = blacks.indexOf(pawn);
                     blacks.splice(pawnToRemove, 1);
                     Game.changeTurn();
-                })            
-            }   
+                    //pieceToCreate <= wybrana bierka
+                    Piece.specialMove = 'Promocja czarny';
+                })
+            }
         }
 
         return modalWindowPawn;
@@ -275,8 +281,8 @@ class Pawn extends Piece {
         const lastMovePawn = lastMoveArray.pop();
 
         if (lastMovePawn) {
-            const differenceY: number = Math.abs(parseInt(lastMovePawn[1]) - parseInt(lastMovePawn[3]));
-            const lastX: string = lastMovePawn[0];
+            const differenceY: number = Math.abs(parseInt(lastMovePawn[1]!) - parseInt(lastMovePawn[3]!));
+            const lastX: string = lastMovePawn[0]!;
 
             if (pawnPos1 !== null && pawnPos2 !== null) {
                 if (this.color === 'white'
