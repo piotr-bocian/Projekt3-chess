@@ -30,7 +30,7 @@ class Game {
     private static whitePlayerTimer: Timer;
     private static blackPlayerTimer: Timer;
 
-    constructor(){
+    constructor(time:number){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
         this.timeHistory = new timeHistory;
@@ -40,8 +40,8 @@ class Game {
         this.lastMove = ''
         //
         // Timers:
-        Game.whitePlayerTimer = new Timer(1, 'timer-white');
-        Game.blackPlayerTimer = new Timer(1, 'timer-black');
+        Game.whitePlayerTimer = new Timer(time, 'timer-white');
+        Game.blackPlayerTimer = new Timer(time, 'timer-black');
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);

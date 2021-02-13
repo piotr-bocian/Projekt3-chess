@@ -1,6 +1,6 @@
 import {Game} from "./js-components/game"
 
-const game = new Game();
+const game = new Game(60); // trzeba podstawić wartość pobraną z range
 
 document.querySelectorAll('.board-container div').forEach(element => {
     element.addEventListener('click', selectPiece)
