@@ -27,6 +27,13 @@ class Timer {
       console.log("STOP");
       // wywołanie okna modalnego
     }
+
+    setTimer(time:string){
+      let minutes = parseInt(time.substring(0,2));
+      let seconds = parseInt(time.substring(3,5));
+      this.seconds = minutes*60 + seconds;
+      console.log(seconds, minutes);
+    };
     
     timedown() {
         this.timerHandler.innerHTML = this.convertSeconds(this.seconds);
