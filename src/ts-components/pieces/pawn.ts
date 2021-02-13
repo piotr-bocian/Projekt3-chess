@@ -229,9 +229,9 @@ class Pawn extends Piece {
                     const pawnToRemove = whites.indexOf(pawn);
                     whites.splice(pawnToRemove, 1);
                     Game.changeTurn();
-                    Piece.specialMove = 'albo tu';
+                    // Piece.specialMove = 'albo tu';
                 })
-                Piece.specialMove = 'Promocja biały';
+                // Piece.specialMove = 'Promocja biały';
             }
         } else {
 
@@ -256,7 +256,7 @@ class Pawn extends Piece {
                     blacks.splice(pawnToRemove, 1);
                     Game.changeTurn();
                     //pieceToCreate <= wybrana bierka
-                    Piece.specialMove = 'Promocja czarny';
+                    // Piece.specialMove = 'Promocja czarny';
                 })
             }
         }

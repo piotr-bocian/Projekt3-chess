@@ -8,9 +8,10 @@ import { Rook } from "./pieces/rook";
 import { Pawn } from "./pieces/pawn"
 import { ID } from "./board";
 import { ifPromotion } from "./promotion"
+import {addMoveHistory} from './addMoveHistory';
 
 class Game {
-    
+
     private gameBoard:Board;
     private static lastChosen:Piece;    //<-- ta składowa klasy Game przechowuje informację o tym jaka figura została wybrana jako ostatnia
     private static whiteKing:King;
@@ -128,22 +129,20 @@ class Game {
     static checkingKings():void{ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
         if(Game.whiteKing.isChecked()){
             if(Game.whiteKing.isCheckmated()){
-                Piece.specialMove = 'Szach-Mat';
                 console.log('WHITE KING CHECKMATED');
             }
             else{
-                Piece.specialMove = 'Szach na Królu';
                 console.log('WHITE KING CHECKED');
+                addMoveHistory('Szach na białym Królu', 'Czarny');
             }
         }
 
         if(Game.blackKing.isChecked()){
             if(Game.blackKing.isCheckmated()){
-                Piece.specialMove = 'Szach-Mat';
                 console.log('BLACK KING CHECKMATED');
             } else{
-                Piece.specialMove = 'Szach na Królu';
                 console.log('BLACK KING CHECKED');
+                addMoveHistory('Szach na czarnym Królu', 'Biały');
             }
 
         }

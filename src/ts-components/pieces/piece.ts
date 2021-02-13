@@ -10,7 +10,6 @@ abstract class Piece{
     protected moves:string[][]
     public lastMove: string;
     public static beated:Piece[] = [];
-    public static specialMove:string;
     public static moveTimeArray: string[];
     public static movesHistory: string[][];
 
@@ -21,7 +20,6 @@ abstract class Piece{
         this.possibleMovesIDs = this.showPossibleMoves();
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
-        Piece.specialMove ='';
         Piece.moveTimeArray =[];
         Piece.movesHistory=[];
         this.lastMove ='';
@@ -111,27 +109,16 @@ abstract class Piece{
             name = getName(this.constructor.name);
 
             //PROMOCJA
-            if (Piece.specialMove === 'promocja Piona'){
-                const descriptive = `${time} ${Piece.specialMove} na .....`;
-                this.lastMove = descriptive;
-                }
+            // if (Piece.specialMove === 'promocja Piona'){
+            //     const descriptive = `${time} ${Piece.specialMove} na .....`;
+            //     this.lastMove = descriptive;
+            //     }
+             //SZACHOWANIE DO SPRAWDZENIA POWINNO DZIAŁAĆ
 
 
             //RUCHY
             const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
             this.lastMove = descriptive;
-
-            //ROSZADA DO SPRAWDZENIA POWINNO DZIAŁAĆ
-            if (Piece.specialMove === 'krótka roszada' || Piece.specialMove === 'długa roszada'){
-                const descriptive = `${time} ${Piece.specialMove}`;
-                this.lastMove = descriptive;
-                }
-
-            //SZACHOWANIE DO SPRAWDZENIA POWINNO DZIAŁAĆ
-            if (Piece.specialMove === 'Szach na Królu' || Piece.specialMove === 'Szach-Mat'){
-                const descriptive = `${time} ${Piece.specialMove}`;
-                this.lastMove = descriptive;
-                }
 
             //NOTACJA DLA BICIA
             if (beatedPiece){
@@ -149,20 +136,6 @@ abstract class Piece{
              const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
              this.lastMove = descriptive;
 
-             //ROSZADA DO SPRAWDZENIA POWINNO DZIAŁAĆ
-            if (Piece.specialMove === 'krótka roszada' || Piece.specialMove === 'długa roszada'){
-                const descriptive = `${time} ${Piece.specialMove}`;
-                this.lastMove = descriptive;
-                }
-
-            //SZACHOWANIE
-            if (Piece.specialMove === 'Szach na Królu'){
-                const descriptive = `King checked`;
-                this.lastMove = descriptive;
-                } else if (Piece.specialMove === 'Szach-Mat'){
-                    const descriptive = `King checkamted`;
-                    this.lastMove = descriptive;
-                }
             //BICIE
             if (beatedPiece){
             const descriptive = `${time} ${beatedPiece.color} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
