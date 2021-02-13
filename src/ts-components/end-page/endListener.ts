@@ -71,7 +71,7 @@ class endResult {
             startButtonContainer.className = "restart-button";
             const startButtonText = document.createElement("p");
             startButtonText.innerHTML = "Strona główna";
-            startButtonText.addEventListener('click',()=>{
+            startButtonContainer.addEventListener('click',()=>{
                 location.reload();
             })
             startButtonContainer.appendChild(startButtonText);
