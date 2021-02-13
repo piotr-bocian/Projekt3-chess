@@ -8,10 +8,13 @@ import { Rook } from "./pieces/rook";
 import { Pawn } from "./pieces/pawn"
 import { ID } from "./board";
 import { ifPromotion } from "./promotion"
+import { Timer } from "./timer";
+import { timeHistory } from "./timeHistoryContainer";
 
 class Game {
     
     private gameBoard:Board;
+    private timeHistory:timeHistory;
     private static lastChosen:Piece;    //<-- ta składowa klasy Game przechowuje informację o tym jaka figura została wybrana jako ostatnia
     private static whiteKing:King;
     private static blackKing:King;
@@ -22,14 +25,21 @@ class Game {
     private lastMove: string;
     private static currentPlayer = Game.whites;
     public static round:number = 0;
+    // Timers:
+    private static whitePlayerTimer: Timer;
+    private static blackPlayerTimer: Timer;
 
-
-    constructor(){
+    constructor(time:number){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
+        this.timeHistory = new timeHistory;
+        this.timeHistory.timeHistoryContainer();
         //DO SPRAWDZENIA
         this.lastMove = ''
         //
+        // Timers:
+        Game.whitePlayerTimer = new Timer(time, 'timer-white');
+        Game.blackPlayerTimer = new Timer(time, 'timer-black');
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -70,17 +80,34 @@ class Game {
         this.round++;
       };
 
+    static changeTimerTurn() {
+        if (Game.currentPlayer === Game.blacks) {
+            this.blackPlayerTimer.start();
+            this.whitePlayerTimer.pause();
+          } else {
+            this.whitePlayerTimer.start();
+            this.blackPlayerTimer.pause();
+          } 
+    };
+
+    static endOfTime() {
+        if (this.whitePlayerTimer.timerHandler.innerHTML === "00:00" || this.blackPlayerTimer.timerHandler.innerHTML === "00:00") {
+            this.whitePlayerTimer.stop();
+        }
+    };
+
+
     startMove(square: HTMLElement): void { //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
         if (!ifPromotion()) {
             let chosenPiece = Game.getPiece(square);
             if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
-                Game.setLastChosen(chosenPiece);
-                chosenPiece.move();
-                //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-                // Game.allMovesHistory.push(chosenPiece.movesHistory)
-                // console.log(Game.allMovesHistory);
+            Game.setLastChosen(chosenPiece);
+            chosenPiece.move();
+            //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
+            //this.allMovesHistory.push(chosenPiece.movesHistory)
+            // console.log(this.allMovesHistory);
             }
-        }
+        } 
     }
 
     static getPiece(square: HTMLElement): Piece | void {
