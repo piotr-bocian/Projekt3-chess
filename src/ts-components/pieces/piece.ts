@@ -159,7 +159,7 @@ abstract class Piece{
             if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
 
-            //DZIAŁA ALE NIE DZIAŁA
+            // DZIAŁA ALE NIE DZIAŁA
             // if(Piece.moveTimeArray.length % 2 === 1){
             //     timeStampWhite.innerHTML = Piece.moveTimeArray.pop()
             // } else {
@@ -170,18 +170,16 @@ abstract class Piece{
                     const positionX = popLastMove[0];
                     const positionY = popLastMove[1];
                     if(positionX && positionY){
+                        const last = Game.beated.pop();
+                        const pos = last?.parentSquare.id;
+                        if (!pos) return;
+                        last?.setOnBoard(pos[0]!, parseInt(pos[2]!))
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
                     }
                 } else {
                     return
                 }
-                const last = Game.beated.pop();
-                const img = last?.symbol
-                const pos = last?.parentSquare.id;
 
-                console.log(pos)
-                // if (!pos) return;
-                last?.setOnBoard(pos[0]!, parseInt(pos[1]!))
 
     }
 

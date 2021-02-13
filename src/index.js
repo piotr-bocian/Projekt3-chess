@@ -1,4 +1,4 @@
-import {Game} from "./js-components/game"
+import { Game } from './js-components/game';
 import timeHistoryContainer from './js-components/timeHistoryContainer';
 import Timer from './js-components/timer';
 
@@ -16,8 +16,8 @@ if (true) {
   TimerTry1.start();
 }
 
-document.querySelectorAll('.board-container div').forEach(element => {
-    element.addEventListener('click', selectPiece)
+document.querySelectorAll('.board-container div').forEach((element) => {
+  element.addEventListener('click', selectPiece);
 });
 
 function selectPiece(e) {
