@@ -51,7 +51,8 @@ class Knight extends Piece{
     
     move(): void {
         this.removeClassActive();
-        const possibilities: string[] = this.showPossibleMoves();
+        let possibilities: string[] = this.showPossibleMoves();
+        possibilities = this.defendKing(possibilities);
         possibilities.forEach((id) => {
             document.querySelector(`#${id}`)!.classList.add('active');
         });

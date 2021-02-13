@@ -98,8 +98,10 @@ class Bishop extends Piece{
     move():void{
         this.removeClassActive();
 
-        const possibleMovesArr:string[] = this.showPossibleMoves();
+        let possibleMovesArr:string[] = this.showPossibleMoves();
         // console.log(possibleMovesArr);
+
+        possibleMovesArr = this.defendKing(possibleMovesArr);
         
         possibleMovesArr.forEach(id => {    //<-- iterujemy przez tablice możliwych ID
             const square = document.querySelector(`#${id}`);

@@ -106,7 +106,7 @@ class Rook extends Piece{
         //         }
         //     });
         // });
-        console.log(PossibleMoves)
+        //console.log(PossibleMoves)
         return PossibleMoves;
     }
 

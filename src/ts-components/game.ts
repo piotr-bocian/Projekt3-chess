@@ -222,6 +222,15 @@ class Game {
     static getBlacks():Piece[]{
         return Game.blacks;
     }
+
+    static getWhiteKing():King{
+        return Game.whiteKing;
+    }
+
+    static getBlackKing():King{
+        return Game.blackKing;
+    }
+
 //COFANIE RUCHÓW
     reverseMove(){
         for(let p of Game.whites){
