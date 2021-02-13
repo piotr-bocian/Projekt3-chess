@@ -27,7 +27,7 @@ class endResult {
         this.timeHistoryContainer.remove();
         this.boardWrapper.remove();
 
-        const testObj = {
+        const obj = {
             user1: this.user1,
             user2: this.user2,
             winner: this.winer,
@@ -48,16 +48,16 @@ class endResult {
             const title2 = document.createElement("h3");
             title.className = "title-result";
             title2.className = "title-result";
-            if (testObj.how === 'pat') {
+            if (obj.how === 'pat') {
                 title.innerHTML = `PAT (REMIS)`;
-                title2.innerHTML = `Gracz ${testObj.user1} zremisował z graczem ${testObj.user2}`;
+                title2.innerHTML = `Gracz ${obj.user1} zremisował z graczem ${obj.user2}`;
             }
-            else if (testObj.how == 'czas') {
+            else if (obj.how == 'czas') {
                 title2.innerHTML = `Koniec czasu przeciwnika`;
-                title.innerHTML = `Wygrał gracz ${testObj.winner}`;
+                title.innerHTML = `Wygrał gracz ${obj.winner}`;
             }
             else {
-                title.innerHTML = `Wygrał gracz ${testObj.winner}`;
+                title.innerHTML = `Wygrał gracz ${obj.winner}`;
                 title2.innerHTML = `SZACH-MAT`;
             }
             const inputDiv = document.createElement("div");
