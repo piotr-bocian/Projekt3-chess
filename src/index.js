@@ -3,24 +3,40 @@ import timeHistoryContainer from './js-components/timeHistoryContainer';
 import Timer from './js-components/timer';
 import logo from './js-components/starting_page/logo'
 import menuContainer from './js-components/starting_page/menuContainer'
+import endResult from "./js-components/end-page/endListener";
 
-// load stat window
+
+// load start window
 document.body.appendChild(logo());
 document.body.appendChild(menuContainer());
 
+var gameTime = document.querySelector(".rs-range");
+var time = document.querySelector(".rs-range").value / 2;
+    gameTime.onchange = function(event){
+    time = document.querySelector(".rs-range").value / 2;
+}
+export {time};
+
+// end test button
+const testButton = document.querySelector('.testEnd');
+testButton.addEventListener('click',()=>{
+  let endModalResul =  new endResult('Mateusz', 'czas')
+  endModalResul.showResult()
+});
 
 // start the game after click button
 const startButton = document.querySelector('.start-button');
 startButton.addEventListener('click',()=>{
+  console.log('clicled')
   // hide start box after start the game
   let logoElement = document.querySelector('.logo');
   let menuContainer = document.querySelector('.menuContainer');
   let bodyContainer = document.getElementsByTagName('body');
-
   bodyContainer[0].classList.remove('body-start-page');
   logoElement.classList.add('display-none');
   menuContainer.classList.add('display-none');
 
+  // new Game
   const game = new Game();
   document.body.appendChild(timeHistoryContainer());
   var TimerTry = new Timer(1, 'timer-white');
@@ -50,6 +66,8 @@ startButton.addEventListener('click',()=>{
   // document.querySelector('.pl').addEventListener('click', () => {
   //   document.documentElement.lang = 'pl';
   // });
-},false)
+})
+
+
 
 
