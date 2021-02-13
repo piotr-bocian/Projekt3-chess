@@ -1,0 +1,8 @@
+.image {
+    height: 100%;
+    margin: auto;
+}
+
+.pieceInside {
+    display: flex;
+}
