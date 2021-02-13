@@ -21,7 +21,6 @@ class Pawn extends Piece {
         this.removeClassActive();
 
         let posXAttack1 = this.nextChar(this.positionX);
-
         let posXAttack2 = this.previousChar(this.positionX);
 
 
@@ -38,8 +37,6 @@ class Pawn extends Piece {
 
             let attack1 = document.getElementById(`${posXAttack1}-${positionY1}`)!;
             let attack2 = document.getElementById(`${posXAttack2}-${positionY1}`)!;
-
-            let pawnPos = document.getElementById(`${posXAttack1}-${this.positionY}`)!;
 
             // ATTACK
             if (attack1 !== null) {
@@ -141,18 +138,28 @@ class Pawn extends Piece {
         //adding event listener to each field with active class to perform a figure's move after click
         document.querySelectorAll('.active').forEach((possMove) => {
             possMove.addEventListener('click', () => {
+
                 const coorX = possMove.id.charAt(0);
                 const coorY = parseInt(possMove.id.charAt(2));
-                const enPass = document.getElementById(`${coorX}-${(coorY - 1)}`)!;
+
+                const enPass1 = document.getElementById(`${coorX}-${(coorY - 1)}`)!;
+                const enPass2 = document.getElementById(`${coorX}-${(coorY + 1)}`)!;
 
                 if (possMove.classList.contains('active') && (Game.getLastChosen() === this)) {
                     if (possMove.innerHTML != '') {
                         Game.beat(possMove as HTMLElement);
                     }
                     if (possMove.classList.contains('en-pass')) {
-                        Game.beat(enPass as HTMLElement);
-                        possMove.classList.remove('en-pass');
-                        enPass.classList.remove('pieceInside');
+                        if (this.color === 'white') {
+                            Game.beat(enPass1 as HTMLElement);
+                            possMove.classList.remove('en-pass');
+                            enPass1.classList.remove('pieceInside');
+                        } else {
+                            Game.beat(enPass2 as HTMLElement);
+                            possMove.classList.remove('en-pass');
+                            enPass2.classList.remove('pieceInside');
+                        }
+
                     }
                     this.history(possMove);
                     this.historyNotation();
@@ -161,10 +168,11 @@ class Pawn extends Piece {
                     Game.checkingKings();
 
                     if (this.color === 'white' && this.positionY === 8 && this.parentSquare.querySelector('img')!.src.includes('Pawn')) {
-                        this.parentSquare.appendChild(this.pawnPromotion(this))
+                        this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     } else if (this.positionY === 1 && this.parentSquare.querySelector('img')!.src.includes('Pawn')){
-                        this.parentSquare.appendChild(this.pawnPromotion(this))
+                        this.parentSquare.appendChild(this.pawnPromotion(this));
+                        this.parentSquare.classList.add('promotion');
                     } 
                 }
                 
@@ -181,7 +189,6 @@ class Pawn extends Piece {
     }
 
     // promotion
-
     pawnPromotion (pawn:Pawn) {
         this.removeClassActive();
         const pieces = [
@@ -220,6 +227,7 @@ class Pawn extends Piece {
                 })            
             }   
         } else {
+
             modalWindowPawn.className = "modal-window-black";
 
             for (const piece of pieces) {
@@ -249,44 +257,52 @@ class Pawn extends Piece {
 
     //en passant
     enPassant() {
-        let pawnPosX = this.nextChar(this.positionX) //|| this.previousChar(this.positionX);
-        let pawnPos = document.getElementById(`${pawnPosX}-${this.positionY}`)!;
+        let pawnPosX1 = this.nextChar(this.positionX);
+        let pawnPos1 = document.getElementById(`${pawnPosX1}-${this.positionY}`)!;
+
+        let pawnPosX2 = this.previousChar(this.positionX);
+        let pawnPos2 = document.getElementById(`${pawnPosX2}-${this.positionY}`)!;
 
         let positionY1 = this.positionY + 1;
-        let emptySquare1 = document.getElementById(`${pawnPosX}-${positionY1}`)!;
-
         let positionY2 = this.positionY - 1;
-        let emptySquare2 = document.getElementById(`${pawnPosX}-${positionY2}`)!;
+
         const enPassant = [];
 
-        console.log(Piece.movesHistory);
         const lastMoveArray = Piece.movesHistory.slice();
         const lastMovePawn = lastMoveArray.pop();
-        console.log(lastMovePawn);
 
         if (lastMovePawn) {
             const differenceY: number = Math.abs(parseInt(lastMovePawn[1]) - parseInt(lastMovePawn[3]));
-            console.log(differenceY);
 
-
-
-            if (this.color === 'white'
-                && this.positionY === 5
-                && pawnPos.querySelector('img')?.src.includes('Pawn')
-                && differenceY === 2
-                && !(emptySquare1.classList.contains('pieceInside'))) {
-                enPassant.push(`${pawnPosX}-${positionY1}`);
+            if (pawnPos1 !== null && pawnPos2 !== null) {
+                if (this.color === 'white'
+                    && this.positionY === 5
+                    && (pawnPos1.querySelector('img')?.src.includes('Pawn') || pawnPos2.querySelector('img')?.src.includes('Pawn'))
+                    && differenceY === 2
+                ) {
+                    if (pawnPos1.querySelector('img')?.src.includes('Pawn')) {
+                        enPassant.push(`${pawnPosX1}-${positionY1}`);
+                    } else {
+                        enPassant.push(`${pawnPosX2}-${positionY1}`)
+                    }
+                }
             }
 
-            if (this.color === 'black'
-                && this.positionY === 4
-                && pawnPos.querySelector('img')?.src.includes('Pawn')
-                && differenceY === 2
-                && emptySquare1.classList.contains('pieceInside')) {
-                enPassant.push(`${pawnPosX}-${positionY1}`);
+            if (pawnPos1 !== null && pawnPos2 !== null) {
+                if (this.color === 'black'
+                    && this.positionY === 4
+                    && (pawnPos1.querySelector('img')?.src.includes('Pawn') || pawnPos2.querySelector('img')?.src.includes('Pawn'))
+                    && differenceY === 2
+                ) {
+                    if (pawnPos1.querySelector('img')?.src.includes('Pawn')) {
+                        enPassant.push(`${pawnPosX1}-${positionY2}`);
+                    } else {
+                        enPassant.push(`${pawnPosX2}-${positionY2}`);
+                    }
+                }
             }
-
         }
+
         return enPassant;
     }
 
