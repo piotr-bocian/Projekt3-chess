@@ -1,18 +1,25 @@
 @import './board.css';
 @import './piece.css';
+@import './logo.css';
 @import './modal-pawn-promo.css';
 @import './queen.css';
 @import "./timeHistoryContainer.css";
 
 body {
-    margin-top: 10rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     height: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    grid-template-rows: 0.2fr 1fr;
+    justify-content: center;
     background-image: url(../static/assets/background.png);
     background-color: black;
+    gap: 0px 0px;
+    grid-template-areas:
+        "logo logo"
+        "game timeHistoryContainer";
 }
+
 
 .active:before{
     display: block;
@@ -24,4 +31,120 @@ body {
     position:relative;
     top: 25%;
     left: 25%;
+}
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) { 
+
+    body {
+        grid-template-rows: 0.14fr 1fr;
+    }
+
+    /*LOGO*/
+    .logo {
+        display: grid;
+        grid-area: logo;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        height: 10vh;
+        
+    }
+    
+    .logo img {
+        max-height: 10vh;
+        max-width: 35vw;
+        object-fit: contain;
+        
+    }
+
+    /*BOARD*/
+    .board-wrapper{
+        grid-template-columns: 55px 1fr 1.5em;
+        padding-top: 1.5em;
+        margin: auto 2em auto auto;
+     }
+     
+     .letters{
+        grid-template-columns: repeat(8, 55px);
+        font-size: 1em;
+        height: 55px;
+     }
+
+     .numbers{
+        grid-template-rows: repeat(8, 55px);
+        font-size: 1em;
+     }
+     
+     .board-container {
+        grid-template-columns: repeat(8, 55px);
+        border: 2px solid black;
+     }
+     
+     .light{
+        width: 55px;
+        height: 55px;
+     }
+     
+     .dark{
+        width: 55px;
+        height: 55px;
+     }
+
+     /*TIME-HISTORY-CONTAINER*/
+     .time-div h4{
+        font-size: 1em;
+        margin: 1em;
+    }
+    
+    #timer1 {
+        margin-right: 1.5em;
+    }
+    
+    #timer-white {
+        font-size: 1.5em;
+    }
+    
+    #timer-black {
+        font-size: 1.5em;
+    }
+     
+    /* HISTORY CONTAINER */
+    
+    .history-div h4{
+        font-size: 1em;
+        margin: 1em;
+    }
+    
+    .history-div-body {
+        height: 200px;
+        width: 90%;
+        padding: 0.9em;
+    }
+    
+    .history-move {
+        font-size: .7em;
+        margin-bottom: 1em;
+    }
+    
+    .history-moveHeader {
+        font-size: .75em;
+    }
+    
+    /* BUTTONS */
+    
+    .exit-button {
+        font-size: 0.75em;
+    }
+    
+    .undo-button {
+        font-size: 0.75em;
+    }
+
+}
+
+@media only screen and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+
 }

@@ -1,6 +1,7 @@
 import {Game} from "./js-components/game"
 import timeHistoryContainer from './js-components/timeHistoryContainer';
 import Timer from './js-components/timer';
+import logo from './js-components/starting_page/logo';
 
 const game = new Game();
 document.body.appendChild(timeHistoryContainer());
@@ -34,3 +35,5 @@ document.querySelector('.undo-button').addEventListener('click', () => {
 // document.querySelector('.pl').addEventListener('click', () => {
 //   document.documentElement.lang = 'pl';
 // });
+
+document.body.appendChild(logo());
