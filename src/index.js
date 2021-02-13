@@ -26,7 +26,7 @@ function selectPiece(e) {
 }
 //COFANIE RUCHÓW
 document.querySelector('.undo-button').addEventListener('click', () => {
-  game.reverseMove();
+  Game.reverseMove();
 });
 // document.querySelector('.en')?.addEventListener('click', () => {
 //   document.documentElement.lang = 'en';
