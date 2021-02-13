@@ -21,7 +21,7 @@ export {time};
 // end test button
 const testButton = document.querySelector('.testEnd');
 testButton.addEventListener('click',()=>{
-  let endModalResult =  new endResult('USER1','USER2','Mateusz', '')
+  let endModalResult =  new endResult('USER1','USER2','Mateusz', 'czas')
   endModalResult.showResult()
 });
 
