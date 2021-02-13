@@ -56,6 +56,8 @@ startButton.addEventListener('click',()=>{
     if (e.target.parentElement.classList.contains('pieceInside'))
       game.startMove(e.target.parentElement);
   }
+
+})
   //COFANIE RUCHÓW
   document.querySelector('.undo-button').addEventListener('click', () => {
     game.reverseMove();
@@ -66,5 +68,5 @@ startButton.addEventListener('click',()=>{
   // document.querySelector('.pl').addEventListener('click', () => {
   //   document.documentElement.lang = 'pl';
   // });
-})
+
 
