@@ -133,7 +133,7 @@ class Game {
             }
             else{
                 console.log('WHITE KING CHECKED');
-                addMoveHistory('Szach na białym Królu', 'Czarny');
+                addMoveHistory('Szach na białym Królu', '');
             }
         }
 
@@ -142,7 +142,7 @@ class Game {
                 console.log('BLACK KING CHECKMATED');
             } else{
                 console.log('BLACK KING CHECKED');
-                addMoveHistory('Szach na czarnym Królu', 'Biały');
+                addMoveHistory('Szach na czarnym Królu', '');
             }
 
         }

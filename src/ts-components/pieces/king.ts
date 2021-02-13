@@ -93,7 +93,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 1);
                     rook.setOnBoard('D', 1);
-                    addMoveHistory('Roszada hetmańska', 'Biały');
+                    addMoveHistory('Roszada hetmańska', '');
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -114,7 +114,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 8);
                     rook.setOnBoard('D', 8);
-                    addMoveHistory('Roszada hetmańska', 'Czarny');
+                    addMoveHistory('Roszada hetmańska', '');
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -140,7 +140,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 1);
                     rook.setOnBoard('F', 1);
-                    addMoveHistory('Roszada na skrzydle królewskim', 'Biały');
+                    addMoveHistory('Roszada na skrzydle królewskim', '');
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -160,7 +160,7 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 8);
                     rook.setOnBoard('F', 8);
-                    addMoveHistory('Roszada na skrzydle królewskim', 'Biały');
+                    addMoveHistory('Roszada na skrzydle królewskim', '');
                     this.removeClassActive();
                     Game.changeTurn();
                 }

@@ -1,5 +1,6 @@
 import { Game } from "../game";
 import {addMoveHistory} from '../addMoveHistory';
+import { getName } from "../translateFunction";
 abstract class Piece{
     public color:string;
     protected symbol:string = ''; //<-- domyślnie ustawiłem puste, bo każda figura ma inny symbol
@@ -67,26 +68,7 @@ abstract class Piece{
     }
     //OPIS RUCHÓW
     historyNotation(){
-        const getName = (constructorName:string)=>{
-            switch (constructorName){
-            case 'Queen':
-              return 'Królowa';
-            case 'Rook':
-             return 'Wieża';
-            case 'Knight':
-              return 'Skoczek';
-            case 'Bishop':
-            return 'Goniec';
-            case 'King':
-            return 'Król';
-            case 'white':
-            return 'Biały';
-            case 'black':
-            return 'Czarny';
-            default:
-            return 'Pion';
-        }
-        }
+
         let name:string;
         let movedTo:string;
         let movedFrom:string;
