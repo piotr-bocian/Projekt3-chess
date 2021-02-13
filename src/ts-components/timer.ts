@@ -17,7 +17,8 @@ class Timer {
     }
 
     start(){
-    this.interval = window.setInterval(() => this.timedown(), 1000);
+      this.timedown();
+      this.interval = window.setInterval(() => this.timedown(), 1000);
     };
 
     pause() {

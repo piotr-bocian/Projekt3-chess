@@ -119,6 +119,7 @@ class Bishop extends Piece{
                     this.setOnBoard(square!.id.charAt(0), parseInt(square!.id.charAt(2)));  //<-- przeniesienie figury po kliknięciu
                     this.removeClassActive();
                     Game.checkingKings();
+                    Game.changeTimerTurn();
                 }
             },{capture: true});
 

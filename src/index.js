@@ -1,6 +1,6 @@
 import { Game } from './js-components/game';
-import timeHistoryContainer from './js-components/timeHistoryContainer';
-import Timer from './js-components/timer';
+import {timeHistory} from './js-components/timeHistoryContainer';
+import {Timer} from './js-components/timer';
 import logo from './js-components/starting_page/logo'
 import menuContainer from './js-components/starting_page/menuContainer'
 import endResult from "./js-components/end-page/endListener";
@@ -39,18 +39,20 @@ startButton.addEventListener('click',()=>{
   menuContainer.remove();
 
   // new Game
-  const game = new Game();
-  document.body.appendChild(timeHistoryContainer());
-  var TimerTry = new Timer(1, 'timer-white');
-  var TimerTry1 = new Timer(1, 'timer-black');
+  const game = new Game(60);
+  Game.getWhiteTimer().start();
+  //document.body.appendChild(game.timeHistory.timeHistoryContainer());
+  //var TimerTry = new Timer(60, 'timer-white');
+  //var TimerTry1 = new Timer(60, 'timer-black');
+  
   // TEST:
-  if (true) {
-    TimerTry.start();
-  }
-  let el = document.getElementById('timer-black');
-  if (true) {
-    TimerTry1.start();
-  }
+  // if (true) {
+  //   TimerTry.start();
+  // }
+  // let el = document.getElementById('timer-black');
+  // if (true) {
+  //   TimerTry1.start();
+  // }
   document.querySelectorAll('.board-container div').forEach(element => {
       element.addEventListener('click', selectPiece)
   });
@@ -58,11 +60,14 @@ startButton.addEventListener('click',()=>{
     if (e.target.parentElement.classList.contains('pieceInside'))
       game.startMove(e.target.parentElement);
   }
+
+  document.querySelector('.undo-button').addEventListener('click', () => {
+    Game.reverseMove();
+  });
 })
   //COFANIE RUCHÓW
-  document.querySelector('.undo-button').addEventListener('click', () => {
-    game.reverseMove();
-  });
+  
+  
   // document.querySelector('.en')?.addEventListener('click', () => {
   //   document.documentElement.lang = 'en';
   // });

@@ -26,8 +26,8 @@ class Game {
     private static currentPlayer = Game.whites;
     public static round:number = 0;
     // Timers:
-    private static whitePlayerTimer: Timer;
-    private static blackPlayerTimer: Timer;
+    public static whitePlayerTimer: Timer;
+    public static blackPlayerTimer: Timer;
 
     constructor(time:number){
         this.gameBoard = new Board;
@@ -37,9 +37,11 @@ class Game {
         //DO SPRAWDZENIA
         this.lastMove = ''
         //
+        
         // Timers:
         Game.whitePlayerTimer = new Timer(time, 'timer-white');
         Game.blackPlayerTimer = new Timer(time, 'timer-black');
+        
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -72,7 +74,7 @@ class Game {
     //TURY
     static changeTurn() {
         if (Game.round % 2 === 0) {
-            Game.currentPlayer = Game.blacks
+            Game.currentPlayer = Game.blacks;
         };
         if (Game.round % 2 === 1) {
             Game.currentPlayer = Game.whites
@@ -95,6 +97,10 @@ class Game {
             this.whitePlayerTimer.stop();
         }
     };
+
+    static getWhiteTimer(){
+        return this.whitePlayerTimer;
+    }
 
 
     startMove(square: HTMLElement): void { //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy

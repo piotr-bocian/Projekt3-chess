@@ -133,6 +133,7 @@ class Rook extends Piece{
                     this.hasMoved = true;
                     this.removeClassActive();
                     Game.checkingKings();
+                    Game.changeTimerTurn();
                 }
             }, {capture: true});
 

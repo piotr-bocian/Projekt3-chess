@@ -41,7 +41,7 @@ abstract class Piece{
         const imgContainer = img.parentElement !as HTMLElement;
         imgContainer.classList.add('pieceInside');
         Game.changeTurn();
-        Game.changeTimerTurn();
+        //Game.changeTimerTurn();
         Game.endOfTime();
     }
 

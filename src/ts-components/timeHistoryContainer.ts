@@ -72,7 +72,7 @@ class timeHistory {
 
         timeHistoryContainer.appendChild(buttonContainer);
         document.querySelector('body')!.appendChild(timeHistoryContainer);
-        // return timeHistoryContainer;
+        return timeHistoryContainer;
     }
 }
 
