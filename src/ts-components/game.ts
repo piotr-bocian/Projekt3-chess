@@ -71,10 +71,6 @@ class Game {
 
     startMove(square: HTMLElement): void { //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy
         
-        if(isDraw()) {
-            alert('GAME ENDED BY DRAW');
-        }
-
         if (!ifPromotion()) {
             let chosenPiece = Game.getPiece(square);
             if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
@@ -85,6 +81,8 @@ class Game {
                 // console.log(this.allMovesHistory);
             }
         }
+
+        isDraw();
     }
 
     static getPiece(square: HTMLElement): Piece | void {
