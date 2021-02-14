@@ -132,12 +132,9 @@ abstract class Piece{
     reverseLastMove(){
         // let timeStampWhite = document.querySelector('#timer-white');
         // let timeStampBlack = document.querySelector('#timer-black');
-        const last = Game.beated.pop();
-        const color = last?.color;
         const black = Game.getBlacks();
         const white = Game.getWhites();
         const lastMove = this.moves;
-
         if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
             this.removeClassActive();
@@ -150,13 +147,15 @@ abstract class Piece{
                 } else {
                     return
                 }
+                const last = Game.beated.pop();
+                const color = last?.color;
 
             if (!last) return;
                if(color === 'black'){
                     black.push(last)
                }
                else {
-                   white.push(last)
+                   white.push(last);
                }
 
             // // TIMER CHYBA DZIAŁA

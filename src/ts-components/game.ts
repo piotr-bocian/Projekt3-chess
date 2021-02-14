@@ -226,12 +226,10 @@ class Game {
     //COFANIE RUCHÓW
     static reverseMove(){
         for(let p of Game.whites){
-            Game.setLastChosen(p);
             p.reverseLastMove();
             }
         for(let p of Game.blacks){
-                Game.setLastChosen(p);
-                p.reverseLastMove();
+            p.reverseLastMove();
             }
         }
 
