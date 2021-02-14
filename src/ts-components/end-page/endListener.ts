@@ -90,4 +90,4 @@ class endResult {
     document.body.appendChild(menuContainer());
     };
 }
-module.exports = endResult;
+export { endResult };

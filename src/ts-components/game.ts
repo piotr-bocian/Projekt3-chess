@@ -11,7 +11,7 @@ import { ifPromotion } from "./promotion"
 import { Timer } from "./timer";
 import { timeHistory } from "./timeHistoryContainer";
 import { addMoveHistory } from "./addMoveHistory";
-import { draw } from './draw';
+import { endGame } from './endGameCases';
 
 class Game {
 
@@ -58,25 +58,25 @@ class Game {
         Game.whites.push(Game.whiteKing);
         Game.blacks.push(new Queen('black', `${ID[4]}`, 8));
         Game.blacks.push(Game.blackKing);
-        // for(let i = 3; i <= 6; i+=3) {
-        //     Game.whites.push(new Bishop('white', `${ID[i]}`, 1));
-        //     Game.blacks.push(new Bishop('black', `${ID[i]}`, 8));
-        // }
+        for(let i = 3; i <= 6; i+=3) {
+            Game.whites.push(new Bishop('white', `${ID[i]}`, 1));
+            Game.blacks.push(new Bishop('black', `${ID[i]}`, 8));
+        }
 
-        // for(let i = 2; i <= 7; i+=5) {
-        //     Game.whites.push(new Knight('white', `${ID[i]}`, 1));
-        //     Game.blacks.push(new Knight('black', `${ID[i]}`, 8));
-        // }
+        for(let i = 2; i <= 7; i+=5) {
+            Game.whites.push(new Knight('white', `${ID[i]}`, 1));
+            Game.blacks.push(new Knight('black', `${ID[i]}`, 8));
+        }
 
-        // for(let i = 1; i <= 8; i+=7) {
-        //     Game.whites.push(new Rook('white', `${ID[i]}`, 1));
-        //     Game.blacks.push(new Rook('black', `${ID[i]}`, 8));
-        // }
+        for(let i = 1; i <= 8; i+=7) {
+            Game.whites.push(new Rook('white', `${ID[i]}`, 1));
+            Game.blacks.push(new Rook('black', `${ID[i]}`, 8));
+        }
 
-        // for(let i = 1; i <= 8; i++) {
-        //    Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
-        //    Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
-        // }
+        for(let i = 1; i <= 8; i++) {
+           Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
+           Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
+        }
     }
 
     //TURY
@@ -124,8 +124,7 @@ class Game {
             Game.moveCounter = true;
             }
         }
-
-        draw();
+        endGame();
     }
 
     static getPiece(square: HTMLElement): Piece | void {

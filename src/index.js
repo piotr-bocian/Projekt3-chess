@@ -21,11 +21,11 @@ gameTime.onchange = function (event) {
 export { time };
 
 // end test button
-const testButton = document.querySelector('.testEnd');
-testButton.addEventListener('click', () => {
-  let endModalResult = new endResult('USER1', 'USER2', 'Mateusz', 'czas');
-  endModalResult.showResult();
-});
+// const testButton = document.querySelector('.testEnd');
+// testButton.addEventListener('click', () => {
+//   let endModalResult = new endResult('USER1', 'USER2', 'Mateusz', 'czas');
+//   endModalResult.showResult();
+// });
 
 // start the game after click button
 const startButton = document.querySelector('.start-button');

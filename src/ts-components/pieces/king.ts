@@ -230,17 +230,20 @@ class King extends Piece{
         const dangerZones: string[] = this.getDangerZones();
         let dangerZonesCounter: number = 0;
 
-        possibleMoves.forEach(move => {
-            if(dangerZones.includes(move)){
-                dangerZonesCounter += 1;
+        if(possibleMoves.length > 0) {
+            possibleMoves.forEach(move => {
+                if(dangerZones.includes(move)){
+                    dangerZonesCounter += 1;
+                }
+            });
+            
+            if(dangerZonesCounter === possibleMoves.length){
+                return true;
+            } else {
+                return false;
             }
-        });
-
-        if(dangerZonesCounter === possibleMoves.length){
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     getDangerZones():string[]{

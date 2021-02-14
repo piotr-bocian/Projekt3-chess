@@ -111,6 +111,17 @@ function patCheckList(): HTMLDivElement {
     const title : HTMLHeadingElement = document.createElement("h4");
     title.innerHTML = "PAT JAKO WYGRANA";
 
+    // const label3 = document.createElement("label");
+    // const input3 = document.createElement("input");
+    // input3.type = "radio";
+    // input3.id = "pat2";
+    // input3.name = "pat";
+    // input3.checked = true;
+    // const inputSpan3 = document.createElement("span");
+    // inputSpan3.innerHTML = "REMIS";
+    // label3.appendChild(input3);
+    // label3.appendChild(inputSpan3);
+
     const label1 = document.createElement("label");
     const input1 = document.createElement("input");
     input1.type = "radio";
@@ -135,6 +146,7 @@ function patCheckList(): HTMLDivElement {
     titleDiv.appendChild(title);
     titleDiv.appendChild(label1);
     titleDiv.appendChild(label2);
+    // titleDiv.appendChild(label3);
   
     return titleDiv;
 }
