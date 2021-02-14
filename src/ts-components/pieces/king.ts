@@ -93,7 +93,11 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 1);
                     rook.setOnBoard('D', 1);
-                    addMoveHistory('Roszada hetmańska', '');
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('Queen side castling', this.color);
+                    } else {
+                        addMoveHistory('Roszada hetmańska', 'Biały');
+                    }
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -114,7 +118,12 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 8);
                     rook.setOnBoard('D', 8);
-                    addMoveHistory('Roszada hetmańska', '');
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('Queen side castling', this.color);
+                    } else {
+                        addMoveHistory('Roszada hetmańska', 'Czarny');
+                    }
+
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -140,7 +149,12 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 1);
                     rook.setOnBoard('F', 1);
-                    addMoveHistory('Roszada na skrzydle królewskim', '');
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('King side castling', this.color);
+                    } else {
+                        addMoveHistory('Roszada na skrzydle królewskim', 'Biały');
+                    }
+
                     this.removeClassActive();
                     Game.changeTurn();
                 }
@@ -160,7 +174,12 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 8);
                     rook.setOnBoard('F', 8);
-                    addMoveHistory('Roszada na skrzydle królewskim', '');
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('King side castling', this.color);
+                    } else {
+                        addMoveHistory('Roszada na skrzydle królewskim', 'Czarny');
+                    }
+
                     this.removeClassActive();
                     Game.changeTurn();
                 }

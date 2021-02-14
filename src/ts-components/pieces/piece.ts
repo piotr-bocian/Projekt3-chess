@@ -120,7 +120,7 @@ abstract class Piece{
 
             //BICIE
             if (beatedPiece){
-            const descriptive = `${time} ${beatedPiece.color} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
+            const descriptive = `${time} ${beatedPiece.color.charAt(0).toUpperCase() + beatedPiece.color.slice(1)} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
             this.lastMove = descriptive;
             }
             addMoveHistory(this.lastMove, this.color);

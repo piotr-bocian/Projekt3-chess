@@ -9,7 +9,7 @@ function title(): HTMLDivElement {
     title.innerHTML = "USTAWIENIA GRY";
 
     titleDiv.appendChild(title);
-  
+
     return title;
 }
 
@@ -57,7 +57,7 @@ function menuNames(): HTMLDivElement {
     nameDiv.appendChild(title);
     nameDiv.appendChild(inputDiv)
 
-  
+
     return nameDiv;
 }
 
@@ -86,7 +86,7 @@ function time(): HTMLDivElement {
     range.min = "60";
     range.max = "180";
     range.step = "10";
-    
+
 
     rangeSlider.addEventListener("input", showSliderValue, false);
 
@@ -98,7 +98,7 @@ function time(): HTMLDivElement {
     rangeSlider.appendChild(span);
     timeDiv.appendChild(title);
     timeDiv.appendChild(rangeSlider);
-    
+
 
     return timeDiv;
 }
@@ -121,7 +121,7 @@ function patCheckList(): HTMLDivElement {
     inputSpan1.innerHTML = "PATUJĄCEGO";
     label1.appendChild(input1);
     label1.appendChild(inputSpan1);
-    
+
     const label2 = document.createElement("label");
     const input2 = document.createElement("input");
     input2.type = "radio";
@@ -135,7 +135,7 @@ function patCheckList(): HTMLDivElement {
     titleDiv.appendChild(title);
     titleDiv.appendChild(label1);
     titleDiv.appendChild(label2);
-  
+
     return titleDiv;
 }
 
@@ -162,7 +162,7 @@ function menuContainer(): HTMLDivElement {
     menu.appendChild(time());
     menu.appendChild(patCheckList());
     menu.appendChild(startButton());
-  
+
     return menu;
 }
 

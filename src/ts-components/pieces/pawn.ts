@@ -165,7 +165,6 @@ class Pawn extends Piece {
                             enPass2.classList.remove('pieceInside');
                             //BICIE W PRZELOCIE
                         }
-
                     }
                     this.history(possMove);
                     this.historyNotation();
@@ -230,8 +229,11 @@ class Pawn extends Piece {
                     const pawnToRemove = whites.indexOf(pawn);
                     whites.splice(pawnToRemove, 1);
                     Game.changeTurn();
-
-                    addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory(`Pawn promotion to ${pieceToCreate.constructor.name}` , '');
+                    } else {
+                        addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
+                    }
                 })
 
 
@@ -260,7 +262,11 @@ class Pawn extends Piece {
                     Game.changeTurn();
                     //pieceToCreate <= wybrana bierka
                     // Piece.specialMove = 'Promocja czarny';
-                    addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory(`Pawn promotion to ${pieceToCreate.constructor.name}` , '');
+                    } else {
+                        addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
+                    }
                 })
             }
         }

@@ -133,7 +133,11 @@ class Game {
             }
             else{
                 console.log('WHITE KING CHECKED');
-                addMoveHistory('Szach na białym Królu', '');
+                if(document.documentElement.lang === 'en'){
+                    addMoveHistory(`White king is checked` , '');
+                } else {
+                    addMoveHistory('Szach na białym królu', '');
+                }
             }
         }
 
@@ -142,7 +146,11 @@ class Game {
                 console.log('BLACK KING CHECKMATED');
             } else{
                 console.log('BLACK KING CHECKED');
-                addMoveHistory('Szach na czarnym Królu', '');
+                if(document.documentElement.lang === 'en'){
+                    addMoveHistory(`Black king is checked` , '');
+                } else {
+                    addMoveHistory('Szach na czarnym królu', '');
+                }
             }
 
         }
@@ -217,8 +225,14 @@ class Game {
 
     //COFANIE RUCHÓW
     static reverseMove(){
-        Game.getLastChosen().reverseLastMove();
-    }
+        // Game.getLastChosen().reverseLastMove();
+        for(let p of Game.whites){
+                p.reverseLastMove()
+            }
+        for(let p of Game.blacks){
+                p.reverseLastMove()
+            }
+        }
 
 
 
