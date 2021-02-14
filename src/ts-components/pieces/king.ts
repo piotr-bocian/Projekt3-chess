@@ -2,6 +2,7 @@ import { Piece } from "./piece";
 import { Game } from "../game";
 import { Pawn } from "./pawn";
 import { Rook } from "./rook";
+import { addMoveHistory } from "../addMoveHistory";
 
 class King extends Piece{
 
@@ -94,7 +95,11 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 1);
                     rook.setOnBoard('D', 1);
-                    Piece.specialMove = 'Roszada długa';
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('Queen side castling', this.color);
+                     } else {
+                        addMoveHistory('Roszada hetmańska', 'Biały');
+                     }
                     this.removeClassActive();
                     Game.changeTurn();
                     Game.changeTimerTurn();
@@ -117,7 +122,11 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('C', 8);
                     rook.setOnBoard('D', 8);
-                    Piece.specialMove = 'Roszada długa';
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('Queen side castling', this.color);
+                     } else {
+                        addMoveHistory('Roszada hetmańska', 'Czarny');
+                     }
                     this.removeClassActive();
                     Game.changeTurn();
                     Game.changeTimerTurn();
@@ -144,7 +153,11 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 1);
                     rook.setOnBoard('F', 1);
-                    Piece.specialMove = 'Roszada krótka';
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('King side castling', this.color);
+                     } else {
+                        addMoveHistory('Roszada na skrzydle królewskim', 'Biały');
+                     }
                     this.removeClassActive();
                     Game.changeTurn();
                     Game.changeTimerTurn();
@@ -165,7 +178,11 @@ class King extends Piece{
                 if(Game.getLastChosen() === this){
                     this.setOnBoard('G', 8);
                     rook.setOnBoard('F', 8);
-                    Piece.specialMove = 'Roszada krótka';
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory('King side castling', this.color);
+                     } else {
+                        addMoveHistory('Roszada na skrzydle królewskim', 'Czarny');
+                     }
                     this.removeClassActive();
                     Game.changeTurn();
                     Game.changeTimerTurn();

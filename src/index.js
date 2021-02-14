@@ -44,7 +44,7 @@ startButton.addEventListener('click',()=>{
   //document.body.appendChild(game.timeHistory.timeHistoryContainer());
   //var TimerTry = new Timer(60, 'timer-white');
   //var TimerTry1 = new Timer(60, 'timer-black');
-  
+
   // TEST:
   // if (true) {
   //   TimerTry.start();
@@ -65,9 +65,7 @@ startButton.addEventListener('click',()=>{
     Game.reverseMove();
   });
 })
-  //COFANIE RUCHÓW
-  
-  
+
   // document.querySelector('.en')?.addEventListener('click', () => {
   //   document.documentElement.lang = 'en';
   // });

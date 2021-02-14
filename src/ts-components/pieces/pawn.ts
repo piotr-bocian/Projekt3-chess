@@ -4,6 +4,8 @@ import {Queen} from "./queen";
 import {Knight} from "./knight";
 import {Rook} from "./rook";
 import {Bishop} from "./bishop";
+import { addMoveHistory } from "../addMoveHistory";
+import { getName } from "../translateFunc";
 
 
 //pion
@@ -230,9 +232,13 @@ class Pawn extends Piece {
                     const pawnToRemove = whites.indexOf(pawn);
                     whites.splice(pawnToRemove, 1);
                     Game.changeTurn();
-                    Piece.specialMove = 'albo tu';
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory(`Pawn promotion to ${pieceToCreate.constructor.name}` , '');
+                     } else {
+                        addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
+                     }
                 })
-                Piece.specialMove = 'Promocja biały';
+
             }
         } else {
 
@@ -256,8 +262,11 @@ class Pawn extends Piece {
                     const pawnToRemove = blacks.indexOf(pawn);
                     blacks.splice(pawnToRemove, 1);
                     Game.changeTurn();
-                    //pieceToCreate <= wybrana bierka
-                    Piece.specialMove = 'Promocja czarny';
+                    if(document.documentElement.lang === 'en'){
+                        addMoveHistory(`Pawn promotion to ${pieceToCreate.constructor.name}` , '');
+                     } else {
+                        addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
+                     }
                 })
             }
         }

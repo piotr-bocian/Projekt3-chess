@@ -10,9 +10,10 @@ import { ID } from "./board";
 import { ifPromotion } from "./promotion"
 import { Timer } from "./timer";
 import { timeHistory } from "./timeHistoryContainer";
+import { addMoveHistory } from "./addMoveHistory";
 
 class Game {
-    
+
     private gameBoard:Board;
     private timeHistory:timeHistory;
     private static lastChosen:Piece;    //<-- ta składowa klasy Game przechowuje informację o tym jaka figura została wybrana jako ostatnia
@@ -37,11 +38,11 @@ class Game {
         //DO SPRAWDZENIA
         this.lastMove = ''
         //
-        
+
         // Timers:
         Game.whitePlayerTimer = new Timer(time, 'timer-white');
         Game.blackPlayerTimer = new Timer(time, 'timer-black');
-        
+
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
         Game.blackKing = new King('black', `${ID[5]}`, 8);
@@ -89,7 +90,7 @@ class Game {
           } else {
             this.whitePlayerTimer.start();
             this.blackPlayerTimer.pause();
-          } 
+          }
     };
 
     static endOfTime() {
@@ -113,7 +114,7 @@ class Game {
             //this.allMovesHistory.push(chosenPiece.movesHistory)
             // console.log(this.allMovesHistory);
             }
-        } 
+        }
     }
 
     static getPiece(square: HTMLElement): Piece | void {
@@ -161,22 +162,28 @@ class Game {
     static checkingKings():void{ //<-- ta metoda sprawdza czy któryś z królów jest szachowany
         if(Game.whiteKing.isChecked()){
             if(Game.whiteKing.isCheckmated()){
-                Piece.specialMove = 'Szach-Mat';
                 console.log('WHITE KING CHECKMATED');
             }
             else{
-                Piece.specialMove = 'Szach na Królu';
                 console.log('WHITE KING CHECKED');
+                if(document.documentElement.lang === 'en'){
+                    addMoveHistory(`White king is checked` , '');
+                } else {
+                    addMoveHistory('Szach na białym królu', '');
+                }
             }
         }
 
         if(Game.blackKing.isChecked()){
             if(Game.blackKing.isCheckmated()){
-                Piece.specialMove = 'Szach-Mat';
                 console.log('BLACK KING CHECKMATED');
             } else{
-                Piece.specialMove = 'Szach na Królu';
                 console.log('BLACK KING CHECKED');
+                if(document.documentElement.lang === 'en'){
+                    addMoveHistory(`Black king is checked` , '');
+                } else {
+                    addMoveHistory('Szach na czarnym królu', '');
+                }
             }
 
         }
@@ -250,8 +257,14 @@ class Game {
     }
 
     //COFANIE RUCHÓW
-    static reverseMove(){
-        Game.getLastChosen().reverseLastMove();
+
+static reverseMove(){
+    for(let p of Game.whites){
+        p.reverseLastMove();
+        }
+    for(let p of Game.blacks){
+            p.reverseLastMove();
+        }
     }
 
 
