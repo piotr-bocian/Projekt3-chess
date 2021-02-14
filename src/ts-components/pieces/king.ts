@@ -225,6 +225,24 @@ class King extends Piece{
         return possMoves.length === 0;
     }
 
+    areAllPossibleMovesInDangerZones():boolean {
+        const possibleMoves: string[] = this.showPossibleMoves();
+        const dangerZones: string[] = this.getDangerZones();
+        let dangerZonesCounter: number = 0;
+
+        possibleMoves.forEach(move => {
+            if(dangerZones.includes(move)){
+                dangerZonesCounter += 1;
+            }
+        });
+
+        if(dangerZonesCounter === possibleMoves.length){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     getDangerZones():string[]{
         const dangerArr:string[] = [];
 
