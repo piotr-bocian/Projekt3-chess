@@ -126,11 +126,9 @@ abstract class Piece{
     reverseLastMove(){
         // let timeStampWhite = document.querySelector('#timer-white');
         // let timeStampBlack = document.querySelector('#timer-black');
-           const last = Game.beated.pop();
-           const color = last?.color;
            const black = Game.getBlacks();
            const white = Game.getWhites();
-        const lastMove = this.moves;
+           const lastMove = this.moves;
         if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
             this.removeClassActive();
@@ -143,7 +141,9 @@ abstract class Piece{
                 } else {
                     return
                 }
-                //WSKRZESZANIE BIEREK
+                //WSKRZESZANIE BIEREK, LAST ORAZ COLOR MUSZĄ BYĆ W TYM MIEJSCU
+                const last = Game.beated.pop();
+                const color = last?.color;
                 if (!last) return;
                 if(color === 'black'){
                      black.push(last)
