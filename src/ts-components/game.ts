@@ -29,6 +29,8 @@ class Game {
     // Timers:
     public static whitePlayerTimer: Timer;
     public static blackPlayerTimer: Timer;
+    //bicie
+    public static beatCounter: number
 
     constructor(time:number){
         this.gameBoard = new Board;
@@ -38,7 +40,8 @@ class Game {
         //DO SPRAWDZENIA
         this.lastMove = ''
         //
-
+        //bicie
+        Game.beatCounter = 0;
         // Timers:
         Game.whitePlayerTimer = new Timer(time, 'timer-white');
         Game.blackPlayerTimer = new Timer(time, 'timer-black');
@@ -113,9 +116,7 @@ class Game {
             if (chosenPiece && Game.currentPlayer.includes(chosenPiece)) {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
-            //TUTAJ ZBIERAM HISTORIE RUCHOW KAŻDEJ BIERKI
-            //this.allMovesHistory.push(chosenPiece.movesHistory)
-            // console.log(this.allMovesHistory);
+            Game.beatCounter = 0;
             }
         }
     }
@@ -151,11 +152,13 @@ class Game {
                 this.beated.push(p);
                 Piece.beated.push(p);
                 square.innerHTML = '';
+                Game.beatCounter = 1;
             } else {
                 this.blacks.splice(this.blacks.indexOf(p),1);
                 this.beated.push(p);
                 Piece.beated.push(p);
                 square.innerHTML = '';
+                Game.beatCounter = 1;
             }
         } else {
             return;
@@ -262,12 +265,14 @@ class Game {
     //COFANIE RUCHÓW
 
 static reverseMove(){
-    for(let p of Game.whites){
-        p.reverseLastMove();
-        }
-    for(let p of Game.blacks){
-            p.reverseLastMove();
-        }
+    Game.getLastChosen().reverseLastMove();
+    if(Game.beatCounter === 1){
+        console.log('test')
+        Piece.retLast();
+        Game.changeTurn();
+        Game.changeTimerTurn();
+        Game.beatCounter = 0;
+    }
     }
 
 

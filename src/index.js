@@ -1,9 +1,9 @@
 import { Game } from './js-components/game';
-import {timeHistory} from './js-components/timeHistoryContainer';
-import {Timer} from './js-components/timer';
-import logo from './js-components/starting_page/logo'
-import menuContainer from './js-components/starting_page/menuContainer'
-import endResult from "./js-components/end-page/endListener";
+import { timeHistory } from './js-components/timeHistoryContainer';
+import { Timer } from './js-components/timer';
+import logo from './js-components/starting_page/logo';
+import menuContainer from './js-components/starting_page/menuContainer';
+import endResult from './js-components/end-page/endListener';
 
 document.querySelectorAll('.board-container div').forEach((element) => {
   element.addEventListener('click', selectPiece);
@@ -13,23 +13,23 @@ document.querySelectorAll('.board-container div').forEach((element) => {
 document.body.appendChild(logo());
 document.body.appendChild(menuContainer());
 
-var gameTime = document.querySelector(".rs-range");
-var time = document.querySelector(".rs-range").value / 2;
-    gameTime.onchange = function(event){
-    time = document.querySelector(".rs-range").value / 2;
-}
-export {time};
+var gameTime = document.querySelector('.rs-range');
+var time = document.querySelector('.rs-range').value / 2;
+gameTime.onchange = function (event) {
+  time = document.querySelector('.rs-range').value / 2;
+};
+export { time };
 
 // end test button
 const testButton = document.querySelector('.testEnd');
-testButton.addEventListener('click',()=>{
-  let endModalResult =  new endResult('USER1','USER2','Mateusz', 'czas')
-  endModalResult.showResult()
+testButton.addEventListener('click', () => {
+  let endModalResult = new endResult('USER1', 'USER2', 'Mateusz', 'czas');
+  endModalResult.showResult();
 });
 
 // start the game after click button
 const startButton = document.querySelector('.start-button');
-startButton.addEventListener('click',()=>{
+startButton.addEventListener('click', () => {
   // hide start box after start the game
   let logoElement = document.querySelector('.logo');
   let menuContainer = document.querySelector('.menuContainer');
@@ -53,8 +53,8 @@ startButton.addEventListener('click',()=>{
   // if (true) {
   //   TimerTry1.start();
   // }
-  document.querySelectorAll('.board-container div').forEach(element => {
-      element.addEventListener('click', selectPiece)
+  document.querySelectorAll('.board-container div').forEach((element) => {
+    element.addEventListener('click', selectPiece);
   });
   function selectPiece(e) {
     if (e.target.parentElement.classList.contains('pieceInside'))
@@ -64,13 +64,11 @@ startButton.addEventListener('click',()=>{
   document.querySelector('.undo-button').addEventListener('click', () => {
     Game.reverseMove();
   });
-})
+});
 
-  // document.querySelector('.en')?.addEventListener('click', () => {
-  //   document.documentElement.lang = 'en';
-  // });
-  // document.querySelector('.pl').addEventListener('click', () => {
-  //   document.documentElement.lang = 'pl';
-  // });
-
-
+// document.querySelector('.en')?.addEventListener('click', () => {
+//   document.documentElement.lang = 'en';
+// });
+// document.querySelector('.pl').addEventListener('click', () => {
+//   document.documentElement.lang = 'pl';
+// });

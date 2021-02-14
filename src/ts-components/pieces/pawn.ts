@@ -174,7 +174,6 @@ class Pawn extends Piece {
                     this.removeClassActive();
                     Game.checkingKings();
                     Game.changeTimerTurn();
-
                     if (this.color === 'white' && this.positionY === 8 && this.parentSquare.querySelector('img')!.src.includes('Pawn')) {
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
@@ -183,7 +182,6 @@ class Pawn extends Piece {
                         this.parentSquare.classList.add('promotion');
                     }
                 }
-
             }, {capture: true})
         })
     }
