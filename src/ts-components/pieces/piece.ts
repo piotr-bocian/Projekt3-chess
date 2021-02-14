@@ -124,8 +124,7 @@ abstract class Piece{
 
     //DZIAŁAJĄ SAME RUCHY
     reverseLastMove(){
-           const black = Game.getBlacks();
-           const white = Game.getWhites();
+
            const lastMove = this.moves;
         if(this.moveTimeArray.length === 0) {return};
         if(lastMove.length === 0){return};
@@ -138,20 +137,28 @@ abstract class Piece{
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
                     }
                 }
-                //WSKRZESZANIE BIEREK, LAST ORAZ COLOR MUSZĄ BYĆ W TYM MIEJSCU
-                const last = Game.beated.pop();
-                const color = last?.color;
-                if (!last) {return};
-                if(color === 'black'){
-                     black.push(last);
-                }
-                else {
-                    white.push(last);
-                }
         }
 
-
-
+        static retLast(){
+            const black = Game.getBlacks();
+           const white = Game.getWhites();
+            const last = Game.beated.pop();
+                const color = last?.color;
+                console.log(last!.positionX,last!.positionY, last);
+                if (!last) {return};
+                if(color === 'black'){
+                    console.log(color, 1);
+                    last.setOnBoard(last.positionX, last.positionY);
+                     black.push(last);
+                     return;
+                }
+                else {
+                    console.log(color, 3);
+                    last.setOnBoard(last.positionX, last.positionY);
+                    white.push(last);
+                    return;
+                }
+        }
 
     abstract showPossibleMoves():string[];
 
