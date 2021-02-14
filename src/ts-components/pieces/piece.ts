@@ -93,31 +93,31 @@ abstract class Piece{
             name = getName(this.constructor.name);
 
             //RUCHY
-            const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+            const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
             this.lastMove = descriptive;
 
             //NOTACJA DLA BICIA
             if (beatedPiece){
-            const descriptive = `${time} ${getName(beatedPiece.color)} ${getName(beatedPiece.constructor.name).toLowerCase()} został zbity przez ${getName(this.color).toLowerCase()} ${name.toLowerCase()}`;
+            const descriptive = `${getName(beatedPiece.color)} ${getName(beatedPiece.constructor.name).toLowerCase()} został zbity przez ${getName(this.color).toLowerCase()} ${name.toLowerCase()}`;
             this.lastMove = descriptive;
             }
 
-            addMoveHistory(this.lastMove, getName(this.color));
+            addMoveHistory(this.lastMove, `${time} ${getName(this.color)}`);
             //EN VERSION
         } else if (document.documentElement.lang === 'en'){
             movedFrom = 'moved from';
             movedTo = 'to';
             name = this.constructor.name;
             //RUCHY
-             const descriptive = `${time} ${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
+             const descriptive = `${name} ${movedFrom} ${createNotation[0]}-${createNotation[1]} ${movedTo} ${createNotation[2]}-${createNotation[3]}`;
              this.lastMove = descriptive;
 
             //BICIE
             if (beatedPiece){
-            const descriptive = `${time} ${beatedPiece.color} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
+            const descriptive = `${beatedPiece.color} ${beatedPiece.constructor.name.toLowerCase()} was beaten by ${this.color.toLowerCase()} ${name.toLowerCase()}`;
             this.lastMove = descriptive;
             }
-            addMoveHistory(this.lastMove, this.color);
+            addMoveHistory(this.lastMove, `${time} ${this.color}`);
         }
 
     }
