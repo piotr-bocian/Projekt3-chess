@@ -102,6 +102,9 @@ class Game {
     static getWhiteTimer(){
         return this.whitePlayerTimer;
     }
+    static getBlackTimer(){
+        return this.blackPlayerTimer;
+    }
 
 
     startMove(square: HTMLElement): void { //<--metoda wywoływana po klknięciu na którekolwiek z pól na szachownicy

@@ -11,7 +11,7 @@ abstract class Piece{
     protected moves:string[][]
     public lastMove: string;
     public static beated:Piece[] = [];
-    public static moveTimeArray: string[];
+    private moveTimeArray: string[];
     public static movesHistory: string[][];
 
     constructor(color:string, positionX:string, positionY:number){
@@ -21,7 +21,7 @@ abstract class Piece{
         this.possibleMovesIDs = this.showPossibleMoves();
 
         this.parentSquare = document.getElementById(`${this.positionX}-${this.positionY}`)!; //<-- parentSquare przechowuje diva, w którym obecnie znajduje się figura
-        Piece.moveTimeArray =[];
+        this.moveTimeArray =[];
         Piece.movesHistory=[];
         this.lastMove ='';
         this.moves = [];
@@ -85,7 +85,7 @@ abstract class Piece{
         if(typeof createNotation[0] === 'undefined') return;
         if(!time) return;
         //CZAS WYKONANIA RUCHU
-        Piece.moveTimeArray.push(time);
+        this.moveTimeArray.push(time);
 
         if (document.documentElement.lang === 'pl'){
             movedFrom = 'poruszył/a się z pola';
@@ -124,11 +124,10 @@ abstract class Piece{
 
     //DZIAŁAJĄ SAME RUCHY
     reverseLastMove(){
-        // let timeStampWhite = document.querySelector('#timer-white');
-        // let timeStampBlack = document.querySelector('#timer-black');
            const black = Game.getBlacks();
            const white = Game.getWhites();
            const lastMove = this.moves;
+        if(this.moveTimeArray.length === 0) {return};
         if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
             this.removeClassActive();
@@ -138,31 +137,17 @@ abstract class Piece{
                     if(positionX && positionY){
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
                     }
-                } else {
-                    return
                 }
                 //WSKRZESZANIE BIEREK, LAST ORAZ COLOR MUSZĄ BYĆ W TYM MIEJSCU
                 const last = Game.beated.pop();
                 const color = last?.color;
-                if (!last) return;
+                if (!last) {return};
                 if(color === 'black'){
-                     black.push(last)
+                     black.push(last);
                 }
                 else {
-                    white.push(last)
+                    white.push(last);
                 }
-
-            // // TIMER CHYBA DZIAŁA
-            // if(Piece.moveTimeArray.length % 2 === 1){
-            //     last.updatePosition(pos[0]!, parseInt(pos[2]!));
-            //     white.push(last)
-            //     // this.whitePlayerTimer.setTimer(Piece.moveTimeArray.pop());
-            // //     timeStampWhite.innerHTML = Piece.moveTimeArray.pop()
-            // } else {
-            //     black.push(last)
-            //     // this.blackPlayerTimer.setTimer(Piece.moveTimeArray.pop());
-            // //     timeStampBlack.innerHTML = Piece.moveTimeArray.pop()
-            // }
         }
 
 

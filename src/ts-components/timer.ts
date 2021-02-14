@@ -58,6 +58,6 @@ class Timer {
         sec = sec < 10 ? '0' + sec : sec;
         return min + ':' + sec;
     }
-} 
+}
 
 export {Timer};
