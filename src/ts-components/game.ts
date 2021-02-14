@@ -30,7 +30,8 @@ class Game {
     public static whitePlayerTimer: Timer;
     public static blackPlayerTimer: Timer;
     //bicie
-    public static beatCounter: number
+    public static beatCounter: number;
+    public static moveCounter: boolean;
 
     constructor(time:number){
         this.gameBoard = new Board;
@@ -42,6 +43,8 @@ class Game {
         //
         //bicie
         Game.beatCounter = 0;
+        //cofanie ruchów
+        Game.moveCounter = true;
         // Timers:
         Game.whitePlayerTimer = new Timer(time, 'timer-white');
         Game.blackPlayerTimer = new Timer(time, 'timer-black');
@@ -117,6 +120,7 @@ class Game {
             Game.setLastChosen(chosenPiece);
             chosenPiece.move();
             Game.beatCounter = 0;
+            Game.moveCounter = true;
             }
         }
     }

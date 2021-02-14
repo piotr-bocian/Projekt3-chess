@@ -62,7 +62,10 @@ startButton.addEventListener('click', () => {
   }
 
   document.querySelector('.undo-button').addEventListener('click', () => {
-    Game.reverseMove();
+    if(Game.moveCounter === true){
+      Game.reverseMove();
+      Game.moveCounter = false;
+    }
   });
 });
 

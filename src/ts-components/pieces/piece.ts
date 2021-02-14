@@ -137,8 +137,6 @@ abstract class Piece{
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
                     }
                 }
-                //WSKRZESZANIE BIEREK, LAST ORAZ COLOR MUSZĄ BYĆ W TYM MIEJSCU
-
         }
 
         static retLast(){
@@ -161,7 +159,6 @@ abstract class Piece{
                     return;
                 }
         }
-
 
     abstract showPossibleMoves():string[];
 
