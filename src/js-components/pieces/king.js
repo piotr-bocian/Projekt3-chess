@@ -46,9 +46,9 @@ class King extends piece_1.Piece {
             if (dangerZones.indexOf(`${square.id.charAt(0)}-${parseInt(square.id.charAt(2))}`) !== -1) {
                 return;
             }
-            if (square.innerHTML !== '' && !this.isPositonSafe(square.id.charAt(0), parseInt(square.id.charAt(2)))) {
-                return;
-            }
+            // if(square!.innerHTML !== '' && !this.isPositonSafe(square!.id.charAt(0), parseInt(square!.id.charAt(2)))){
+            //     return;
+            // }
             square.classList.add('active'); //<--oznaczenie wizualne na szachownicy
             square.addEventListener('click', () => {
                 if (square.classList.contains('active') && (game_1.Game.getLastChosen() === this)) {
