@@ -174,11 +174,9 @@ class Pawn extends Piece {
                     this.removeClassActive();
                     Game.checkingKings();
                     Game.changeTimerTurn();
-                    console.log('pauza na koniec funkcji')
 
                     if (this.color === 'white' && this.positionY === 8 && this.parentSquare.querySelector('img')!.src.includes('Pawn')) {
                         Game.blackPlayerTimer.pause();
-                        console.log('pauza modal');
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     } else if (this.positionY === 1 && this.parentSquare.querySelector('img')!.src.includes('Pawn')){

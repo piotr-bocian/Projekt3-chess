@@ -283,7 +283,7 @@ static reverseMove(){
     if(Game.beatCounter === 1){
         Piece.retLast();
         Game.changeTurn();
-        Game.changeTimerTurn();
+        // Game.changeTimerTurn();
         Game.beatCounter = 0;
     }
     Game.changeTimerTurn();
