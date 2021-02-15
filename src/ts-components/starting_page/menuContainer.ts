@@ -174,7 +174,9 @@ function startButton(): HTMLDivElement {
 
     const startButtonText = document.createElement("p");
     startButtonText.innerHTML = "ROZPOCZNIJ GRĘ!";
-    startButtonText.innerHTML = "PLAY";
+    if (document.documentElement.lang === 'en'){
+        startButtonText.innerHTML = "PLAY";
+    }
     startButtonContainer.appendChild(startButtonText);
 
     return startButtonContainer

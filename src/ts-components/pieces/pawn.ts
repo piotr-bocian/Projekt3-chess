@@ -173,15 +173,19 @@ class Pawn extends Piece {
                     this.setOnBoard(coorX, coorY);
                     this.removeClassActive();
                     Game.checkingKings();
+                    Game.changeTimerTurn();
+                    console.log('pauza na koniec funkcji')
+
                     if (this.color === 'white' && this.positionY === 8 && this.parentSquare.querySelector('img')!.src.includes('Pawn')) {
+                        Game.blackPlayerTimer.pause();
+                        console.log('pauza modal');
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     } else if (this.positionY === 1 && this.parentSquare.querySelector('img')!.src.includes('Pawn')){
+                        Game.whitePlayerTimer.pause();
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     }
-                    Game.changeTimerTurn();
-
                 }
             }, {capture: true})
         })
@@ -207,8 +211,6 @@ class Pawn extends Piece {
 
         const modalWindowPawn = document.createElement("div");
 
-        const parentSquare = document.getElementById(`${pawn.getPositionX}`)!;
-
         if (this.color === 'white') {
 
             modalWindowPawn.className = "modal-window-white";
@@ -216,7 +218,6 @@ class Pawn extends Piece {
             for (const piece of pieces) {
                 const selectableFigure = document.createElement("img");
                 selectableFigure.setAttribute('src', `../../../static/assets/white${piece.name}.png`)
-                selectableFigure.style.height = '90px';
                 const { pieceName: PieceName } = piece;
 
                 modalWindowPawn.appendChild(selectableFigure);
@@ -233,9 +234,10 @@ class Pawn extends Piece {
                     Game.changeTurn();
                     if(document.documentElement.lang === 'en'){
                         addMoveHistory(`Pawn promotion to ${pieceToCreate.constructor.name}` , '');
-                     } else {
+                    } else {
                         addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
-                     }
+                    };
+                    Game.blackPlayerTimer.start();
                 })
 
             }
@@ -246,7 +248,7 @@ class Pawn extends Piece {
             for (const piece of pieces) {
                 const selectableFigure = document.createElement("img");
                 selectableFigure.setAttribute('src', `../../../static/assets/black${piece.name}.png`)
-                selectableFigure.style.height = '90px';
+                selectableFigure.style.height = '80px';
                 const { pieceName: PieceName } = piece;
 
                 modalWindowPawn.appendChild(selectableFigure);
@@ -263,9 +265,10 @@ class Pawn extends Piece {
                     Game.changeTurn();
                     if(document.documentElement.lang === 'en'){
                         addMoveHistory(`Pawn promotion to ${pieceToCreate.constructor.name}` , '');
-                     } else {
+                    } else {
                         addMoveHistory(`Promocja piona na ${getName(pieceToCreate.constructor.name)}`, '');
-                     }
+                    }
+                    Game.whitePlayerTimer.start();
                 })
             }
         }
