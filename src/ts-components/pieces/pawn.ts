@@ -248,7 +248,7 @@ class Pawn extends Piece {
 
             for (const piece of pieces) {
                 const selectableFigure = document.createElement("img");
-                selectableFigure.setAttribute('src', `../../../../Projekt3-chess/static/assets/black${piece.name}.png`)
+                selectableFigure.setAttribute('src', `../../../../Projekt3-chess/static/assets/black${piece.name}.png`);
                 selectableFigure.style.height = '80px';
                 const { pieceName: PieceName } = piece;
 
