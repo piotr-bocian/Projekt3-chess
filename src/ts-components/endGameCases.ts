@@ -41,15 +41,11 @@ function endCase(user1:string, user2: string): EndType {
     console.log(!whiteKing.isChecked());
     console.log(!whiteKing.isCheckmated());
     console.log(whiteKing.areAllPossibleMovesInDangerZones());
-    console.log('czarne',blackKing.getDangerZones());
-    console.log('biale',whiteKing.getDangerZones());
+    console.log(blackKing.areAllPossibleMovesInDangerZones());
     console.log(whiteKing.allPossibleMoves());
+    console.log(blackKing.allPossibleMoves());
 
     if(!whiteKing.isChecked() && !whiteKing.isCheckmated() && whiteKing.areAllPossibleMovesInDangerZones() && whiteKing.allPossibleMoves() == 0){
-        console.log(!whiteKing.isChecked());
-        console.log(!whiteKing.isCheckmated());
-        console.log(whiteKing.areAllPossibleMovesInDangerZones());
-        console.log(blackKing.getDangerZones());
         console.log('pat');
         endGameCase.how = endGameCases.stalemate;
         endGameCase.finish = true;   

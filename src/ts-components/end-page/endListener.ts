@@ -49,7 +49,7 @@ class endResult {
             title.className = "title-result";
             title2.className = "title-result";
             if (obj.how === 'pat') {
-                title.innerHTML = `PAT (REMIS)`;
+                title.innerHTML = `PAT`;
                 title2.innerHTML = `Gracz ${obj.user1} zremisował z graczem ${obj.user2}`;
             }
             else if (obj.how == 'czas') {
