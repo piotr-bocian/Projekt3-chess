@@ -6,6 +6,7 @@
 @import "./timeHistoryContainer.css";
 @import "./menuContainer.css";
 @import "./logo.css";
+@import "./lang.css";
 
 
 
@@ -23,6 +24,7 @@ body {
         "logo logo"
         "game timeHistoryContainer";
 }
+
 
 .body-start-page {
     height: 100vh;
@@ -49,6 +51,10 @@ body {
     position: relative;
     top: 25%;
     left: 25%;
+}
+
+.active.pieceInside {
+    background-color: rgba(124, 124, 124, 0.5);
 }
 
 @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {

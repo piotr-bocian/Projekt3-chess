@@ -160,7 +160,7 @@ function patCheckList(): HTMLDivElement {
     titleDiv.appendChild(label2);
     // titleDiv.appendChild(label3);
     if (document.documentElement.lang === 'en'){
-        title.innerHTML = "STALEMATE AS WIN";
+        title.innerHTML = "STALEMATE AS WIN OF";
         inputSpan1.innerHTML = "PATUJĄCEGO";
         inputSpan2.innerHTML = "PATOWANEGO";
     }
@@ -174,7 +174,9 @@ function startButton(): HTMLDivElement {
 
     const startButtonText = document.createElement("p");
     startButtonText.innerHTML = "ROZPOCZNIJ GRĘ!";
-    startButtonText.innerHTML = "PLAY";
+    if (document.documentElement.lang === 'en'){
+        startButtonText.innerHTML = "PLAY";
+    }
     startButtonContainer.appendChild(startButtonText);
 
     return startButtonContainer

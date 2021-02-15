@@ -4,10 +4,33 @@ import { Timer } from './js-components/timer';
 import logo from './js-components/starting_page/logo';
 import menuContainer from './js-components/starting_page/menuContainer';
 import endResult from './js-components/end-page/endListener';
+import lang from './js-components/starting_page/lang';
 
 document.querySelectorAll('.board-container div').forEach((element) => {
   element.addEventListener('click', selectPiece);
 });
+
+document.body.appendChild(lang());
+
+document.querySelector('.eng').addEventListener('click', () => {
+  document.documentElement.lang = 'en';
+  localStorage.setItem('lang', 'en');
+  document.location.reload();
+  console.log('ang');
+});
+
+document.querySelector('.pl').addEventListener('click', () => {
+  document.documentElement.lang = 'pl';
+  localStorage.setItem('lang', 'pl');
+  document.location.reload();
+  console.log('pl');
+});
+
+if (localStorage) {
+  document.documentElement.lang = localStorage.getItem('lang');
+} else {
+  document.documentElement.lang = "pl";
+}
 
 // load start window
 document.body.appendChild(logo());
@@ -81,7 +104,7 @@ startButton.addEventListener('click', () => {
   });
 });
 
-// document.querySelector('.en')?.addEventListener('click', () => {
+// document.querySelector('.eng')?.addEventListener('click', () => {
 //   document.documentElement.lang = 'en';
 // });
 // document.querySelector('.pl').addEventListener('click', () => {
