@@ -60,9 +60,9 @@ class King extends Piece{
                 return;
             }
 
-            if(square!.innerHTML !== '' && !this.isPositonSafe(square!.id.charAt(0), parseInt(square!.id.charAt(2)))){
-                return;
-            }
+            // if(square!.innerHTML !== '' && !this.isPositonSafe(square!.id.charAt(0), parseInt(square!.id.charAt(2)))){
+            //     return;
+            // }
 
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
