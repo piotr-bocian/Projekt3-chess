@@ -102,6 +102,11 @@ startButton.addEventListener('click', () => {
       Game.moveCounter = false;
     }
   });
+
+  document.querySelector('.exit-button').addEventListener('click', () => {
+    location.reload();
+  });
+  
 });
 
 // document.querySelector('.eng')?.addEventListener('click', () => {
