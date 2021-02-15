@@ -56,6 +56,10 @@ class endResult {
                 title2.innerHTML = `Koniec czasu przeciwnika`;
                 title.innerHTML = `Wygrał gracz ${obj.winner}`;
             }
+            else if (obj.how === 'remis') {
+                title.innerHTML = `REMIS`;
+                title2.innerHTML = `Gracz ${obj.user1} zremisował z graczem ${obj.user2}`;
+            }
             else {
                 title.innerHTML = `Wygrał gracz ${obj.winner}`;
                 title2.innerHTML = `SZACH-MAT`;
