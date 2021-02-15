@@ -38,6 +38,9 @@ class endResult {
             titleDiv.className = "menuTitle";
             const title = document.createElement("h1");
             title.innerHTML = "KONIEC GRY";
+            if(document.documentElement.lang === 'en'){
+                title.innerHTML = "END OF THE GAME";
+            }
             titleDiv.appendChild(title);
             return title;
         }
@@ -51,18 +54,34 @@ class endResult {
             if (obj.how === 'pat') {
                 title.innerHTML = `PAT (REMIS)`;
                 title2.innerHTML = `Gracz ${obj.user1} zremisował z graczem ${obj.user2}`;
+                if(document.documentElement.lang === 'en'){
+                    title.innerHTML = "STALEMATE";
+                    title2.innerHTML = `Player ${obj.user1} stalemate with player ${obj.user2}`;
+                }
             }
             else if (obj.how == 'czas') {
                 title2.innerHTML = `Koniec czasu przeciwnika`;
                 title.innerHTML = `Wygrał gracz ${obj.winner}`;
+                if(document.documentElement.lang === 'en'){
+                    title.innerHTML = "End of time";
+                    title2.innerHTML = `Player ${obj.user1} win!`;
+                }
             }
             else if (obj.how === 'remis') {
                 title.innerHTML = `REMIS`;
                 title2.innerHTML = `Gracz ${obj.user1} zremisował z graczem ${obj.user2}`;
+                if(document.documentElement.lang === 'en'){
+                    title.innerHTML = "DRAW";
+                    title2.innerHTML = `Player ${obj.user1} draw with ${obj.user2}`;
+                }
             }
             else {
                 title.innerHTML = `Wygrał gracz ${obj.winner}`;
                 title2.innerHTML = `SZACH-MAT`;
+                if(document.documentElement.lang === 'en'){
+                    title.innerHTML = `Player ${obj.winner} win`;
+                    title2.innerHTML = `CHECKMATE`;
+                }
             }
             const inputDiv = document.createElement("div");
             nameDiv.appendChild(title);
@@ -75,6 +94,9 @@ class endResult {
             startButtonContainer.className = "restart-button";
             const startButtonText = document.createElement("p");
             startButtonText.innerHTML = "Strona główna";
+            if(document.documentElement.lang === 'en'){
+                startButtonText.innerHTML = "Main menu";
+            }
             startButtonContainer.addEventListener('click',()=>{
                 location.reload();
             })

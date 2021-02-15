@@ -125,7 +125,7 @@ abstract class Piece{
     //COFANIE RUCHÓW
     reverseLastMove(color: string){
 
-           const lastMove = this.moves;
+        const lastMove = this.moves;
         if(this.moveTimeArray.length === 0) {return};
         if(lastMove.length === 0){return};
             const popLastMove = lastMove.pop();
