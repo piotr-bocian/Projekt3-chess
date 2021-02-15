@@ -1,5 +1,6 @@
 import { Game } from './game';
 import { endResult } from './end-page/endListener'
+import { Pawn } from './pieces/pawn'
 
 type EndType = {
     player1:string, 
@@ -37,12 +38,25 @@ function endCase(user1:string, user2: string): EndType {
         endGameCase.finish = true;
         return endGameCase;
     }
-    if(!whiteKing.isChecked() && !whiteKing.isCheckmated() && whiteKing.areAllPossibleMovesInDangerZones()){
+    console.log(!whiteKing.isChecked());
+    console.log(!whiteKing.isCheckmated());
+    console.log(whiteKing.areAllPossibleMovesInDangerZones());
+    console.log('czarne',blackKing.getDangerZones());
+    console.log('biale',whiteKing.getDangerZones());
+    console.log(whiteKing.allPossibleMoves());
+
+    if(!whiteKing.isChecked() && !whiteKing.isCheckmated() && whiteKing.areAllPossibleMovesInDangerZones() && whiteKing.allPossibleMoves() == 0){
+        console.log(!whiteKing.isChecked());
+        console.log(!whiteKing.isCheckmated());
+        console.log(whiteKing.areAllPossibleMovesInDangerZones());
+        console.log(blackKing.getDangerZones());
+        console.log('pat');
         endGameCase.how = endGameCases.stalemate;
         endGameCase.finish = true;   
         return endGameCase;     
 
-    } else if(!blackKing.isChecked() && !blackKing.isCheckmated() && blackKing.areAllPossibleMovesInDangerZones()) {
+    } else if(!blackKing.isChecked() && !blackKing.isCheckmated() && blackKing.areAllPossibleMovesInDangerZones() && blackKing.allPossibleMoves() == 0) {
+        console.log('pat');
         endGameCase.how = endGameCases.stalemate;
         endGameCase.finish = true;
         return endGameCase;
@@ -80,10 +94,10 @@ function endGame(user1:string, user2: string): void{
     const theEnd: EndType = endCase(user1, user2);
     
     if(theEnd.finish){
-        // setTimeout(() => {
+        setTimeout(() => {
             let endModalResult = new endResult(theEnd.player1, theEnd.player2, theEnd.winner, theEnd.how);
             return endModalResult.showResult();
-        // }, 1000);
+        }, 1000);
     }
 
     return;

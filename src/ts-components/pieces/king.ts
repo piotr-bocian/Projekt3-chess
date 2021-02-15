@@ -327,6 +327,45 @@ class King extends Piece{
 
         return dangerArr;
     }
+
+    allPossibleMoves():number{
+        const allMoves:string[] = [];
+    
+        if(this.color === 'white'){
+            for(let p of Game.getWhites()){
+                if(!(p instanceof Pawn)){
+                    if(!(p instanceof King)){
+                        const possibleMoves = p.showPossibleMoves();
+                        possibleMoves.forEach(id => {
+                            allMoves.push(id);
+                        });
+                    }
+                }
+                else{
+                    const possiblePawnAttacks = p.getAttacks();
+                    possiblePawnAttacks.forEach(attack => allMoves.push(attack));
+                }
+            }
+        }
+        else{
+            for(let p of Game.getBlacks()){
+                if(!(p instanceof Pawn)){
+                    if(!(p instanceof King)){
+                        const possibleMoves = p.showPossibleMoves();
+                        possibleMoves.forEach(id => {
+                            allMoves.push(id);
+                        });
+                    }
+                }
+                else{
+                    const possiblePawnAttacks = p.getAttacks();
+                    possiblePawnAttacks.forEach(attack => allMoves.push(attack));
+                }
+            }
+        }
+    
+        return allMoves.length;
+    }
 }
 
 export {King};

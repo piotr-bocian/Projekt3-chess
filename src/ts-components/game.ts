@@ -31,8 +31,8 @@ class Game {
     public static whitePlayerTimer: Timer;
     public static blackPlayerTimer: Timer;
     // Players:
-    public player1Name:string;
-    public player2Name:string;
+    static player1Name:string;
+    static player2Name:string;
     //bicie
     public static beatCounter: number;
     public static moveCounter: boolean;
@@ -53,8 +53,8 @@ class Game {
         Game.whitePlayerTimer = new Timer(time, 'timer-white');
         Game.blackPlayerTimer = new Timer(time, 'timer-black');
         // Players:
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        Game.player1Name = player1Name;
+        Game.player2Name = player2Name;
 
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
@@ -64,25 +64,25 @@ class Game {
         Game.whites.push(Game.whiteKing);
         Game.blacks.push(new Queen('black', `${ID[4]}`, 8));
         Game.blacks.push(Game.blackKing);
-        for(let i = 3; i <= 6; i+=3) {
-            Game.whites.push(new Bishop('white', `${ID[i]}`, 1));
-            Game.blacks.push(new Bishop('black', `${ID[i]}`, 8));
-        }
+        // for(let i = 3; i <= 6; i+=3) {
+        //     Game.whites.push(new Bishop('white', `${ID[i]}`, 1));
+        //     Game.blacks.push(new Bishop('black', `${ID[i]}`, 8));
+        // }
 
-        for(let i = 2; i <= 7; i+=5) {
-            Game.whites.push(new Knight('white', `${ID[i]}`, 1));
-            Game.blacks.push(new Knight('black', `${ID[i]}`, 8));
-        }
+        // for(let i = 2; i <= 7; i+=5) {
+        //     Game.whites.push(new Knight('white', `${ID[i]}`, 1));
+        //     Game.blacks.push(new Knight('black', `${ID[i]}`, 8));
+        // }
 
-        for(let i = 1; i <= 8; i+=7) {
-            Game.whites.push(new Rook('white', `${ID[i]}`, 1));
-            Game.blacks.push(new Rook('black', `${ID[i]}`, 8));
-        }
+        // for(let i = 1; i <= 8; i+=7) {
+        //     Game.whites.push(new Rook('white', `${ID[i]}`, 1));
+        //     Game.blacks.push(new Rook('black', `${ID[i]}`, 8));
+        // }
 
-        for(let i = 1; i <= 8; i++) {
-           Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
-           Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
-        }
+        // for(let i = 1; i <= 8; i++) {
+        //    Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
+        //    Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
+        // }
     }
 
     //TURY
@@ -130,7 +130,7 @@ class Game {
             Game.moveCounter = true;
             }
         }
-        endGame(this.player1Name, this.player2Name);
+        // endGame(this.player1Name, this.player2Name);
     }
 
     static getPiece(square: HTMLElement): Piece | void {
