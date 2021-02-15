@@ -59,6 +59,10 @@ class King extends Piece{
                 return;
             }
 
+            if(square!.innerHTML !== '' && !this.isPositonSafe(square!.id.charAt(0), parseInt(square!.id.charAt(2)))){
+                return;
+            }
+
             square!.classList.add('active');    //<--oznaczenie wizualne na szachownicy
             square!.addEventListener('click', () => {
                 if(square!.classList.contains('active') && (Game.getLastChosen() === this)){
@@ -244,6 +248,49 @@ class King extends Piece{
             }
         }
         return false;
+    }
+
+    isPositonSafe(posX:string, posY:number):boolean{
+        let safe:boolean;
+        const square = document.querySelector(`#${posX}-${posY}`);
+        let originalPiece:Piece;
+        for(let p of (square!.querySelector('img')!.classList.contains('white') ? Game.getWhites() : Game.getBlacks())){
+            if(p.getPositionX() === posX && p.getPositionY() === posY){
+                originalPiece = p;
+            }
+        }
+        const originalPieceX = originalPiece!.getPositionX();
+        const originalPieceY = originalPiece!.getPositionY();
+
+        const originalKingX = this.positionX;
+        const originalKingY = this.positionY;
+
+        const tempPositions = Array.from(document.querySelectorAll('.board-container div')).filter(square => {
+            return (square.innerHTML == '');
+        });
+
+        const tempPieceX:string = tempPositions[0].id.charAt(0);
+        const tempPieceY:number = parseFloat(tempPositions[0].id.charAt(2));
+        //console.log(originalPiece!);
+        //console.log(tempPieceX, tempPieceY);
+        originalPiece!.setOnBoard(tempPieceX, tempPieceY);
+        Game.changeTurn();
+        console.log(originalPiece!);
+
+        this.setOnBoard(originalPieceX, originalPieceY);
+        if(this.isChecked()){
+            safe = false;
+        }
+        else{
+            safe = true;
+        }
+
+        this.setOnBoard(originalKingX, originalKingY);
+        Game.changeTurn;
+        originalPiece!.setOnBoard(originalPieceX, originalPieceY);
+        Game.changeTurn();
+
+        return safe;
     }
 
     getDangerZones():string[]{
