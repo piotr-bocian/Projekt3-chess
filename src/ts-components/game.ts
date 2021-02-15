@@ -130,7 +130,7 @@ class Game {
             Game.moveCounter = true;
             }
         }
-        endGame();
+        endGame(this.player1Name, this.player2Name);
     }
 
     static getPiece(square: HTMLElement): Piece | void {

@@ -2,8 +2,8 @@ import { Game } from './game';
 import { endResult } from './end-page/endListener'
 
 type EndType = {
-    user1:string, 
-    user2:string, 
+    player1:string, 
+    player2:string, 
     winner:string, 
     how:string, 
     finish: boolean
@@ -12,17 +12,21 @@ type EndType = {
 enum endGameCases {
     draw = 'remis',
     stalemate = 'pat',
-    checkMate = ''
+    checkMate = '',
+    timeUp = 'czas'
 }
 
-function endCase(): EndType {
+function endCase(user1:string, user2: string): EndType {
     const whites = Game.getWhites();
     const blacks = Game.getBlacks();
     const whiteKing = Game.getWhiteKing();
     const blackKing = Game.getBlackKing();
+    const whiteTime = Game.getWhiteTimer().seconds;
+    const blackTime = Game.getBlackTimer().seconds;
+    
     const endGameCase: EndType = {
-        user1: 'Białe',
-        user2: 'Czarne',
+        player1: user1,
+        player2: user2,
         winner: '',
         how: '',
         finish: false
@@ -31,36 +35,53 @@ function endCase(): EndType {
     if(whites.length === 1 && blacks.length === 1) {
         endGameCase.how = endGameCases.draw;
         endGameCase.finish = true;
+        return endGameCase;
     }
     if(!whiteKing.isChecked() && !whiteKing.isCheckmated() && whiteKing.areAllPossibleMovesInDangerZones()){
         endGameCase.how = endGameCases.stalemate;
-        endGameCase.finish = true;        
+        endGameCase.finish = true;   
+        return endGameCase;     
 
     } else if(!blackKing.isChecked() && !blackKing.isCheckmated() && blackKing.areAllPossibleMovesInDangerZones()) {
         endGameCase.how = endGameCases.stalemate;
         endGameCase.finish = true;
+        return endGameCase;
     }
 
     if(whiteKing.isCheckmated()) {
         endGameCase.how = endGameCases.checkMate;
-        endGameCase.winner = endGameCase.user2;
+        endGameCase.winner = endGameCase.player2;
         endGameCase.finish = true;
+        return endGameCase;
 
     } else if(blackKing.isCheckmated()) {
         endGameCase.how = endGameCases.checkMate;
-        endGameCase.winner = endGameCase.user1;
+        endGameCase.winner = endGameCase.player1;
         endGameCase.finish = true;
+        return endGameCase;
+    }
+
+    if(whiteTime == 0){
+        endGameCase.how = endGameCases.timeUp;
+        endGameCase.winner = endGameCase.player2;
+        endGameCase.finish = true;
+        return endGameCase;
+    } else if(blackTime == 0){
+        endGameCase.how = endGameCases.timeUp;
+        endGameCase.winner = endGameCase.player1;
+        endGameCase.finish = true;
+        return endGameCase;
     }
     
     return endGameCase;
 }
 
-function endGame(): void{
-    const theEnd: EndType = endCase();
+function endGame(user1:string, user2: string): void{
+    const theEnd: EndType = endCase(user1, user2);
     
     if(theEnd.finish){
         // setTimeout(() => {
-            let endModalResult = new endResult(theEnd.user1, theEnd.user2, theEnd.winner, theEnd.how);
+            let endModalResult = new endResult(theEnd.player1, theEnd.player2, theEnd.winner, theEnd.how);
             return endModalResult.showResult();
         // }, 1000);
     }
