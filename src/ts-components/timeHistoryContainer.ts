@@ -65,6 +65,7 @@ class timeHistory {
             black.innerHTML = "BLACK";
             historyHeader.innerHTML = "CHESS MOVES";
             exitButton.innerHTML = "LEAVE GAME";
+            undoButton.innerHTML = "REVERSE LAST MOVE";
         }
 
         buttonContainer.appendChild(exitButton);

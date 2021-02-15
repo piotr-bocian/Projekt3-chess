@@ -7,9 +7,12 @@ function title(): HTMLDivElement {
 
     const title : HTMLHeadingElement = document.createElement("h2");
     title.innerHTML = "USTAWIENIA GRY";
+    if (document.documentElement.lang === 'en'){
+        title.innerHTML = "GAME SETTINGS";
+    }
 
     titleDiv.appendChild(title);
-  
+
     return title;
 }
 
@@ -48,6 +51,12 @@ function menuNames(): HTMLDivElement {
     player2.required = true;
     player2.placeholder = "Jessica";
 
+    if (document.documentElement.lang === 'en'){
+        title.innerHTML = "PLAYER NAMES";
+        legend1.innerHTML = "White | player name";
+        legend2.innerHTML = "Black | player name";
+    }
+
     field2.appendChild(legend2);
     field2.appendChild(player2);
 
@@ -57,7 +66,7 @@ function menuNames(): HTMLDivElement {
     nameDiv.appendChild(title);
     nameDiv.appendChild(inputDiv)
 
-  
+
     return nameDiv;
 }
 
@@ -86,7 +95,10 @@ function time(): HTMLDivElement {
     range.min = "60";
     range.max = "180";
     range.step = "10";
-    
+    if (document.documentElement.lang === 'en'){
+        title.innerHTML = "GAME TIME";
+        inMinutes.innerHTML = '[IN MINUTES]'
+    }
 
     rangeSlider.addEventListener("input", showSliderValue, false);
 
@@ -98,7 +110,7 @@ function time(): HTMLDivElement {
     rangeSlider.appendChild(span);
     timeDiv.appendChild(title);
     timeDiv.appendChild(rangeSlider);
-    
+
 
     return timeDiv;
 }
@@ -132,7 +144,7 @@ function patCheckList(): HTMLDivElement {
     inputSpan1.innerHTML = "PATUJĄCEGO";
     label1.appendChild(input1);
     label1.appendChild(inputSpan1);
-    
+
     const label2 = document.createElement("label");
     const input2 = document.createElement("input");
     input2.type = "radio";
@@ -147,7 +159,11 @@ function patCheckList(): HTMLDivElement {
     titleDiv.appendChild(label1);
     titleDiv.appendChild(label2);
     // titleDiv.appendChild(label3);
-  
+    if (document.documentElement.lang === 'en'){
+        title.innerHTML = "STALEMATE AS WIN";
+        inputSpan1.innerHTML = "PATUJĄCEGO";
+        inputSpan2.innerHTML = "PATOWANEGO";
+    }
     return titleDiv;
 }
 
@@ -158,7 +174,7 @@ function startButton(): HTMLDivElement {
 
     const startButtonText = document.createElement("p");
     startButtonText.innerHTML = "ROZPOCZNIJ GRĘ!";
-
+    startButtonText.innerHTML = "PLAY";
     startButtonContainer.appendChild(startButtonText);
 
     return startButtonContainer
@@ -174,7 +190,7 @@ function menuContainer(): HTMLDivElement {
     menu.appendChild(time());
     menu.appendChild(patCheckList());
     menu.appendChild(startButton());
-  
+
     return menu;
 }
 
