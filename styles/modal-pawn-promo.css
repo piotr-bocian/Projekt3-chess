@@ -1,6 +1,6 @@
 .modal-window-white {
     position: relative;
-    right:90px;
+    right:80px;
     height: fit-content;
     z-index: 100;
     border-radius: 3px;
@@ -11,9 +11,13 @@
     flex-direction: column;
 }
 
+.modal-window-white img {
+    height: 80px;
+}
+
 .modal-window-black {
     position: relative;
-    right:90px;
+    right:80px;
     bottom: 270px;
     height: fit-content;
     z-index: 100;
@@ -23,6 +27,10 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+}
+
+.modal-window-black img {
+    height: 80px;
 }
 
 .modal-window img {

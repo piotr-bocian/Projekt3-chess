@@ -1,0 +1,13 @@
+.lang {
+    display: block;
+    height: 5vh;
+    position: fixed;
+    top: 1vh;
+    right: 1vh;
+}
+
+.lang img {
+    display: inline-block;
+    height: 4vh;
+    padding: 5px;
+}

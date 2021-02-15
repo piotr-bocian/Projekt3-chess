@@ -141,6 +141,10 @@
     cursor: pointer;
 }
 
+.menuCheckList label span {
+    margin-left: 0.25em;
+}
+
 .menuCheckList input[type='radio']:after {
     width: 12.5px;
     height: 12.5px;
@@ -167,6 +171,7 @@
     display: inline-block;
     visibility: visible;
     border: 2px solid white;
+    
 }
 
 /* START-BUTTON */
@@ -185,4 +190,27 @@
     font-weight: bold;
     color: white;
     padding: 0.5em;
+}
+
+/*MODAL WINDOW*/
+.how-information{
+    padding: 5%;
+    font-weight: 100;;
+}
+.restart-button{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    padding: 1.2em;
+}
+.endModal h1{
+    padding-top: 5%;
+    font-size: 3em;
+}
+.title-result{
+    text-align: center;
+}
+.title-result h2{
+    font-size: 3em;
+    font-weight: 100;
 }
