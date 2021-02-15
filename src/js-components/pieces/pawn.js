@@ -9,6 +9,7 @@ const rook_1 = require("./rook");
 const bishop_1 = require("./bishop");
 const addMoveHistory_1 = require("../addMoveHistory");
 const translateFunc_1 = require("../translateFunc");
+const endGameCases_1 = require("../endGameCases");
 //pion
 class Pawn extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -157,6 +158,7 @@ class Pawn extends piece_1.Piece {
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     }
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
                 }
             }, { capture: true });
         });

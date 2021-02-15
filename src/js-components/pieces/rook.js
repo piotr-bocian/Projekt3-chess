@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rook = void 0;
 const piece_1 = require("./piece");
 const game_1 = require("../game");
+const endGameCases_1 = require("../endGameCases");
 //wieża
 class Rook extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -124,6 +125,7 @@ class Rook extends piece_1.Piece {
                     this.removeClassActive();
                     game_1.Game.checkingKings();
                     game_1.Game.changeTimerTurn();
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
                 }
             }, { capture: true });
         });

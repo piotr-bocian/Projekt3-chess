@@ -6,6 +6,7 @@ const game_1 = require("../game");
 const pawn_1 = require("./pawn");
 const rook_1 = require("./rook");
 const addMoveHistory_1 = require("../addMoveHistory");
+const endGameCases_1 = require("../endGameCases");
 class King extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
@@ -62,6 +63,7 @@ class King extends piece_1.Piece {
                     this.hasMoved = true;
                     this.removeClassActive();
                     game_1.Game.changeTimerTurn();
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
                 }
             }, { capture: true });
         });
@@ -197,7 +199,10 @@ class King extends piece_1.Piece {
         for (let p of (this.color === 'white' ? game_1.Game.getWhites() : game_1.Game.getBlacks())) {
             p.defendKing(p.showPossibleMoves()).forEach(id => possMoves.push(id));
         }
-        return possMoves.length === 0;
+        if (this.isChecked() && possMoves.length === 0) {
+            return true;
+        }
+        return false;
     }
     areAllPossibleMovesInDangerZones() {
         const possibleMoves = this.showPossibleMoves();
@@ -285,6 +290,42 @@ class King extends piece_1.Piece {
             }
         }
         return dangerArr;
+    }
+    allPossibleMoves() {
+        const allMoves = [];
+        if (this.color === 'white') {
+            for (let p of game_1.Game.getWhites()) {
+                if (!(p instanceof pawn_1.Pawn)) {
+                    if (!(p instanceof King)) {
+                        const possibleMoves = p.showPossibleMoves();
+                        possibleMoves.forEach(id => {
+                            allMoves.push(id);
+                        });
+                    }
+                }
+                else {
+                    const possiblePawnAttacks = p.getAttacks();
+                    possiblePawnAttacks.forEach(attack => allMoves.push(attack));
+                }
+            }
+        }
+        else {
+            for (let p of game_1.Game.getBlacks()) {
+                if (!(p instanceof pawn_1.Pawn)) {
+                    if (!(p instanceof King)) {
+                        const possibleMoves = p.showPossibleMoves();
+                        possibleMoves.forEach(id => {
+                            allMoves.push(id);
+                        });
+                    }
+                }
+                else {
+                    const possiblePawnAttacks = p.getAttacks();
+                    possiblePawnAttacks.forEach(attack => allMoves.push(attack));
+                }
+            }
+        }
+        return allMoves.length;
     }
 }
 exports.King = King;

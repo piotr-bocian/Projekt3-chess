@@ -195,7 +195,7 @@
 /*MODAL WINDOW*/
 .how-information{
     padding: 5%;
-    font-weight: 100;;
+    font-weight: 100;
 }
 .restart-button{
     font-size: 1.2em;
@@ -213,4 +213,43 @@
 .title-result h2{
     font-size: 3em;
     font-weight: 100;
+}
+
+
+@media screen and (min-width: 667px){
+.endModal{
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    height: 50vh;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+    padding: 1vw;
+    text-align: center;
+    border-radius: 25px;
+    }
+    .endModal h1{
+        display: grid;
+        align-self: center;
+    }
+}
+@media screen and (min-width: 225px) and (max-width: 667px){
+    .endModal{
+        display: grid;
+        justify-self: center;
+        width: 90%;
+        height: 100%;
+        background-color: white;
+        font-family: 'Montserrat', sans-serif;
+        padding: 1vw;
+        text-align: center;
+        border-radius: 25px;
+    }
+    .endModal h1{
+        display: grid;
+        align-self: center;
+    }
+    .menuNames h2 {
+        font-size: 2em;
+    }
 }

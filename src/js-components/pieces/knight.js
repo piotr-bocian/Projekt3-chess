@@ -4,6 +4,7 @@ exports.Knight = void 0;
 const piece_1 = require("./piece");
 const board_1 = require("../board");
 const game_1 = require("../game");
+const endGameCases_1 = require("../endGameCases");
 //skoczek / koń
 class Knight extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -70,6 +71,7 @@ class Knight extends piece_1.Piece {
                     this.removeClassActive();
                     game_1.Game.checkingKings();
                     game_1.Game.changeTimerTurn();
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
                     //console.log(possMove.innerHTML);
                 }
             }, { capture: true });

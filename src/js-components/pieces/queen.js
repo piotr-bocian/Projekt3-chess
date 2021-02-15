@@ -4,7 +4,7 @@ exports.Queen = void 0;
 const board_1 = require("../board");
 const piece_1 = require("./piece");
 const game_1 = require("../game");
-// import { endGame } from '../endGameCases';
+const endGameCases_1 = require("../endGameCases");
 //królowa / hetman
 class Queen extends piece_1.Piece {
     constructor(color, positionX, positionY) {
@@ -47,7 +47,7 @@ class Queen extends piece_1.Piece {
                     this.removeClassActive();
                     game_1.Game.checkingKings();
                     game_1.Game.changeTimerTurn();
-                    // endGame();
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
                 }
             }, { capture: true });
         });

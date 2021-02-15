@@ -14,7 +14,6 @@ const promotion_1 = require("./promotion");
 const timer_1 = require("./timer");
 const timeHistoryContainer_1 = require("./timeHistoryContainer");
 const addMoveHistory_1 = require("./addMoveHistory");
-const endGameCases_1 = require("./endGameCases");
 class Game {
     constructor(time, player1Name, player2Name) {
         this.gameBoard = new board_1.Board;
@@ -32,8 +31,8 @@ class Game {
         Game.whitePlayerTimer = new timer_1.Timer(time, 'timer-white');
         Game.blackPlayerTimer = new timer_1.Timer(time, 'timer-black');
         // Players:
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        Game.player1Name = player1Name;
+        Game.player2Name = player2Name;
         //ustawianie figur
         Game.whiteKing = new king_1.King('white', `${board_2.ID[5]}`, 1);
         Game.blackKing = new king_1.King('black', `${board_2.ID[5]}`, 8);
@@ -56,6 +55,8 @@ class Game {
         for (let i = 1; i <= 8; i++) {
             Game.whites.push(new pawn_1.Pawn('white', `${board_2.ID[i]}`, 2));
             Game.blacks.push(new pawn_1.Pawn('black', `${board_2.ID[i]}`, 7));
+            //    Game.whites.push(new Pawn('white', `E`, 2));
+            //    Game.blacks.push(new Pawn('black', `E`, 7));
         }
     }
     //TURY
@@ -104,7 +105,6 @@ class Game {
                 Game.moveCounter = true;
             }
         }
-        endGameCases_1.endGame();
     }
     static getPiece(square) {
         const x = square.id.charAt(0);

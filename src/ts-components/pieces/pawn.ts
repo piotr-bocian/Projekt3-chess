@@ -185,7 +185,6 @@ class Pawn extends Piece {
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     }
-                    Game.changeTimerTurn();
                     endGame(Game.player1Name, Game.player2Name);
 
                 }

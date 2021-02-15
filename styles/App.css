@@ -410,7 +410,7 @@ body {
 
     /*MODAL KOŃCOWY*/
 
-    .endModal {
+    /* .endModal {
         display: grid;
         justify-self: center;
         align-self: center;
@@ -425,7 +425,7 @@ body {
     .endModal h1 {
         display: grid;
         align-self: center;
-    }
+    } */
 }
 
 @media only screen and (min-device-width: 768px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
@@ -853,7 +853,7 @@ body {
 
     /*MODAL KOŃCOWY*/
 
-    .endModal {
+    /* .endModal {
         display: grid;
         justify-self: center;
         width: 90%;
@@ -872,7 +872,7 @@ body {
 
     .menuNames h2 {
         font-size: 2em;
-    }
+    } */
 
 }
 
@@ -1110,7 +1110,7 @@ body {
 
     /* MODAL KOŃCOWY*/
 
-    .endModal {
+    /* .endModal {
         display: grid;
         justify-self: center;
         width: 90%;
@@ -1129,6 +1129,6 @@ body {
 
     .menuNames h2 {
         font-size: 2em;
-    }
+    } */
 
 }
