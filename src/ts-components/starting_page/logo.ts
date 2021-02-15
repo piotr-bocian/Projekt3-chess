@@ -4,7 +4,7 @@ function logo(): HTMLDivElement {
     divLogo.className = "logo";
   
     const imgLogo : HTMLImageElement = document.createElement("img");
-    const src = "../../../static/assets/CodersChess.png";
+    const src = "../../../../Projekt3-chess/static/assets/CodersChess.png";
     imgLogo.setAttribute('src', src);
    
     imgLogo.addEventListener("click", function() : void {

@@ -9,7 +9,7 @@ class Rook extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
         this.hasMoved = false;
-        this.symbol = `../../../static/assets/${this.color}Rook.png`;
+        this.symbol = `./../../../Projekt3-chess/static/assets/${this.color}Rook.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {

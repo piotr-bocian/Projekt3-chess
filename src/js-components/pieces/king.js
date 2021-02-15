@@ -10,7 +10,7 @@ class King extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
         this.hasMoved = false;
-        this.symbol = `../../../static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
+        this.symbol = `./../../../Projekt3-chess/static/assets/${this.color}King.png`; //<-- w przyszłości bedzie tu ścieżka do img figury
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {

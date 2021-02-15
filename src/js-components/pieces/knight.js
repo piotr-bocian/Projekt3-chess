@@ -8,7 +8,7 @@ const game_1 = require("../game");
 class Knight extends piece_1.Piece {
     constructor(color, positionX, positionY) {
         super(color, positionX, positionY);
-        this.symbol = `../../../static/assets/${this.color}Knight.png`;
+        this.symbol = `./../../../Projekt3-chess/static/assets/${this.color}Knight.png`;
         this.setOnBoard(this.positionX, this.positionY);
     }
     showPossibleMoves() {
