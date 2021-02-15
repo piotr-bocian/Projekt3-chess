@@ -141,6 +141,10 @@
     cursor: pointer;
 }
 
+.menuCheckList label span {
+    margin-left: 0.25em;
+}
+
 .menuCheckList input[type='radio']:after {
     width: 12.5px;
     height: 12.5px;
@@ -167,6 +171,7 @@
     display: inline-block;
     visibility: visible;
     border: 2px solid white;
+    
 }
 
 /* START-BUTTON */

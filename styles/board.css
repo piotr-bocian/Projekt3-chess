@@ -37,6 +37,7 @@
 
 .board-container{
    width: fit-content;
+   margin: auto auto;
    display: grid;
    grid-template-columns: repeat(8, 80px);
    border: 2px solid black;
