@@ -225,8 +225,12 @@ class King extends Piece{
         for(let p of (this.color === 'white' ? Game.getWhites() : Game.getBlacks())){
             p.defendKing(p.showPossibleMoves()).forEach(id => possMoves.push(id));
         }
+        
+        if(this.isChecked() && possMoves.length === 0){
+            return true
+        }
 
-        return possMoves.length === 0;
+        return false;
     }
 
     areAllPossibleMovesInDangerZones():boolean {
