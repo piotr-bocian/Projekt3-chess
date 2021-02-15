@@ -13,12 +13,24 @@ document.querySelectorAll('.board-container div').forEach((element) => {
 document.body.appendChild(logo());
 document.body.appendChild(menuContainer());
 
+// time
 var gameTime = document.querySelector('.rs-range');
 var time = document.querySelector('.rs-range').value / 2;
 gameTime.onchange = function (event) {
   time = document.querySelector('.rs-range').value / 2;
 };
-export { time };
+// firstPlayer
+var player1 = document.getElementById("player1-input");
+var player1Name = player1.placeholder;
+player1.onchange = function(event){
+  player1Name = player1.value;
+}
+// secondPlayer
+var player2 = document.getElementById("player2-input");
+var player2Name = player2.placeholder;
+player2.onchange = function(event){
+  player2Name = player2.value;
+}
 
 // end test button
 // const testButton = document.querySelector('.testEnd');
@@ -39,7 +51,7 @@ startButton.addEventListener('click', () => {
   menuContainer.remove();
 
   // new Game
-  const game = new Game(60);
+  const game = new Game(time, player1Name, player2Name);
   Game.getWhiteTimer().start();
   //document.body.appendChild(game.timeHistory.timeHistoryContainer());
   //var TimerTry = new Timer(60, 'timer-white');

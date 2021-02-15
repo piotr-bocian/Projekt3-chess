@@ -30,11 +30,14 @@ class Game {
     // Timers:
     public static whitePlayerTimer: Timer;
     public static blackPlayerTimer: Timer;
+    // Players:
+    public player1Name:string;
+    public player2Name:string;
     //bicie
     public static beatCounter: number;
     public static moveCounter: boolean;
 
-    constructor(time:number){
+    constructor(time:number, player1Name:string, player2Name:string){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
         this.timeHistory = new timeHistory;
@@ -49,6 +52,9 @@ class Game {
         // Timers:
         Game.whitePlayerTimer = new Timer(time, 'timer-white');
         Game.blackPlayerTimer = new Timer(time, 'timer-black');
+        // Players:
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
 
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
