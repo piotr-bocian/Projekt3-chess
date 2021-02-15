@@ -29,7 +29,9 @@ W menu startowym gracze posiadają możliwość personalizacji gry poprzez wybó
    - Król.
 2. Bicie (pokazanie możliwości bicia).
 3. Promowanie pionka na dowolną inną figurę (oprócz króla) na końcu planszy.
+
 ![Szachy - Promocja](./.github/images/promocja.png)
+
 4. Roszada
 5. Szachowanie króla
 6. Szach mat
