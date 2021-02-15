@@ -277,14 +277,16 @@ class Game {
     //COFANIE RUCHÓW
 
 static reverseMove(){
-    Game.getLastChosen().reverseLastMove();
+    Game.getLastChosen().reverseLastMove(Game.getLastChosen().color );
+    //to wyzej działa bez argumentu
+    //działa
     if(Game.beatCounter === 1){
-        console.log('test')
         Piece.retLast();
         Game.changeTurn();
         Game.changeTimerTurn();
         Game.beatCounter = 0;
     }
+    Game.changeTimerTurn();
     }
 
 

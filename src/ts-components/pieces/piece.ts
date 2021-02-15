@@ -123,7 +123,7 @@ abstract class Piece{
     }
 
     //DZIAŁAJĄ SAME RUCHY
-    reverseLastMove(){
+    reverseLastMove(color: string){
 
            const lastMove = this.moves;
         if(this.moveTimeArray.length === 0) {return};
@@ -135,6 +135,7 @@ abstract class Piece{
                     const positionY = popLastMove[1];
                     if(positionX && positionY){
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
+                        color === 'white'? this.reverseTimeBlack() : this.reverseTimeWhite()
                     }
                 }
         }
@@ -158,6 +159,22 @@ abstract class Piece{
                     white.push(last);
                     return;
                 }
+        }
+
+        reverseTimeWhite(){
+            if(this.moveTimeArray.length === 0) {return};
+            const time = this.moveTimeArray.pop();
+            console.log(time);
+
+            if(!time){return};
+            Game.getWhiteTimer().setTimer(time);
+        }
+        reverseTimeBlack(){
+            if(this.moveTimeArray.length === 0) {return};
+            const time = this.moveTimeArray.pop();
+            console.log('black',time);
+            if(!time){return};
+            Game.getBlackTimer().setTimer(time);
         }
 
     abstract showPossibleMoves():string[];
