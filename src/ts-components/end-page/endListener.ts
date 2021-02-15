@@ -49,7 +49,7 @@ class endResult {
             nameDiv.className = "menuNames";
             const title = document.createElement("h2");
             const title2 = document.createElement("h3");
-            title.className = "title-result";
+            title.className = "title-result how-information";
             title2.className = "title-result";
             if (obj.how === 'pat') {
                 title.innerHTML = `PAT (REMIS)`;
@@ -107,7 +107,7 @@ class endResult {
         function menuContainer(): HTMLDivElement {
 
             const menu : HTMLDivElement = document.createElement("div");
-            menu.className = "menuContainer";
+            menu.className = "endModal";
             menu.appendChild(title());
             menu.appendChild(gameResult());
             menu.appendChild(startButton());

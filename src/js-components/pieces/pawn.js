@@ -181,7 +181,7 @@ class Pawn extends piece_1.Piece {
             modalWindowPawn.className = "modal-window-white";
             for (const piece of pieces) {
                 const selectableFigure = document.createElement("img");
-                selectableFigure.setAttribute('src', `../../../static/assets/white${piece.name}.png`);
+                selectableFigure.setAttribute('src', `../../../../Projekt3-chess/static/assets/white${piece.name}.png`);
                 const { pieceName: PieceName } = piece;
                 modalWindowPawn.appendChild(selectableFigure);
                 selectableFigure.addEventListener('click', () => {
