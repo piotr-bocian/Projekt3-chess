@@ -2,6 +2,7 @@ import { ID } from "../board";
 import { MovesShow, QueenMethods} from "../interfaces/pieceMethodsInterfaces";
 import {Piece} from "./piece";
 import { Game } from "../game"
+// import { endGame } from '../endGameCases';
 //królowa / hetman
 class Queen extends Piece implements QueenMethods{
     constructor(color:string, positionX:string, positionY:number){
@@ -49,6 +50,7 @@ class Queen extends Piece implements QueenMethods{
                     this.removeClassActive();
                     Game.checkingKings();
                     Game.changeTimerTurn();
+                    // endGame();
                 }
             }, {capture: true});
         });

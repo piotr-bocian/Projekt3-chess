@@ -59,8 +59,10 @@ function endGame(): void{
     const theEnd: EndType = endCase();
     
     if(theEnd.finish){
-        let endModalResult = new endResult(theEnd.user1, theEnd.user2, theEnd.winner, theEnd.how);
-        return endModalResult.showResult();
+        // setTimeout(() => {
+            let endModalResult = new endResult(theEnd.user1, theEnd.user2, theEnd.winner, theEnd.how);
+            return endModalResult.showResult();
+        // }, 1000);
     }
 
     return;
