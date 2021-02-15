@@ -160,9 +160,9 @@ function patCheckList(): HTMLDivElement {
     titleDiv.appendChild(label2);
     // titleDiv.appendChild(label3);
     if (document.documentElement.lang === 'en'){
-        title.innerHTML = "STALEMATE AS WIN";
-        inputSpan1.innerHTML = "PATUJĄCEGO";
-        inputSpan2.innerHTML = "PATOWANEGO";
+        title.innerHTML = "STALEMATE AS";
+        inputSpan1.innerHTML = "LOOSE FOR STALEMATED PLAYER";
+        inputSpan2.innerHTML = "WIN FOR STALEMATED PLAYER";
     }
     return titleDiv;
 }

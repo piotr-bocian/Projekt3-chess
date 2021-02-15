@@ -122,7 +122,7 @@ abstract class Piece{
 
     }
 
-    //DZIAŁAJĄ SAME RUCHY
+    //COFANIE RUCHÓW
     reverseLastMove(color: string){
 
            const lastMove = this.moves;
@@ -164,17 +164,19 @@ abstract class Piece{
         reverseTimeWhite(){
             if(this.moveTimeArray.length === 0) {return};
             const time = this.moveTimeArray.pop();
-            console.log(time);
 
             if(!time){return};
             Game.getWhiteTimer().setTimer(time);
+            const timerWhite =document.querySelector('#timer-white');
+            timerWhite!.innerHTML = time;
         }
         reverseTimeBlack(){
             if(this.moveTimeArray.length === 0) {return};
             const time = this.moveTimeArray.pop();
-            console.log('black',time);
             if(!time){return};
             Game.getBlackTimer().setTimer(time);
+            const timerBlack =document.querySelector('#timer-black');
+            timerBlack!.innerHTML = time;
         }
 
     abstract showPossibleMoves():string[];
