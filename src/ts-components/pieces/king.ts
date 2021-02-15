@@ -3,6 +3,7 @@ import { Game } from "../game";
 import { Pawn } from "./pawn";
 import { Rook } from "./rook";
 import { addMoveHistory } from "../addMoveHistory";
+import { endGame } from '../endGameCases'
 
 class King extends Piece{
 
@@ -77,6 +78,7 @@ class King extends Piece{
                     this.hasMoved = true;
                     this.removeClassActive();
                     Game.changeTimerTurn();
+                    endGame(Game.player1Name, Game.player2Name);
                 }
             }, {capture: true});
         });

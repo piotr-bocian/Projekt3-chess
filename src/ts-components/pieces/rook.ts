@@ -2,6 +2,7 @@
 
 import {Piece} from "./piece";
 import { Game } from "../game";
+import { endGame } from '../endGameCases'
 
 //wieża
 class Rook extends Piece{
@@ -134,6 +135,7 @@ class Rook extends Piece{
                     this.removeClassActive();
                     Game.checkingKings();
                     Game.changeTimerTurn();
+                    endGame(Game.player1Name, Game.player2Name);
                 }
             }, {capture: true});
 

@@ -6,6 +6,7 @@ import {Rook} from "./rook";
 import {Bishop} from "./bishop";
 import { addMoveHistory } from "../addMoveHistory";
 import { getName } from "../translateFunc";
+import { endGame } from '../endGameCases'
 
 
 //pion
@@ -181,6 +182,7 @@ class Pawn extends Piece {
                         this.parentSquare.classList.add('promotion');
                     }
                     Game.changeTimerTurn();
+                    endGame(Game.player1Name, Game.player2Name);
 
                 }
             }, {capture: true})

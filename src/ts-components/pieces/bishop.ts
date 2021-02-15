@@ -1,6 +1,7 @@
 import {Piece} from "./piece";
 import { ID } from "../board";
 import {Game} from "../game";
+import { endGame } from '../endGameCases'
 //goniec / laufer
 
 
@@ -120,6 +121,7 @@ class Bishop extends Piece{
                     this.removeClassActive();
                     Game.checkingKings();
                     Game.changeTimerTurn();
+                    endGame(Game.player1Name, Game.player2Name);
                 }
             },{capture: true});
 

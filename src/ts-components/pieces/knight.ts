@@ -1,6 +1,7 @@
 import { Piece } from "./piece";
 import { ID } from "../board";
 import { Game } from "../game"
+import { endGame } from '../endGameCases'
 //skoczek / koń
 class Knight extends Piece{
 
@@ -75,6 +76,7 @@ class Knight extends Piece{
                     this.removeClassActive();
                     Game.checkingKings();
                     Game.changeTimerTurn();
+                    endGame(Game.player1Name, Game.player2Name);
                     //console.log(possMove.innerHTML);
                 }
             },{capture: true});
