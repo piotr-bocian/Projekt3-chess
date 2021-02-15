@@ -33,11 +33,12 @@ class Game {
     // Players:
     static player1Name:string;
     static player2Name:string;
+    static target:string;
     //bicie
     public static beatCounter: number;
     public static moveCounter: boolean;
 
-    constructor(time:number, player1Name:string, player2Name:string){
+    constructor(time:number, player1Name:string, player2Name:string, target: string){
         this.gameBoard = new Board;
         this.gameBoard.drawBoard();
         this.timeHistory = new timeHistory;
@@ -55,6 +56,7 @@ class Game {
         // Players:
         Game.player1Name = player1Name;
         Game.player2Name = player2Name;
+        Game.target = target;
 
         //ustawianie figur
         Game.whiteKing = new King('white', `${ID[5]}`, 1);
@@ -82,8 +84,6 @@ class Game {
         for(let i = 1; i <= 8; i++) {
            Game.whites.push(new Pawn('white', `${ID[i]}`, 2));
            Game.blacks.push(new Pawn('black', `${ID[i]}`, 7));
-        //    Game.whites.push(new Pawn('white', `E`, 2));
-        //    Game.blacks.push(new Pawn('black', `E`, 7));
         }
     }
 

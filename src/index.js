@@ -55,6 +55,35 @@ player2.onchange = function(event){
   player2Name = player2.value;
 }
 
+//stalemate mode
+let P1 = document.getElementsByClassName("menuCheckList")[0];
+let P2 = P1.getElementsByTagName("label")[0];
+let P3 = P2.getElementsByTagName("span")[0];
+let P33 = P2.getElementsByTagName("input")[0];
+
+let P4 = document.getElementsByClassName("menuCheckList")[0];
+let P5 = P4.getElementsByTagName("label")[1];
+let P6 = P5.getElementsByTagName("span")[0];
+let P66 = P5.getElementsByTagName("input")[0];
+
+var target = P3.innerHTML;
+
+P3.onclick = function(event) {
+  target = P3.innerHTML;
+};
+
+P6.onclick = function(event) {
+  target = P6.innerHTML;
+};
+
+P33.onclick = function(event) {
+  target = P3.innerHTML;
+};
+
+P66.onclick = function(event) {
+  target = P6.innerHTML;
+};
+
 // end test button
 // const testButton = document.querySelector('.testEnd');
 // testButton.addEventListener('click', () => {
@@ -74,7 +103,7 @@ startButton.addEventListener('click', () => {
   menuContainer.remove();
 
   // new Game
-  const game = new Game(time, player1Name, player2Name);
+  const game = new Game(time, player1Name, player2Name, target);
   Game.getWhiteTimer().start();
   //document.body.appendChild(game.timeHistory.timeHistoryContainer());
   //var TimerTry = new Timer(60, 'timer-white');

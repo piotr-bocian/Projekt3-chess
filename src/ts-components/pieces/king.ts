@@ -78,7 +78,7 @@ class King extends Piece{
                     this.hasMoved = true;
                     this.removeClassActive();
                     Game.changeTimerTurn();
-                    endGame(Game.player1Name, Game.player2Name);
+                    endGame(Game.player1Name, Game.player2Name, Game.target);
                 }
             }, {capture: true});
         });

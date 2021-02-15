@@ -4,7 +4,8 @@ import { Pawn } from './pieces/pawn'
 
 type EndType = {
     player1:string, 
-    player2:string, 
+    player2:string,
+    target: string, 
     winner:string, 
     how:string, 
     finish: boolean
@@ -17,7 +18,7 @@ enum endGameCases {
     timeUp = 'czas'
 }
 
-function endCase(user1:string, user2: string): EndType {
+function endCase(user1:string, user2: string, target: string): EndType {
     const whites = Game.getWhites();
     const blacks = Game.getBlacks();
     const whiteKing = Game.getWhiteKing();
@@ -28,6 +29,7 @@ function endCase(user1:string, user2: string): EndType {
     const endGameCase: EndType = {
         player1: user1,
         player2: user2,
+        target: target,
         winner: '',
         how: '',
         finish: false
@@ -46,16 +48,34 @@ function endCase(user1:string, user2: string): EndType {
     console.log(blackKing.allPossibleMoves());
 
     if(!whiteKing.isChecked() && !whiteKing.isCheckmated() && whiteKing.areAllPossibleMovesInDangerZones() && whiteKing.allPossibleMoves() == 0){
-        console.log('pat');
-        endGameCase.how = endGameCases.stalemate;
-        endGameCase.finish = true;   
-        return endGameCase;     
+        if(endGameCase.target == "PATUJĄCEGO" || endGameCase.target == "LOOSE FOR STALEMATED PLAYER"){
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player2;
+            endGameCase.finish = true;   
+            return endGameCase;     
+        } else if (endGameCase.target == "PATOWANEGO" || endGameCase.target == "WIN FOR STALEMATED PLAYER") {
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player1;
+            endGameCase.finish = true;   
+            return endGameCase;
+        }
 
     } else if(!blackKing.isChecked() && !blackKing.isCheckmated() && blackKing.areAllPossibleMovesInDangerZones() && blackKing.allPossibleMoves() == 0) {
-        console.log('pat');
-        endGameCase.how = endGameCases.stalemate;
-        endGameCase.finish = true;
-        return endGameCase;
+        if(endGameCase.target == "PATUJĄCEGO" || endGameCase.target == "LOOSE FOR STALEMATED PLAYER"){
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player1;
+            endGameCase.finish = true;   
+            return endGameCase;     
+        }else if (endGameCase.target == "PATOWANEGO" || endGameCase.target == "WIN FOR STALEMATED PLAYER") {
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player2;
+            endGameCase.finish = true;   
+            return endGameCase;
+        }
     }
 
     if(whiteKing.isCheckmated()) {
@@ -86,8 +106,8 @@ function endCase(user1:string, user2: string): EndType {
     return endGameCase;
 }
 
-function endGame(user1:string, user2: string): void{
-    const theEnd: EndType = endCase(user1, user2);
+function endGame(user1:string, user2: string, target: string): void{
+    const theEnd: EndType = endCase(user1, user2, target);
     
     if(theEnd.finish){
         setTimeout(() => {

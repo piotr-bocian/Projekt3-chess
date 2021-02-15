@@ -44,10 +44,10 @@ class endResult {
             title2.className = "title-result";
             if (obj.how === 'pat') {
                 title.innerHTML = `PAT`;
-                title2.innerHTML = `Gracz ${obj.user1} zremisował z graczem ${obj.user2}`;
+                title2.innerHTML = `Wygrał gracz ${obj.winner}`;
                 if (document.documentElement.lang === 'en') {
                     title.innerHTML = "STALEMATE";
-                    title2.innerHTML = `Player ${obj.user1} stalemate with player ${obj.user2}`;
+                    title2.innerHTML = `Player ${obj.winner} wins`;
                 }
             }
             else if (obj.how == 'czas') {

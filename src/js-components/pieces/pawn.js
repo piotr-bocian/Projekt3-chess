@@ -158,7 +158,7 @@ class Pawn extends piece_1.Piece {
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     }
-                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name, game_1.Game.target);
                 }
             }, { capture: true });
         });
@@ -210,7 +210,7 @@ class Pawn extends piece_1.Piece {
             modalWindowPawn.className = "modal-window-black";
             for (const piece of pieces) {
                 const selectableFigure = document.createElement("img");
-                selectableFigure.setAttribute('src', `../../../static/assets/black${piece.name}.png`);
+                selectableFigure.setAttribute('src', `../../../../Projekt3-chess/static/assets/black${piece.name}.png`);
                 selectableFigure.style.height = '80px';
                 const { pieceName: PieceName } = piece;
                 modalWindowPawn.appendChild(selectableFigure);

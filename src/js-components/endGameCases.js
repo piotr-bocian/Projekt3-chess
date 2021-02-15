@@ -10,7 +10,7 @@ var endGameCases;
     endGameCases["checkMate"] = "";
     endGameCases["timeUp"] = "czas";
 })(endGameCases || (endGameCases = {}));
-function endCase(user1, user2) {
+function endCase(user1, user2, target) {
     const whites = game_1.Game.getWhites();
     const blacks = game_1.Game.getBlacks();
     const whiteKing = game_1.Game.getWhiteKing();
@@ -20,6 +20,7 @@ function endCase(user1, user2) {
     const endGameCase = {
         player1: user1,
         player2: user2,
+        target: target,
         winner: '',
         how: '',
         finish: false
@@ -36,16 +37,36 @@ function endCase(user1, user2) {
     console.log(whiteKing.allPossibleMoves());
     console.log(blackKing.allPossibleMoves());
     if (!whiteKing.isChecked() && !whiteKing.isCheckmated() && whiteKing.areAllPossibleMovesInDangerZones() && whiteKing.allPossibleMoves() == 0) {
-        console.log('pat');
-        endGameCase.how = endGameCases.stalemate;
-        endGameCase.finish = true;
-        return endGameCase;
+        if (endGameCase.target == "PATUJĄCEGO" || endGameCase.target == "LOOSE FOR STALEMATED PLAYER") {
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player2;
+            endGameCase.finish = true;
+            return endGameCase;
+        }
+        else if (endGameCase.target == "PATOWANEGO" || endGameCase.target == "WIN FOR STALEMATED PLAYER") {
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player1;
+            endGameCase.finish = true;
+            return endGameCase;
+        }
     }
     else if (!blackKing.isChecked() && !blackKing.isCheckmated() && blackKing.areAllPossibleMovesInDangerZones() && blackKing.allPossibleMoves() == 0) {
-        console.log('pat');
-        endGameCase.how = endGameCases.stalemate;
-        endGameCase.finish = true;
-        return endGameCase;
+        if (endGameCase.target == "PATUJĄCEGO" || endGameCase.target == "LOOSE FOR STALEMATED PLAYER") {
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player1;
+            endGameCase.finish = true;
+            return endGameCase;
+        }
+        else if (endGameCase.target == "PATOWANEGO" || endGameCase.target == "WIN FOR STALEMATED PLAYER") {
+            console.log('pat');
+            endGameCase.how = endGameCases.stalemate;
+            endGameCase.winner = endGameCase.player2;
+            endGameCase.finish = true;
+            return endGameCase;
+        }
     }
     if (whiteKing.isCheckmated()) {
         endGameCase.how = endGameCases.checkMate;
@@ -73,8 +94,8 @@ function endCase(user1, user2) {
     }
     return endGameCase;
 }
-function endGame(user1, user2) {
-    const theEnd = endCase(user1, user2);
+function endGame(user1, user2, target) {
+    const theEnd = endCase(user1, user2, target);
     if (theEnd.finish) {
         setTimeout(() => {
             let endModalResult = new endListener_1.endResult(theEnd.player1, theEnd.player2, theEnd.winner, theEnd.how);

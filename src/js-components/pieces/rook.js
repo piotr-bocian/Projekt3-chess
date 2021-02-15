@@ -125,7 +125,7 @@ class Rook extends piece_1.Piece {
                     this.removeClassActive();
                     game_1.Game.checkingKings();
                     game_1.Game.changeTimerTurn();
-                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name);
+                    endGameCases_1.endGame(game_1.Game.player1Name, game_1.Game.player2Name, game_1.Game.target);
                 }
             }, { capture: true });
         });

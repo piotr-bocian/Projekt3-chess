@@ -185,7 +185,7 @@ class Pawn extends Piece {
                         this.parentSquare.appendChild(this.pawnPromotion(this));
                         this.parentSquare.classList.add('promotion');
                     }
-                    endGame(Game.player1Name, Game.player2Name);
+                    endGame(Game.player1Name, Game.player2Name, Game.target);
 
                 }
             }, {capture: true})
