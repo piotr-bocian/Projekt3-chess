@@ -135,7 +135,7 @@ abstract class Piece{
                     const positionY = popLastMove[1];
                     if(positionX && positionY){
                         this.setOnBoard(positionX.toUpperCase(), parseInt(positionY));
-                        color === 'white'? this.reverseTimeBlack() : this.reverseTimeWhite()
+                        color === 'white'? this.reverseTimeWhite() : this.reverseTimeBlack()
                     }
                 }
         }
